@@ -16,16 +16,16 @@ For our game, we plan to implement a version of Space Invaders.  In this game, t
 This project will cover many of the requirements of the project: it will use Java Swing components and Java graphics with event-handlers for use of the keyboard (to control the cannon that fires at the aliens).  There are also several objects we will need to create to make the game work that will require a class hierarchy.
 
 ### Satifies
-- Object oriented design
-- Event driven programming
-- Multi-threading
-- Feature rich
+* Object oriented design
+* Event driven programming
+* Multi-threading
+* Feature rich
 
 ### Milestones
-- Create individual game objects (ship, alien ships, etc.)(70 points 10/15 points per alien/ship/etc. object)
-- Create gameboard that uses these objects, as well as keep track of a score (50 points for gameboard and correctly scoring and eliminating aliens)
-- Add sounds to actions (death, shoot, etc.) and cover objects using sprites (15 points)
-- Create a prompt so user can save score, to a file (and possibly send that score to a server) (15 points)
+* Create individual game objects (ship, alien ships, etc.)(70 points 10/15 points per alien/ship/etc. object)
+* Create gameboard that uses these objects, as well as keep track of a score (50 points for gameboard and correctly scoring and eliminating aliens)
+* Add sounds to actions (death, shoot, etc.) and cover objects using sprites (15 points)
+* Create a prompt so user can save score, to a file (and possibly send that score to a server) (15 points)
 
 ### Timeline
 By: 4/19/2020 - Have game objects and gameboard created (*Necessary*)
@@ -37,16 +37,16 @@ For the simulation, we plan to simulate the game Settlers of Catan.  The players
 The goal of the game is to reach ten victory points. Players score one point for each settlement they own and two for each city. Catan will use Java Swing components and Java graphics with event-handlers for buttons and placing pieces on the map. We will need to keep track of each player's resources, points, settlements, cities and roads.  To run the game smoothly we will also need a class hierarchy to code this game.
 
 ### Satifies
-- Object oriented design
-- Event driven programming
-- Multi-threading
-- Data Structures
-- Feature rich
+* Object oriented design
+* Event driven programming
+* Multi-threading
+* Data Structures
+* Feature rich
 
 ### Milestones
-- Create individual game objects (hexagonal tiles, resources, dice, etc.)(100 points 20 points per each object)
-- Combine these into one graphical window/aka the Island that handles random layout of hexes (40 points)
-- Create bot class to fill in seats, so a single person can play?(10 points)
+* Create individual game objects (hexagonal tiles, resources, dice, etc.)(100 points 20 points per each object)
+* Combine these into one graphical window/aka the Island that handles random layout of hexes (40 points)
+* Create bot class to fill in seats, so a single person can play?(10 points)
 
 ### Timeline
 By: 4/27/2020 Have game objects and gameboard created (*Necessary*)
