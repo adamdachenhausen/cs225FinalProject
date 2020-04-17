@@ -22,10 +22,10 @@ This project will cover many of the requirements of the project: it will use Jav
 - Feature rich
 
 ### Milestones
-- Create individual game objects using sprites (ship, alien ships, etc.)
-- Create gameboard that uses these objects, as well as keep track of a score
-- Add sounds to actions (death, shoot, etc.)
-- Create a prompt so user can save score, to a file (and possibly send that score to a server)
+- Create individual game objects (ship, alien ships, etc.)(70 points 10/15 points per alien/ship/etc. object)
+- Create gameboard that uses these objects, as well as keep track of a score (50 points for gameboard and correctly scoring and eliminating aliens)
+- Add sounds to actions (death, shoot, etc.) and cover objects using sprites (15 points)
+- Create a prompt so user can save score, to a file (and possibly send that score to a server) (15 points)
 
 ### Timeline
 By: 4/19/2020 - Have game objects and gameboard created (*Necessary*)
@@ -44,9 +44,9 @@ The goal of the game is to reach ten victory points. Players score one point for
 - Feature rich
 
 ### Milestones
-- Create individual game objects (hexagonal tiles, resources, dice, etc.)
-- Combine these into one graphical window
-- **Create bot class to fill in seats, so a single person can play?
+- Create individual game objects (hexagonal tiles, resources, dice, etc.)(100 points 20 points per each object)
+- Combine these into one graphical window/aka the Island that handles random layout of hexes (40 points)
+- Create bot class to fill in seats, so a single person can play?(10 points)
 
 ### Timeline
 By: 4/27/2020 Have game objects and gameboard created (*Necessary*)
