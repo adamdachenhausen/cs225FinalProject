@@ -7,7 +7,7 @@ import javax.swing.event.*;
  * Write a description of class ArcadeMachine here.
  *
  * @author (your name)
- * @version (a version number or a date)
+ * @version Spring 2020
  */
 public class ArcadeMachine extends MouseAdapter implements Runnable
 {
@@ -25,7 +25,7 @@ public class ArcadeMachine extends MouseAdapter implements Runnable
         // create a JFrame in which we will build our very
         // tiny GUI, and give the window a name
         JFrame frame = new JFrame("Space Invaders");
-        frame.setPreferredSize(new Dimension(500,500));
+        frame.setPreferredSize(new Dimension(800,800));
 
         // tell the JFrame that when someone closes the
         // window, the application should terminate
