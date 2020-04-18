@@ -1,22 +1,50 @@
-
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
+import javax.swing.*;
+import javax.swing.event.*;
 /**
  * Write a description of class playerShip here.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Kate Nelligan, Lindsay Clark, Adam Dachenhausen
+ * @version Spring 2020
  */
-public class PlayerShip
-{
-    // instance variables - replace the example below with your own
-    private int x;
+public class PlayerShip extends Thread{
 
+    // initial bubble size
+    public static final int INITIAL_SIZE = 2;
+
+    // pixels to move each frame
+    protected static final int GROWTH_RATE = 2;
+
+    // pixels to move each frame
+    protected static final int SPEED = 2;
+
+    // delay between each frame
+    protected static final int DELAY_TIME = 33;
+
+    // who do we live in so we can repaint?
+    private JComponent container;
+
+    // current size of bubble
+    protected int size;
+
+    // latest location of the bubble
+    protected Point upperLeft;
+
+    // Color of the bubble
+    protected Color color;
+
+    // current state of the bubble: start, grow, float, empty, pop
+    protected String status;
+
+    protected boolean game = false;
     /**
      * Constructor for objects of class playerShip
      */
     public PlayerShip()
     {
-        // initialise instance variables
-        x = 0;
+
     }
 
     /**
@@ -25,9 +53,8 @@ public class PlayerShip
      * @param  y  a sample parameter for a method
      * @return    the sum of x and y
      */
-    public int sampleMethod(int y)
+    public void sampleMethod(int y)
     {
-        // put your code here
-        return x + y;
+
     }
 }

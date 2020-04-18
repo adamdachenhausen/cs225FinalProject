@@ -5,9 +5,9 @@ import javax.swing.*;
 import javax.swing.event.*;
 /**
  * Write a description of class ArcadeMachine here.
- *
- * @author (your name)
- * @version Spring 2020
+* 
+* @author Adam Dachenhausen, Kate Nelligan, Lindsay Clark
+* @version Spring 2020
  */
 public class ArcadeMachine extends MouseAdapter implements Runnable
 {
