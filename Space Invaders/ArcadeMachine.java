@@ -86,8 +86,6 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         super("Space Invaders", FRAME_WIDTH, FRAME_HEIGHT);
     }
 
-
-
     /**
      * Default implementation of the method that will connect the
      * given frame, which represents the whole window and the panel,
@@ -112,12 +110,11 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         frame.add(mainPanel);
         frame.setResizable(false);
         //frame.requestFocus();
-        
 
         //add graphics panel to main panel
         mainPanel.add(panel);
         //mainPanel.requestFocus();
-        
+
         //Add border around game panel
         Border blackLine = BorderFactory.createLineBorder(Color.BLACK);
         panel.setBorder(blackLine);
@@ -165,7 +162,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         scorePanel.add(highScoreLabel);
 
     }
-    
+
     /**
      *   Add the mouse listeners to the panel.  Here, we need methods
      *   from both MouseListener and MouseMotionListener.
@@ -180,14 +177,13 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         panel.addKeyListener(this);
         //bottomPanel.addKeyListener(this);
 
-        
-
         //Add action listeners to buttons
         startButton.addActionListener(this);
         startButton.addKeyListener(this);
         resetButton.addActionListener(this);
         instructionsButton.addActionListener(this);
     }
+
     /**
      * Executes action each time button pressed.
      *
@@ -307,10 +303,29 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         panel.repaint();
     }
 
+    //SRC: https://stackoverflow.com/questions/26305/how-can-i-play-sound-in-java
+    public static synchronized void playSound(String soundIn) {
+        new Thread(new Runnable() {
+                // The wrapper thread is unnecessary, unless it blocks on the
+                // Clip finishing; see comments.
+                public void run() {
+                    try {
+                        File soundFile = new File(soundIn);
+                        Clip clip = AudioSystem.getClip();
+                        AudioInputStream inputStream = AudioSystem.getAudioInputStream(soundFile);
+                        clip.open(inputStream);
+                        clip.start(); 
+                    } catch (Exception e) {
+                        System.err.println(e.getMessage());
+                    }
+                }
+            }).start();
+    }
+
     public static void main(String args[]) {
         //load sound files and set volume
-        SoundEffect.init();
-        SoundEffect.volume = SoundEffect.Volume.LOW;
+        //SoundEffect.init();
+        //SoundEffect.volume = SoundEffect.Volume.LOW;
 
         //load pics
         Alien.loadPic();
