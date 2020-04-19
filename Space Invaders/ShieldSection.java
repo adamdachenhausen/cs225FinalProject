@@ -118,6 +118,9 @@ public class ShieldSection extends AnimatedGraphicsObject
     
    @Override
     public void run(){
-
+        while(!dead||!done){
+            container.repaint();
+            sleepWithCatch(DELAY_TIME);
+        }
     }
 }
