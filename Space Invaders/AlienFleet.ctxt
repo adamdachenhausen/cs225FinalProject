@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=AlienFleet
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ AlienFleet\ here.\r\n\r\n\ @author\ Adam\ Dachenhausen,\ Kate\ Nelligan,\ Lindsay\ Clark,\ \r\n\ @version\ Spring\ 2020\r\n
+comment0.text=\r\n\ Class\ responsible\ for\ creating\ and\ managing\ all\ of\ the\ \r\n\ aliens\ attacking\ the\ player\r\n\r\n\ @author\ Adam\ Dachenhausen,\ Kate\ Nelligan,\ Lindsay\ Clark,\ \r\n\ @version\ Spring\ 2020\r\n
 comment1.params=container
 comment1.target=AlienFleet(javax.swing.JComponent)
 comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ AlienFleet\r\n

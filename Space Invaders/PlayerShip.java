@@ -25,13 +25,13 @@ public class PlayerShip extends AnimatedGraphicsObject{
     private JComponent container;
 
     // current size of biggest ship/cannon rectangle
-    protected int lgSize;
+    protected int lgSize = 20;
 
     // current size of medium ship/cannon rectangle
-    protected int medSize;
+    protected int medSize = 10;
 
     // current size of smallest ship/cannon rectangle
-    protected int smSize;
+    protected int smSize = 2;
 
     // latest location of the ship/cannon
     protected Point upperLeft;
@@ -44,8 +44,9 @@ public class PlayerShip extends AnimatedGraphicsObject{
     /**
      * Constructor for objects of class playerShip
      */
-    public PlayerShip(JComponent container){
+    public PlayerShip(Point upperLeft, JComponent container){
         super(container);
+        this.upperLeft = upperLeft;
     }
 
     /**

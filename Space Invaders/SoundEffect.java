@@ -42,7 +42,14 @@ public enum SoundEffect{
      */
     SoundEffect(String fileName){
         try{
+            File soundFile = new File("fileName");
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
             clip = AudioSystem.getClip();
+        }catch (UnsupportedAudioFileException e) {
+            e.printStackTrace();
+
+        }catch(IOException e){
+
         }catch(LineUnavailableException e){
             e.printStackTrace(); 
         }
@@ -54,6 +61,7 @@ public enum SoundEffect{
      */
     public void play(){
         if(volume != Volume.MUTE){
+            //clip.start();
             if(clip.isRunning()){
                 //stop if player is running
                 clip.stop();

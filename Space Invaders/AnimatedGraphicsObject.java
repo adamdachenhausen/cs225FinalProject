@@ -44,7 +44,7 @@ public abstract class AnimatedGraphicsObject extends Thread {
 
     @param millis the number of milliseconds for the thread to sleep
      */
-    public static void sleepWithCatch(long millis) {
+    protected static void sleepWithCatch(long millis) {
 
         try {
             sleep(millis);
@@ -60,7 +60,7 @@ public abstract class AnimatedGraphicsObject extends Thread {
     @return whether this object's lifetime is done and can safely
     never be painted again
      */
-    public boolean done() {
+    protected boolean done() {
 
         return done;
     }
@@ -71,7 +71,7 @@ public abstract class AnimatedGraphicsObject extends Thread {
 
     @param g the Graphics object in which to draw
      */
-    public abstract void paint(Graphics g);
+    protected abstract void paint(Graphics g);
 
     /**
     Abstract run method to ensure that derived classes override

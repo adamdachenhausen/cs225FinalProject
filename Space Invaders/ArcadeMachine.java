@@ -25,8 +25,11 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
     protected static final int ALIEN_POINTS = 10;
     protected static final int SPACESHIP_POINTS = 100;
     protected static final int LIVES = 3;
-    public static final int GRAPHICS_WIDTH = 800;
-    public static final int GRAPHICS_HEIGHT = 800;
+    public static final int FRAME_WIDTH = 850;
+    public static final int FRAME_HEIGHT = 850;
+
+    public static final int PANEL_WIDTH = 850;
+    public static final int PANEL_HEIGHT = 150;
 
     // current coordinates of the upper left corner of the 
     //user's cannon/ship (a rectangle).
@@ -50,17 +53,20 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
     // score for game so far
     private int score = 0;
 
-    // label that holds the score to the game
-    private JLabel scoreLabel;
-
     // button that holds the high score to the game
     private int highScore = 0;
+
+    // label that holds the score to the game
+    private JLabel scoreLabel;
 
     // label that holds the high score for the game
     private JLabel highScoreLabel;
 
     // label to show how many shots are left before the game ends.
     private JLabel instructions;
+
+    // main panel with buttons for the game
+    private JPanel mainPanel;
 
     // bottom panel with buttons for the game
     private JPanel bottomPanel;
@@ -71,7 +77,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
      */
     public ArcadeMachine() {
 
-        super("Space Invaders", GRAPHICS_WIDTH, GRAPHICS_HEIGHT);
+        super("Space Invaders", FRAME_WIDTH, FRAME_HEIGHT);
     }
 
     /**
@@ -83,7 +89,13 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
      */
     @Override
     protected void addListeners(JPanel panel, JFrame frame) {
+        //Add key listener to frame
         frame.addKeyListener(this);
+
+        //Add action listeners to buttons
+        startButton.addActionListener(this);
+        resetButton.addActionListener(this);
+        instructionsButton.addActionListener(this);
     }
 
     /**
@@ -104,13 +116,60 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
      */
     @Override
     protected void buildGUI(JFrame frame, JPanel panel) {
-        startButton = new JButton("Start");
-        resetButton = new JButton("Reset");
-        startButton.addActionListener(this);
-        resetButton.addActionListener(this);
+        //main panel
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BorderLayout());
+        frame.add(mainPanel);
+        frame.setResizable(false);
 
-        panel.add(startButton);
-        panel.add(resetButton);
+        //add graphics panel to main panel
+        mainPanel.add(panel);
+
+        //Add border around game panel
+        Border blackLine = BorderFactory.createLineBorder(Color.BLACK);
+        panel.setBorder(blackLine);
+
+        //add bottom panel: a panel for the buttons
+        bottomPanel = new JPanel();
+        mainPanel.add(bottomPanel, BorderLayout.SOUTH);
+        bottomPanel.setPreferredSize(new Dimension(PANEL_WIDTH,PANEL_HEIGHT));
+        bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.Y_AXIS));
+
+        JPanel buttonPanel = new JPanel();
+        bottomPanel.add(buttonPanel);
+
+        JPanel scorePanel = new JPanel();
+        bottomPanel.add(scorePanel);
+
+        JLabel buttonInstructions = new JLabel("Click 'Start' to play the game!");
+        buttonInstructions.setFont(buttonInstructions.getFont().deriveFont(Font.BOLD,15));
+        buttonInstructions.setBorder(new EmptyBorder(5,330,10,330));
+        buttonPanel.add(buttonInstructions);
+
+        //Construct buttons
+        startButton = new JButton("Start");
+        startButton.setToolTipText("Press to begin the game");
+        resetButton = new JButton("Reset");
+        resetButton.setToolTipText("Press to reset the game");
+        instructionsButton = new JButton("Instructions");
+        instructionsButton.setToolTipText("Press for instructions on how to play the game");
+
+        //Add buttons
+        buttonPanel.add(startButton);
+        buttonPanel.add(resetButton);
+        buttonPanel.add(instructionsButton);
+
+        //Add score label
+        scoreLabel = new JLabel("Score: " + score);
+        scoreLabel.setFont(scoreLabel.getFont().deriveFont(Font.BOLD,15));
+        scorePanel.add(scoreLabel);
+        scoreLabel.setBorder(new EmptyBorder(10,20,10,20));
+
+        //Add highscore label
+        highScoreLabel = new JLabel("High score: " + highScore);
+        highScoreLabel.setFont(highScoreLabel.getFont().deriveFont(Font.BOLD,15));
+        highScoreLabel.setBorder(new EmptyBorder(10,20,10,20));
+        scorePanel.add(highScoreLabel);
 
     }
 
@@ -122,14 +181,47 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource().equals(startButton)){
-            SoundEffect.CLICK.play();
+            //testing if i can get different sounds to play
+            SoundEffect.EXPLODE.play();
+            startGame();
         }
         if(e.getSource().equals(resetButton)){
             SoundEffect.CLICK.play();
+            resetGame();
         }
         if(e.getSource().equals(instructionsButton)){
             SoundEffect.CLICK.play();
         }
+    }
+
+    /**
+     * Sets up the game after start button pressed
+     *
+     */
+    public void startGame() {
+        gameStart = true;
+
+        //edit more instance variables here, this is a stub
+    }
+
+    /**
+     * Sets up the game after start button pressed
+     *
+     */
+    public void resetGame() {
+        gameStart = false;
+
+        //edit more instance variables here, this is a stub
+    }
+
+    /**
+     * Sets up the game after start button pressed
+     *
+     */
+    public void showInstructions() {
+        JFrame instructionDialog = new JFrame("Game Instructions");
+        JOptionPane.showMessageDialog(instructionDialog, "Use left/right arrow keys to move, press 'f' to fire!");
+
     }
 
     /**
@@ -177,7 +269,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
     public static void main(String args[]) {
         SoundEffect.init();
         SoundEffect.volume = SoundEffect.Volume.LOW;
-        
+
         javax.swing.SwingUtilities.invokeLater(new ArcadeMachine());
     }
 }

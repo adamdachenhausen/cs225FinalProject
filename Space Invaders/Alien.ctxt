@@ -1,10 +1,13 @@
 #BlueJ class context
 comment0.target=Alien
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ Alien\ here.\r\n\r\n\ @author\ Lindsay\ Clark,\ Kate\ Nelligan,\ Adam\ Dachenhausen\r\n\ @version\ Spring\ 2020\r\n
-comment1.params=
-comment1.target=Alien()
-comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Alien\r\n
-comment2.params=y
-comment2.target=int\ sampleMethod(int)
-comment2.text=\r\n\ An\ example\ of\ a\ method\ -\ replace\ this\ comment\ with\ your\ own\r\n\r\n\ @param\ \ y\ \ a\ sample\ parameter\ for\ a\ method\r\n\ @return\ \ \ \ the\ sum\ of\ x\ and\ y\r\n
-numComments=3
+comment0.text=\r\n\ Class\ responsible\ for\ creating\ and\ animating\ a\ single\ alien\r\n\r\n\ @author\ Lindsay\ Clark,\ Kate\ Nelligan,\ Adam\ Dachenhausen\r\n\ @version\ Spring\ 2020\r\n
+comment1.params=startCenter\ xSpeed\ ySpeed\ container
+comment1.target=Alien(java.awt.Point,\ double,\ double,\ javax.swing.JComponent)
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Alien\r\n\ \u0000\u0000\u0000\u0000\u0000\r\n
+comment2.params=g
+comment2.target=void\ paint(java.awt.Graphics)
+comment2.text=\r\n\ Draw\ the\ alien\ at\ its\ current\ location.\r\n\ \r\n\ @param\ g\ the\ Graphics\ object\ on\ which\ the\ alien\ should\ be\ drawn\r\n
+comment3.params=
+comment3.target=void\ run()
+comment3.text=\r\n\ This\ object's\ run\ method,\ which\ manages\ the\ life\ of\ the\ alien\ as\ it\r\n\ bounces\ around\ the\ screen.\r\n
+numComments=4
