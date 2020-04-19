@@ -48,12 +48,11 @@ public class ImageLoader implements Runnable, ImageObserver {
     /**
      * Constructor for ImageLoader
      *
-     * @param  type type of image
+     * 
      */
     public ImageLoader()
     {
-        // put your code here
-        this.type = type;
+        type = 0;
     }
 
     /**
@@ -92,41 +91,41 @@ public class ImageLoader implements Runnable, ImageObserver {
                 switch(type){
                     case 1:
                     g.drawImage(alien1aImage, 100, 100, this);
-                        break;
+                    break;
                     case 2:
                     g.drawImage(alien1bImage, 100, 100, this);
-                        break;
+                    break;
                     case 3:
                     g.drawImage(alien2aImage, 100, 100, this);
-                        break;
+                    break;
                     case 4:
                     g.drawImage(alien2bImage, 100, 100, this);
-                        break;
+                    break;
                     case 5:
                     g.drawImage(alien3aImage, 100, 100, this);
-                        break;
+                    break;
                     case 6:
                     g.drawImage(alien3bImage, 100, 100, this);
-                        break;
+                    break;
                     case 7:
                     g.drawImage(alien4aImage, 100, 100, this);
-                        break;
+                    break;
                     case 8:
                     g.drawImage(alien4bImage, 100, 100, this);
-                        break;
+                    break;
                     case 9:
                     g.drawImage(ufoImage, 100, 100, this);
-                        break;
+                    break;
                     case 10:
                     g.drawImage(attack1Image, 100, 100, this);
-                        break;
+                    break;
                     case 11:
                     g.drawImage(attack2Image, 100, 100, this);
-                        break;
+                    break;
                     case 12:
                     g.drawImage(explodeImage, 100, 100, this);
                     break;
-                        default:
+                    default:
                     g.drawImage(missImage, 100, 100, this);
 
                 }
@@ -151,10 +150,11 @@ public class ImageLoader implements Runnable, ImageObserver {
         return true;
     }
 
-    public static void main(String args[]) {
+    private static void loadPic(){
 
         // create the image that will be drawn by the
         // paintComponent method
+
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         cannonImage = toolkit.getImage("cannon.png");
         alien1aImage = toolkit.getImage("alien1a.png");
@@ -169,7 +169,10 @@ public class ImageLoader implements Runnable, ImageObserver {
         attack2Image = toolkit.getImage("attack2.png");
         explodeImage = toolkit.getImage("explode.png");
         missImage = toolkit.getImage("miss.png");
+    }
 
+    public static void main(String args[]) {
+        loadPic();
         // launch the main thread that will manage the GUI
         javax.swing.SwingUtilities.invokeLater(new ImageLoader());
     }
