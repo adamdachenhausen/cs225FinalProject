@@ -176,7 +176,10 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         //Add key listener to frame
         frame.addKeyListener(this);
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> cbe55688b11c0e1bb92780255130a6e97c9d97f2
         //Add action listeners to buttons
         startButton.addActionListener(this);
 
@@ -310,10 +313,29 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         panel.repaint();
     }
 
+    //SRC: https://stackoverflow.com/questions/26305/how-can-i-play-sound-in-java
+    public static synchronized void playSound(String soundIn) {
+        new Thread(new Runnable() {
+                // The wrapper thread is unnecessary, unless it blocks on the
+                // Clip finishing; see comments.
+                public void run() {
+                    try {
+                        File soundFile = new File(soundIn);
+                        Clip clip = AudioSystem.getClip();
+                        AudioInputStream inputStream = AudioSystem.getAudioInputStream(soundFile);
+                        clip.open(inputStream);
+                        clip.start(); 
+                    } catch (Exception e) {
+                        System.err.println(e.getMessage());
+                    }
+                }
+            }).start();
+    }
+
     public static void main(String args[]) {
         //load sound files and set volume
-        SoundEffect.init();
-        SoundEffect.volume = SoundEffect.Volume.LOW;
+        //SoundEffect.init();
+        //SoundEffect.volume = SoundEffect.Volume.LOW;
 
         //load pics
         //Alien.loadPic();
