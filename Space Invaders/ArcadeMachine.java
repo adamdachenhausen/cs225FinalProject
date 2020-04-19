@@ -35,6 +35,9 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
     //user's cannon/ship (a rectangle).
     private Point upperLeft;
 
+    //Starting point of first alien in first row
+    private Point alienPoint = new Point(50,100);
+
     // amount to move on each arrow key press
     public static final int MOVE_BY = 4;
 

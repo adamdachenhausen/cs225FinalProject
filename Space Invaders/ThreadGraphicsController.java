@@ -102,6 +102,8 @@ public class ThreadGraphicsController implements Runnable {
                 // paintComponent is called
                 thisTGC.paint(g);
 
+                g.setColor(Color.BLACK);
+                g.fillRect(0, 0, 850, 675);
                 // redraw each animated graphics object at its
                 // current position, remove the ones that are done
                 // along the way

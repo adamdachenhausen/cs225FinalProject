@@ -33,6 +33,7 @@ public abstract class ImageLoader implements Runnable, ImageObserver {
     private static Image missImage; 
 
     private int type;
+    
     //flag to tell if this object is dead or alive
     protected boolean dead;
 
