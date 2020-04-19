@@ -12,16 +12,18 @@ import java.awt.BorderLayout;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import java.util.Random;
+import java.io.*;
+import javax.sound.sampled.*;
 /**
-A base class to help manage animated graphics programs where the
-animated objects extend the companion class AnimatedGraphicsObject,
-and are managed by the run and paintComponent methods provided
-here.  Event handlers and specifics of the animated and
-non-animated graphics are to be given in the classes that extend
-this and AnimatedGraphicsObject.
-
-@author Jim Teresco
-@version Spring 2020
+ * A base class to help manage animated graphics programs where the
+ * animated objects extend the companion class AnimatedGraphicsObject,
+ * and are managed by the run and paintComponent methods provided
+ * here.  Event handlers and specifics of the animated and
+ * non-animated graphics are to be given in the classes that extend
+ * this and AnimatedGraphicsObject.
+ * 
+ * @author Jim Teresco modified by Kate Nelligan, Lindsay Clark, Adam Dachenhausen
+ * @version Spring 2020
  */
 
 public class ThreadGraphicsController implements Runnable {
@@ -133,9 +135,9 @@ public class ThreadGraphicsController implements Runnable {
         // we don't know here what mouse, keyboard, or other listeners
         // a derived class might want to add, so derived classes that
         // use listeners should override this method and set them
+
         addListeners(panel, frame);
-        addButtons(panel);
-        addLabels(panel);
+
 
         // construct the list of AnimatedGraphicsObject
         list = new ArrayList<AnimatedGraphicsObject>();
@@ -175,61 +177,20 @@ public class ThreadGraphicsController implements Runnable {
     }
 
     /**
-     * Default implementation of the method that will add additional 
-     * panels at the appropriate time during creation of the window.
-     *
-     * Derived classes should override this if such functionality is
-     * needed.
-     *
-     * @param p the JPanel to which any JButtons should be attached
-     */
-    protected void addPanels(JPanel p) {
-
-    }
-
-    /**
-     *  Default implementation of the method that will add buttons
-     *  at the appropriate time during creation of the window.
-     * 
-     *  Derived classes should override this if such functionality is
-     *  needed.
-     * 
-     *  @param p the JPanel to which any JButtons should be attached
-     */
-    protected void addButtons(JPanel p) {
-
-    }
-
-    /**
-     *  Default implementation of the method that will add labels
-     * at the appropriate time during creation of the window.
+     * Default implementation of the method that will connect the
+     * given frame, which represents the whole window and the panel,
+     * which is where graphics will be drawn and mouse events
+     * delivered.  If additional components are used, they can be set
+     * up here.  The default implementation simply adds the panel to
+     * the frame.
      * 
      * Derived classes should override this if such functionality is
      * needed.
      * 
-     * @param p the JPanel to which any mouse or keyboard listeners
-     * should be attached
-     */
-    protected void addLabels(JPanel p) {
-
-    }
-
-    
-    /**
-    Default implementation of the method that will connect the
-    given frame, which represents the whole window and the panel,
-    which is where graphics will be drawn and mouse events
-    delivered.  If additional components are used, they can be set
-    up here.  The default implementation simply adds the panel to
-    the frame.
-
-    Derived classes should override this if such functionality is
-    needed.
-
-    @param frame the JFrame to which components ultimately need to
-    be added
-    @param panel the JPanel where graphics will be drawn that needs
-    to be added somewhere in the GUI hierarchy
+     * @param frame the JFrame to which components ultimately need to
+     * be added
+     * @param panel the JPanel where graphics will be drawn that needs
+     * to be added somewhere in the GUI hierarchy
      */
     protected void buildGUI(JFrame frame, JPanel panel) {
 

@@ -1,8 +1,19 @@
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.event.*;
+import javax.swing.border.AbstractBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.BorderFactory;
+import java.awt.BorderLayout;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
+import java.util.Random;
+import java.io.*;
+import javax.sound.sampled.*;
 /**
  * Creates the game Space Invaders
  * 
@@ -45,6 +56,9 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
     // label that holds the high score for the game
     private JLabel highScoreLabel;
 
+    // label to show how many shots are left before the game ends.
+    private JLabel instructions;
+
     // bottom panel with buttons for the game
     private JPanel bottomPanel;
 
@@ -70,25 +84,23 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
     }
 
     /**
-     * Add the labels to the panel.  Here, we need methods
-     * from both MouseListener and MouseMotionListener.
+     * Default implementation of the method that will connect the
+     * given frame, which represents the whole window and the panel,
+     * which is where graphics will be drawn and mouse events
+     * delivered.  If additional components are used, they can be set
+     * up here.  The default implementation simply adds the panel to
+     * the frame.
      * 
-     * @param p the JPanel to which the labels will be attached
+     * Derived classes should override this if such functionality is
+     * needed.
+     * 
+     * @param frame the JFrame to which components ultimately need to
+     * be added
+     * @param panel the JPanel where graphics will be drawn that needs
+     * to be added somewhere in the GUI hierarchy
      */
     @Override
-    protected void addPanels(JPanel panel) {
-
-    }
-
-    /**
-    Add the mouse listeners to the panel.  Here, we need methods
-    from both MouseListener and MouseMotionListener.
-
-    @param p the JPanel to which the mouse listeners will be
-    attached
-     */
-    @Override
-    protected void addButtons(JPanel panel) {
+    protected void buildGUI(JFrame frame, JPanel panel) {
         startButton = new JButton("Start");
         resetButton = new JButton("Reset");
         startButton.addActionListener(this);
@@ -96,16 +108,6 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
 
         panel.add(startButton);
         panel.add(resetButton);
-    }
-
-    /**
-    Add the labels to the panel.  Here, we need methods
-    from both MouseListener and MouseMotionListener.
-
-    @param p the JPanel to which the labels will be attached
-     */
-    @Override
-    protected void addLabels(JPanel panel) {
 
     }
 

@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=AlienShip
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ alienShip\ here.\r\n\r\n\ @author\ Lindsay\ Clark,\ Kate\ Nelligan,\ Adam\ Dachenhausen\r\n\ @version\ Spring\ 2020\r\n
+comment0.text=\r\n\ Manages\ the\ life\ of\ a\ red\ ufo\ which\ either\ scrolls\ from\ \r\n\ left\ or\ right\ to\ the\ opposite\ edge\ of\ screen\r\n\r\n\ @author\ Lindsay\ Clark,\ Kate\ Nelligan,\ Adam\ Dachenhausen\r\n\ @version\ Spring\ 2020\r\n
 comment1.params=container
 comment1.target=AlienShip(javax.swing.JComponent)
 comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ alienShip\r\n

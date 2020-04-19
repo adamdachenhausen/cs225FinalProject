@@ -1,19 +1,19 @@
 #BlueJ class context
 comment0.target=AnimatedGraphicsObject
-comment0.text=\r\n\ \ \ An\ abstract\ class\ that\ provides\ some\ instance\ variables\ and\ \r\n\ \ \ default\ versions\ of\ methods\ that\ are\ needed\ by\ threaded\ objects\r\n\ \ \ representing\ animated\ graphics\ objects.\r\n\r\n\ \ \ @author\ Jim\ Teresco\r\n\ \ \ @version\ Spring\ 2020\r\n
+comment0.text=\r\n\ An\ abstract\ class\ that\ provides\ some\ instance\ variables\ and\ \r\n\ default\ versions\ of\ methods\ that\ are\ needed\ by\ threaded\ objects\r\n\ representing\ animated\ graphics\ objects.\r\n\ \r\n\ @author\ Jim\ Teresco\ modified\ by\ Kate\ Nelligan,\ Lindsay\ Clark,\ Adam\ Dachenhausen\r\n\ @version\ Spring\ 2020\r\n
 comment1.params=container
 comment1.target=AnimatedGraphicsObject(javax.swing.JComponent)
-comment1.text=\r\n\ \ \ \ \ \ \ Construct\ an\ AnimatedGraphicsObject.\ \ All\ derived\ classes\ must\r\n\ \ \ \ \ \ \ call\ this\ as\ a\ superconstructor\ or\ explicitly\ set\ the\ container\r\n\ \ \ \ \ \ \ variable.\r\n\r\n\ \ \ \ \ \ \ @param\ container\ the\ Swing\ component\ on\ which\ we\ will\ need\ to\r\n\ \ \ \ \ \ \ call\ repaint\ when\ the\ object\ needs\ to\ be\ redrawn\r\n
+comment1.text=\r\n\ \ \ \ Construct\ an\ AnimatedGraphicsObject.\ \ All\ derived\ classes\ must\r\n\ \ \ \ call\ this\ as\ a\ superconstructor\ or\ explicitly\ set\ the\ container\r\n\ \ \ \ variable.\r\n\r\n\ \ \ \ @param\ container\ the\ Swing\ component\ on\ which\ we\ will\ need\ to\r\n\ \ \ \ call\ repaint\ when\ the\ object\ needs\ to\ be\ redrawn\r\n
 comment2.params=millis
 comment2.target=void\ sleepWithCatch(long)
-comment2.text=\r\n\ \ \ \ \ \ \ A\ utility\ method\ to\ have\ the\ thread\ sleep\ without\ the\ need\ to\r\n\ \ \ \ \ \ \ place\ the\ call\ in\ a\ try-catch\ block.\r\n\r\n\ \ \ \ \ \ \ @param\ millis\ the\ number\ of\ milliseconds\ for\ the\ thread\ to\ sleep\r\n
+comment2.text=\r\n\ \ \ \ A\ utility\ method\ to\ have\ the\ thread\ sleep\ without\ the\ need\ to\r\n\ \ \ \ place\ the\ call\ in\ a\ try-catch\ block.\r\n\r\n\ \ \ \ @param\ millis\ the\ number\ of\ milliseconds\ for\ the\ thread\ to\ sleep\r\n
 comment3.params=
 comment3.target=boolean\ done()
-comment3.text=\r\n\ \ \ \ \ \ \ Accessor\ method\ to\ check\ the\ value\ of\ the\ done\ variable.\r\n\ \ \ \ \ \ \ The\ done\ variable\ should\ only\ be\ set\ to\ true\ when\ it\ this\r\n\ \ \ \ \ \ \ object\ is\ guaranteed\ never\ to\ need\ to\ be\ painted\ again.\r\n\r\n\ \ \ \ \ \ \ @return\ whether\ this\ object's\ lifetime\ is\ done\ and\ can\ safely\r\n\ \ \ \ \ \ \ never\ be\ painted\ again\r\n
+comment3.text=\r\n\ \ \ \ Accessor\ method\ to\ check\ the\ value\ of\ the\ done\ variable.\r\n\ \ \ \ The\ done\ variable\ should\ only\ be\ set\ to\ true\ when\ it\ this\r\n\ \ \ \ object\ is\ guaranteed\ never\ to\ need\ to\ be\ painted\ again.\r\n\r\n\ \ \ \ @return\ whether\ this\ object's\ lifetime\ is\ done\ and\ can\ safely\r\n\ \ \ \ never\ be\ painted\ again\r\n
 comment4.params=g
 comment4.target=void\ paint(java.awt.Graphics)
-comment4.text=\r\n\ \ \ \ \ \ \ Required\ paint\ method\ that\ will\ be\ called\ when\ this\ graphical\r\n\ \ \ \ \ \ \ object\ needs\ to\ be\ drawn\ on\ the\ given\ Graphics\ object.\r\n\r\n\ \ \ \ \ \ \ @param\ g\ the\ Graphics\ object\ in\ which\ to\ draw\r\n
+comment4.text=\r\n\ \ \ \ Required\ paint\ method\ that\ will\ be\ called\ when\ this\ graphical\r\n\ \ \ \ object\ needs\ to\ be\ drawn\ on\ the\ given\ Graphics\ object.\r\n\r\n\ \ \ \ @param\ g\ the\ Graphics\ object\ in\ which\ to\ draw\r\n
 comment5.params=
 comment5.target=void\ run()
-comment5.text=\r\n\ \ \ \ \ \ \ Abstract\ run\ method\ to\ ensure\ that\ derived\ classes\ override\r\n\ \ \ \ \ \ \ the\ default\ provided\ by\ Thread.\r\n
+comment5.text=\r\n\ \ \ \ Abstract\ run\ method\ to\ ensure\ that\ derived\ classes\ override\r\n\ \ \ \ the\ default\ provided\ by\ Thread.\r\n
 numComments=6

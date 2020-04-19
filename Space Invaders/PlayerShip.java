@@ -1,8 +1,13 @@
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.event.*;
+import java.util.Random;
+import java.io.*;
+import javax.sound.sampled.*;
 /**
  * Green cannon that player can move to the left or right
  *

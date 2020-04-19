@@ -3,6 +3,9 @@ import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.event.*;
+import java.util.Random;
+import java.io.*;
+import javax.sound.sampled.*;
 /**
  * Manages the life of a red ufo which either scrolls from 
  * left or right to the opposite edge of screen
@@ -22,7 +25,6 @@ public class AlienShip extends AnimatedGraphicsObject{
         super(container);
     }
 
-    
     /**
      * Draw the alien at its current location.
      * 
@@ -40,5 +42,5 @@ public class AlienShip extends AnimatedGraphicsObject{
     @Override
     public void run() {
     }
-    
+
 }
