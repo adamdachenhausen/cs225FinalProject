@@ -29,8 +29,11 @@ public class ShieldSection extends AnimatedGraphicsObject
     //Am I dead or alive?
     protected boolean dead;
 
-    //Am I damaged?
-    protected boolean damaged;
+    //Am I damaged? If so, to what extent
+    protected int damaged;
+
+    //How much damage have I sustained
+    private int maxDamage;
 
     //Where am I?
     protected Point upperLeft;
@@ -41,7 +44,8 @@ public class ShieldSection extends AnimatedGraphicsObject
         super(container);
         this.upperLeft = upperLeft;
         dead = false;
-        damaged = false;
+        damaged = 0;
+        maxDamage = 5;
         damagePoints = new boolean[SIZE/5][SIZE/5];
 
         //Calculate the damage on init
@@ -50,7 +54,7 @@ public class ShieldSection extends AnimatedGraphicsObject
 
     @Override
     public void paint(Graphics g){
-        if(!dead && !damaged){
+        if(!dead && damaged==0){
             //Draw one big full rectangle
             g.setColor(shieldColor);
             g.fillRect(upperLeft.x,upperLeft.y,SIZE,SIZE);
@@ -78,20 +82,26 @@ public class ShieldSection extends AnimatedGraphicsObject
     private void hurt(){
         Random rand = new Random();
 
-        //Generate a random anywhere from 5 to 15 inclusive aka SIZE/5 to (3*SIZE)/5
-        int maxDamage = rand.nextInt(11)+5;
-        while(maxDamage>=0){
-            //Select a random point in the double array to set damaged
-            int x = rand.nextInt(4);
-            int y = rand.nextInt(4);
+        maxDamage += 10;
+        if(maxDamage >= SIZE){
+            dead = true;
+            done = true;
+        }
+        else{
+            int i = maxDamage;
+            while(i>=0){
+                //Select a random point in the double array to set damaged
+                int x = rand.nextInt(4);
+                int y = rand.nextInt(4);
 
-            //Set it to true, unless it is already, then just do nothing
-            if(damagePoints[x][y]){
-                //Do nothing
-            }
-            else{
-                maxDamage--;
-                damagePoints[x][y] = true;
+                //Set it to true, unless it is already, then just do nothing
+                if(damagePoints[x][y]){
+                    //Do nothing
+                }
+                else{
+                    i--;
+                    damagePoints[x][y] = true;
+                }
             }
         }
     }
