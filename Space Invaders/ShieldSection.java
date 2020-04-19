@@ -17,9 +17,6 @@ import javax.sound.sampled.*;
  */
 public class ShieldSection extends AnimatedGraphicsObject
 {
-    // delay time between frames of animation (ms)
-    public static final int DELAY_TIME = 33;
-
     // individual rectangle for shield size
     public static final int SIZE = 25;
 
