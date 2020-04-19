@@ -86,23 +86,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         super("Space Invaders", FRAME_WIDTH, FRAME_HEIGHT);
     }
 
-    /**
-     *   Add the mouse listeners to the panel.  Here, we need methods
-     *   from both MouseListener and MouseMotionListener.
-     * 
-     *   @param p the JPanel to which the mouse listeners will be
-     *   attached
-     */
-    @Override
-    protected void addListeners(JPanel panel, JFrame frame) {
-        //Add key listener to frame
-        frame.addKeyListener(this);
 
-        //Add action listeners to buttons
-        startButton.addActionListener(this);
-        resetButton.addActionListener(this);
-        instructionsButton.addActionListener(this);
-    }
 
     /**
      * Default implementation of the method that will connect the
@@ -127,10 +111,13 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         mainPanel.setLayout(new BorderLayout());
         frame.add(mainPanel);
         frame.setResizable(false);
+        //frame.requestFocus();
+        
 
         //add graphics panel to main panel
         mainPanel.add(panel);
-
+        //mainPanel.requestFocus();
+        
         //Add border around game panel
         Border blackLine = BorderFactory.createLineBorder(Color.BLACK);
         panel.setBorder(blackLine);
@@ -178,7 +165,29 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         scorePanel.add(highScoreLabel);
 
     }
+    
+    /**
+     *   Add the mouse listeners to the panel.  Here, we need methods
+     *   from both MouseListener and MouseMotionListener.
+     * 
+     *   @param p the JPanel to which the mouse listeners will be
+     *   attached
+     */
+    @Override
+    protected void addListeners(JPanel panel, JFrame frame) {
+        //Add key listener to frame
+        //mainPanel.addKeyListener(this);
+        panel.addKeyListener(this);
+        //bottomPanel.addKeyListener(this);
 
+        
+
+        //Add action listeners to buttons
+        startButton.addActionListener(this);
+        startButton.addKeyListener(this);
+        resetButton.addActionListener(this);
+        instructionsButton.addActionListener(this);
+    }
     /**
      * Executes action each time button pressed.
      *
