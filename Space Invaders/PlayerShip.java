@@ -42,18 +42,17 @@ public class PlayerShip extends AnimatedGraphicsObject{
     // current size of smallest ship/cannon rectangle
     protected int smHeight = 4;
 
-    // latest location of the largest rectangle that makes the ship/cannon
-    protected Point upperLeft;
-
     // Color of the ship/cannon
     protected Color shipColor = new Color(34, 204, 0);
 
     protected boolean done = false;
 
+    protected String type;
+
     protected int width;
     protected int height;
 
-    String status;
+
     /**
      * Constructor for objects of class playerShip
      */
@@ -63,6 +62,10 @@ public class PlayerShip extends AnimatedGraphicsObject{
         status = "alive";
         width = container.getWidth();
         height = container.getHeight();
+        System.out.print("width: " + container.getWidth());
+        System.out.print("height: " + container.getHeight());
+        type = "ship";
+        done = false;
     }
 
     /**

@@ -33,7 +33,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
 
     // current coordinates of the upper left corner of the 
     //user's cannon/ship (a rectangle).
-    private Point upperLeft;
+    private Point playerPoint;
 
     //Starting point of first alien in first row
     private Point alienPoint = new Point(50,100);
@@ -215,9 +215,9 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
     }
 
     public void createPlayer() {
-        upperLeft = new Point(425 - 24, 650);
-        //upperLeft = new Point(panel.getWidth() - 20/2, panel.getHeight() - 10/2);
-        player = new PlayerShip(upperLeft, panel);
+            playerPoint = new Point(425 - 24, 650);
+        //    playerPoint = new Point(panel.getWidth() - 20/2, panel.getHeight() - 10/2);
+        player = new PlayerShip(    playerPoint, panel);
         synchronized (lock) {
             list.add(player);
         }
@@ -275,12 +275,12 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         //Source for consume(): https://docs.oracle.com/javase/7/docs/api/java/awt/event/InputEvent.html#consume()
         if(gameStart){
             if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-                player.upperLeft.translate(-MOVE_BY, 0);
+                player.getPosition().translate(-MOVE_BY, 0);
 
                 //move ship
             }
             else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                player.upperLeft.translate(MOVE_BY, 0);
+                player.getPosition().translate(MOVE_BY, 0);
 
                 //move ship
             }else if(e.getKeyCode() == KeyEvent.VK_SPACE){

@@ -25,6 +25,26 @@ public abstract class AnimatedGraphicsObject extends Thread {
     /** The container on which we will call repaint after changes are made */
     protected JComponent container;
 
+    /** delay time between frames of animation (ms)*/
+    public static final int DELAY_TIME = 33;
+
+    /** max allowed coordinates of play area*/
+    public static final int LEFT_MAX = 0;
+    public static final int RIGHT_MAX = 830;
+    public static final int TOP_MAX = 0;
+    public static final int BOTTOM_MAX = 600;
+
+    /** type of animated object */
+    protected int type;
+
+    /** flag to tell if this object is dead or alive*/
+    protected boolean dead;
+
+    /** point to draw object from */
+    protected Point upperLeft;
+
+    /** status of the object */
+    String status;
     /**
     Construct an AnimatedGraphicsObject.  All derived classes must
     call this as a superconstructor or explicitly set the container
@@ -63,6 +83,33 @@ public abstract class AnimatedGraphicsObject extends Thread {
     protected boolean done() {
 
         return done;
+    }
+
+    /**
+     * Returns the current status of a bubble (start, grow, float, empty, pop)
+     *
+     * @return status the status of the bubble
+     */
+    public String getStatus(){
+        return status;
+    }
+
+    /**
+     * Sets the status of the bubble (start, grow, float, empty, pop)
+     *
+     * @param newStatus the new status to set the bubble to
+     */
+    public void setStatus(String newStatus){
+        status = newStatus;
+    }
+
+    /**
+     * Returns the current position of a bubble
+     *
+     * @return status the position of the bubble
+     */
+    public Point getPosition(){
+        return upperLeft;
     }
 
     /**

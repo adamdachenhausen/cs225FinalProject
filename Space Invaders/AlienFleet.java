@@ -23,6 +23,8 @@ public class AlienFleet extends AnimatedGraphicsObject{
     public AlienFleet(JComponent container)
     {
         super(container);
+        type = 1;
+        done = false;
     }
 
     /**
