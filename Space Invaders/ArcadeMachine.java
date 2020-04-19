@@ -176,10 +176,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         //Add key listener to frame
         frame.addKeyListener(this);
 
-<<<<<<< HEAD
 
-=======
->>>>>>> cbe55688b11c0e1bb92780255130a6e97c9d97f2
         //Add action listeners to buttons
         startButton.addActionListener(this);
 
@@ -198,15 +195,18 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         if(e.getSource().equals(startButton)){
 
             //SoundEffect.CLICK.play();
+            playSound("buttonclick.wav");
             startGame();
         }
         if(e.getSource().equals(resetButton)){
 
             //SoundEffect.CLICK.play();
+            playSound("buttonclick.wav");
             resetGame();
         }
         if(e.getSource().equals(instructionsButton)){
             //SoundEffect.CLICK.play();
+            playSound("buttonclick.wav");
             showInstructions();
         }
     }
@@ -229,17 +229,16 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         playerPoint = new Point(401, 650);
 
         player = new PlayerShip(playerPoint, panel);
-        synchronized (lock) {
-            list.add(player);
-        }
+
         player.start();
         panel.repaint();
     }
 
     public void createAliens() {
-        alien = new Alien(alienPoint, panel);
+        
+        Alien alien = new Alien(alienPoint, panel);
         synchronized (lock) {
-            //list.add(alien);
+            aliens.add(alien);
         }
         alien.start();
         panel.repaint();
@@ -251,7 +250,8 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
      */
     public void resetGame() {
         gameStart = false;
-        list.clear();
+        player.setStatus("dead");
+        aliens.clear();
         //edit more instance variables here, this is a stub
     }
 
@@ -338,7 +338,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         //SoundEffect.volume = SoundEffect.Volume.LOW;
 
         //load pics
-        //Alien.loadPic();
+        Alien.loadPic();
 
         //launch main thread that will manage the GUI
         javax.swing.SwingUtilities.invokeLater(new ArcadeMachine());

@@ -29,12 +29,12 @@ import javax.sound.sampled.*;
 public class ThreadGraphicsController implements Runnable {
 
     /** list of animated graphics objects currently on the screen */
-    protected java.util.List<AnimatedGraphicsObject> aliens;
+    protected java.util.List<Alien>  aliens;
     protected java.util.List<AnimatedGraphicsObject> shields;
-        
+
     /** the player */
     AnimatedGraphicsObject player;
-   
+
     /** the ufo*/
     AnimatedGraphicsObject alienShip;
 
@@ -55,7 +55,7 @@ public class ThreadGraphicsController implements Runnable {
     // so we can access it in the paintComponent method (where
     // this would refer to the JPanel instead!)
     protected ThreadGraphicsController thisTGC;
-    
+
     protected JFrame frame;
 
     /**
@@ -116,25 +116,28 @@ public class ThreadGraphicsController implements Runnable {
                 // along the way
                 int i = 0;
 
+                if(player != null && !player.getStatus().equals("dead")){
+                    player.paint(g);
+                }
                 // since we will be modifying the list, we will
                 // lock access in case any other code tries to
                 // access the list
                 synchronized (lock) {
-                    while (i < list.size()) {
-                        AnimatedGraphicsObject b = list.get(i);
-                        if (b.done()) {
-                            list.remove(i);
+                    while (i < aliens.size()) {
+                        Alien a = aliens.get(i);
+                        if (a.done()) {
+                            aliens.remove(i);
                         }
                         else {
-                            b.paint(g);
+                            a.paint(g);
                             i++;
                         }
                     }
                 }
             }
         };
-        
-        frame.setFocusable(true);
+
+        //frame.setFocusable(true);
         // the panel should be placed appropriately within the frame
         // by this method, so if anything further is needed such as
         // additional panels, buttons, etc., that can be accomplished
@@ -148,9 +151,8 @@ public class ThreadGraphicsController implements Runnable {
 
         addListeners(panel, frame);
 
-
         // construct the list of AnimatedGraphicsObject
-        list = new ArrayList<AnimatedGraphicsObject>();
+        aliens = new ArrayList<Alien>();
 
         // display the window we've created
         frame.pack();
