@@ -58,6 +58,8 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
 
     // button that holds the high score to the game
     private int highScore = 0;
+    
+    private int level = 0;
 
     // label that holds the score to the game
     private JLabel scoreLabel;
@@ -74,8 +76,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
     // bottom panel with buttons for the game
     private JPanel bottomPanel;
 
-    // Player ship/cannon
-    PlayerShip player;
+
 
     /**
      * Constructor, which simply calls the superclass constructor
@@ -85,8 +86,6 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
 
         super("Space Invaders", FRAME_WIDTH, FRAME_HEIGHT);
     }
-
-
 
     /**
      * Default implementation of the method that will connect the
@@ -112,12 +111,11 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         frame.add(mainPanel);
         frame.setResizable(false);
         //frame.requestFocus();
-        
 
         //add graphics panel to main panel
         mainPanel.add(panel);
         //mainPanel.requestFocus();
-        
+
         //Add border around game panel
         Border blackLine = BorderFactory.createLineBorder(Color.BLACK);
         panel.setBorder(blackLine);
@@ -165,7 +163,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         scorePanel.add(highScoreLabel);
 
     }
-    
+
     /**
      *   Add the mouse listeners to the panel.  Here, we need methods
      *   from both MouseListener and MouseMotionListener.
@@ -176,18 +174,16 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
     @Override
     protected void addListeners(JPanel panel, JFrame frame) {
         //Add key listener to frame
-        //mainPanel.addKeyListener(this);
-        panel.addKeyListener(this);
-        //bottomPanel.addKeyListener(this);
+        frame.addKeyListener(this);
 
-        
 
         //Add action listeners to buttons
         startButton.addActionListener(this);
-        startButton.addKeyListener(this);
+
         resetButton.addActionListener(this);
         instructionsButton.addActionListener(this);
     }
+
     /**
      * Executes action each time button pressed.
      *
@@ -195,12 +191,14 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
      */
     @Override
     public void actionPerformed(ActionEvent e) {
+        frame.requestFocus();
         if(e.getSource().equals(startButton)){
 
             //SoundEffect.CLICK.play();
             startGame();
         }
         if(e.getSource().equals(resetButton)){
+
             //SoundEffect.CLICK.play();
             resetGame();
         }
@@ -227,7 +225,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         //starting point for player ship
         playerPoint = new Point(401, 650);
 
-        player = new PlayerShip(    playerPoint, panel);
+        player = new PlayerShip(playerPoint, panel);
         synchronized (lock) {
             list.add(player);
         }
@@ -236,7 +234,12 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
     }
 
     public void createAliens() {
-
+        alien = new Alien(alienPoint, panel);
+        synchronized (lock) {
+            //list.add(alien);
+        }
+        alien.start();
+        panel.repaint();
     }
 
     /**
@@ -245,7 +248,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
      */
     public void resetGame() {
         gameStart = false;
-
+        list.clear();
         //edit more instance variables here, this is a stub
     }
 
@@ -281,7 +284,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
      * @param e the KeyEvent to determine direction
      */
     public void keyPressed(KeyEvent e) {
-        System.out.println("key pressed");
+
         //Source for consume(): https://docs.oracle.com/javase/7/docs/api/java/awt/event/InputEvent.html#consume()
         if(gameStart){
             if (e.getKeyCode() == KeyEvent.VK_LEFT) {
@@ -313,7 +316,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         SoundEffect.volume = SoundEffect.Volume.LOW;
 
         //load pics
-        Alien.loadPic();
+        //Alien.loadPic();
 
         //launch main thread that will manage the GUI
         javax.swing.SwingUtilities.invokeLater(new ArcadeMachine());

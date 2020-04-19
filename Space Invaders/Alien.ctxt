@@ -1,8 +1,8 @@
 #BlueJ class context
 comment0.target=Alien
 comment0.text=\r\n\ Class\ responsible\ for\ creating\ and\ animating\ a\ single\ alien\r\n\r\n\ @author\ Lindsay\ Clark,\ Kate\ Nelligan,\ Adam\ Dachenhausen\r\n\ @version\ Spring\ 2020\r\n
-comment1.params=upperLeft\ xSpeed\ ySpeed\ container
-comment1.target=Alien(java.awt.Point,\ double,\ double,\ javax.swing.JComponent)
+comment1.params=upperLeft\ container
+comment1.target=Alien(java.awt.Point,\ javax.swing.JComponent)
 comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Alien\r\n\ \u0000\u0000\u0000\u0000\u0000\r\n
 comment2.params=g
 comment2.target=void\ paint(java.awt.Graphics)
@@ -10,10 +10,4 @@ comment2.text=\r\n\ Draw\ the\ alien\ at\ its\ current\ location.\r\n\ \r\n\ @pa
 comment3.params=
 comment3.target=void\ run()
 comment3.text=\r\n\ This\ object's\ run\ method,\ which\ manages\ the\ life\ of\ the\ alien\ as\ it\r\n\ bounces\ around\ the\ screen.\r\n
-comment4.params=img\ infoflags\ x\ y\ width\ height
-comment4.target=boolean\ imageUpdate(java.awt.Image,\ int,\ int,\ int,\ int,\ int)
-comment5.params=
-comment5.target=void\ loadPic()
-comment6.params=
-comment6.target=boolean\ isDead()
-numComments=7
+numComments=4

@@ -56,8 +56,6 @@ public class PlayerShip extends AnimatedGraphicsObject{
         status = "alive";
         width = container.getWidth();
         height = container.getHeight();
-        System.out.print("width: " + container.getWidth());
-        System.out.print("height: " + container.getHeight());
         type = "ship";
         done = false;
     }

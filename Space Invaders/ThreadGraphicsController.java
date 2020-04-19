@@ -29,7 +29,14 @@ import javax.sound.sampled.*;
 public class ThreadGraphicsController implements Runnable {
 
     /** list of animated graphics objects currently on the screen */
-    protected java.util.List<AnimatedGraphicsObject> list;
+    protected java.util.List<AnimatedGraphicsObject> aliens;
+    protected java.util.List<AnimatedGraphicsObject> shields;
+        
+    /** the player */
+    AnimatedGraphicsObject player;
+   
+    /** the ufo*/
+    AnimatedGraphicsObject alienShip;
 
     /** the panel in which our graphics are drawn */
     protected JPanel panel;
