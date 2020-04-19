@@ -70,6 +70,9 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
 
     // bottom panel with buttons for the game
     private JPanel bottomPanel;
+    
+    // Player ship/cannon
+    PlayerShip player;
 
     /**
      * Constructor, which simply calls the superclass constructor
@@ -181,16 +184,17 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource().equals(startButton)){
-            //testing if i can get different sounds to play
-            SoundEffect.EXPLODE.play();
+
+            //SoundEffect.CLICK.play();
             startGame();
         }
         if(e.getSource().equals(resetButton)){
-            SoundEffect.CLICK.play();
+            //SoundEffect.CLICK.play();
             resetGame();
         }
         if(e.getSource().equals(instructionsButton)){
-            SoundEffect.CLICK.play();
+            //SoundEffect.CLICK.play();
+            showInstructions();
         }
     }
 
@@ -200,7 +204,14 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
      */
     public void startGame() {
         gameStart = true;
-
+        upperLeft = new Point(50, 50);
+        //upperLeft = new Point(panel.getWidth() - 20/2, panel.getHeight() - 10/2);
+        player = new PlayerShip(upperLeft, panel);
+	synchronized (lock) {
+	    list.add(player);
+	}
+        player.start();
+        panel.repaint();
         //edit more instance variables here, this is a stub
     }
 
@@ -250,11 +261,16 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         if(gameStart){
             if (e.getKeyCode() == KeyEvent.VK_UP) {
                 upperLeft.translate(0, -MOVE_BY);
+
+                //move ship
             }
             else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
                 upperLeft.translate(0, MOVE_BY);
+
+                //move ship
             }else if(e.getKeyCode() == KeyEvent.VK_F){
                 //fire cannon code (call method)
+
             }
             else{
                 e.consume();

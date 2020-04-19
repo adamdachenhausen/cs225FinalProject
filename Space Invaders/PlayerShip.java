@@ -22,41 +22,61 @@ public class PlayerShip extends AnimatedGraphicsObject{
     protected static final int DELAY_TIME = 33;
 
     // who do we live in so we can repaint?
-    private JComponent container;
+    //private JComponent container;
 
     // current size of biggest ship/cannon rectangle
-    protected int lgSize = 20;
+    protected int lgWidth = 40;
 
     // current size of medium ship/cannon rectangle
-    protected int medSize = 10;
+    protected int medWidth = 12;
 
     // current size of smallest ship/cannon rectangle
-    protected int smSize = 2;
+    protected int smWidth = 2;
 
-    // latest location of the ship/cannon
+    // current size of biggest ship/cannon rectangle
+    protected int lgHeight = 12;
+
+    // current size of medium ship/cannon rectangle
+    protected int medHeight = 14;
+
+    // current size of smallest ship/cannon rectangle
+    protected int smHeight = 16;
+
+    // latest location of the largest rectangle that makes the ship/cannon
     protected Point upperLeft;
 
     // Color of the ship/cannon
     protected Color shipColor = new Color(34, 204, 0);
 
+    protected boolean done = false;
 
-    protected boolean gameDone = false;
+    protected int width;
+    protected int height;
+
+    String status;
     /**
      * Constructor for objects of class playerShip
      */
     public PlayerShip(Point upperLeft, JComponent container){
         super(container);
         this.upperLeft = upperLeft;
+        status = "alive";
+        width = container.getWidth();
+        height = container.getHeight();
     }
 
     /**
      * Draw the cannon/ship at its current location.
      * 
-     * @param g the Graphics object on which the alien should be drawn
+     * @param g the Graphics object on which the cannon should be drawn
      */
     @Override
     public void paint(Graphics g) {
-
+        //(x, y, width, height)
+        g.setColor(shipColor);
+        g.fillRect(upperLeft.x, upperLeft.y,lgWidth, lgHeight);
+        g.fillRect(upperLeft.x + medWidth/2, upperLeft.y - medHeight, medWidth, medHeight);
+        g.fillRect(upperLeft.x+ smWidth/2, upperLeft.y- smHeight, smWidth, smHeight);
     }
 
     /**
@@ -65,6 +85,52 @@ public class PlayerShip extends AnimatedGraphicsObject{
      */
     @Override
     public void run() {
+        while(getStatus().equals("alive")){
+            try {
+                sleep(DELAY_TIME);
+            }
+            catch (InterruptedException e) {
+            }
 
+            container.repaint();
+        }
+        done = true;
     }
+
+    /**
+     * Returns the current status of a ship (alive/dead)
+     *
+     * @return status the status of the bubble
+     */
+    public String getStatus(){
+        return status;
+    }
+
+    /**
+     * Sets the status of the bubble (start, grow, float, empty, pop)
+     *
+     * @param newStatus the new status to set the bubble to
+     */
+    public void setStatus(String newStatus){
+        status = newStatus;
+    }
+
+    /**
+     * Returns the current position of a bubble
+     *
+     * @return status the position of the bubble
+     */
+    public Point getPosition(){
+        return upperLeft;
+    }
+
+    /**
+     * Returns the current position of a bubble
+     *
+     * @return status the position of the bubble
+     */
+    public Point setPosition(){
+        return upperLeft;
+    }
+
 }

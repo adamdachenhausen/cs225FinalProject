@@ -31,7 +31,7 @@ public enum SoundEffect{
     public static enum Volume{
         MUTE, LOW, MEDIUM, HIGH
     }
-    public static Volume volume = Volume.MEDIUM;
+    public static Volume volume = Volume.LOW;
 
     private Clip clip;
 
@@ -45,6 +45,7 @@ public enum SoundEffect{
             File soundFile = new File("fileName");
             AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
             clip = AudioSystem.getClip();
+            clip.open(audioIn);
         }catch (UnsupportedAudioFileException e) {
             e.printStackTrace();
 
