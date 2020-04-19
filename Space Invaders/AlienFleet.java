@@ -4,34 +4,38 @@ import java.util.*;
 import javax.swing.*;
 import javax.swing.event.*;
 /**
- * Write a description of class AlienFleet here.
+ * Class responsible for creating and managing all of the 
+ * aliens attacking the player
  *
 * @author Adam Dachenhausen, Kate Nelligan, Lindsay Clark, 
 * @version Spring 2020
  */
-public class AlienFleet extends Thread{
+public class AlienFleet extends AnimatedGraphicsObject{
 
-    // instance variables - replace the example below with your own
-    private int x;
 
     /**
      * Constructor for objects of class AlienFleet
      */
-    public AlienFleet()
+    public AlienFleet(JComponent container)
     {
-        // initialise instance variables
-        x = 0;
+        super(container);
     }
 
     /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
+     * Draw the alien at its current location.
+     * 
+     * @param g the Graphics object on which the alien should be drawn
      */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
+    @Override
+    public void paint(Graphics g) {
+
+    }
+
+    /**
+     * This object's run method, which manages the life of the alien as it
+     * bounces around the screen.
+     */
+    @Override
+    public void run() {
     }
 }

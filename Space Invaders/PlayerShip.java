@@ -4,19 +4,12 @@ import java.util.*;
 import javax.swing.*;
 import javax.swing.event.*;
 /**
- * Write a description of class playerShip here.
+ * Green cannon that player can move to the left or right
  *
  * @author Kate Nelligan, Lindsay Clark, Adam Dachenhausen
  * @version Spring 2020
  */
-public class PlayerShip extends Thread{
-
-    // initial bubble size
-    public static final int INITIAL_SIZE = 2;
-
-    // pixels to move each frame
-    protected static final int GROWTH_RATE = 2;
-
+public class PlayerShip extends AnimatedGraphicsObject{
     // pixels to move each frame
     protected static final int SPEED = 2;
 
@@ -26,35 +19,46 @@ public class PlayerShip extends Thread{
     // who do we live in so we can repaint?
     private JComponent container;
 
-    // current size of bubble
-    protected int size;
+    // current size of biggest ship/cannon rectangle
+    protected int lgSize;
 
-    // latest location of the bubble
+    // current size of medium ship/cannon rectangle
+    protected int medSize;
+
+    // current size of smallest ship/cannon rectangle
+    protected int smSize;
+
+    // latest location of the ship/cannon
     protected Point upperLeft;
 
-    // Color of the bubble
-    protected Color color;
+    // Color of the ship/cannon
+    protected Color shipColor = new Color(34, 204, 0);
 
-    // current state of the bubble: start, grow, float, empty, pop
-    protected String status;
 
-    protected boolean game = false;
+    protected boolean gameDone = false;
     /**
      * Constructor for objects of class playerShip
      */
-    public PlayerShip()
-    {
+    public PlayerShip(JComponent container){
+        super(container);
+    }
+
+    /**
+     * Draw the cannon/ship at its current location.
+     * 
+     * @param g the Graphics object on which the alien should be drawn
+     */
+    @Override
+    public void paint(Graphics g) {
 
     }
 
     /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
+     * This object's run method, which manages the life of the ship/alien as it
+     * bounces around the screen.
      */
-    public void sampleMethod(int y)
-    {
+    @Override
+    public void run() {
 
     }
 }

@@ -1,9 +1,9 @@
 #BlueJ class context
-comment0.target=AlienShip
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ alienShip\ here.\r\n\r\n\ @author\ Lindsay\ Clark,\ Kate\ Nelligan,\ Adam\ Dachenhausen\r\n\ @version\ Spring\ 2020\r\n
+comment0.target=AlienFleet
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ AlienFleet\ here.\r\n\r\n\ @author\ Adam\ Dachenhausen,\ Kate\ Nelligan,\ Lindsay\ Clark,\ \r\n\ @version\ Spring\ 2020\r\n
 comment1.params=container
-comment1.target=AlienShip(javax.swing.JComponent)
-comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ alienShip\r\n
+comment1.target=AlienFleet(javax.swing.JComponent)
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ AlienFleet\r\n
 comment2.params=g
 comment2.target=void\ paint(java.awt.Graphics)
 comment2.text=\r\n\ Draw\ the\ alien\ at\ its\ current\ location.\r\n\ \r\n\ @param\ g\ the\ Graphics\ object\ on\ which\ the\ alien\ should\ be\ drawn\r\n
