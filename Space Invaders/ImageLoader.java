@@ -48,12 +48,11 @@ public class ImageLoader implements Runnable, ImageObserver {
     /**
      * Constructor for ImageLoader
      *
-     * @param  type type of image
+     * 
      */
     public ImageLoader()
     {
-        // put your code here
-        this.type = type;
+        type = 0;
     }
 
     /**
@@ -151,10 +150,11 @@ public class ImageLoader implements Runnable, ImageObserver {
         return true;
     }
 
-    public static void main(String args[]) {
+    private static void loadPic(){
 
         // create the image that will be drawn by the
         // paintComponent method
+
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         cannonImage = toolkit.getImage("cannon.png");
         alien1aImage = toolkit.getImage("alien1a.png");
@@ -169,7 +169,10 @@ public class ImageLoader implements Runnable, ImageObserver {
         attack2Image = toolkit.getImage("attack2.png");
         explodeImage = toolkit.getImage("explode.png");
         missImage = toolkit.getImage("miss.png");
+    }
 
+    public static void main(String args[]) {
+        loadPic();
         // launch the main thread that will manage the GUI
         javax.swing.SwingUtilities.invokeLater(new ImageLoader());
     }
