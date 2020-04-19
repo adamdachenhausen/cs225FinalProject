@@ -13,7 +13,7 @@ import javax.swing.event.*;
 @version Spring 2020
  */
 
-public class ImageLoader implements Runnable, ImageObserver {
+public abstract class ImageLoader implements Runnable, ImageObserver {
 
     // we store the contents of the files in an Image object,
     // declared as static since we'd only ever need it once.
@@ -31,114 +31,72 @@ public class ImageLoader implements Runnable, ImageObserver {
     private static Image attack2Image;   
     private static Image explodeImage;   
     private static Image missImage; 
-    private JPanel panel;
 
     private int type;
+    //flag to tell if this object is dead or alive
+    protected boolean dead;
+
+    //Container to hold this object
+    private Component panel;
     /**
      * Constructor for ImageLoader
      *
      * @param  type type of image
      */
-    public ImageLoader(int type)
+    public ImageLoader(int type,Component panel)
     {
         // put your code here
         this.type = type;
+        dead=false;
+        this.panel=panel;
     }
 
-    /**
-     * Constructor for ImageLoader
-     *
-     * 
-     */
-    public ImageLoader()
-    {
-        type = 0;
-    }
+    public void paint(Graphics g){
+        if(!dead){
+            // draw the appropriate image
+            switch(type){
+                case 1:
+                g.drawImage(alien1aImage, 100, 100, this);
+                break;
+                case 2:
+                g.drawImage(alien1bImage, 100, 100, this);
+                break;
+                case 3:
+                g.drawImage(alien2aImage, 100, 100, this);
+                break;
+                case 4:
+                g.drawImage(alien2bImage, 100, 100, this);
+                break;
+                case 5:
+                g.drawImage(alien3aImage, 100, 100, this);
+                break;
+                case 6:
+                g.drawImage(alien3bImage, 100, 100, this);
+                break;
+                case 7:
+                g.drawImage(alien4aImage, 100, 100, this);
+                break;
+                case 8:
+                g.drawImage(alien4bImage, 100, 100, this);
+                break;
+                case 9:
+                g.drawImage(ufoImage, 100, 100, this);
+                break;
+                case 10:
+                g.drawImage(attack1Image, 100, 100, this);
+                break;
+                case 11:
+                g.drawImage(attack2Image, 100, 100, this);
+                break;
+                case 12:
+                g.drawImage(explodeImage, 100, 100, this);
+                break;
+                default:
+                g.drawImage(missImage, 100, 100, this);
 
-    /**
-     * The run method to set up the graphical user interface
-     */
-    @Override
-    public void run() {
-
-        // set up the GUI "look and feel" which should match
-        // the OS on which we are running
-        JFrame.setDefaultLookAndFeelDecorated(true);
-
-        // create a JFrame in which we will build our very
-        // tiny GUI, and give the window a name
-        JFrame frame = new JFrame("ShowSnowflake");
-        frame.setPreferredSize(new Dimension(500,500));
-
-        // tell the JFrame that when someone closes the
-        // window, the application should terminate
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        // JPanel with a paintComponent method
-        panel = new JPanel() {
-            @Override
-            public void paintComponent(Graphics g) {
-
-                // first, we should call the paintComponent method we are
-                // overriding in JPanel
-                super.paintComponent(g);
-
-                // draw a big, black background
-                g.setColor(Color.BLACK);
-                g.fillRect(0, 0, 700, 700);
-
-                // draw the appropriate image
-                switch(type){
-                    case 1:
-                    g.drawImage(alien1aImage, 100, 100, this);
-                    break;
-                    case 2:
-                    g.drawImage(alien1bImage, 100, 100, this);
-                    break;
-                    case 3:
-                    g.drawImage(alien2aImage, 100, 100, this);
-                    break;
-                    case 4:
-                    g.drawImage(alien2bImage, 100, 100, this);
-                    break;
-                    case 5:
-                    g.drawImage(alien3aImage, 100, 100, this);
-                    break;
-                    case 6:
-                    g.drawImage(alien3bImage, 100, 100, this);
-                    break;
-                    case 7:
-                    g.drawImage(alien4aImage, 100, 100, this);
-                    break;
-                    case 8:
-                    g.drawImage(alien4bImage, 100, 100, this);
-                    break;
-                    case 9:
-                    g.drawImage(ufoImage, 100, 100, this);
-                    break;
-                    case 10:
-                    g.drawImage(attack1Image, 100, 100, this);
-                    break;
-                    case 11:
-                    g.drawImage(attack2Image, 100, 100, this);
-                    break;
-                    case 12:
-                    g.drawImage(explodeImage, 100, 100, this);
-                    break;
-                    default:
-                    g.drawImage(missImage, 100, 100, this);
-
-                }
             }
-        };
-        frame.add(panel);
-
-        // display the window we've created
-        frame.pack();
-        frame.setVisible(true);
-
+        }
     }
-
     // the method required by ImageObserver
     public boolean imageUpdate(Image img, int infoflags, int x, int y,
     int width, int height) {
@@ -171,10 +129,8 @@ public class ImageLoader implements Runnable, ImageObserver {
         missImage = toolkit.getImage("miss.png");
     }
 
-    public static void main(String args[]) {
-        loadPic();
-        // launch the main thread that will manage the GUI
-        javax.swing.SwingUtilities.invokeLater(new ImageLoader());
+    public boolean isDead(){
+        return dead;
     }
 }
 
