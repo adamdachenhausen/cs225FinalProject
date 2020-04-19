@@ -209,14 +209,15 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         gameStart = true;
 
         createPlayer();
-        
+
         createAliens();
         //edit more instance variables here, this is a stub
     }
 
     public void createPlayer() {
-            playerPoint = new Point(425 - 24, 650);
-        //    playerPoint = new Point(panel.getWidth() - 20/2, panel.getHeight() - 10/2);
+        //starting point for player ship
+        playerPoint = new Point(401, 650);
+
         player = new PlayerShip(    playerPoint, panel);
         synchronized (lock) {
             list.add(player);

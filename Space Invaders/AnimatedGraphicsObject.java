@@ -35,7 +35,7 @@ public abstract class AnimatedGraphicsObject extends Thread {
     public static final int BOTTOM_MAX = 600;
 
     /** type of animated object */
-    protected int type;
+    protected String type;
 
     /** flag to tell if this object is dead or alive*/
     protected boolean dead;

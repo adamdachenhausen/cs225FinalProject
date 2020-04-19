@@ -16,13 +16,10 @@ import javax.sound.sampled.*;
  */
 public class PlayerShip extends AnimatedGraphicsObject{
     // pixels to move each frame
-    protected static final int SPEED = 2;
+    protected static final int SPEED = 4;
 
     // delay between each frame
     protected static final int DELAY_TIME = 33;
-
-    // who do we live in so we can repaint?
-    //private JComponent container;
 
     // current size of biggest ship/cannon rectangle
     protected int lgWidth = 48;
@@ -45,9 +42,6 @@ public class PlayerShip extends AnimatedGraphicsObject{
     // Color of the ship/cannon
     protected Color shipColor = new Color(34, 204, 0);
 
-    protected boolean done = false;
-
-    protected String type;
 
     protected int width;
     protected int height;
