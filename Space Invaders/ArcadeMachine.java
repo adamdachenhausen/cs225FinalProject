@@ -41,6 +41,9 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
     // button that resets the game;
     private JButton resetButton;
 
+    // button that displays instructions for the game;
+    private JButton instructionsButton;
+
     // game is started
     private boolean gameStart = false;
 
@@ -118,7 +121,15 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        if(e.getSource().equals(startButton)){
+            SoundEffect.CLICK.play();
+        }
+        if(e.getSource().equals(resetButton)){
+            SoundEffect.CLICK.play();
+        }
+        if(e.getSource().equals(instructionsButton)){
+            SoundEffect.CLICK.play();
+        }
     }
 
     /**
@@ -143,22 +154,30 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
      * @param e the KeyEvent to determine direction
      */
     public void keyPressed(KeyEvent e) {
-
-        if (e.getKeyCode() == KeyEvent.VK_UP) {
-            upperLeft.translate(0, -MOVE_BY);
+        //Source for consume(): https://docs.oracle.com/javase/7/docs/api/java/awt/event/InputEvent.html#consume()
+        if(gameStart){
+            if (e.getKeyCode() == KeyEvent.VK_UP) {
+                upperLeft.translate(0, -MOVE_BY);
+            }
+            else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                upperLeft.translate(0, MOVE_BY);
+            }else if(e.getKeyCode() == KeyEvent.VK_F){
+                //fire cannon code (call method)
+            }
+            else{
+                e.consume();
+            }
+        }else{
+            e.consume();   
         }
-        else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-            upperLeft.translate(0, MOVE_BY);
-        }
-        else{
-            upperLeft.translate(0, 0);
-        }
-
         // trigger paint so we can see the ship in its new location
         panel.repaint();
     }
 
     public static void main(String args[]) {
+        SoundEffect.init();
+        SoundEffect.volume = SoundEffect.Volume.LOW;
+        
         javax.swing.SwingUtilities.invokeLater(new ArcadeMachine());
     }
 }
