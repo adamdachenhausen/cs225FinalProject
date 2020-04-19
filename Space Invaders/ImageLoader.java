@@ -115,7 +115,7 @@ public abstract class ImageLoader implements Runnable, ImageObserver {
         // paintComponent method
 
         Toolkit toolkit = Toolkit.getDefaultToolkit();
-        cannonImage = toolkit.getImage("cannon.png");
+        //cannonImage = toolkit.getImage("cannon.png");
         alien1aImage = toolkit.getImage("alien1a.png");
         alien1bImage = toolkit.getImage("alien1b.png");
         alien2aImage = toolkit.getImage("alien2a.png");

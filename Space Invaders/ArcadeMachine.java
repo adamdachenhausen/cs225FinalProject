@@ -208,6 +208,13 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
     public void startGame() {
         gameStart = true;
 
+        createPlayer();
+        
+        createAliens();
+        //edit more instance variables here, this is a stub
+    }
+
+    public void createPlayer() {
         upperLeft = new Point(425 - 24, 650);
         //upperLeft = new Point(panel.getWidth() - 20/2, panel.getHeight() - 10/2);
         player = new PlayerShip(upperLeft, panel);
@@ -216,7 +223,10 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         }
         player.start();
         panel.repaint();
-        //edit more instance variables here, this is a stub
+    }
+
+    public void createAliens() {
+
     }
 
     /**
@@ -288,9 +298,14 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
     }
 
     public static void main(String args[]) {
+        //load sound files and set volume
         SoundEffect.init();
         SoundEffect.volume = SoundEffect.Volume.LOW;
 
+        //load pics
+        Alien.loadPic();
+
+        //launch main thread that will manage the GUI
         javax.swing.SwingUtilities.invokeLater(new ArcadeMachine());
     }
 }
