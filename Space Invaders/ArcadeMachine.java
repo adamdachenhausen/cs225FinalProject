@@ -36,7 +36,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
     private Point upperLeft;
 
     // amount to move on each arrow key press
-    public static final int MOVE_BY = 2;
+    public static final int MOVE_BY = 4;
 
     // button that starts the game
     private JButton startButton;
@@ -70,7 +70,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
 
     // bottom panel with buttons for the game
     private JPanel bottomPanel;
-    
+
     // Player ship/cannon
     PlayerShip player;
 
@@ -204,12 +204,13 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
      */
     public void startGame() {
         gameStart = true;
-        upperLeft = new Point(50, 50);
+
+        upperLeft = new Point(425 - 24, 650);
         //upperLeft = new Point(panel.getWidth() - 20/2, panel.getHeight() - 10/2);
         player = new PlayerShip(upperLeft, panel);
-	synchronized (lock) {
-	    list.add(player);
-	}
+        synchronized (lock) {
+            list.add(player);
+        }
         player.start();
         panel.repaint();
         //edit more instance variables here, this is a stub
@@ -231,7 +232,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
      */
     public void showInstructions() {
         JFrame instructionDialog = new JFrame("Game Instructions");
-        JOptionPane.showMessageDialog(instructionDialog, "Use left/right arrow keys to move, press 'f' to fire!");
+        JOptionPane.showMessageDialog(instructionDialog, "Use left/right arrow keys to move, press 'SPACE' to fire!");
 
     }
 
@@ -257,18 +258,19 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
      * @param e the KeyEvent to determine direction
      */
     public void keyPressed(KeyEvent e) {
+        System.out.println("key pressed");
         //Source for consume(): https://docs.oracle.com/javase/7/docs/api/java/awt/event/InputEvent.html#consume()
         if(gameStart){
-            if (e.getKeyCode() == KeyEvent.VK_UP) {
-                upperLeft.translate(0, -MOVE_BY);
+            if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+                player.upperLeft.translate(-MOVE_BY, 0);
 
                 //move ship
             }
-            else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                upperLeft.translate(0, MOVE_BY);
+            else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                player.upperLeft.translate(MOVE_BY, 0);
 
                 //move ship
-            }else if(e.getKeyCode() == KeyEvent.VK_F){
+            }else if(e.getKeyCode() == KeyEvent.VK_SPACE){
                 //fire cannon code (call method)
 
             }

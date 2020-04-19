@@ -124,7 +124,8 @@ public class ThreadGraphicsController implements Runnable {
                 }
             }
         };
-
+        
+        frame.setFocusable(true);
         // the panel should be placed appropriately within the frame
         // by this method, so if anything further is needed such as
         // additional panels, buttons, etc., that can be accomplished

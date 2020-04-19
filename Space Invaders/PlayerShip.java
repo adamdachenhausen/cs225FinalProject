@@ -25,22 +25,22 @@ public class PlayerShip extends AnimatedGraphicsObject{
     //private JComponent container;
 
     // current size of biggest ship/cannon rectangle
-    protected int lgWidth = 40;
+    protected int lgWidth = 48;
 
     // current size of medium ship/cannon rectangle
-    protected int medWidth = 12;
+    protected int medWidth = 20;
 
     // current size of smallest ship/cannon rectangle
-    protected int smWidth = 2;
+    protected int smWidth = 4;
 
     // current size of biggest ship/cannon rectangle
     protected int lgHeight = 12;
 
     // current size of medium ship/cannon rectangle
-    protected int medHeight = 14;
+    protected int medHeight = 6;
 
     // current size of smallest ship/cannon rectangle
-    protected int smHeight = 16;
+    protected int smHeight = 4;
 
     // latest location of the largest rectangle that makes the ship/cannon
     protected Point upperLeft;
@@ -75,8 +75,10 @@ public class PlayerShip extends AnimatedGraphicsObject{
         //(x, y, width, height)
         g.setColor(shipColor);
         g.fillRect(upperLeft.x, upperLeft.y,lgWidth, lgHeight);
-        g.fillRect(upperLeft.x + medWidth/2, upperLeft.y - medHeight, medWidth, medHeight);
-        g.fillRect(upperLeft.x+ smWidth/2, upperLeft.y- smHeight, smWidth, smHeight);
+        //g.setColor(Color.black);
+        g.fillRect((upperLeft.x + lgWidth/2) - (medWidth/2), upperLeft.y - medHeight, medWidth, medHeight);
+        //g.setColor(Color.red);
+        g.fillRect((upperLeft.x + lgWidth/2) - (smWidth/2), upperLeft.y - (smHeight + medHeight), smWidth, smHeight);
     }
 
     /**
@@ -85,7 +87,9 @@ public class PlayerShip extends AnimatedGraphicsObject{
      */
     @Override
     public void run() {
+        container.repaint();
         while(getStatus().equals("alive")){
+            upperLeft = getPosition();
             try {
                 sleep(DELAY_TIME);
             }
