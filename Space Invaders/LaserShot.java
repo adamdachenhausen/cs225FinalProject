@@ -1,18 +1,10 @@
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.*;
-import javax.swing.*;
-import javax.swing.event.*;
-import java.util.Random;
-import java.io.*;
-import javax.sound.sampled.*;
 /**
- * Write a description of class LaserShot here.
+ * Handles individual animation of a laser shot
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Lindsay Clark, Kate Nelligan, Adam Dachenhausen
+ * @version Spring 2020
  */
 public class LaserShot
 {
@@ -21,6 +13,12 @@ public class LaserShot
     protected String type;
     protected String subType;
     protected Point upperLeft;
+    public LaserShot(Point upperLeft, String type){
+        this.upperLeft = upperLeft;
+        this.type = type;
+        //Set subType to "A" as its the first frame of animation
+        subType = "A";
+    }
     public void paint(Graphics g){
         int y_Shift = 0;
         if(type.equals("1")){
