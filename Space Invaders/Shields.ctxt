@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Shields
-comment0.text=\r\n\ Class\ responsible\ for\ creating\ shields\ for\ the\ game.\r\n\ Each\ shield\ is\ comprised\ of\ 5\ rectangles.\ \ As\ the\ player\r\n\ or\ alien\ enemies\ hit\ a\ rectangle\ on\ the\ shield\ it\r\n\r\n\ @author\ Lindsay\ Clark,\ Kate\ Nelligan,\ Adam\ Dachenhausen\r\n\ @version\ Spring\ 2020\r\n
+comment0.text=\r\n\ Class\ responsible\ for\ creating\ shields\ for\ the\ game.\r\n\ Each\ shield\ is\ comprised\ of\ 5\ ShieldSections.\ \ As\ the\ player\r\n\ or\ alien\ enemies\ hit\ a\ section\ on\ the\ shield\ it\ breaks\ down\r\n\r\n\ @author\ Lindsay\ Clark,\ Kate\ Nelligan,\ Adam\ Dachenhausen\r\n\ @version\ Spring\ 2020\r\n
 comment1.params=upperLeft\ container
 comment1.target=Shields(java.awt.Point,\ javax.swing.JComponent)
 comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Shield\r\n\ Comprised\ of\ 5\ points\ to\ make\ up\ filled\ rects\r\n\ \u0000\u0000\u0000\u0000\u0000\r\n

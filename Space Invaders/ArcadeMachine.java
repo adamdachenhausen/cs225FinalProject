@@ -38,6 +38,9 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
     //Starting point of first alien in first row
     private Point alienPoint = new Point(50,100);
 
+    //Starting point of first alien in first row
+    private Point shieldPoint = new Point(50,100);
+
     // amount to move on each arrow key press
     public static final int MOVE_BY = 4;
 
@@ -58,7 +61,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
 
     // button that holds the high score to the game
     private int highScore = 0;
-    
+
     private int level = 0;
 
     // label that holds the score to the game
@@ -75,7 +78,6 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
 
     // bottom panel with buttons for the game
     private JPanel bottomPanel;
-
 
 
     /**
@@ -176,7 +178,6 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         //Add key listener to frame
         frame.addKeyListener(this);
 
-
         //Add action listeners to buttons
         startButton.addActionListener(this);
 
@@ -219,6 +220,9 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         gameStart = true;
 
         createPlayer();
+        
+        //Uncomment when ready
+        //createShields();
 
         createAliens();
         //edit more instance variables here, this is a stub
@@ -235,12 +239,22 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
     }
 
     public void createAliens() {
-        
+
         Alien alien = new Alien(alienPoint, panel);
         synchronized (lock) {
             aliens.add(alien);
         }
         alien.start();
+        panel.repaint();
+    }
+
+    public void createShields() {
+        //Create shield object
+        Shields shield = new Shields(shieldPoint, panel);
+        synchronized (lock) {
+            shields.add(shield);
+        }
+        shield.start();
         panel.repaint();
     }
 
