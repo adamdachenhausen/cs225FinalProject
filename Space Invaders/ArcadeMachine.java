@@ -79,6 +79,11 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
     // bottom panel with buttons for the game
     private JPanel bottomPanel;
 
+    /** amount to space aliens horizontally apart*/
+    public static final int H_SPACING = 85;
+    
+        /** amount to space aliens vertically apart*/
+    public static final int V_SPACING = 95;
 
     /**
      * Constructor, which simply calls the superclass constructor
@@ -220,7 +225,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         gameStart = true;
 
         createPlayer();
-        
+
         //Uncomment when ready
         //createShields();
 
