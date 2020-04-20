@@ -296,7 +296,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         int y = 520;
         Shields shield;
         for(int i = 0; i < 4; i++){
-            System.out.println("x: " + x + "y: " + y);
+
             synchronized (lock) {
                 shield = new Shields(new Point(x, y), panel);
                 shields.add(shield);
@@ -318,6 +318,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         gameStart = false;
         player.setStatus("dead");
         aliens.clear();
+        shields.clear();
         //edit more instance variables here, this is a stub
     }
 
@@ -403,8 +404,8 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
     }
 
     public static void main(String args[]) {
-
         //load pics
+        AlienShip.loadUfoPic();
         Alien.loadPic();
 
         //launch main thread that will manage the GUI
