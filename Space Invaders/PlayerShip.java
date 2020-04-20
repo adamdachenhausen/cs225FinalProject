@@ -16,7 +16,7 @@ import javax.sound.sampled.*;
  */
 public class PlayerShip extends AnimatedGraphicsObject{
     // pixels to move each frame
-    protected static final int SPEED = 4;
+    //protected static final int SPEED = 4;
 
     // delay between each frame
     protected static final int DELAY_TIME = 33;
@@ -84,7 +84,7 @@ public class PlayerShip extends AnimatedGraphicsObject{
     public void run() {
         container.repaint();
         while(getStatus().equals("alive")){
-            upperLeft = getPosition();
+            //upperLeft = getPosition();
             try {
                 sleep(DELAY_TIME);
             }
@@ -130,6 +130,18 @@ public class PlayerShip extends AnimatedGraphicsObject{
      */
     public Point setPosition(){
         return upperLeft;
+    }
+    
+        /**
+     * Returns the current position of a bubble
+     *
+     * @return status the position of the bubble
+     */
+    public Point getCannonPosition(){
+        int x = (upperLeft.x + lgWidth/2) - (smWidth/2);
+        int y = upperLeft.y - (smHeight + medHeight);
+        Point cannon = new Point(x, y);
+        return cannon;
     }
 
 }
