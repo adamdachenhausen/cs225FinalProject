@@ -31,15 +31,20 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
     public static final int PANEL_WIDTH = 850;
     public static final int PANEL_HEIGHT = 150;
 
+    public static final int ALIEN_1 = 1;
+    public static final int ALIEN_2 = 2;
+    public static final int ALIEN_3 = 3;
+    public static final int ALIEN_4 = 4;
+
     // current coordinates of the upper left corner of the 
     //user's cannon/ship (a rectangle).
-    private Point playerPoint;
+    private Point playerPoint = new Point(401, 650);
 
     //Starting point of first alien in first row
     private Point alienPoint = new Point(50,100);
 
     //Starting point of first alien in first row
-    private Point shieldPoint = new Point(50,100);
+    private Point shieldPoint = new Point(350,100);
 
     // amount to move on each arrow key press
     public static final int MOVE_BY = 4;
@@ -80,10 +85,10 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
     private JPanel bottomPanel;
 
     /** amount to space aliens horizontally apart*/
-    public static final int H_SPACING = 85;
-    
-        /** amount to space aliens vertically apart*/
-    public static final int V_SPACING = 95;
+    public static final int H_SPACING = 120;
+
+    /** amount to space aliens vertically apart*/
+    public static final int V_SPACING = 120;
 
     /**
      * Constructor, which simply calls the superclass constructor
@@ -235,8 +240,6 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
 
     public void createPlayer() {
         //starting point for player ship
-        playerPoint = new Point(401, 650);
-
         player = new PlayerShip(playerPoint, panel);
 
         player.start();
@@ -244,13 +247,73 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
     }
 
     public void createAliens() {
-
-        Alien alien = new Alien(alienPoint, panel);
         synchronized (lock) {
-            aliens.add(alien);
+        for(int i = 0; i < 5; i++){
+            if(i == 0){
+                Alien alien = new Alien(alienPoint, ALIEN_1, panel);
+                //synchronized (lock) {
+                    aliens.add(alien);
+                //}
+            }else{
+                alienPoint.x += H_SPACING;
+                System.out.println("pt" + i + ": " + alienPoint.x+", " +alienPoint.y);
+                Alien alien = new Alien(alienPoint, ALIEN_1, panel);
+            }
         }
-        alien.start();
+    }
+        alienPoint = new Point(50,100 + V_SPACING);
+        synchronized (lock) {
+        for(int i = 0; i < 5; i++){
+            if(i == 0){
+                Alien alien = new Alien(alienPoint, ALIEN_2, panel);
+                synchronized (lock) {
+                    aliens.add(alien);
+                }
+            }else{
+                alienPoint.x += H_SPACING;
+                System.out.println("pt" + i + ": " + alienPoint.x+", " +alienPoint.y);
+                Alien alien = new Alien(alienPoint, ALIEN_2, panel);
+            }
+        }
+    }
+            
+            synchronized (lock) {
+        alienPoint = new Point(50,100 + V_SPACING);
+        for(int i = 0; i < 5; i++){
+            if(i == 0){
+                Alien alien = new Alien(alienPoint, ALIEN_3, panel);
+                synchronized (lock) {
+                    aliens.add(alien);
+                }
+            }else{
+                alienPoint.x += H_SPACING;
+                System.out.println("pt" + i + ": " + alienPoint.x+", " +alienPoint.y);
+                Alien alien = new Alien(alienPoint, ALIEN_3, panel);
+            }
+        }
+    }
+    synchronized (lock) {
+        alienPoint = new Point(50,100 + V_SPACING);
+        for(int i = 0; i < 5; i++){
+            if(i == 0){
+                Alien alien = new Alien(alienPoint, ALIEN_4, panel);
+                synchronized (lock) {
+                    aliens.add(alien);
+                }
+            }else{
+                alienPoint.x += H_SPACING;
+                System.out.println("pt" + i + ": " + alienPoint.x+", " +alienPoint.y);
+                Alien alien = new Alien(alienPoint, ALIEN_4, panel);
+            }
+        }
+    }
+    
+        for(Alien i: aliens){
+              i.start();  
+        }
+        
         panel.repaint();
+
     }
 
     public void createShields() {

@@ -1,8 +1,8 @@
 #BlueJ class context
 comment0.target=Alien
 comment0.text=\r\n\ Class\ responsible\ for\ creating\ and\ animating\ a\ single\ alien\r\n\r\n\ @author\ Lindsay\ Clark,\ Kate\ Nelligan,\ Adam\ Dachenhausen\r\n\ @version\ Spring\ 2020\r\n
-comment1.params=upperLeft\ container
-comment1.target=Alien(java.awt.Point,\ javax.swing.JComponent)
+comment1.params=upperLeft\ subType\ container
+comment1.target=Alien(java.awt.Point,\ int,\ javax.swing.JComponent)
 comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Alien\r\n\ \u0000\u0000\u0000\u0000\u0000\r\n
 comment10.params=
 comment10.target=boolean\ isDead()
