@@ -3,7 +3,6 @@ import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.event.*;
-import java.util.Random;
 import java.io.*;
 import javax.sound.sampled.*;
 import java.awt.image.*;
@@ -14,7 +13,7 @@ import java.awt.image.*;
  * @author Lindsay Clark, Kate Nelligan, Adam Dachenhausen
  * @version Spring 2020
  */
-public class AlienShip extends Thread implements ImageObserver{
+public class AlienShip extends AnimatedGraphicsObject implements ImageObserver{
     /** Is the animation done, meaning the object can safely
     never be drawn again? */
     protected boolean done;
@@ -33,25 +32,24 @@ public class AlienShip extends Thread implements ImageObserver{
 
     /** The container on which we will call repaint after changes are made */
     protected JComponent container;
+
     // Color of the ship/cannon
     protected Color ufoColor = new Color(255, 25, 0);
 
     /** delay time between frames of animation (ms)*/
     public static final int DELAY_TIME = 66;
 
-    /** amount to move during animation*/
-    public static final int MOVE_AMT = 5;
-
     private static Image ufoImage;
     private static Image explodeImage; 
     /**
      * Constructor for objects of class alienShip
      */
-    public AlienShip(JComponent container)
+    public AlienShip(JComponent container, Point upperLeft)
     {
+        super(container);
         this.upperLeft = upperLeft;
 
-        this.container = container;
+        //this.container = container;
         status = "alive";
         done = false;
     }
@@ -61,8 +59,11 @@ public class AlienShip extends Thread implements ImageObserver{
      * 
      * @param g the Graphics object on which the alien should be drawn
      */
+    @Override
     public void paint(Graphics g) {
-
+        if(!dead){
+            g.drawImage(ufoImage, upperLeft.x, upperLeft.y, this);
+        }
     }
 
     /**
@@ -71,6 +72,24 @@ public class AlienShip extends Thread implements ImageObserver{
      */
     @Override
     public void run() {
+        int i = 0;
+        //direction for ship to move;
+        int moveAmt;
+        if(upperLeft.x > 100){
+            moveAmt = 5;
+        }else{
+            moveAmt = -5;
+        }
+        while(i < 50){
+            container.repaint();
+            upperLeft.x += moveAmt;
+            try {
+                sleep(DELAY_TIME);
+            }
+            catch (InterruptedException e) {
+            }
+            container.repaint();
+        }
     }
 
     /**

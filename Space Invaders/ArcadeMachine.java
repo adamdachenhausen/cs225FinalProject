@@ -85,7 +85,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
     private JPanel bottomPanel;
 
     /** amount to space aliens horizontally apart*/
-    public static final int H_SPACING = 70;
+    public static final int H_SPACING = 75;
 
     /** amount to space aliens vertically apart*/
     public static final int V_SPACING = 70;
@@ -251,14 +251,15 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         Alien alien;
 
         //Starting x,y values for first alien in fleet
-        int x = 70;
-        int y = 90;
-
+        int x = 75;
+        int y = 80;
+        AlienShip a = new AlienShip(panel, new Point(0,0));
+        ships.add(a);
         //Starting alien type
         int alienType = ALIEN_1;
         synchronized (lock) {
             for(int i = 1; i <= 4; i++){
-                for(int j = 0; j < 11; j++){
+                for(int j = 0; j < 10; j++){
                     if(i == 2){
                         alienType = ALIEN_2;
                     }else if(i == 3){
