@@ -19,6 +19,10 @@ public class LaserShot
         //Set subType to "A" as its the first frame of animation
         subType = "A";
     }
+    
+    protected void updateUpperLeft(Point upperLeftIn){
+        upperLeft = upperLeftIn;
+    }
     public void paint(Graphics g){
         int y_Shift = 0;
         if(type.equals("1")){
