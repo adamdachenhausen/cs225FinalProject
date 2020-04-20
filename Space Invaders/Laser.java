@@ -19,15 +19,24 @@ public class Laser extends AnimatedGraphicsObject
     //Amount to translate every DELAY_TIME
     public static final int Y_SPEED = 4;
 
-    public Laser(JComponent container, Point upperLeft){
+    /** Constructor for a laser
+     *  @param container where this object should draw itself?
+     *  @param upperLeft where does this object start?
+     *  @param typeInt the type of laser this should be represented by
+     *  an Int in a String representation
+     */
+    public Laser(JComponent container, Point upperLeft,String typeInt){
         super(container);
         this.upperLeft = upperLeft;
         done=false;
+        type=typeInt;
     }
 
     @Override
     public void paint(Graphics g){
-
+        if(!done){
+            
+        }
     }
 
     @Override
