@@ -232,7 +232,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         createPlayer();
 
         //Uncomment when ready
-        //createShields();
+        createShields();
 
         createAliens();
         //edit more instance variables here, this is a stub
@@ -268,12 +268,12 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
                     }
                     if (j == 0){
                         alien = new Alien(new Point(x, y), alienType, panel);
-                        
+
                         aliens.add(alien);
                     }else{
                         x += H_SPACING;
                         alien = new Alien(new Point(x, y), alienType, panel);
-                        
+
                         aliens.add(alien);
                     }
                 }
@@ -292,11 +292,21 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
 
     public void createShields() {
         //Create shield object
-        Shields shield = new Shields(new Point(350,100), panel);
-        synchronized (lock) {
-            shields.add(shield);
+        int x = 125;
+        int y = 520;
+        Shields shield;
+        for(int i = 0; i < 4; i++){
+            System.out.println("x: " + x + "y: " + y);
+            synchronized (lock) {
+                shield = new Shields(new Point(x, y), panel);
+                shields.add(shield);
+            }
+            x += 175;
         }
-        shield.start();
+        for(Shields i: shields){
+            i.start();  
+        }
+
         panel.repaint();
     }
 

@@ -30,7 +30,7 @@ public class ThreadGraphicsController implements Runnable {
 
     /** list of animated graphics objects currently on the screen */
     protected java.util.List<Alien>  aliens;
-    protected java.util.List<AnimatedGraphicsObject> shields;
+    protected java.util.List<Shields> shields;
 
     /** the player */
     AnimatedGraphicsObject player;
@@ -119,6 +119,20 @@ public class ThreadGraphicsController implements Runnable {
                 if(player != null && !player.getStatus().equals("dead")){
                     player.paint(g);
                 }
+
+                if(shields != null){
+                    while(i < shields.size()){
+                        Shields s = shields.get(i);
+                        if (s.done()) {
+                            shields.remove(i);
+                        }
+                        else {
+                            s.paint(g);
+                            i++;
+                        }
+                    }
+                }
+                i = 0;
                 // since we will be modifying the list, we will
                 // lock access in case any other code tries to
                 // access the list
@@ -153,6 +167,7 @@ public class ThreadGraphicsController implements Runnable {
 
         // construct the list of AnimatedGraphicsObject
         aliens = new ArrayList<Alien>();
+        shields = new ArrayList<Shields>();
 
         // display the window we've created
         frame.pack();
