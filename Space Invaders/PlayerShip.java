@@ -84,7 +84,7 @@ public class PlayerShip extends AnimatedGraphicsObject{
     public void run() {
         container.repaint();
         while(getStatus().equals("alive")){
-            //upperLeft = getPosition();
+            
             try {
                 sleep(DELAY_TIME);
             }

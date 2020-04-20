@@ -236,6 +236,9 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
 
         createAliens();
         //edit more instance variables here, this is a stub
+        
+        //remove this later; for testing purposes
+        callUFO();
     }
 
     public void createPlayer() {
@@ -253,8 +256,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         //Starting x,y values for first alien in fleet
         int x = 75;
         int y = 80;
-        AlienShip a = new AlienShip(panel, new Point(0,0));
-        ships.add(a);
+
         //Starting alien type
         int alienType = ALIEN_1;
         synchronized (lock) {
@@ -310,7 +312,19 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
 
         panel.repaint();
     }
-
+    protected void callUFO(){
+        Random r = new Random();
+        int direction = r.nextInt(2);
+        Point start;
+        if(direction > 0){
+            start = new Point(0,50);
+        }else{
+           start = new Point(800,50); 
+        }
+        AlienShip alienShip = new AlienShip(panel, start);
+        ships.add(alienShip);
+        alienShip.start();
+    }
     /**
      * Sets up the game after start button pressed
      *

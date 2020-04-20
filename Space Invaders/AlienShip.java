@@ -14,30 +14,11 @@ import java.awt.image.*;
  * @version Spring 2020
  */
 public class AlienShip extends AnimatedGraphicsObject implements ImageObserver{
-    /** Is the animation done, meaning the object can safely
-    never be drawn again? */
-    protected boolean done;
-
-    /** type of animated object */
-    protected String type;
-
-    /** flag to tell if this object is dead or alive*/
-    protected boolean dead;
-
-    /** point to draw object from */
-    protected Point upperLeft;
-
-    /** status of the object */
-    String status;
-
-    /** The container on which we will call repaint after changes are made */
-    protected JComponent container;
-
     // Color of the ship/cannon
     protected Color ufoColor = new Color(255, 25, 0);
 
     /** delay time between frames of animation (ms)*/
-    public static final int DELAY_TIME = 66;
+    public static final int DELAY_TIME = 22;
 
     private static Image ufoImage;
     private static Image explodeImage; 
@@ -76,9 +57,9 @@ public class AlienShip extends AnimatedGraphicsObject implements ImageObserver{
         //direction for ship to move;
         int moveAmt;
         if(upperLeft.x > 100){
-            moveAmt = 5;
-        }else{
             moveAmt = -5;
+        }else{
+            moveAmt = 5;
         }
         while(i < 50){
             container.repaint();
@@ -156,5 +137,24 @@ public class AlienShip extends AnimatedGraphicsObject implements ImageObserver{
 
     protected boolean isDead(){
         return dead;
+    }
+    
+        //SRC: https://stackoverflow.com/questions/26305/how-can-i-play-sound-in-java
+    public static synchronized void playSound(String soundIn) {
+        new Thread(new Runnable() {
+                // The wrapper thread is unnecessary, unless it blocks on the
+                // Clip finishing; see comments.
+                public void run() {
+                    try {
+                        File soundFile = new File(soundIn);
+                        Clip clip = AudioSystem.getClip();
+                        AudioInputStream inputStream = AudioSystem.getAudioInputStream(soundFile);
+                        clip.open(inputStream);
+                        clip.start(); 
+                    } catch (Exception e) {
+                        System.err.println(e.getMessage());
+                    }
+                }
+            }).start();
     }
 }

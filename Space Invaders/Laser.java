@@ -2,7 +2,12 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.*;
 import javax.swing.*;
+import javax.swing.event.*;
+import java.util.Random;
+import java.io.*;
+import javax.sound.sampled.*;
 
 /**
  * One of 4 types of laser shots.
@@ -60,5 +65,24 @@ public class Laser extends AnimatedGraphicsObject
             }
         }
         container.repaint();
+    }
+    
+        //SRC: https://stackoverflow.com/questions/26305/how-can-i-play-sound-in-java
+    public static synchronized void playSound(String soundIn) {
+        new Thread(new Runnable() {
+                // The wrapper thread is unnecessary, unless it blocks on the
+                // Clip finishing; see comments.
+                public void run() {
+                    try {
+                        File soundFile = new File(soundIn);
+                        Clip clip = AudioSystem.getClip();
+                        AudioInputStream inputStream = AudioSystem.getAudioInputStream(soundFile);
+                        clip.open(inputStream);
+                        clip.start(); 
+                    } catch (Exception e) {
+                        System.err.println(e.getMessage());
+                    }
+                }
+            }).start();
     }
 }
