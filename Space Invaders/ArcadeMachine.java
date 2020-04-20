@@ -25,29 +25,29 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
     protected static final int ALIEN_POINTS = 10;
     protected static final int SPACESHIP_POINTS = 100;
     protected static final int LIVES = 3;
+
+    //Width of Frame
     public static final int FRAME_WIDTH = 850;
     public static final int FRAME_HEIGHT = 850;
 
+    //Width of Bottom button panel
     public static final int PANEL_WIDTH = 850;
     public static final int PANEL_HEIGHT = 150;
 
+    //Alien type values for switch statement in Alien class
     public static final int ALIEN_1 = 1;
     public static final int ALIEN_2 = 3;
     public static final int ALIEN_3 = 5;
     public static final int ALIEN_4 = 7;
 
-    // current coordinates of the upper left corner of the 
-    //user's cannon/ship (a rectangle).
-    private Point playerPoint = new Point(401, 650);
+    //Maximum shift can go right
+    public static final int WIDTH_MAX = 830;
 
-    //Starting point of first alien in first row
-    private Point alienPoint = new Point(50,100);
-
-    //Starting point of first shield in the row
-    private Point shieldPoint = new Point(350,100);
+    //Alien ship width
+    public static final int SHIP_SIZE = 48;
 
     // amount to move on each arrow key press
-    public static final int MOVE_BY = 4;
+    public static final int MOVE_BY = 6;
 
     // button that starts the game
     private JButton startButton;
@@ -240,27 +240,21 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
 
     public void createPlayer() {
         //starting point for player ship
-        player = new PlayerShip(playerPoint, panel);
+
+        player = new PlayerShip(new Point(401, 650), panel);
 
         player.start();
         panel.repaint();
     }
 
     public void createAliens() {
-
         Alien alien;
-        // alien = new Alien(new Point(50,100), ALIEN_1, panel);
-        // aliens.add(alien);
-        // alien = new Alien(new Point(150,100), ALIEN_1, panel);
-        // aliens.add(alien);
-        // alien = new Alien(new Point(250,100), ALIEN_1, panel);
-        // aliens.add(alien);      
-        // alien = new Alien(new Point(350,100), ALIEN_1, panel);
-        // aliens.add(alien);   
 
-        int x = 50;
-        int y = 100;
-        //alien = new Alien(new Point(x,y), ALIEN_1, panel);
+        //Starting x,y values for first alien in fleet
+        int x = 70;
+        int y = 90;
+
+        //Starting alien type
         int alienType = ALIEN_1;
         synchronized (lock) {
             for(int i = 1; i <= 4; i++){
@@ -274,12 +268,12 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
                     }
                     if (j == 0){
                         alien = new Alien(new Point(x, y), alienType, panel);
-                        System.out.println("x:"+x+" y:"+y+" i:"+i);
+                        
                         aliens.add(alien);
                     }else{
                         x += H_SPACING;
                         alien = new Alien(new Point(x, y), alienType, panel);
-                        System.out.println("x:"+x+" y:"+y+" i:"+i);
+                        
                         aliens.add(alien);
                     }
                 }
@@ -298,7 +292,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
 
     public void createShields() {
         //Create shield object
-        Shields shield = new Shields(shieldPoint, panel);
+        Shields shield = new Shields(new Point(350,100), panel);
         synchronized (lock) {
             shields.add(shield);
         }
@@ -353,13 +347,17 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         //Source for consume(): https://docs.oracle.com/javase/7/docs/api/java/awt/event/InputEvent.html#consume()
         if(gameStart){
             if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-                player.getPosition().translate(-MOVE_BY, 0);
-
+                if(player.getPosition().x >= 10) {
+                    player.getPosition().translate(-MOVE_BY, 0);
+                }
                 //move ship
             }
             else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                player.getPosition().translate(MOVE_BY, 0);
+                int pos = player.getPosition().x;
+                if(pos <= WIDTH_MAX - SHIP_SIZE){
+                    player.getPosition().translate(MOVE_BY, 0);
 
+                }
                 //move ship
             }else if(e.getKeyCode() == KeyEvent.VK_SPACE){
                 //fire cannon code (call method)
@@ -395,9 +393,6 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
     }
 
     public static void main(String args[]) {
-        //load sound files and set volume
-        //SoundEffect.init();
-        //SoundEffect.volume = SoundEffect.Volume.LOW;
 
         //load pics
         Alien.loadPic();
