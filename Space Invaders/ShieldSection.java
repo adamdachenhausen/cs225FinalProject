@@ -32,9 +32,6 @@ public class ShieldSection extends AnimatedGraphicsObject
     //How much damage have I sustained
     private int maxDamage;
 
-    //Where am I?
-    protected Point upperLeft;
-
     //The black squares to color in to show damage (damage indicated by a true value)
     private boolean[][] damagePoints;
     public ShieldSection(Point upperLeft, JComponent container){
@@ -115,8 +112,8 @@ public class ShieldSection extends AnimatedGraphicsObject
         }
         return false;
     }
-    
-   @Override
+
+    @Override
     public void run(){
         while(!dead||!done){
             container.repaint();
