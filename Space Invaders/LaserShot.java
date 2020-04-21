@@ -1,28 +1,39 @@
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.event.*;
+import java.util.Random;
 /**
  * Handles individual animation of a laser shot
  *
  * @author Lindsay Clark, Kate Nelligan, Adam Dachenhausen
  * @version Spring 2020
  */
-public class LaserShot
+public class LaserShot extends AnimatedGraphicsObject
 {
     //Standard unit to base a square off of
     public static final int STD = 1;
     protected String type;
     protected String subType;
-    protected Point upperLeft;
-    public LaserShot(Point upperLeft, String type){
+    public LaserShot(JComponent container, Point upperLeft,String typeIn){
+        super(container);
+        //this.container=container;
         this.upperLeft = upperLeft;
-        this.type = type;
+        type=typeIn;
+        
+        //If its an alien's laser, generate a random laser for them to use
+        if(!typeIn.equals("PLAYER")){
+            Random rand = new Random();
+            type = ""+rand.nextInt(3)+1;;
+        }
         //Set subType to "A" as its the first frame of animation
         subType = "A";
     }
-    
+
     protected void updateUpperLeft(Point upperLeftIn){
         upperLeft = upperLeftIn;
     }
+
     public void paint(Graphics g){
         int y_Shift = 0;
         if(type.equals("1")){
@@ -40,7 +51,7 @@ public class LaserShot
                 //Draw \ leg
                 g.drawRect(upperLeft.x,upperLeft.y+y_Shift,STD,STD);y_Shift++;
                 g.drawRect(upperLeft.x+STD,upperLeft.y+y_Shift,STD,STD);
-                
+
                 //Update subtype
                 subType = "B";
             }
@@ -59,7 +70,7 @@ public class LaserShot
 
                 //Draw / leg
                 g.drawRect(upperLeft.x,upperLeft.y+y_Shift,STD,STD);
-                
+
                 //Update subtype
                 subType = "C";
             }
@@ -76,7 +87,7 @@ public class LaserShot
                 //Draw / leg
                 g.drawRect(upperLeft.x,upperLeft.y+y_Shift,STD,STD);y_Shift++;
                 g.drawRect(upperLeft.x-STD,upperLeft.y+y_Shift,STD,STD);
-                
+
                 //Update subtype
                 subType = "D";
             }
@@ -95,7 +106,7 @@ public class LaserShot
 
                 //Draw \ leg
                 g.drawRect(upperLeft.x,upperLeft.y+y_Shift,STD,STD);
-                
+
                 //Update subtype
                 subType = "A";
             }
@@ -108,7 +119,7 @@ public class LaserShot
                 y_Shift = 1;
                 g.drawRect(upperLeft.x-STD,upperLeft.y+y_Shift,STD,STD);
                 g.drawRect(upperLeft.x+STD,upperLeft.y+y_Shift,STD,STD);
-                
+
                 //Update subtype
                 subType = "B";
             }
@@ -116,7 +127,7 @@ public class LaserShot
                 y_Shift = 3;
                 g.drawRect(upperLeft.x-STD,upperLeft.y+y_Shift,STD,STD);
                 g.drawRect(upperLeft.x+STD,upperLeft.y+y_Shift,STD,STD);
-                
+
                 //Update subtype
                 subType = "C";
             }
@@ -124,7 +135,7 @@ public class LaserShot
                 y_Shift = 5;
                 g.drawRect(upperLeft.x-STD,upperLeft.y+y_Shift,STD,STD);
                 g.drawRect(upperLeft.x+STD,upperLeft.y+y_Shift,STD,STD);
-                
+
                 //Update subtype
                 subType = "A";
             }
@@ -141,7 +152,7 @@ public class LaserShot
                 g.drawRect(upperLeft.x+STD,upperLeft.y+y_Shift,STD,STD);y_Shift++;
                 g.drawRect(upperLeft.x-STD,upperLeft.y+y_Shift,STD,STD);y_Shift++;
                 g.drawRect(upperLeft.x+STD,upperLeft.y+y_Shift,STD,STD);
-                
+
                 //Update subtype
                 subType = "B";
             }
@@ -153,7 +164,7 @@ public class LaserShot
                 g.drawRect(upperLeft.x-STD,upperLeft.y+y_Shift,STD,STD);y_Shift++;
                 g.drawRect(upperLeft.x+STD,upperLeft.y+y_Shift,STD,STD);y_Shift++;
                 g.drawRect(upperLeft.x-STD,upperLeft.y+y_Shift,STD,STD);
-                
+
                 //Update subtype
                 subType = "A";
             }
@@ -167,5 +178,14 @@ public class LaserShot
         else{
             g.drawRect(upperLeft.x,upperLeft.y,STD,7*STD);
         }
+    }
+
+    /**
+     * This object's run method, which manages the life of the shield as it
+     * bounces around the screen.
+     */
+    @Override
+    public void run() {
+        
     }
 }
