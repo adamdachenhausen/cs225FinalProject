@@ -395,8 +395,9 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
                 Point p = player.getPosition();
                 int x = (p.x + 48/2) - (4/2);
                 int y = p.y - (4 + 6);
-                Laser laser = new Laser(panel, new Point(x,y), PLAYER);
-
+                Laser laser = new Laser(panel, new Point(x,y), "PLAYER");
+                lasers.add(laser);
+                laser.start();
             }
             else{
                 e.consume();

@@ -154,7 +154,7 @@ public class ThreadGraphicsController implements Runnable {
                 synchronized (lock) {
                     while (i < lasers.size()) {
                         Laser l = lasers.get(i);
-                        if (a.done()) {
+                        if (l.done()) {
                             lasers.remove(i);
                         }
                         else {
