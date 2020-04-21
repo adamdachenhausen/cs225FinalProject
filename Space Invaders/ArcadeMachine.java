@@ -236,20 +236,49 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
 
         createAliens();
         //edit more instance variables here, this is a stub
-        
+
         createTimer();
 
     }
+
     public void createTimer() {
-                Random r = new Random();
-        long timeForUFO1 = r.nextInt(5000) + 5000;
-        long timeForUFO2 = r.nextInt(17000) + 12000;
-        TimerTask task = new Helper();
+        Random r = new Random();
+        int timeForUFO1 = r.nextInt(5000) + 5000;
+        int timeForUFO2 = r.nextInt(17000) + 12000;
+        new UfoTimer(timeForUFO1);
+        new UfoTimer(timeForUFO2);
         //TimerTask task = callUFO();
-        java.util.Timer t = new Timer();
-        t.schedule(task,timeForUFO1);
-            //remove this later; for testing purposes
-        t.schedule(task,timeForUFO2);
+        // java.util.Timer t = new Timer();
+        // t.schedule(task,timeForUFO1);
+        //remove this later; for testing purposes
+        // t.schedule(task,timeForUFO2);
+    }
+    public class UfoTimer{
+        private Timer timer;
+
+        public UfoTimer(int ms){
+            timer = new Timer();
+            timer.schedule(new UfoTask(), ms);
+            
+        }
+        class UfoTask extends TimerTask{
+            public void run(){
+
+                Random r = new Random();
+                int direction = r.nextInt(2);
+                Point start;
+                if(direction > 0){
+                    start = new Point(0,50);
+                }else{
+                    start = new Point(800,50); 
+                }
+                alienShip = new AlienShip(panel, start);
+                //ships.add(alienShip);
+                alienShip.start();
+                playSound("ufo_lowpitch.wav");
+
+            }
+        }
     }
     public void createPlayer() {
         //starting point for player ship
@@ -323,20 +352,6 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         panel.repaint();
     }
 
-    protected void callUFO(){
-        Random r = new Random();
-        int direction = r.nextInt(2);
-        Point start;
-        if(direction > 0){
-            start = new Point(0,50);
-        }else{
-            start = new Point(800,50); 
-        }
-        alienShip = new AlienShip(panel, start);
-        //ships.add(alienShip);
-        alienShip.start();
-        playSound("ufo_lowpitch.wav");
-    }
 
     /**
      * Sets up the game after start button pressed
