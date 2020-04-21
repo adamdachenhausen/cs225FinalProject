@@ -31,6 +31,7 @@ public class ThreadGraphicsController implements Runnable {
     /** list of animated graphics objects currently on the screen */
     protected java.util.List<Alien>  aliens;
     protected java.util.List<Shields> shields;
+    protected java.util.List<Laser> lasers;
     //protected java.util.List<AlienShip> ships;
 
     /** the player */
@@ -149,6 +150,19 @@ public class ThreadGraphicsController implements Runnable {
                         }
                     }
                 }
+                i = 0;
+                synchronized (lock) {
+                    while (i < lasers.size()) {
+                        Laser l = lasers.get(i);
+                        if (a.done()) {
+                            lasers.remove(i);
+                        }
+                        else {
+                            l.paint(g);
+                            i++;
+                        }
+                    }
+                }
 
                 if(alienShip != null && !alienShip.getStatus().equals("dead")){
                     alienShip.paint(g);
@@ -174,6 +188,7 @@ public class ThreadGraphicsController implements Runnable {
         // construct the list of AnimatedGraphicsObject
         aliens = new ArrayList<Alien>();
         shields = new ArrayList<Shields>();
+        lasers = new ArrayList<Laser>();
         //ships = new ArrayList<AlienShip>();
 
         // display the window we've created

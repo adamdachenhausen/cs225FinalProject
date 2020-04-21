@@ -236,7 +236,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
 
         createAliens();
         //edit more instance variables here, this is a stub
-        
+
         //remove this later; for testing purposes
         callUFO();
     }
@@ -312,6 +312,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
 
         panel.repaint();
     }
+
     protected void callUFO(){
         Random r = new Random();
         int direction = r.nextInt(2);
@@ -319,13 +320,14 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         if(direction > 0){
             start = new Point(0,50);
         }else{
-           start = new Point(800,50); 
+            start = new Point(800,50); 
         }
         alienShip = new AlienShip(panel, start);
         //ships.add(alienShip);
         alienShip.start();
         playSound("ufo_lowpitch.wav");
     }
+
     /**
      * Sets up the game after start button pressed
      *
@@ -390,6 +392,11 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
             }else if(e.getKeyCode() == KeyEvent.VK_SPACE){
                 //fire cannon code (call method)
                 playSound("shoot.wav");
+                Point p = player.getPosition();
+                int x = (p.x + 48/2) - (4/2);
+                int y = p.y - (4 + 6);
+                Laser laser = new Laser(panel, new Point(x,y), PLAYER);
+
             }
             else{
                 e.consume();

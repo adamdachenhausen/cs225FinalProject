@@ -41,7 +41,7 @@ public class Laser extends AnimatedGraphicsObject
     @Override
     public void paint(Graphics g){
         if(!dead){
-            
+
         }
         else if(!done){
             //draw image of explosion
@@ -66,6 +66,6 @@ public class Laser extends AnimatedGraphicsObject
         }
         container.repaint();
     }
-    
+
 
 }

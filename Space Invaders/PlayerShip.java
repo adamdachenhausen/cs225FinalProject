@@ -93,43 +93,43 @@ public class PlayerShip extends AnimatedGraphicsObject{
     /**
      * Returns the current status of a ship (alive/dead)
      *
-     * @return status the status of the bubble
+     * @return status the status of the ship
      */
     public String getStatus(){
         return status;
     }
 
     /**
-     * Sets the status of the bubble (start, grow, float, empty, pop)
+     * Sets the status of the ship
      *
-     * @param newStatus the new status to set the bubble to
+     * @param newStatus the new status to set the ship to
      */
     public void setStatus(String newStatus){
         status = newStatus;
     }
 
     /**
-     * Returns the current position of a bubble
+     * Returns the current position of a cannon
      *
-     * @return status the position of the bubble
+     * @return status the position of the cannon
      */
     public Point getPosition(){
         return upperLeft;
     }
 
     /**
-     * Returns the current position of a bubble
+     * Returns the current position of a cannon
      *
-     * @return status the position of the bubble
+     * @return status the position of the cannon
      */
     public Point setPosition(){
         return upperLeft;
     }
 
     /**
-     * Returns the current position of a bubble
+     * Returns the current position of a cannon
      *
-     * @return status the position of the bubble
+     * @return status the position of the cannon
      */
     public Point getCannonPosition(){
         int x = (upperLeft.x + lgWidth/2) - (smWidth/2);
