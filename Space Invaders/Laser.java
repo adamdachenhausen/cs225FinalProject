@@ -1,14 +1,8 @@
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.*;
 import javax.swing.*;
 import javax.swing.event.*;
-import java.util.Random;
-import java.io.*;
-import javax.sound.sampled.*;
-
+import java.awt.image.*;
 /**
  * One of 4 types of laser shots.
  * It either will hit an alien, shield, or the top of the gameboard.
@@ -17,12 +11,14 @@ import javax.sound.sampled.*;
  * @author Lindsay Clark, Kate Nelligan, Adam Dachenhausen
  * @version Spring 2020
  */
-public class Laser extends AnimatedGraphicsObject
+public class Laser extends AnimatedGraphicsObject implements ImageObserver
 {
     //Amount to translate every DELAY_TIME
     public static final int Y_SPEED = 4;
 
     protected LaserShot shot;
+
+    private static Image explosion;
     /** Constructor for a laser
      *  @param container where this object should draw itself?
      *  @param upperLeft where does this object start?
@@ -32,19 +28,23 @@ public class Laser extends AnimatedGraphicsObject
      */
     public Laser(JComponent container, Point upperLeft,String typeIn){
         super(container);
+        //this.container=container;
         this.upperLeft = upperLeft;
         done=false;
+        dead=false;
         type=typeIn;
-        shot = new LaserShot(upperLeft,type);
+        shot = new LaserShot(container,upperLeft,type);
+        shot.start();
     }
 
     @Override
     public void paint(Graphics g){
         if(!dead){
-
+            shot.paint(g);
         }
         else if(!done){
             //draw image of explosion
+            g.drawImage(explosion, upperLeft.x, upperLeft.y, this);
         }
         else{
             //do nothing
@@ -57,15 +57,32 @@ public class Laser extends AnimatedGraphicsObject
         if(!done){
             if(type.equals("PLAYER")){
                 upperLeft.translate(0,-Y_SPEED);
-                shot.updateUpperLeft(upperLeft);
+                //shot.updateUpperLeft(upperLeft);
+                if(upperLeft.y<0){dead = true;}
             }
             else{
                 upperLeft.translate(0,Y_SPEED);
-                shot.updateUpperLeft(upperLeft);
+                //shot.updateUpperLeft(upperLeft);
+                if(upperLeft.y>container.getHeight()){dead = true;}
             }
         }
         container.repaint();
     }
 
+    protected void loadPic(){
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        explosion = toolkit.getImage("explode.png");
+    }
 
+    // the method required by ImageObserver
+    public boolean imageUpdate(Image img, int infoflags, int x, int y,
+    int width, int height) {
+
+        if ((infoflags & ImageObserver.ALLBITS) > 0) {
+            container.repaint();
+            return false;
+        }
+        return true;
+
+    }
 }
