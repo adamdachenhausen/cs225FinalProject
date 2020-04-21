@@ -387,7 +387,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
                 //move ship
             }else if(e.getKeyCode() == KeyEvent.VK_SPACE){
                 //fire cannon code (call method)
-
+                playSound("shoot.wav");
             }
             else{
                 e.consume();
