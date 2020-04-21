@@ -64,11 +64,7 @@ public class AlienShip extends AnimatedGraphicsObject implements ImageObserver{
         while(i < 50){
             container.repaint();
             upperLeft.x += moveAmt;
-            try {
-                sleep(DELAY_TIME);
-            }
-            catch (InterruptedException e) {
-            }
+            sleepWithCatch(DELAY_TIME);
             container.repaint();
         }
     }

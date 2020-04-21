@@ -321,9 +321,10 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         }else{
            start = new Point(800,50); 
         }
-        AlienShip alienShip = new AlienShip(panel, start);
-        ships.add(alienShip);
+        alienShip = new AlienShip(panel, start);
+        //ships.add(alienShip);
         alienShip.start();
+        playSound("ufo_lowpitch.wav");
     }
     /**
      * Sets up the game after start button pressed
@@ -334,6 +335,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         player.setStatus("dead");
         aliens.clear();
         shields.clear();
+        alienShip.setStatus("dead");
         //edit more instance variables here, this is a stub
     }
 

@@ -42,10 +42,8 @@ public class PlayerShip extends AnimatedGraphicsObject{
     // Color of the ship/cannon
     protected Color shipColor = new Color(34, 204, 0);
 
-
     protected int width;
     protected int height;
-
 
     /**
      * Constructor for objects of class playerShip
@@ -84,12 +82,8 @@ public class PlayerShip extends AnimatedGraphicsObject{
     public void run() {
         container.repaint();
         while(getStatus().equals("alive")){
-            
-            try {
-                sleep(DELAY_TIME);
-            }
-            catch (InterruptedException e) {
-            }
+
+            sleepWithCatch(DELAY_TIME);
 
             container.repaint();
         }
@@ -131,8 +125,8 @@ public class PlayerShip extends AnimatedGraphicsObject{
     public Point setPosition(){
         return upperLeft;
     }
-    
-        /**
+
+    /**
      * Returns the current position of a bubble
      *
      * @return status the position of the bubble

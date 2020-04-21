@@ -31,13 +31,13 @@ public class ThreadGraphicsController implements Runnable {
     /** list of animated graphics objects currently on the screen */
     protected java.util.List<Alien>  aliens;
     protected java.util.List<Shields> shields;
-    protected java.util.List<AlienShip> ships;
+    //protected java.util.List<AlienShip> ships;
 
     /** the player */
     AnimatedGraphicsObject player;
 
     /** the ufo*/
-    //AnimatedGraphicsObject alienShip;
+    AnimatedGraphicsObject alienShip;
 
     /** the panel in which our graphics are drawn */
     protected JPanel panel;
@@ -150,13 +150,10 @@ public class ThreadGraphicsController implements Runnable {
                     }
                 }
 
-                if(ships != null){
-                    for(AlienShip as: ships){
-                        if(!as.getStatus().equals("dead")){
-                            as.paint(g);
-                        }
-                    }
+                if(alienShip != null && !alienShip.getStatus().equals("dead")){
+                    alienShip.paint(g);
                 }
+
             }
         };
 
@@ -177,7 +174,7 @@ public class ThreadGraphicsController implements Runnable {
         // construct the list of AnimatedGraphicsObject
         aliens = new ArrayList<Alien>();
         shields = new ArrayList<Shields>();
-        ships = new ArrayList<AlienShip>();
+        //ships = new ArrayList<AlienShip>();
 
         // display the window we've created
         frame.pack();
