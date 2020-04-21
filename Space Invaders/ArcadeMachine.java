@@ -1,4 +1,6 @@
 import javax.swing.Icon;
+import java.util.Timer;
+import java.util.TimerTask;
 import javax.swing.ImageIcon;
 import java.awt.*;
 import java.awt.event.*;
@@ -204,14 +206,12 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
     public void actionPerformed(ActionEvent e) {
         frame.requestFocus();
         if(e.getSource().equals(startButton)){
-
-            //SoundEffect.CLICK.play();
             playSound("buttonclick.wav");
             startGame();
+
         }
         if(e.getSource().equals(resetButton)){
 
-            //SoundEffect.CLICK.play();
             playSound("buttonclick.wav");
             resetGame();
         }
@@ -236,11 +236,21 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
 
         createAliens();
         //edit more instance variables here, this is a stub
+        
+        createTimer();
 
-        //remove this later; for testing purposes
-        callUFO();
     }
-
+    public void createTimer() {
+                Random r = new Random();
+        long timeForUFO1 = r.nextInt(5000) + 5000;
+        long timeForUFO2 = r.nextInt(17000) + 12000;
+        TimerTask task = new Helper();
+        //TimerTask task = callUFO();
+        java.util.Timer t = new Timer();
+        t.schedule(task,timeForUFO1);
+            //remove this later; for testing purposes
+        t.schedule(task,timeForUFO2);
+    }
     public void createPlayer() {
         //starting point for player ship
 
