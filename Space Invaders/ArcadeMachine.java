@@ -245,13 +245,12 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         Random r = new Random();
         int timeForUFO1 = r.nextInt(5000) + 5000;
         int timeForUFO2 = r.nextInt(17000) + 12000;
+        
+        //Researched timer class here: 
+        //http://www.iitk.ac.in/esc101/05Aug/tutorial/essential/threads/timer.html
         new UfoTimer(timeForUFO1);
         new UfoTimer(timeForUFO2);
-        //TimerTask task = callUFO();
-        // java.util.Timer t = new Timer();
-        // t.schedule(task,timeForUFO1);
-        //remove this later; for testing purposes
-        // t.schedule(task,timeForUFO2);
+
     }
     public class UfoTimer{
         private Timer timer;
