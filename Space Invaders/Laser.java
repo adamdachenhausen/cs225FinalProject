@@ -44,7 +44,7 @@ public class Laser extends AnimatedGraphicsObject implements ImageObserver
         }
         else if(!done){
             //draw image of explosion
-            g.drawImage(explosion, upperLeft.x, upperLeft.y, this);
+            g.drawImage(explosion, upperLeft.x , upperLeft.y, this);
         }
         else{
             //do nothing

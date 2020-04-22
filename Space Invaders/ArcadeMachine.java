@@ -245,7 +245,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         Random r = new Random();
         int timeForUFO1 = r.nextInt(5000) + 5000;
         int timeForUFO2 = r.nextInt(17000) + 12000;
-        
+
         //Researched timer class here: 
         //http://www.iitk.ac.in/esc101/05Aug/tutorial/essential/threads/timer.html
         new UfoTimer(timeForUFO1);
@@ -258,7 +258,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         public UfoTimer(int ms){
             timer = new Timer();
             timer.schedule(new UfoTask(), ms);
-            
+
         }
         class UfoTask extends TimerTask{
             public void run(){
@@ -350,7 +350,6 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
 
         panel.repaint();
     }
-
 
     /**
      * Sets up the game after start button pressed
@@ -456,7 +455,6 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         //load pics
         AlienShip.loadUfoPic();
         Alien.loadPic();
-        Laser.loadPic();
 
         //launch main thread that will manage the GUI
         javax.swing.SwingUtilities.invokeLater(new ArcadeMachine());
