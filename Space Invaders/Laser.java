@@ -28,7 +28,6 @@ public class Laser extends AnimatedGraphicsObject implements ImageObserver
      */
     public Laser(JComponent container, Point upperLeft,String typeIn){
         super(container);
-        //this.container=container;
         this.upperLeft = upperLeft;
         done=false;
         dead=false;
