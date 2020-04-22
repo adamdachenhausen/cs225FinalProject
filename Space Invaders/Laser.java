@@ -69,12 +69,7 @@ public class Laser extends AnimatedGraphicsObject implements ImageObserver
         container.repaint();
     }
 
-    protected void loadPic(){
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        explosion = toolkit.getImage("explode.png");
-    }
-
-    // the method required by ImageObserver
+        // the method required by ImageObserver
     public boolean imageUpdate(Image img, int infoflags, int x, int y,
     int width, int height) {
 
@@ -85,4 +80,11 @@ public class Laser extends AnimatedGraphicsObject implements ImageObserver
         return true;
 
     }
+    
+    protected static void loadPic(){
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        explosion = toolkit.getImage("explode.png");
+    }
+
+
 }

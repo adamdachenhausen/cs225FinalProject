@@ -456,6 +456,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         //load pics
         AlienShip.loadUfoPic();
         Alien.loadPic();
+        Laser.loadPic();
 
         //launch main thread that will manage the GUI
         javax.swing.SwingUtilities.invokeLater(new ArcadeMachine());
