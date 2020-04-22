@@ -17,7 +17,6 @@ public class LaserShot extends AnimatedGraphicsObject
     protected String subType;
     public LaserShot(JComponent container, Point upperLeft,String typeIn){
         super(container);
-        //this.container=container;
         this.upperLeft = upperLeft;
         type=typeIn;
         
