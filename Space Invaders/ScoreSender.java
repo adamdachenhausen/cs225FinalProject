@@ -1,6 +1,9 @@
 import java.net.*;
 import java.io.*;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import java.awt.Container;
+import javax.swing.JFrame;
 /**
  * Write a description of class ScoreSender here.
  *  SRC:https://www.codejava.net/java-se/networking/java-socket-client-examples-tcp-ip
@@ -9,10 +12,16 @@ import java.util.ArrayList;
  */
 public class ScoreSender
 {
+    public ScoreSender(int score){
+        //Make Popup
+        JFrame saveScore = new JFrame("Save Score");
+        String name=JOptionPane.showInputDialog(saveScore,"Your Score: "+score+"\nEnter Initials");
+        sendScore(name,score);
+    }
     public static ArrayList sendScore(String name, int score){
         //Create a new highscore from params
         highScore currentScore = new highScore(name,score);
-        
+
         String hostname = "192.168.1.12";
         int port = 225;
         highScore highestScore;
@@ -56,7 +65,7 @@ public class ScoreSender
 
                 //Set msg to what should be "High Scores:"
                 msg = r.readLine()+"\n";
-                
+
                 //Read in the top 10 scores
                 for(int i=1; i<=10; i++){
                     msg += i+". "+r.readLine()+"\n";
@@ -64,9 +73,9 @@ public class ScoreSender
                 System.out.println(msg);
                 //Read in the done
                 String lastMsg = r.readLine();
-                
+
                 if(lastMsg.equals("DONE")){
-                    
+
                 }
                 else{
                     throw new IOException("Did not hear end word from server, will terminate anyways.");
