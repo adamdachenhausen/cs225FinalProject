@@ -52,39 +52,39 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
     public static final int MOVE_BY = 6;
 
     // button that starts the game
-    private JButton startButton;
+    protected JButton startButton;
 
     // button that resets the game;
-    private JButton resetButton;
+    protected JButton resetButton;
 
     // button that displays instructions for the game;
-    private JButton instructionsButton;
+    protected JButton instructionsButton;
 
-    // game is started
-    private boolean gameStart = false;
+    // // game is started
+    // protected boolean gameStart = false;
 
-    // score for game so far
-    private int score = 0;
+    // // score for game so far
+    // protected int score = 0;
 
-    // button that holds the high score to the game
-    private int highScore = 0;
+    // // button that holds the high score to the game
+    // protected int highScore = 0;
 
-    private int level = 0;
+    // protected int level = 0;
 
     // label that holds the score to the game
     private JLabel scoreLabel;
 
     // label that holds the high score for the game
-    private JLabel highScoreLabel;
+    protected JLabel highScoreLabel;
 
     // label to show how many shots are left before the game ends.
-    private JLabel instructions;
+    protected JLabel instructions;
 
     // main panel with buttons for the game
-    private JPanel mainPanel;
+    protected JPanel mainPanel;
 
     // bottom panel with buttons for the game
-    private JPanel bottomPanel;
+    protected JPanel bottomPanel;
 
     /** amount to space aliens horizontally apart*/
     public static final int H_SPACING = 75;
@@ -431,6 +431,74 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         // trigger paint so we can see the ship in its new location
         panel.repaint();
     }
+
+    /**
+     * Returns the current status of a alien 
+     *
+     * @return status the status of the alien
+     */
+    public void alienAttack(){
+        // playSound("shoot.wav");
+        // //Point p = alien.getPosition();
+        // int x = (p.x + 48/2) - (4/2);
+        // int y = p.y - (4 + 6);
+        // Laser alienLaser = new Laser(panel, new Point(x,y), "ALIEN");
+        // alienLasers.add(alienLaser);
+        // alienLaser.start();
+    }
+
+    public class AttackTimer{
+        private Timer timer;
+
+        public AttackTimer(int ms){
+            timer = new Timer();
+            timer.schedule(new AttackTask(), ms);
+
+        }
+        class AttackTask extends TimerTask{
+            public void run(){
+
+                Random r = new Random();
+                int direction = r.nextInt(2);
+                Point start;
+                if(direction > 0){
+                    start = new Point(0,50);
+                }else{
+                    start = new Point(800,50); 
+                }
+                alienShip = new AlienShip(panel, start);
+                //ships.add(alienShip);
+                alienShip.start();
+                playSound("ufo_lowpitch.wav");
+
+            }
+        }
+    }
+    // /**
+     // * Checks if a laser hit an alien.
+     // *
+     // */
+    // public void checkAlienHit(Point p) {
+
+        // int i = 0;
+        // while (i < aliens.size()) {
+            // Alien a = aliens.get(i);
+            // Point alienCenter = a.getPosition();
+            // int alienWidth = a.getAlienWidth(a.getSubType());
+            // int alienHeight= a.getAlienHeight(a.getSubType());
+            // alienCenter = new Point(alienCenter.x + centerSize/2, bubCenter.y + centerSize/2);
+            // if (bubCenter.distance(p) <= centerSize/2) {
+                // score++;
+                // scoreLabel.setText("Score: " + score);
+                // list.remove(i);
+                // if(list.isEmpty()){
+                    // endGame();
+                    // panel.repaint();
+                // }
+            // }
+            // i++;
+        // }
+    // }
 
     //SRC: https://stackoverflow.com/questions/26305/how-can-i-play-sound-in-java
     public static synchronized void playSound(String soundIn) {

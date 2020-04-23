@@ -32,8 +32,35 @@ public class ThreadGraphicsController implements Runnable {
     protected java.util.List<Alien>  aliens;
     protected java.util.List<Shields> shields;
     protected java.util.List<Laser> lasers;
+        protected java.util.List<Laser> alienLasers;
     //protected java.util.List<AlienShip> ships;
 
+        // score for game so far
+    protected int score = 0;
+
+    // button that holds the high score to the game
+    protected int highScore = 0;
+
+    protected int level = 0;
+    
+        // label that holds the score to the game
+    private JLabel scoreLabel;
+
+    // label that holds the high score for the game
+    protected JLabel highScoreLabel;
+    
+        // label that holds the high score for the game
+    protected JLabel introTextLabel;
+    
+        // game is started
+    protected boolean gameStart = false;
+    
+            // game is started
+    protected boolean gameEnd = false;
+    
+                // game is started
+    protected boolean gameWon = false;
+    
     /** the player */
     AnimatedGraphicsObject player;
 
@@ -164,6 +191,20 @@ public class ThreadGraphicsController implements Runnable {
                     }
                 }
 
+                                i = 0;
+                synchronized (lock) {
+                    while (i < alienLasers.size()) {
+                        Laser l = lasers.get(i);
+                        if (l.done()) {
+                            alienLasers.remove(i);
+                        }
+                        else {
+                            l.paint(g);
+                            i++;
+                        }
+                    }
+                }
+                
                 if(alienShip != null && !alienShip.getStatus().equals("dead")){
                     alienShip.paint(g);
                 }
@@ -171,7 +212,7 @@ public class ThreadGraphicsController implements Runnable {
             }
         };
 
-        //frame.setFocusable(true);
+
         // the panel should be placed appropriately within the frame
         // by this method, so if anything further is needed such as
         // additional panels, buttons, etc., that can be accomplished
@@ -189,13 +230,38 @@ public class ThreadGraphicsController implements Runnable {
         aliens = new ArrayList<Alien>();
         shields = new ArrayList<Shields>();
         lasers = new ArrayList<Laser>();
+        alienLasers = new ArrayList<Laser>();
         //ships = new ArrayList<AlienShip>();
 
         // display the window we've created
         frame.pack();
         frame.setVisible(true);
     }
+    /**
+     * Checks if a laser hit an alien.
+     *
+     */
+    public void checkAlienHit(Point p) {
 
+        int i = 0;
+        while (i < aliens.size()) {
+            Alien a = aliens.get(i);
+            Point alienUpperLeft = a.getPosition();
+            int alienWidth = a.getAlienWidth(a.getSubType());
+            int alienHeight= a.getAlienHeight(a.getSubType());
+            Point alienCenter = new Point(alienUpperLeft.x + alienWidth/2, alienUpperLeft.y + alienHeight/2);
+            if (alienCenter.distance(p) <= (alienWidth + alienHeight)/2) {
+                score++;
+                scoreLabel.setText("Score: " + score);
+                a.setStatus("shot");
+                if(aliens.isEmpty()){
+                    beatLevel();
+                    panel.repaint();
+                }
+            }
+            i++;
+        }
+    }
     /**
     Default implementation of the method that will draw any static
     image needed in the window and any visual feedback needed for
