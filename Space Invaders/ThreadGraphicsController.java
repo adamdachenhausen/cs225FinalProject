@@ -167,7 +167,7 @@ public class ThreadGraphicsController implements Runnable {
                             explode.start();
                         }
 
-                        if(alienShips != null){
+                        if(alienShips != null && alienShips.size()>0){
                             if(checkUfoHit(l.getPosition())){
                                 System.out.println("hit!");
                                 Explosion explode = new Explosion(panel,l.getPosition(), "UFO");
@@ -316,28 +316,30 @@ public class ThreadGraphicsController implements Runnable {
      *
      */
     public boolean checkUfoHit(Point p) {
-
+        int i = 0;
         boolean hit = false;
-        Point ufoPos = alienShips.get(0).getPosition();
+        while(i < alienShips.size()){
+            Point ufoPos = alienShips.get(i).getPosition();
 
-        int ufoWidth = 50;
-        int ufoHeight = 40;
+            int ufoWidth = 60;
+            int ufoHeight = 50;
 
-        int leftPt = ufoPos.x;
-        int rightPt = ufoPos.x + ufoWidth;
-        int bottom = ufoPos.y + ufoHeight;
-        int laserpt = p.x;
-        if (p.x > leftPt && p.x < rightPt) {
-            if(p.y <= bottom){
-                hit = true;
-                int points = 0;
-                ArcadeMachine.score += points;
-                ArcadeMachine.scoreLabel.setText("Score: " + ArcadeMachine.score);
+            int leftPt = ufoPos.x;
+            int rightPt = ufoPos.x + ufoWidth;
+            int bottom = ufoPos.y + ufoHeight;
+            int laserpt = p.x;
+            if (p.x > leftPt && p.x < rightPt) {
+                if(p.y <= bottom){
+                    hit = true;
+                    int points = 0;
+                    ArcadeMachine.score += points;
+                    ArcadeMachine.scoreLabel.setText("Score: " + ArcadeMachine.score);
 
-                alienShips.remove(0);
+                    alienShips.remove(0);
+                }
             }
+            i++;
         }
-
         return hit;
     }
 

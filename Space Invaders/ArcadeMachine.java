@@ -254,7 +254,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
 
     public void createTimer() {
         Random r = new Random();
-        int timeForUFO1 = r.nextInt(5000) + 5000;
+        int timeForUFO1 = r.nextInt(5000) + 3000;
         int timeForUFO2 = r.nextInt(17000) + 12000;
 
         //Researched timer class here: 
@@ -281,13 +281,12 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
                 }else{
                     start = new Point(800,50); 
                 }
-<<<<<<< HEAD
+                
                 AlienShip alienShip = new AlienShip(panel, start);
                 alienShips.add(alienShip);
                 alienShip.start();
                 playSound("ufo_lowpitch.wav");
-=======
->>>>>>> c4b78a89c8d030d5207e4da0d390f628f73ccb57
+
 
                 //If we need to reset, throw this timer, and its tasks away
                 if(reset){
@@ -387,14 +386,14 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
             player.setStatus("dead");
             aliens.clear();
             shields.clear();
-<<<<<<< HEAD
+
             alienShips.clear();
-=======
-            if(alienShip != null){
-                alienShip.done=true;
-                alienShip.dead=true;
-            }
->>>>>>> c4b78a89c8d030d5207e4da0d390f628f73ccb57
+
+            // if(alienShips != null){
+                // alienShip.done=true;
+                // alienShip.dead=true;
+            // }
+
             score=0;
         }
     }
@@ -514,13 +513,13 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
                 }else{
                     start = new Point(800,50); 
                 }
-<<<<<<< HEAD
+
                 AlienShip alienShip = new AlienShip(panel, start);
                 alienShips.add(alienShip);
-=======
+
 
                 //ships.add(alienShip);
->>>>>>> c4b78a89c8d030d5207e4da0d390f628f73ccb57
+
                 alienShip.start();
                 playSound("ufo_lowpitch.wav");
 

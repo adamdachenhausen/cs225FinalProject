@@ -18,7 +18,7 @@ public class AlienShip extends AnimatedGraphicsObject implements ImageObserver{
     protected Color ufoColor = new Color(255, 25, 0);
 
     /** delay time between frames of animation (ms)*/
-    public static final int DELAY_TIME = 99;
+    public static final int DELAY_TIME = 66;
 
     private static Image ufoImage;
     private static Image explodeImage; 
@@ -58,8 +58,14 @@ public class AlienShip extends AnimatedGraphicsObject implements ImageObserver{
         int moveAmt;
         if(upperLeft.x > 100){
             moveAmt = -5;
+            if(upperLeft.x + 50 < 0){
+                done = true;
+            }
         }else{
             moveAmt = 5;
+            if(upperLeft.x + 50 > 850){
+                done = true;
+            }
         }
         while(i < 50){
             container.repaint();
@@ -95,8 +101,8 @@ public class AlienShip extends AnimatedGraphicsObject implements ImageObserver{
     protected boolean isDead(){
         return dead;
     }
-    
-        //SRC: https://stackoverflow.com/questions/26305/how-can-i-play-sound-in-java
+
+    //SRC: https://stackoverflow.com/questions/26305/how-can-i-play-sound-in-java
     public static synchronized void playSound(String soundIn) {
         new Thread(new Runnable() {
                 // The wrapper thread is unnecessary, unless it blocks on the
