@@ -108,6 +108,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
     public ArcadeMachine() {
 
         super("Space Invaders", FRAME_WIDTH, FRAME_HEIGHT);
+        //alienShip = new AlienShip(panel, start);
     }
 
     /**
@@ -236,18 +237,19 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
      *
      */
     public void startGame() {
-        gameStart = true;
+        if(!gameStart){
+            gameStart = true;
+            reset = false;
+            createPlayer();
 
-        createPlayer();
+            //Uncomment when ready
+            createShields();
 
-        //Uncomment when ready
-        createShields();
+            createAliens();
+            //edit more instance variables here, this is a stub
 
-        createAliens();
-        //edit more instance variables here, this is a stub
-
-        createTimer();
-
+            createTimer();
+        }
     }
 
     public void createTimer() {
@@ -279,13 +281,25 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
                 }else{
                     start = new Point(800,50); 
                 }
+<<<<<<< HEAD
                 AlienShip alienShip = new AlienShip(panel, start);
                 alienShips.add(alienShip);
                 alienShip.start();
                 playSound("ufo_lowpitch.wav");
+=======
+>>>>>>> c4b78a89c8d030d5207e4da0d390f628f73ccb57
 
                 //If we need to reset, throw this timer, and its tasks away
-                if(reset){timer.cancel();}
+                if(reset){
+                    timer.cancel();
+                    timer.purge();
+                }
+                else{
+                    alienShip = new AlienShip(panel, start);
+                    //ships.add(alienShip);
+                    alienShip.start();
+                    playSound("ufo_lowpitch.wav");
+                }
 
             }
         }
@@ -373,7 +387,14 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
             player.setStatus("dead");
             aliens.clear();
             shields.clear();
+<<<<<<< HEAD
             alienShips.clear();
+=======
+            if(alienShip != null){
+                alienShip.done=true;
+                alienShip.dead=true;
+            }
+>>>>>>> c4b78a89c8d030d5207e4da0d390f628f73ccb57
             score=0;
         }
     }
@@ -493,8 +514,13 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
                 }else{
                     start = new Point(800,50); 
                 }
+<<<<<<< HEAD
                 AlienShip alienShip = new AlienShip(panel, start);
                 alienShips.add(alienShip);
+=======
+
+                //ships.add(alienShip);
+>>>>>>> c4b78a89c8d030d5207e4da0d390f628f73ccb57
                 alienShip.start();
                 playSound("ufo_lowpitch.wav");
 
