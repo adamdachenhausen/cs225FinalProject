@@ -50,7 +50,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
 
     // amount to move on each arrow key press
     public static final int MOVE_BY = 6;
-    
+
     UfoTimer timer1;
     UfoTimer timer2;
 
@@ -67,9 +67,9 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
 
     protected JLabel pressStartLabel;
 
-    protected JLabel continueLabel;
+    protected static JLabel continueLabel;
 
-    protected JLabel levelWonLabel;
+    protected static JLabel levelWonLabel;
 
     protected JLabel gameWonLabel;
 
@@ -305,20 +305,21 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         //http://www.iitk.ac.in/esc101/05Aug/tutorial/essential/threads/timer.html
         timer1 = new UfoTimer(timeForUFO1);
         timer2 = new UfoTimer(timeForUFO2);
-        
+
     }
     public class UfoTimer{
         protected Timer timer;
         protected UfoTask ufoTimer;
         public UfoTimer(int ms){
             timer = new Timer();
-            
+
             ufoTimer = new UfoTask();
-            
+
             timer.schedule(ufoTimer, ms);
 
         }
-                public UfoTask getTask(){
+
+        public UfoTask getTask(){
             return ufoTimer;
         }
 
@@ -441,16 +442,17 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
             shields.clear();
             explosions.clear();
 
+            //cancel red ufos
             timer1.getTask().cancel();
-
+            timer2.getTask().cancel();
             alienShips.clear();
-            // if(alienShips != null){
-            // alienShip.done=true;
-            // alienShip.dead=true;
-            // }
 
             score=0;
             scoreLabel.setText("Score: " + score);
+            
+                        introTextLabel.setVisible(true);
+
+            pressStartLabel.setVisible(true);
         }
     }
 
@@ -461,6 +463,9 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
     public static void beatLevel() {
         gameStart = false;
         gameEnded = true;
+        continueLabel.setVisible(true);
+
+        levelWonLabel.setVisible(true);
         //player.setStatus("dead");
         //aliens.clear();
         //shields.clear();
