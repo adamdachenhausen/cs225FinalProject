@@ -279,8 +279,8 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
                 }else{
                     start = new Point(800,50); 
                 }
-                alienShip = new AlienShip(panel, start);
-                //ships.add(alienShip);
+                AlienShip alienShip = new AlienShip(panel, start);
+                alienShips.add(alienShip);
                 alienShip.start();
                 playSound("ufo_lowpitch.wav");
 
@@ -373,7 +373,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
             player.setStatus("dead");
             aliens.clear();
             shields.clear();
-            alienShip.setStatus("dead");
+            alienShips.clear();
             score=0;
         }
     }
@@ -493,8 +493,8 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
                 }else{
                     start = new Point(800,50); 
                 }
-                alienShip = new AlienShip(panel, start);
-                //ships.add(alienShip);
+                AlienShip alienShip = new AlienShip(panel, start);
+                alienShips.add(alienShip);
                 alienShip.start();
                 playSound("ufo_lowpitch.wav");
 
