@@ -161,7 +161,12 @@ public class ThreadGraphicsController implements Runnable {
                 synchronized (lock) {
                     while (i < lasers.size()) {
                         Laser l = lasers.get(i);
-                        //checkAlienHit(l.getPosition());
+                        if(checkAlienHit(l.getPosition())){
+                            System.out.println("exploded");
+                            l.setStatus("explode");
+                            l.start();
+                        }
+                        
                         //System.out.println("laser: "+l.getPosition().x +" "+ l.getPosition().y);
                         if (l.done()) {
                             lasers.remove(i);
@@ -224,39 +229,55 @@ public class ThreadGraphicsController implements Runnable {
      * Checks if a laser hit an alien.
      *
      */
-    public void checkAlienHit(Point p) {
+    public boolean checkAlienHit(Point p) {
         int i = 0;
+        boolean hit = false;
         while (i < aliens.size()) {
             Alien a = aliens.get(i);
             Point alienUpperLeft = a.getPosition();
-            int alienWidth = a.getAlienWidth(a.getSubType());
-            int alienHeight= a.getAlienHeight(a.getSubType());
+            int alienWidth = 50;
+            //a.getAlienWidth(a.getSubType());
+            int alienHeight= 50;
+            //a.getAlienHeight(a.getSubType());
+
             //Point alienCenter = new Point(alienUpperLeft.x + alienWidth/2, alienUpperLeft.y + alienHeight/2);
             int leftPt = alienUpperLeft.x;
             int rightPt = alienUpperLeft.x + alienWidth;
             int bottom = alienUpperLeft.y + alienHeight;
-            System.out.println("H: " + alienHeight + "w: " + alienWidth + " "+ alienUpperLeft.x +" "+alienUpperLeft.y);
+            int laserpt = p.x;
+            // if(laserpt > leftPt && laserpt< rightPt){
+            // if(
+            // System.out.println("hit alien!"); 
+            // }
+            //System.out.println("H: " + alienHeight + "w: " + alienWidth + " "+ alienUpperLeft.x +" "+alienUpperLeft.y);
             if (p.x > leftPt && p.x < rightPt) {
-                int points = 0;
-                if(a.getSubType() == 1 || a.getSubType() == 2){
-                    points = ALIEN1_PTS;
-                }else if(a.getSubType() == 3 || a.getSubType() == 4){
-                    points = ALIEN2_PTS;
-                }else if(a.getSubType() == 5 || a.getSubType() == 6){
-                    points = ALIEN3_PTS;
-                }else if(a.getSubType() == 7 || a.getSubType() == 8){
-                    points = ALIEN4_PTS;
+                if(p.y <= bottom && p.y >= alienUpperLeft.y){
+                    System.out.println("hit!");
+                    hit = true;
+                    int points = 0;
+                    if(a.getSubType() == 1 || a.getSubType() == 2){
+                        points = ALIEN1_PTS;
+                    }else if(a.getSubType() == 3 || a.getSubType() == 4){
+                        points = ALIEN2_PTS;
+                    }else if(a.getSubType() == 5 || a.getSubType() == 6){
+                        points = ALIEN3_PTS;
+                    }else if(a.getSubType() == 7 || a.getSubType() == 8){
+                        points = ALIEN4_PTS;
+                    }
+                    ArcadeMachine.score += points;
+                    ArcadeMachine.scoreLabel.setText("Score: " + ArcadeMachine.score);
+                    a.setStatus("shot");
+                    aliens.remove(i);
+                    if(aliens.isEmpty()){
+                        ArcadeMachine.beatLevel();
+                        panel.repaint();
+                    }
                 }
-                ArcadeMachine.score += points;
-                ArcadeMachine.scoreLabel.setText("Score: " + ArcadeMachine.score);
-                a.setStatus("shot");
-                if(aliens.isEmpty()){
-                    ArcadeMachine.beatLevel();
-                    panel.repaint();
-                }
+
             }
             i++;
         }
+        return hit;
     }
 
     /**
