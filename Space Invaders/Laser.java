@@ -53,7 +53,7 @@ public class Laser extends AnimatedGraphicsObject implements ImageObserver
 
     @Override
     public void run(){
-        while(!dead){
+        while(getStatus().equals("alive")){
             sleepWithCatch(DELAY_TIME);
             if(type.equals("PLAYER")){
                 upperLeft.translate(0,-Y_SPEED);
