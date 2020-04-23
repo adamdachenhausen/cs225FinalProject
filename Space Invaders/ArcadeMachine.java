@@ -60,25 +60,32 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
     // button that displays instructions for the game;
     protected JButton instructionsButton;
 
-    // // game is started
-    // protected boolean gameStart = false;
+    protected JLabel introTextLabel;
 
-    // // score for game so far
-    // protected int score = 0;
+    protected JLabel levelWonLabel;
 
-    // // button that holds the high score to the game
-    // protected int highScore = 0;
-
-    // protected int level = 0;
+    protected JLabel gameWonLabel;
 
     // label that holds the score to the game
-    private JLabel scoreLabel;
+    protected static JLabel scoreLabel;
 
     // label that holds the high score for the game
-    protected JLabel highScoreLabel;
+    protected static JLabel highScoreLabel;
 
     // label to show how many shots are left before the game ends.
     protected JLabel instructions;
+
+    // score
+    protected static int score;
+
+    // high score
+    protected static int highScore;
+
+    protected static boolean gameStart = false;
+
+    protected static boolean gameWon = false;
+
+    protected static boolean gameEnded = false;
 
     // main panel with buttons for the game
     protected JPanel mainPanel;
@@ -368,6 +375,19 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
      * Sets up the game after start button pressed
      *
      */
+    public static void beatLevel() {
+        gameStart = false;
+        //player.setStatus("dead");
+        //aliens.clear();
+        ///shields.clear();
+        //alienShip.setStatus("dead");
+        //edit more instance variables here, this is a stub
+    }
+
+    /**
+     * Sets up the game after start button pressed
+     *
+     */
     public void showInstructions() {
         JFrame instructionDialog = new JFrame("Game Instructions");
         JOptionPane.showMessageDialog(instructionDialog, "Use left/right arrow keys to move, press 'SPACE' to fire!");
@@ -479,26 +499,45 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
      // *
      // */
     // public void checkAlienHit(Point p) {
-
         // int i = 0;
         // while (i < aliens.size()) {
             // Alien a = aliens.get(i);
-            // Point alienCenter = a.getPosition();
+            // Point alienUpperLeft = a.getPosition();
             // int alienWidth = a.getAlienWidth(a.getSubType());
             // int alienHeight= a.getAlienHeight(a.getSubType());
-            // alienCenter = new Point(alienCenter.x + centerSize/2, bubCenter.y + centerSize/2);
-            // if (bubCenter.distance(p) <= centerSize/2) {
+            // Point alienCenter = new Point(alienUpperLeft.x + alienWidth/2, alienUpperLeft.y + alienHeight/2);
+            // if (alienCenter.distance(p) <= (alienWidth + alienHeight)/2) {
                 // score++;
                 // scoreLabel.setText("Score: " + score);
-                // list.remove(i);
-                // if(list.isEmpty()){
-                    // endGame();
+                // a.setStatus("shot");
+                // if(aliens.isEmpty()){
+                    // beatLevel();
                     // panel.repaint();
                 // }
             // }
             // i++;
         // }
     // }
+
+    public int getScore(){
+        return score;
+
+    }
+
+    public int getHighScore(){
+        return highScore;
+
+    }
+
+    public void setScore(int newScore){
+        score = newScore;
+
+    }
+
+    public void setHighScore(int newHighScore){
+        highScore = newHighScore;
+
+    }
 
     //SRC: https://stackoverflow.com/questions/26305/how-can-i-play-sound-in-java
     public static synchronized void playSound(String soundIn) {

@@ -32,35 +32,9 @@ public class ThreadGraphicsController implements Runnable {
     protected java.util.List<Alien>  aliens;
     protected java.util.List<Shields> shields;
     protected java.util.List<Laser> lasers;
-        protected java.util.List<Laser> alienLasers;
+    protected java.util.List<Laser> alienLasers;
     //protected java.util.List<AlienShip> ships;
 
-        // score for game so far
-    protected int score = 0;
-
-    // button that holds the high score to the game
-    protected int highScore = 0;
-
-    protected int level = 0;
-    
-        // label that holds the score to the game
-    private JLabel scoreLabel;
-
-    // label that holds the high score for the game
-    protected JLabel highScoreLabel;
-    
-        // label that holds the high score for the game
-    protected JLabel introTextLabel;
-    
-        // game is started
-    protected boolean gameStart = false;
-    
-            // game is started
-    protected boolean gameEnd = false;
-    
-                // game is started
-    protected boolean gameWon = false;
-    
     /** the player */
     AnimatedGraphicsObject player;
 
@@ -86,6 +60,12 @@ public class ThreadGraphicsController implements Runnable {
     protected ThreadGraphicsController thisTGC;
 
     protected JFrame frame;
+
+    public static final int ALIEN1_PTS = 50;
+    public static final int ALIEN2_PTS = 40;
+    public static final int ALIEN3_PTS = 30;
+    public static final int ALIEN4_PTS = 20;
+    public static final int UFO_PTS = 100;
 
     /**
     Constructor, which needs to take the size and name of the
@@ -181,17 +161,20 @@ public class ThreadGraphicsController implements Runnable {
                 synchronized (lock) {
                     while (i < lasers.size()) {
                         Laser l = lasers.get(i);
+                        checkAlienHit(l.getPosition());
+                        System.out.println("laser: "+l.getPosition().x +" "+ l.getPosition().y);
                         if (l.done()) {
                             lasers.remove(i);
                         }
                         else {
                             l.paint(g);
+
                             i++;
                         }
                     }
                 }
 
-                                i = 0;
+                i = 0;
                 synchronized (lock) {
                     while (i < alienLasers.size()) {
                         Laser l = lasers.get(i);
@@ -204,14 +187,13 @@ public class ThreadGraphicsController implements Runnable {
                         }
                     }
                 }
-                
+
                 if(alienShip != null && !alienShip.getStatus().equals("dead")){
                     alienShip.paint(g);
                 }
 
             }
         };
-
 
         // the panel should be placed appropriately within the frame
         // by this method, so if anything further is needed such as
@@ -237,31 +219,46 @@ public class ThreadGraphicsController implements Runnable {
         frame.pack();
         frame.setVisible(true);
     }
+
     /**
      * Checks if a laser hit an alien.
      *
      */
     public void checkAlienHit(Point p) {
-
         int i = 0;
         while (i < aliens.size()) {
             Alien a = aliens.get(i);
             Point alienUpperLeft = a.getPosition();
             int alienWidth = a.getAlienWidth(a.getSubType());
             int alienHeight= a.getAlienHeight(a.getSubType());
-            Point alienCenter = new Point(alienUpperLeft.x + alienWidth/2, alienUpperLeft.y + alienHeight/2);
-            if (alienCenter.distance(p) <= (alienWidth + alienHeight)/2) {
-                score++;
-                scoreLabel.setText("Score: " + score);
+            //Point alienCenter = new Point(alienUpperLeft.x + alienWidth/2, alienUpperLeft.y + alienHeight/2);
+            int leftPt = alienUpperLeft.x;
+            int rightPt = alienUpperLeft.x + alienWidth;
+            int bottom = alienUpperLeft.y + alienHeight;
+            System.out.println("H: " + alienHeight + "w: " + alienWidth + " "+ alienUpperLeft.x +" "+alienUpperLeft.y);
+            if (p.x > leftPt && p.x < rightPt) {
+                int points = 0;
+                if(a.getSubType() == 1 || a.getSubType() == 2){
+                    points = ALIEN1_PTS;
+                }else if(a.getSubType() == 3 || a.getSubType() == 4){
+                    points = ALIEN2_PTS;
+                }else if(a.getSubType() == 5 || a.getSubType() == 6){
+                    points = ALIEN3_PTS;
+                }else if(a.getSubType() == 7 || a.getSubType() == 8){
+                    points = ALIEN4_PTS;
+                }
+                ArcadeMachine.score += points;
+                ArcadeMachine.scoreLabel.setText("Score: " + ArcadeMachine.score);
                 a.setStatus("shot");
                 if(aliens.isEmpty()){
-                    beatLevel();
+                    ArcadeMachine.beatLevel();
                     panel.repaint();
                 }
             }
             i++;
         }
     }
+
     /**
     Default implementation of the method that will draw any static
     image needed in the window and any visual feedback needed for
