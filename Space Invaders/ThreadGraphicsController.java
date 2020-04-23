@@ -34,13 +34,10 @@ public class ThreadGraphicsController implements Runnable {
     protected java.util.List<Laser> lasers;
     protected java.util.List<Laser> alienLasers;
     protected java.util.List<Explosion> explosions;
-    protected java.util.List<AlienShip> ships;
+    protected java.util.List<AlienShip> alienShips;
 
     /** the player */
     AnimatedGraphicsObject player;
-
-    /** the ufo*/
-    AnimatedGraphicsObject alienShip;
 
     /** the panel in which our graphics are drawn */
     protected JPanel panel;
@@ -170,8 +167,8 @@ public class ThreadGraphicsController implements Runnable {
                             explode.start();
                         }
 
-                        if(alienShip != null){
-                            if(checkUfoHit(alienShip.getPosition())){
+                        if(alienShips != null){
+                            if(checkUfoHit(l.getPosition())){
                                 System.out.println("hit!");
                                 Explosion explode = new Explosion(panel,l.getPosition(), "UFO");
                                 explosions.add(explode);
@@ -218,10 +215,18 @@ public class ThreadGraphicsController implements Runnable {
                         }
                     }
                 }
-
-                if(alienShip != null && !alienShip.getStatus().equals("dead")){
-
-                    alienShip.paint(g);
+                i = 0;
+                if(alienShips != null){
+                    while (i < alienShips.size()) {
+                        AlienShip as = alienShips.get(i);
+                        if (as.done()) {
+                            alienShips.remove(i);
+                        }
+                        else {
+                            as.paint(g);
+                            i++;
+                        }
+                    }
                 }
 
             }
@@ -246,7 +251,7 @@ public class ThreadGraphicsController implements Runnable {
         lasers = new ArrayList<Laser>();
         alienLasers = new ArrayList<Laser>();
         explosions = new ArrayList<Explosion>();
-        ships = new ArrayList<AlienShip>();
+        alienShips = new ArrayList<AlienShip>();
 
         // display the window we've created
         frame.pack();
@@ -274,10 +279,9 @@ public class ThreadGraphicsController implements Runnable {
             int bottom = alienUpperLeft.y + alienHeight;
             int laserpt = p.x;
 
-            
             if (p.x > leftPt && p.x < rightPt) {
                 if(p.y <= bottom && p.y >= alienUpperLeft.y){
-                    
+
                     hit = true;
                     int points = 0;
                     if(a.getSubType() == 1 || a.getSubType() == 2){
@@ -294,7 +298,7 @@ public class ThreadGraphicsController implements Runnable {
                     a.setStatus("shot");
                     aliens.remove(i);
                     if(aliens.isEmpty()){
-                        if(alienShip == null){
+                        if(alienShips.size()==0){
                             ArcadeMachine.beatLevel();
                             panel.repaint();
                         }
@@ -312,9 +316,9 @@ public class ThreadGraphicsController implements Runnable {
      *
      */
     public boolean checkUfoHit(Point p) {
-        
+
         boolean hit = false;
-        Point ufoPos = alienShip.getPosition();
+        Point ufoPos = alienShips.get(0).getPosition();
 
         int ufoWidth = 50;
         int ufoHeight = 40;
@@ -330,7 +334,7 @@ public class ThreadGraphicsController implements Runnable {
                 ArcadeMachine.score += points;
                 ArcadeMachine.scoreLabel.setText("Score: " + ArcadeMachine.score);
 
-                alienShip.setDone(true);
+                alienShips.remove(0);
             }
         }
 
