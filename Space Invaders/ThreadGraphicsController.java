@@ -153,6 +153,12 @@ public class ThreadGraphicsController implements Runnable {
                             a.paint(g);
                             i++;
                         }
+                        if(a.getAttack()){
+                            Laser l = new Laser(panel, a.getPosition(), "ALIEN");
+                            lasers.add(l);
+                            l.start();
+                        }
+                        
                     }
                 }
                 i = 0;
