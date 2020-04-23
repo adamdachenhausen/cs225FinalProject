@@ -331,7 +331,7 @@ public class ThreadGraphicsController implements Runnable {
             if (p.x > leftPt && p.x < rightPt) {
                 if(p.y <= bottom){
                     hit = true;
-                    int points = 0;
+                    int points = UFO_PTS;
                     ArcadeMachine.score += points;
                     ArcadeMachine.scoreLabel.setText("Score: " + ArcadeMachine.score);
 

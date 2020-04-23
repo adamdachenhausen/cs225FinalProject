@@ -62,6 +62,10 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
 
     protected JLabel introTextLabel;
 
+    protected JLabel pressStartLabel;
+
+    protected JLabel continueLabel;
+
     protected JLabel levelWonLabel;
 
     protected JLabel gameWonLabel;
@@ -138,8 +142,30 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
 
         //add graphics panel to main panel
         mainPanel.add(panel);
-        //mainPanel.requestFocus();
 
+        //add text to graphics pane 
+        introTextLabel = new JLabel("SPACE INVADERS!");
+        introTextLabel.setFont(introTextLabel.getFont().deriveFont(Font.BOLD,45));
+        introTextLabel.setHorizontalAlignment(JLabel.CENTER);
+        panel.add(introTextLabel);
+
+        pressStartLabel = new JLabel("Press start to play the game");
+        pressStartLabel.setHorizontalAlignment(JLabel.CENTER);
+        panel.add(pressStartLabel);
+
+        levelWonLabel = new JLabel("You Won!");
+        levelWonLabel.setFont(levelWonLabel.getFont().deriveFont(Font.BOLD,45));
+        levelWonLabel.setHorizontalAlignment(JLabel.CENTER);
+        panel.add(levelWonLabel);
+
+        continueLabel= new JLabel("Press start to play again!");
+        continueLabel.setHorizontalAlignment(JLabel.CENTER);
+        panel.add(continueLabel);
+
+        //If we extend the game to have multiple levels
+        //gameWonLabel;
+        
+        
         //Add border around game panel
         Border blackLine = BorderFactory.createLineBorder(Color.BLACK);
         panel.setBorder(blackLine);
@@ -281,12 +307,11 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
                 }else{
                     start = new Point(800,50); 
                 }
-                
+
                 AlienShip alienShip = new AlienShip(panel, start);
                 alienShips.add(alienShip);
                 alienShip.start();
                 playSound("ufo_lowpitch.wav");
-
 
                 //If we need to reset, throw this timer, and its tasks away
                 if(reset){
@@ -386,15 +411,16 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
             player.setStatus("dead");
             aliens.clear();
             shields.clear();
+            explosions.clear();
 
             alienShips.clear();
-
             // if(alienShips != null){
-                // alienShip.done=true;
-                // alienShip.dead=true;
+            // alienShip.done=true;
+            // alienShip.dead=true;
             // }
 
             score=0;
+            scoreLabel.setText("Score: " + score);
         }
     }
 
@@ -450,6 +476,9 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
             if (e.getKeyCode() == KeyEvent.VK_LEFT) {
                 if(player.getPosition().x >= 10) {
                     player.getPosition().translate(-MOVE_BY, 0);
+                    if(aliens.size() == 0 && alienShips.size() == 0){
+                        gameOver = true;
+                    }
                 }
                 //move ship
             }
@@ -518,16 +547,13 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
                 AlienShip alienShip = new AlienShip(panel, start);
                 alienShips.add(alienShip);
 
-
                 //ships.add(alienShip);
-
                 alienShip.start();
                 playSound("ufo_lowpitch.wav");
 
             }
         }
     }
-
 
     public int getScore(){
         return score;

@@ -18,7 +18,7 @@ public class Laser extends AnimatedGraphicsObject implements ImageObserver
 
     protected LaserShot shot;
 
-    private static Image explosion;
+    private static Image shotExplosion;
     /** Constructor for a laser
      *  @param container where this object should draw itself?
      *  @param upperLeft where does this object start?
@@ -44,7 +44,7 @@ public class Laser extends AnimatedGraphicsObject implements ImageObserver
         }
         else if(getStatus().equals("explode")){
             //draw image of explosion
-            g.drawImage(explosion, upperLeft.x , upperLeft.y, this);
+            g.drawImage(shotExplosion, upperLeft.x , upperLeft.y, this);
         }
         else{
             //do nothing
@@ -93,7 +93,7 @@ public class Laser extends AnimatedGraphicsObject implements ImageObserver
 
     protected static void loadPic(){
         Toolkit toolkit = Toolkit.getDefaultToolkit();
-        explosion = toolkit.getImage("explode.png");
+        shotExplosion = toolkit.getImage("shotExplosion.png");
     }
 
 }
