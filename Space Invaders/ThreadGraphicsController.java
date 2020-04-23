@@ -34,7 +34,7 @@ public class ThreadGraphicsController implements Runnable {
     protected java.util.List<Laser> lasers;
     protected java.util.List<Laser> alienLasers;
     protected java.util.List<Explosion> explosions;
-    //protected java.util.List<AlienShip> ships;
+    protected java.util.List<AlienShip> ships;
 
     /** the player */
     AnimatedGraphicsObject player;
@@ -163,13 +163,23 @@ public class ThreadGraphicsController implements Runnable {
                     while (i < lasers.size()) {
                         Laser l = lasers.get(i);
                         if(checkAlienHit(l.getPosition())){
-                            System.out.println("exploded");
-                            l.setStatus("explode");
                             Explosion explode = new Explosion(panel,l.getPosition(), "ALIEN");
                             explosions.add(explode);
+
+                            lasers.remove(i);
                             explode.start();
                         }
 
+                        if(alienShip != null){
+                            if(checkUfoHit(alienShip.getPosition())){
+                                System.out.println("hit!");
+                                Explosion explode = new Explosion(panel,l.getPosition(), "UFO");
+                                explosions.add(explode);
+
+                                lasers.remove(i);
+                                explode.start();
+                            }
+                        }
                         //System.out.println("laser: "+l.getPosition().x +" "+ l.getPosition().y);
                         if (l.done()) {
                             lasers.remove(i);
@@ -210,6 +220,7 @@ public class ThreadGraphicsController implements Runnable {
                 }
 
                 if(alienShip != null && !alienShip.getStatus().equals("dead")){
+
                     alienShip.paint(g);
                 }
 
@@ -235,7 +246,7 @@ public class ThreadGraphicsController implements Runnable {
         lasers = new ArrayList<Laser>();
         alienLasers = new ArrayList<Laser>();
         explosions = new ArrayList<Explosion>();
-        //ships = new ArrayList<AlienShip>();
+        ships = new ArrayList<AlienShip>();
 
         // display the window we've created
         frame.pack();
@@ -252,24 +263,21 @@ public class ThreadGraphicsController implements Runnable {
         while (i < aliens.size()) {
             Alien a = aliens.get(i);
             Point alienUpperLeft = a.getPosition();
-            int alienWidth = 50;
-            //a.getAlienWidth(a.getSubType());
-            int alienHeight= 50;
-            //a.getAlienHeight(a.getSubType());
+            //int alienWidth = 50;
+            int alienWidth = a.getAlienWidth(a.getSubType());
+            //int alienHeight= 50;
+            int alienHeight = a.getAlienHeight(a.getSubType());
 
             //Point alienCenter = new Point(alienUpperLeft.x + alienWidth/2, alienUpperLeft.y + alienHeight/2);
             int leftPt = alienUpperLeft.x;
             int rightPt = alienUpperLeft.x + alienWidth;
             int bottom = alienUpperLeft.y + alienHeight;
             int laserpt = p.x;
-            // if(laserpt > leftPt && laserpt< rightPt){
-            // if(
-            // System.out.println("hit alien!"); 
-            // }
-            //System.out.println("H: " + alienHeight + "w: " + alienWidth + " "+ alienUpperLeft.x +" "+alienUpperLeft.y);
+
+            
             if (p.x > leftPt && p.x < rightPt) {
                 if(p.y <= bottom && p.y >= alienUpperLeft.y){
-                    System.out.println("hit!");
+                    
                     hit = true;
                     int points = 0;
                     if(a.getSubType() == 1 || a.getSubType() == 2){
@@ -286,14 +294,46 @@ public class ThreadGraphicsController implements Runnable {
                     a.setStatus("shot");
                     aliens.remove(i);
                     if(aliens.isEmpty()){
-                        ArcadeMachine.beatLevel();
-                        panel.repaint();
+                        if(alienShip == null){
+                            ArcadeMachine.beatLevel();
+                            panel.repaint();
+                        }
                     }
                 }
 
             }
             i++;
         }
+        return hit;
+    }
+
+    /**
+     * Checks if a laser hit an alien.
+     *
+     */
+    public boolean checkUfoHit(Point p) {
+        
+        boolean hit = false;
+        Point ufoPos = alienShip.getPosition();
+
+        int ufoWidth = 50;
+        int ufoHeight = 40;
+
+        int leftPt = ufoPos.x;
+        int rightPt = ufoPos.x + ufoWidth;
+        int bottom = ufoPos.y + ufoHeight;
+        int laserpt = p.x;
+        if (p.x > leftPt && p.x < rightPt) {
+            if(p.y <= bottom){
+                hit = true;
+                int points = 0;
+                ArcadeMachine.score += points;
+                ArcadeMachine.scoreLabel.setText("Score: " + ArcadeMachine.score);
+
+                alienShip.setDone(true);
+            }
+        }
+
         return hit;
     }
 

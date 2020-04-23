@@ -18,7 +18,7 @@ public class AlienShip extends AnimatedGraphicsObject implements ImageObserver{
     protected Color ufoColor = new Color(255, 25, 0);
 
     /** delay time between frames of animation (ms)*/
-    public static final int DELAY_TIME = 22;
+    public static final int DELAY_TIME = 99;
 
     private static Image ufoImage;
     private static Image explodeImage; 
@@ -42,7 +42,7 @@ public class AlienShip extends AnimatedGraphicsObject implements ImageObserver{
      */
     @Override
     public void paint(Graphics g) {
-        if(!dead){
+        if(!done){
             g.drawImage(ufoImage, upperLeft.x, upperLeft.y, this);
         }
     }
@@ -67,46 +67,7 @@ public class AlienShip extends AnimatedGraphicsObject implements ImageObserver{
             sleepWithCatch(DELAY_TIME);
             container.repaint();
         }
-    }
-
-    /**
-    Accessor method to check the value of the done variable.
-    The done variable should only be set to true when it this
-    object is guaranteed never to need to be painted again.
-
-    @return whether this object's lifetime is done and can safely
-    never be painted again
-     */
-    protected boolean done() {
-
-        return done;
-    }
-
-    /**
-     * Returns the current status of a bubble (start, grow, float, empty, pop)
-     *
-     * @return status the status of the bubble
-     */
-    public String getStatus(){
-        return status;
-    }
-
-    /**
-     * Sets the status of the bubble (start, grow, float, empty, pop)
-     *
-     * @param newStatus the new status to set the bubble to
-     */
-    public void setStatus(String newStatus){
-        status = newStatus;
-    }
-
-    /**
-     * Returns the current position of a bubble
-     *
-     * @return status the position of the bubble
-     */
-    public Point getPosition(){
-        return upperLeft;
+        done = true;
     }
 
     // the method required by ImageObserver
