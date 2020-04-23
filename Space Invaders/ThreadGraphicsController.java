@@ -115,9 +115,9 @@ public class ThreadGraphicsController implements Runnable {
                 // here will refer to the JPanel on which the
                 // paintComponent is called
                 thisTGC.paint(g);
-
-                g.setColor(Color.BLACK);
-                g.fillRect(0, 0, 850, 675);
+                
+                //g.setColor(Color.BLACK);
+                //g.fillRect(0, 0, 850, 675);
                 // redraw each animated graphics object at its
                 // current position, remove the ones that are done
                 // along the way
@@ -231,7 +231,8 @@ public class ThreadGraphicsController implements Runnable {
 
             }
         };
-
+        
+        panel.setBackground(Color.black);
         // the panel should be placed appropriately within the frame
         // by this method, so if anything further is needed such as
         // additional panels, buttons, etc., that can be accomplished

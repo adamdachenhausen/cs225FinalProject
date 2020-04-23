@@ -14,7 +14,7 @@ import java.awt.image.*;
 public class Laser extends AnimatedGraphicsObject implements ImageObserver
 {
     //Amount to translate every DELAY_TIME
-    public static final int Y_SPEED = 4;
+    public static final int Y_SPEED = 6;
 
     protected LaserShot shot;
 
