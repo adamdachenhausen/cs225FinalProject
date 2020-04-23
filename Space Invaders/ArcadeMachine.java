@@ -399,6 +399,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         ///shields.clear();
         //alienShip.setStatus("dead");
         //edit more instance variables here, this is a stub
+        new ScoreSender(score);
     }
 
     /**
