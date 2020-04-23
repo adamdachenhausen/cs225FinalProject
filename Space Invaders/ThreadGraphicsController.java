@@ -164,7 +164,6 @@ public class ThreadGraphicsController implements Runnable {
                         if(checkAlienHit(l.getPosition())){
                             System.out.println("exploded");
                             l.setStatus("explode");
-                            l.start();
                         }
                         
                         //System.out.println("laser: "+l.getPosition().x +" "+ l.getPosition().y);
