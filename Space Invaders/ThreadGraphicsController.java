@@ -161,8 +161,8 @@ public class ThreadGraphicsController implements Runnable {
                 synchronized (lock) {
                     while (i < lasers.size()) {
                         Laser l = lasers.get(i);
-                        checkAlienHit(l.getPosition());
-                        System.out.println("laser: "+l.getPosition().x +" "+ l.getPosition().y);
+                        //checkAlienHit(l.getPosition());
+                        //System.out.println("laser: "+l.getPosition().x +" "+ l.getPosition().y);
                         if (l.done()) {
                             lasers.remove(i);
                         }
