@@ -40,7 +40,7 @@ public class Explosion extends AnimatedGraphicsObject implements ImageObserver{
 
     @Override
     public void run(){
-        upperLeft.x -= 25;
+        //upperLeft.x -= 25;
         int i = 0;
         while(i < 20){
             container.repaint();
