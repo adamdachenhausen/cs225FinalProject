@@ -53,7 +53,8 @@ public class ScoreReceiver extends Thread
 
                                 //We verify that the message has the correct header, and
                                 //handshake the client
-                                if(r.readLine().equals("PING")){
+                                String firstMsg = r.readLine();
+                                if(firstMsg.equals("PING")){
                                     //Handshake the client
                                     w.println("PONG");
 
@@ -70,7 +71,7 @@ public class ScoreReceiver extends Thread
                                     w.println("High Scores");
                                     
                                     //Send the top ten scores
-                                    for(int i=0; i<9; i++){
+                                    for(int i=0; i<=9; i++){
                                         w.println(topTen.toString());
                                     }
                                     w.println("DONE");
@@ -107,7 +108,7 @@ public class ScoreReceiver extends Thread
         String first = scnr.next();
 
         //Check if score is in form of full or simplified
-        if(first.equals("Name: "))
+        if(first.equals("Name:"))
         {
             output.name = scnr.next();
             scnr.next();
