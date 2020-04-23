@@ -13,7 +13,7 @@ public class ScoreSender
         //Create a new highscore from params
         highScore currentScore = new highScore(name,score);
         
-        String hostname = "98.15.164.141";
+        String hostname = "192.168.1.12";
         int port = 225;
         highScore highestScore;
         boolean newHigh;
@@ -54,18 +54,18 @@ public class ScoreSender
                     throw new IOException("Error processing highScore, will not continue");
                 }
 
-                //Clear our msg
-                msg = "";
+                //Set msg to what should be "High Scores:"
+                msg = r.readLine()+"\n";
                 
                 //Read in the top 10 scores
-                for(int i=0; i<9; i++){
+                for(int i=1; i<=10; i++){
                     msg += i+". "+r.readLine()+"\n";
                 }
-                
+                System.out.println(msg);
                 //Read in the done
                 String lastMsg = r.readLine();
                 
-                if(lastMsg == "DONE"){
+                if(lastMsg.equals("DONE")){
                     
                 }
                 else{
