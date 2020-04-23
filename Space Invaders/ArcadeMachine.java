@@ -52,39 +52,46 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
     public static final int MOVE_BY = 6;
 
     // button that starts the game
-    private JButton startButton;
+    protected JButton startButton;
 
     // button that resets the game;
-    private JButton resetButton;
+    protected JButton resetButton;
 
     // button that displays instructions for the game;
-    private JButton instructionsButton;
+    protected JButton instructionsButton;
 
-    // game is started
-    private boolean gameStart = false;
+    protected JLabel introTextLabel;
 
-    // score for game so far
-    private int score = 0;
+    protected JLabel levelWonLabel;
 
-    // button that holds the high score to the game
-    private int highScore = 0;
-
-    private int level = 0;
+    protected JLabel gameWonLabel;
 
     // label that holds the score to the game
-    private JLabel scoreLabel;
+    protected static JLabel scoreLabel;
 
     // label that holds the high score for the game
-    private JLabel highScoreLabel;
+    protected static JLabel highScoreLabel;
 
     // label to show how many shots are left before the game ends.
-    private JLabel instructions;
+    protected JLabel instructions;
+
+    // score
+    protected static int score;
+
+    // high score
+    protected static int highScore;
+
+    protected static boolean gameStart = false;
+
+    protected static boolean gameWon = false;
+
+    protected static boolean gameEnded = false;
 
     // main panel with buttons for the game
-    private JPanel mainPanel;
+    protected JPanel mainPanel;
 
     // bottom panel with buttons for the game
-    private JPanel bottomPanel;
+    protected JPanel bottomPanel;
 
     /** amount to space aliens horizontally apart*/
     public static final int H_SPACING = 75;
@@ -368,6 +375,19 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
      * Sets up the game after start button pressed
      *
      */
+    public static void beatLevel() {
+        gameStart = false;
+        //player.setStatus("dead");
+        //aliens.clear();
+        ///shields.clear();
+        //alienShip.setStatus("dead");
+        //edit more instance variables here, this is a stub
+    }
+
+    /**
+     * Sets up the game after start button pressed
+     *
+     */
     public void showInstructions() {
         JFrame instructionDialog = new JFrame("Game Instructions");
         JOptionPane.showMessageDialog(instructionDialog, "Use left/right arrow keys to move, press 'SPACE' to fire!");
@@ -432,6 +452,93 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         panel.repaint();
     }
 
+    /**
+     * Returns the current status of a alien 
+     *
+     * @return status the status of the alien
+     */
+    public void alienAttack(){
+        // playSound("shoot.wav");
+        // //Point p = alien.getPosition();
+        // int x = (p.x + 48/2) - (4/2);
+        // int y = p.y - (4 + 6);
+        // Laser alienLaser = new Laser(panel, new Point(x,y), "ALIEN");
+        // alienLasers.add(alienLaser);
+        // alienLaser.start();
+    }
+
+    public class AttackTimer{
+        private Timer timer;
+
+        public AttackTimer(int ms){
+            timer = new Timer();
+            timer.schedule(new AttackTask(), ms);
+
+        }
+        class AttackTask extends TimerTask{
+            public void run(){
+
+                Random r = new Random();
+                int direction = r.nextInt(2);
+                Point start;
+                if(direction > 0){
+                    start = new Point(0,50);
+                }else{
+                    start = new Point(800,50); 
+                }
+                alienShip = new AlienShip(panel, start);
+                //ships.add(alienShip);
+                alienShip.start();
+                playSound("ufo_lowpitch.wav");
+
+            }
+        }
+    }
+    // /**
+    // * Checks if a laser hit an alien.
+    // *
+    // */
+    // public void checkAlienHit(Point p) {
+    // int i = 0;
+    // while (i < aliens.size()) {
+    // Alien a = aliens.get(i);
+    // Point alienUpperLeft = a.getPosition();
+    // int alienWidth = a.getAlienWidth(a.getSubType());
+    // int alienHeight= a.getAlienHeight(a.getSubType());
+    // Point alienCenter = new Point(alienUpperLeft.x + alienWidth/2, alienUpperLeft.y + alienHeight/2);
+    // if (alienCenter.distance(p) <= (alienWidth + alienHeight)/2) {
+    // score++;
+    // scoreLabel.setText("Score: " + score);
+    // a.setStatus("shot");
+    // if(aliens.isEmpty()){
+    // beatLevel();
+    // panel.repaint();
+    // }
+    // }
+    // i++;
+    // }
+    // }
+
+    public int getScore(){
+        return score;
+
+    }
+
+    public int getHighScore(){
+        return highScore;
+
+    }
+
+    public void setScore(int newScore){
+        score = newScore;
+
+    }
+
+    public void setHighScore(int newHighScore){
+        highScore = newHighScore;
+
+    }
+
     //SRC: https://stackoverflow.com/questions/26305/how-can-i-play-sound-in-java
     public static synchronized void playSound(String soundIn) {
         new Thread(new Runnable() {
@@ -455,7 +562,8 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         //load pics
         AlienShip.loadUfoPic();
         Alien.loadPic();
-
+        Laser.loadPic();
+        Explosion.loadPic();
         //launch main thread that will manage the GUI
         javax.swing.SwingUtilities.invokeLater(new ArcadeMachine());
     }

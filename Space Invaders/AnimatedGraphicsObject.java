@@ -84,6 +84,17 @@ public abstract class AnimatedGraphicsObject extends Thread {
 
         return done;
     }
+        /**
+    Accessor method to check the value of the done variable.
+    The done variable should only be set to true when it this
+    object is guaranteed never to need to be painted again.
+
+    @return whether this object's lifetime is done and can safely
+    never be painted again
+     */
+    protected void setDone(boolean newDone) {
+        done = newDone;
+    }
 
     /**
      * Returns the current status of a bubble (start, grow, float, empty, pop)

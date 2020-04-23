@@ -34,6 +34,7 @@ public class Laser extends AnimatedGraphicsObject implements ImageObserver
         type=typeIn;
         shot = new LaserShot(container,upperLeft,type);
         shot.start();
+        status = "alive";
     }
 
     @Override
@@ -41,7 +42,7 @@ public class Laser extends AnimatedGraphicsObject implements ImageObserver
         if(!dead){
             shot.paint(g);
         }
-        else if(!done){
+        else if(getStatus().equals("explode")){
             //draw image of explosion
             g.drawImage(explosion, upperLeft.x , upperLeft.y, this);
         }
@@ -52,21 +53,33 @@ public class Laser extends AnimatedGraphicsObject implements ImageObserver
 
     @Override
     public void run(){
-        while(!done){
+        while(!dead){
             sleepWithCatch(DELAY_TIME);
             if(type.equals("PLAYER")){
                 upperLeft.translate(0,-Y_SPEED);
-                if(upperLeft.y<0){dead = true;}
+                if(upperLeft.y==0){dead = true;}
             }
             else{
                 upperLeft.translate(0,Y_SPEED);
-                if(upperLeft.y>container.getHeight()){dead = true;}
+                if(upperLeft.y==container.getHeight()){dead = true;}
             }
+
             container.repaint();
         }
+        setStatus("explode");
+        upperLeft.x -= 25;
+        int i = 0;
+        while(i < 20){
+            container.repaint();
+            sleepWithCatch(DELAY_TIME);
+            container.repaint();
+            i++;
+        }
+        setStatus("complete");
+        done = true;
     }
 
-        // the method required by ImageObserver
+    // the method required by ImageObserver
     public boolean imageUpdate(Image img, int infoflags, int x, int y,
     int width, int height) {
 
@@ -77,11 +90,10 @@ public class Laser extends AnimatedGraphicsObject implements ImageObserver
         return true;
 
     }
-    
+
     protected static void loadPic(){
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         explosion = toolkit.getImage("explode.png");
     }
-
 
 }
