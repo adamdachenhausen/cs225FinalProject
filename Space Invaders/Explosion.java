@@ -11,24 +11,36 @@ import java.awt.image.*;
  */
 public class Explosion extends AnimatedGraphicsObject implements ImageObserver{
     private static Image explosion;
+    private static Image shotExplosion;
+    private static Image playerExplosion;
+    private static Image ufoExplosion;
     public Explosion(JComponent container, Point upperLeft,String typeIn){
         super(container);
         this.upperLeft = upperLeft;
-        done=false;
-        dead=false;
+        type = typeIn;
+        done = false;
+        dead = false;
     }
 
     public void paint(Graphics g){
         if(!done){
             //draw image of explosion
-            g.drawImage(explosion, upperLeft.x , upperLeft.y, this);
+            if(type.equals("SHOT")){
+                g.drawImage(shotExplosion, upperLeft.x , upperLeft.y, this);
+            }else if(type.equals("PLAYER")){
+                g.drawImage(playerExplosion, upperLeft.x , upperLeft.y, this);
+            }else if(type.equals("UFO")){
+                g.drawImage(ufoExplosion, upperLeft.x , upperLeft.y, this);
+            }else{
+                //If alien
+                g.drawImage(explosion, upperLeft.x , upperLeft.y, this);
+            }
         }
-
     }
 
     @Override
     public void run(){
-                upperLeft.x -= 25;
+        upperLeft.x -= 25;
         int i = 0;
         while(i < 20){
             container.repaint();
@@ -54,6 +66,10 @@ public class Explosion extends AnimatedGraphicsObject implements ImageObserver{
     protected static void loadPic(){
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         explosion = toolkit.getImage("explode.png");
+
+        shotExplosion = toolkit.getImage("shotexplosion.png");
+        playerExplosion = toolkit.getImage("playexplosion.png");
+        ufoExplosion = toolkit.getImage("ufoexplosion.png");
     }
 
 }

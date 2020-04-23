@@ -495,28 +495,28 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         }
     }
     // /**
-     // * Checks if a laser hit an alien.
-     // *
-     // */
+    // * Checks if a laser hit an alien.
+    // *
+    // */
     // public void checkAlienHit(Point p) {
-        // int i = 0;
-        // while (i < aliens.size()) {
-            // Alien a = aliens.get(i);
-            // Point alienUpperLeft = a.getPosition();
-            // int alienWidth = a.getAlienWidth(a.getSubType());
-            // int alienHeight= a.getAlienHeight(a.getSubType());
-            // Point alienCenter = new Point(alienUpperLeft.x + alienWidth/2, alienUpperLeft.y + alienHeight/2);
-            // if (alienCenter.distance(p) <= (alienWidth + alienHeight)/2) {
-                // score++;
-                // scoreLabel.setText("Score: " + score);
-                // a.setStatus("shot");
-                // if(aliens.isEmpty()){
-                    // beatLevel();
-                    // panel.repaint();
-                // }
-            // }
-            // i++;
-        // }
+    // int i = 0;
+    // while (i < aliens.size()) {
+    // Alien a = aliens.get(i);
+    // Point alienUpperLeft = a.getPosition();
+    // int alienWidth = a.getAlienWidth(a.getSubType());
+    // int alienHeight= a.getAlienHeight(a.getSubType());
+    // Point alienCenter = new Point(alienUpperLeft.x + alienWidth/2, alienUpperLeft.y + alienHeight/2);
+    // if (alienCenter.distance(p) <= (alienWidth + alienHeight)/2) {
+    // score++;
+    // scoreLabel.setText("Score: " + score);
+    // a.setStatus("shot");
+    // if(aliens.isEmpty()){
+    // beatLevel();
+    // panel.repaint();
+    // }
+    // }
+    // i++;
+    // }
     // }
 
     public int getScore(){
@@ -563,6 +563,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         AlienShip.loadUfoPic();
         Alien.loadPic();
         Laser.loadPic();
+        Explosion.loadPic();
         //launch main thread that will manage the GUI
         javax.swing.SwingUtilities.invokeLater(new ArcadeMachine());
     }
