@@ -144,11 +144,16 @@ public class ScoreReceiver extends Thread
                     String next = scnr.nextLine();
                     Scanner s = new Scanner(next);
 
-                    //Throw out the placement number
+                    //Throw out the placement number and "NAME:"
+                    s.next();
                     s.next();
 
                     //Get the initials
                     String name = s.next();
+                    
+                    //Throw out "Score"
+                    s.next();
+                    
                     //Get the score
                     int score = s.nextInt();
 
