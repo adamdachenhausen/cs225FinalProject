@@ -50,6 +50,9 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
 
     // amount to move on each arrow key press
     public static final int MOVE_BY = 6;
+    
+    UfoTimer timer1;
+    UfoTimer timer2;
 
     // button that starts the game
     protected JButton startButton;
@@ -69,8 +72,8 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
     protected JLabel levelWonLabel;
 
     protected JLabel gameWonLabel;
-    
-        protected JLabel gameOverLabel;
+
+    protected JLabel gameOverLabel;
 
     // label that holds the score to the game
     protected static JLabel scoreLabel;
@@ -278,7 +281,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
             introTextLabel.setVisible(false);
 
             pressStartLabel.setVisible(false);
-            
+
             gameStart = true;
             reset = false;
             createPlayer();
@@ -300,17 +303,27 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
 
         //Researched timer class here: 
         //http://www.iitk.ac.in/esc101/05Aug/tutorial/essential/threads/timer.html
-        new UfoTimer(timeForUFO1);
-        new UfoTimer(timeForUFO2);
-
+        timer1 = new UfoTimer(timeForUFO1);
+        timer2 = new UfoTimer(timeForUFO2);
+        
     }
     public class UfoTimer{
-        private Timer timer;
-
+        protected Timer timer;
+        protected UfoTask ufoTimer;
         public UfoTimer(int ms){
             timer = new Timer();
-            timer.schedule(new UfoTask(), ms);
+            
+            ufoTimer = new UfoTask();
+            
+            timer.schedule(ufoTimer, ms);
 
+        }
+                public UfoTask getTask(){
+            return ufoTimer;
+        }
+
+        public void setTask(UfoTask ut){
+            ufoTimer = ut;
         }
         class UfoTask extends TimerTask{
             public void run(){
@@ -427,6 +440,8 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
             aliens.clear();
             shields.clear();
             explosions.clear();
+
+            timer1.getTask().cancel();
 
             alienShips.clear();
             // if(alienShips != null){
@@ -548,12 +563,21 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
     }
 
     public class AttackTimer{
-        private Timer timer;
-
+        protected Timer timer;
+        AttackTask attack;
         public AttackTimer(int ms){
             timer = new Timer();
-            timer.schedule(new AttackTask(), ms);
+            attack = new AttackTask();
+            timer.schedule(attack, ms);
 
+        }
+
+        public AttackTask getTask(){
+            return attack;
+        }
+
+        public void setTask(AttackTask nt){
+            attack = nt;
         }
         class AttackTask extends TimerTask{
             public void run(){
