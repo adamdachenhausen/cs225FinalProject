@@ -33,6 +33,7 @@ public class ThreadGraphicsController implements Runnable {
     protected java.util.List<Shields> shields;
     protected java.util.List<Laser> lasers;
     protected java.util.List<Laser> alienLasers;
+    protected java.util.List<Explosion> explosions;
     //protected java.util.List<AlienShip> ships;
 
     /** the player */
@@ -164,8 +165,11 @@ public class ThreadGraphicsController implements Runnable {
                         if(checkAlienHit(l.getPosition())){
                             System.out.println("exploded");
                             l.setStatus("explode");
+                            Explosion explode = new Explosion(panel,l.getPosition(), "ALIEN");
+                            explosions.add(explode);
+                            explode.start();
                         }
-                        
+
                         //System.out.println("laser: "+l.getPosition().x +" "+ l.getPosition().y);
                         if (l.done()) {
                             lasers.remove(i);
@@ -173,6 +177,19 @@ public class ThreadGraphicsController implements Runnable {
                         else {
                             l.paint(g);
 
+                            i++;
+                        }
+                    }
+                }
+                i = 0;
+                synchronized (lock) {
+                    while (i < explosions.size()) {
+                        Explosion x = explosions.get(i);
+                        if (x.done()) {
+                            explosions.remove(i);
+                        }
+                        else {
+                            x.paint(g);
                             i++;
                         }
                     }
@@ -217,6 +234,7 @@ public class ThreadGraphicsController implements Runnable {
         shields = new ArrayList<Shields>();
         lasers = new ArrayList<Laser>();
         alienLasers = new ArrayList<Laser>();
+        explosions = new ArrayList<Explosion>();
         //ships = new ArrayList<AlienShip>();
 
         // display the window we've created
