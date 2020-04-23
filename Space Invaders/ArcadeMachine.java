@@ -87,6 +87,8 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
 
     protected static boolean gameEnded = false;
 
+    protected static boolean reset = false;
+
     // main panel with buttons for the game
     protected JPanel mainPanel;
 
@@ -269,7 +271,6 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         }
         class UfoTask extends TimerTask{
             public void run(){
-
                 Random r = new Random();
                 int direction = r.nextInt(2);
                 Point start;
@@ -282,6 +283,9 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
                 //ships.add(alienShip);
                 alienShip.start();
                 playSound("ufo_lowpitch.wav");
+
+                //If we need to reset, throw this timer, and its tasks away
+                if(reset){timer.cancel();}
 
             }
         }
@@ -363,12 +367,15 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
      *
      */
     public void resetGame() {
-        gameStart = false;
-        player.setStatus("dead");
-        aliens.clear();
-        shields.clear();
-        alienShip.setStatus("dead");
-        //edit more instance variables here, this is a stub
+        if(gameStart){
+            gameStart = false;
+            reset = true;
+            player.setStatus("dead");
+            aliens.clear();
+            shields.clear();
+            alienShip.setStatus("dead");
+            score=0;
+        }
     }
 
     /**
