@@ -22,6 +22,7 @@ public class Explosion extends AnimatedGraphicsObject implements ImageObserver{
         dead = false;
     }
 
+    @Override
     public void paint(Graphics g){
         if(!done){
             //draw image of explosion
