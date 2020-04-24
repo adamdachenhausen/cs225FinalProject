@@ -150,19 +150,19 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         mainPanel.add(panel);
 
         //add text to graphics pane 
-        introTextLabel = new JLabel("SPACE INVADERS!");
-        introTextLabel.setBackground(Color.YELLOW); 
-        introTextLabel.setFont(introTextLabel.getFont().deriveFont(Font.BOLD,55));
-        introTextLabel.setBorder(new EmptyBorder(15,20,15,20));
-        introTextLabel.setHorizontalAlignment(JLabel.CENTER);
-        panel.add(introTextLabel);
+        // introTextLabel = new JLabel("SPACE INVADERS!");
+        // introTextLabel.setBackground(Color.YELLOW); 
+        // introTextLabel.setFont(introTextLabel.getFont().deriveFont(Font.BOLD,55));
+        // introTextLabel.setBorder(new EmptyBorder(15,20,15,20));
+        // introTextLabel.setHorizontalAlignment(JLabel.CENTER);
+        // panel.add(introTextLabel);
 
-        pressStartLabel = new JLabel("Press start to play the game");
-        pressStartLabel.setBackground(Color.GREEN); 
-        pressStartLabel.setFont(pressStartLabel.getFont().deriveFont(Font.BOLD,25));
-        introTextLabel.setBorder(new EmptyBorder(15,20,15,20));
-        pressStartLabel.setHorizontalAlignment(JLabel.CENTER);
-        panel.add(pressStartLabel);
+        // pressStartLabel = new JLabel("Press start to play the game");
+        // pressStartLabel.setBackground(Color.GREEN); 
+        // pressStartLabel.setFont(pressStartLabel.getFont().deriveFont(Font.BOLD,25));
+        // introTextLabel.setBorder(new EmptyBorder(15,20,15,20));
+        // pressStartLabel.setHorizontalAlignment(JLabel.CENTER);
+        // panel.add(pressStartLabel);
 
         levelWonLabel = new JLabel("You Won!");
         levelWonLabel.setBackground(Color.GREEN); 
@@ -278,9 +278,9 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
      */
     public void startGame() {
         if(!gameStart){
-            introTextLabel.setVisible(false);
+            //introTextLabel.setVisible(false);
 
-            pressStartLabel.setVisible(false);
+            //pressStartLabel.setVisible(false);
 
             gameStart = true;
             reset = false;
@@ -449,10 +449,10 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
 
             score=0;
             scoreLabel.setText("Score: " + score);
-            
-                        introTextLabel.setVisible(true);
 
-            pressStartLabel.setVisible(true);
+            //introTextLabel.setVisible(true);
+
+            //pressStartLabel.setVisible(true);
         }
     }
 

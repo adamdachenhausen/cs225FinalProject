@@ -115,8 +115,26 @@ public class ThreadGraphicsController implements Runnable {
                 // here will refer to the JPanel on which the
                 // paintComponent is called
                 thisTGC.paint(g);
-                
-                //g.setColor(Color.BLACK);
+
+                if(aliens.size() == 0 && alienShips.size() == 0){
+                    g.setColor(Color.GREEN);
+                    String intro = "SPACE INVADERS!";
+                    FontMetrics fm = g.getFontMetrics();
+
+                    g.setFont(new Font("TimesRoman", Font.BOLD, 70));
+                    fm = g.getFontMetrics();
+                    int x = (getWidth() - fm.stringWidth(intro)) / 2;
+                    int y = ((getHeight() - fm.getHeight()) / 2) + fm.getAscent();
+                    g.drawString(intro, x, y);
+
+                    String instruction = "PRESS START TO PLAY.";
+                    g.setFont(new Font("TimesRoman", Font.BOLD, 20));
+                                        fm = g.getFontMetrics();
+                    int x2 = (getWidth() - fm.stringWidth(instruction)) / 2;
+                    int y2 = (y + fm.getAscent() + 20);
+                    g.setColor(Color.WHITE);
+                    g.drawString(instruction, x2, y2);
+                }
                 //g.fillRect(0, 0, 850, 675);
                 // redraw each animated graphics object at its
                 // current position, remove the ones that are done
@@ -153,12 +171,14 @@ public class ThreadGraphicsController implements Runnable {
                             a.paint(g);
                             i++;
                         }
-                        if(a.getAttack()){
-                            Laser l = new Laser(panel, a.getPosition(), "ALIEN");
-                            lasers.add(l);
-                            l.start();
-                        }
-                        
+
+                        // if(a.getAttack()){
+                        // //Point laserPoint = new Point(a.getPosition().x + 20, a.getPosition().y + a.getAlienHeight());
+                        // Laser l = new Laser(panel, new Point(a.getPosition().x + 20, a.getPosition().y + a.getAlienHeight()), "ALIEN");
+                        // alienLasers.add(l);
+                        // l.start();
+                        // }
+
                     }
                 }
                 i = 0;
@@ -175,7 +195,7 @@ public class ThreadGraphicsController implements Runnable {
 
                         if(alienShips != null && alienShips.size()>0){
                             if(checkUfoHit(l.getPosition())){
-                                System.out.println("hit!");
+
                                 Explosion explode = new Explosion(panel,l.getPosition(), "UFO");
                                 explosions.add(explode);
 
@@ -194,15 +214,41 @@ public class ThreadGraphicsController implements Runnable {
                         }
                     }
                 }
+
+                i = 0;
+                if(alienLasers.size() > 0){                
+                    synchronized (lock) {
+                        while (i < alienLasers.size()) {
+                            Laser l = alienLasers.get(i);
+                            // if(checkAlienHit(l.getPosition())){
+                            // Explosion explode = new Explosion(panel,l.getPosition(), "ALIEN");
+                            // explosions.add(explode);
+
+                            // lasers.remove(i);
+                            // explode.start();
+                            // }
+
+                            if (l.done()) {
+                                alienLasers.remove(i);
+                            }
+                            else {
+                                l.paint(g);
+
+                                i++;
+                            }
+                        }
+                    }
+                }
+
                 i = 0;
                 synchronized (lock) {
                     while (i < explosions.size()) {
-                        Explosion x = explosions.get(i);
-                        if (x.done()) {
+                        Explosion e = explosions.get(i);
+                        if (e.done()) {
                             explosions.remove(i);
                         }
                         else {
-                            x.paint(g);
+                            e.paint(g);
                             i++;
                         }
                     }
@@ -237,7 +283,7 @@ public class ThreadGraphicsController implements Runnable {
 
             }
         };
-        
+
         panel.setBackground(Color.black);
         // the panel should be placed appropriately within the frame
         // by this method, so if anything further is needed such as
@@ -278,7 +324,7 @@ public class ThreadGraphicsController implements Runnable {
             //int alienWidth = 50;
             int alienWidth = a.getAlienWidth(a.getSubType());
             //int alienHeight= 50;
-            int alienHeight = a.getAlienHeight(a.getSubType());
+            int alienHeight = a.getAlienHeight();
 
             //Point alienCenter = new Point(alienUpperLeft.x + alienWidth/2, alienUpperLeft.y + alienHeight/2);
             int leftPt = alienUpperLeft.x;
@@ -314,6 +360,7 @@ public class ThreadGraphicsController implements Runnable {
 
             }
             i++;
+
         }
         return hit;
     }

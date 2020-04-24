@@ -60,7 +60,7 @@ public class Laser extends AnimatedGraphicsObject implements ImageObserver
                 if(upperLeft.y<=0){dead = true;}
             }
             else{
-                upperLeft.translate(0,Y_SPEED);
+                upperLeft.translate(0,+Y_SPEED);
                 if(upperLeft.y>=container.getHeight()){dead = true;}
             }
 
