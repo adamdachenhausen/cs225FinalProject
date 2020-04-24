@@ -24,9 +24,7 @@ import javax.sound.sampled.*;
  */
 public class ArcadeMachine extends ThreadGraphicsController implements ActionListener, KeyListener{ 
     //Constants
-    protected static final int ALIEN_POINTS = 10;
-    protected static final int SPACESHIP_POINTS = 100;
-    protected static final int LIVES = 3;
+
 
     //Width of Frame
     public static final int FRAME_WIDTH = 850;
@@ -277,7 +275,9 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
      *
      */
     public void startGame() {
+        resetGame();
         if(!gameStart){
+            
             //introTextLabel.setVisible(false);
 
             //pressStartLabel.setVisible(false);

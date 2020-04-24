@@ -28,6 +28,8 @@ import javax.sound.sampled.*;
 
 public class ThreadGraphicsController implements Runnable {
 
+    protected int lives = 3;
+    
     /** list of animated graphics objects currently on the screen */
     protected java.util.List<Alien>  aliens;
     protected java.util.List<Shields> shields;
@@ -297,6 +299,12 @@ public class ThreadGraphicsController implements Runnable {
                     }
                 }
 
+                
+                if(alienShips.size() == 0 && aliens.size() == 0){
+                    
+                }else if(lives == 0){
+                    
+                }
             }
         };
 
