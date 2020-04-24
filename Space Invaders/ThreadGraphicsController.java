@@ -129,7 +129,7 @@ public class ThreadGraphicsController implements Runnable {
 
                     String instruction = "PRESS START TO PLAY.";
                     g.setFont(new Font("TimesRoman", Font.BOLD, 20));
-                                        fm = g.getFontMetrics();
+                    fm = g.getFontMetrics();
                     int x2 = (getWidth() - fm.stringWidth(instruction)) / 2;
                     int y2 = (y + fm.getAscent() + 20);
                     g.setColor(Color.WHITE);
@@ -172,15 +172,23 @@ public class ThreadGraphicsController implements Runnable {
                             i++;
                         }
 
-                        // if(a.getAttack()){
-                        // //Point laserPoint = new Point(a.getPosition().x + 20, a.getPosition().y + a.getAlienHeight());
-                        // Laser l = new Laser(panel, new Point(a.getPosition().x + 20, a.getPosition().y + a.getAlienHeight()), "ALIEN");
-                        // alienLasers.add(l);
-                        // l.start();
-                        // }
-
                     }
                 }
+                i = 0;
+                // synchronized (lock) {
+                    // while (i < aliens.size()) {
+                        // Alien a = aliens.get(i);
+
+                        // if(a.getAttack()){
+                            // //Point laserPoint = new Point(a.getPosition().x + 20, a.getPosition().y + a.getAlienHeight());
+                            // Laser alienlaser = new Laser(panel, new Point(a.getPosition().x + 20, a.getPosition().y + 50), "ALIEN");
+                            // alienLasers.add(alienlaser);
+                            // alienlaser.start();
+                        // }
+
+                    // }
+                // }
+
                 i = 0;
                 synchronized (lock) {
                     while (i < lasers.size()) {

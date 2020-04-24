@@ -13,17 +13,16 @@ public class LaserShot extends AnimatedGraphicsObject
 {
     //Standard unit to base a square off of
     public static final int STD = 1;
-    protected String type;
-    protected String subType;
+
     public LaserShot(JComponent container, Point upperLeft,String typeIn){
         super(container);
         this.upperLeft = upperLeft;
         type=typeIn;
-        
+
         //If its an alien's laser, generate a random laser for them to use
         if(!typeIn.equals("PLAYER")){
             Random rand = new Random();
-            type = ""+rand.nextInt(3)+1;;
+            type = ""+rand.nextInt(3)+1;
         }
         //Set subType to "A" as its the first frame of animation
         subType = "A";
@@ -33,6 +32,7 @@ public class LaserShot extends AnimatedGraphicsObject
         upperLeft = upperLeftIn;
     }
 
+    @Override
     public void paint(Graphics g){
         int y_Shift = 0;
         if(type.equals("1")){
@@ -180,11 +180,17 @@ public class LaserShot extends AnimatedGraphicsObject
     }
 
     /**
-     * This object's run method, which manages the life of the shield as it
-     * bounces around the screen.
+     * This object's run method, which manages the life of the shot as it
+
      */
     @Override
     public void run() {
-        
+        int i = 0;
+        while(i < 2){
+            sleepWithCatch(DELAY_TIME);
+
+            container.repaint();
+            i++;
+        }
     }
 }

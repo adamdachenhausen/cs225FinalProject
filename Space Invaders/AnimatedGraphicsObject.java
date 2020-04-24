@@ -36,6 +36,9 @@ public abstract class AnimatedGraphicsObject extends Thread {
 
     /** type of animated object */
     protected String type;
+    
+    /** type of animated object */
+    protected String subType;
 
     /** flag to tell if this object is dead or alive*/
     protected boolean dead;
