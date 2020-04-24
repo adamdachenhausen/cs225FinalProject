@@ -98,6 +98,14 @@ public class ThreadGraphicsController implements Runnable {
         // window, the application should terminate
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        // construct the list of AnimatedGraphicsObject
+        aliens = new ArrayList<Alien>();
+        shields = new ArrayList<Shields>();
+        lasers = new ArrayList<Laser>();
+        alienLasers = new ArrayList<Laser>();
+        explosions = new ArrayList<Explosion>();
+        alienShips = new ArrayList<AlienShip>();
+
         // JPanel with a paintComponent method
         panel = new JPanel() {
             @Override
@@ -164,7 +172,7 @@ public class ThreadGraphicsController implements Runnable {
                 synchronized (lock) {
                     while (i < aliens.size()) {
                         Alien a = aliens.get(i);
-                        if (a.done()) {
+                        if(a.done()) {
                             aliens.remove(i);
                         }
                         else {
@@ -176,17 +184,17 @@ public class ThreadGraphicsController implements Runnable {
                 }
                 i = 0;
                 // synchronized (lock) {
-                    // while (i < aliens.size()) {
-                        // Alien a = aliens.get(i);
+                // while (i < aliens.size()) {
+                // Alien a = aliens.get(i);
 
-                        // if(a.getAttack()){
-                            // //Point laserPoint = new Point(a.getPosition().x + 20, a.getPosition().y + a.getAlienHeight());
-                            // Laser alienlaser = new Laser(panel, new Point(a.getPosition().x + 20, a.getPosition().y + 50), "ALIEN");
-                            // alienLasers.add(alienlaser);
-                            // alienlaser.start();
-                        // }
+                // // if(a.getAttack()){
+                // // //Point laserPoint = new Point(a.getPosition().x + 20, a.getPosition().y + a.getAlienHeight());
+                // // Laser alienlaser = new Laser(panel, new Point(a.getPosition().x + 20, a.getPosition().y + 50), "ALIEN");
+                // // alienLasers.add(alienlaser);
+                // // alienlaser.start();
+                // // }
 
-                    // }
+                // }
                 // }
 
                 i = 0;
@@ -224,7 +232,7 @@ public class ThreadGraphicsController implements Runnable {
                 }
 
                 i = 0;
-                if(alienLasers.size() > 0){                
+                if(alienLasers != null && alienLasers.size() > 0){                
                     synchronized (lock) {
                         while (i < alienLasers.size()) {
                             Laser l = alienLasers.get(i);
@@ -306,13 +314,13 @@ public class ThreadGraphicsController implements Runnable {
 
         addListeners(panel, frame);
 
-        // construct the list of AnimatedGraphicsObject
-        aliens = new ArrayList<Alien>();
-        shields = new ArrayList<Shields>();
-        lasers = new ArrayList<Laser>();
-        alienLasers = new ArrayList<Laser>();
-        explosions = new ArrayList<Explosion>();
-        alienShips = new ArrayList<AlienShip>();
+        // // construct the list of AnimatedGraphicsObject
+        // aliens = new ArrayList<Alien>();
+        // shields = new ArrayList<Shields>();
+        // lasers = new ArrayList<Laser>();
+        // alienLasers = new ArrayList<Laser>();
+        // explosions = new ArrayList<Explosion>();
+        // alienShips = new ArrayList<AlienShip>();
 
         // display the window we've created
         frame.pack();

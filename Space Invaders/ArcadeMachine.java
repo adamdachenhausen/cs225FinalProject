@@ -409,6 +409,10 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
 
     }
 
+    public void createAlienLasers(){
+        
+    }
+    
     public void createShields() {
         //Create shield object
         int x = 125;
@@ -513,9 +517,9 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
             if (e.getKeyCode() == KeyEvent.VK_LEFT) {
                 if(player.getPosition().x >= 10) {
                     player.getPosition().translate(-MOVE_BY, 0);
-                    if(aliens.size() == 0 && alienShips.size() == 0){
-                        gameEnded = true;
-                    }
+                    // if(aliens.size() == 0 && alienShips.size() == 0){
+                        // gameEnded = true;
+                    // }
                 }
                 //move ship
             }
@@ -525,9 +529,9 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
                     player.getPosition().translate(MOVE_BY, 0);
 
                 }
-                if(aliens.size() == 0 && alienShips.size() == 0){
-                    gameEnded = true;
-                }
+                // if(aliens.size() == 0 && alienShips.size() == 0){
+                    // gameEnded = true;
+                // }
                 //move ship
             }else if(e.getKeyCode() == KeyEvent.VK_SPACE){
                 //fire cannon code (call method)
@@ -538,9 +542,9 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
                 Laser laser = new Laser(panel, new Point(x,y), "PLAYER");
                 lasers.add(laser);
                 laser.start();
-                if(aliens.size() == 0 && alienShips.size() == 0){
-                    gameEnded = true;
-                }
+                // if(aliens.size() == 0 && alienShips.size() == 0){
+                    // gameEnded = true;
+                // }
             }
             else{
                 e.consume();
