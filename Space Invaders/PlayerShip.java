@@ -17,7 +17,7 @@ import javax.sound.sampled.*;
 public class PlayerShip extends AnimatedGraphicsObject{
     // pixels to move each frame
     //protected static final int SPEED = 4;
-    
+
     protected int lives;
 
     // delay between each frame
@@ -69,12 +69,24 @@ public class PlayerShip extends AnimatedGraphicsObject{
     @Override
     public void paint(Graphics g) {
         //(x, y, width, height)
-        g.setColor(shipColor);
-        g.fillRect(upperLeft.x, upperLeft.y,lgWidth, lgHeight);
-        //g.setColor(Color.black);
-        g.fillRect((upperLeft.x + lgWidth/2) - (medWidth/2), upperLeft.y - medHeight, medWidth, medHeight);
-        //g.setColor(Color.red);
-        g.fillRect((upperLeft.x + lgWidth/2) - (smWidth/2), upperLeft.y - (smHeight + medHeight), smWidth, smHeight);
+        if(lives == 3){
+            g.setColor(Color.GREEN);
+            g.fillRect(upperLeft.x, upperLeft.y,lgWidth, lgHeight);
+            g.fillRect((upperLeft.x + lgWidth/2) - (medWidth/2), upperLeft.y - medHeight, medWidth, medHeight);
+            g.fillRect((upperLeft.x + lgWidth/2) - (smWidth/2), upperLeft.y - (smHeight + medHeight), smWidth, smHeight);
+        }else if(lives == 2){
+            g.setColor(Color.YELLOW);
+            g.fillRect(upperLeft.x, upperLeft.y,lgWidth, lgHeight);
+            g.fillRect((upperLeft.x + lgWidth/2) - (medWidth/2), upperLeft.y - medHeight, medWidth, medHeight);
+            g.fillRect((upperLeft.x + lgWidth/2) - (smWidth/2), upperLeft.y - (smHeight + medHeight), smWidth, smHeight);
+        }else if(lives == 1){
+            g.setColor(Color.RED);
+            g.fillRect(upperLeft.x, upperLeft.y,lgWidth, lgHeight);
+            g.fillRect((upperLeft.x + lgWidth/2) - (medWidth/2), upperLeft.y - medHeight, medWidth, medHeight);
+            g.fillRect((upperLeft.x + lgWidth/2) - (smWidth/2), upperLeft.y - (smHeight + medHeight), smWidth, smHeight);
+        }else{
+            //do nothing   
+        }
     }
 
     /**
@@ -93,7 +105,7 @@ public class PlayerShip extends AnimatedGraphicsObject{
         done = true;
     }
 
-        /**
+    /**
      * Returns the current status of a ship (alive/dead)
      *
      * @return status the status of the ship
@@ -101,8 +113,8 @@ public class PlayerShip extends AnimatedGraphicsObject{
     public int getWidth(){
         return lgWidth + medWidth + smWidth;
     }
-    
-        /**
+
+    /**
      * Returns the current status of a ship (alive/dead)
      *
      * @return status the status of the ship
@@ -110,6 +122,7 @@ public class PlayerShip extends AnimatedGraphicsObject{
     public int getHeight(){
         return lgHeight + medHeight + smHeight;
     }
+
     /**
      * Returns the current status of a ship (alive/dead)
      *
@@ -136,8 +149,8 @@ public class PlayerShip extends AnimatedGraphicsObject{
     public Point getPosition(){
         return upperLeft;
     }
-    
-        /**
+
+    /**
      * Returns the current position of a cannon
      *
      * @return status the position of the cannon
@@ -145,7 +158,8 @@ public class PlayerShip extends AnimatedGraphicsObject{
     public int getLives(){
         return lives;
     }
-            /**
+
+    /**
      * Returns the current position of a cannon
      *
      * @return status the position of the cannon
@@ -153,8 +167,8 @@ public class PlayerShip extends AnimatedGraphicsObject{
     public void setLives(int newLives){
         lives = newLives;
     }
-    
-        /**
+
+    /**
      * Returns the current position of a cannon
      *
      * @return status the position of the cannon

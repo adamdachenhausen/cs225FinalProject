@@ -128,6 +128,8 @@ public class ThreadGraphicsController implements Runnable {
 
                 if(!ArcadeMachine.gameStart && aliens.size() == 0 && alienShips.size() == 0){
                     introScreen(g);
+                }else{
+                 displayLives(g);   
                 }
                 //g.fillRect(0, 0, 850, 675);
                 // redraw each animated graphics object at its
@@ -410,8 +412,7 @@ public class ThreadGraphicsController implements Runnable {
 
                 player.setLives(player.getLives() - 1);
 
-                ArcadeMachine.scoreLabel.setText("Score: " + ArcadeMachine.score);
-                player.setStatus("dead");
+                //update lives method that paints lives.
 
             }
 
@@ -547,6 +548,38 @@ public class ThreadGraphicsController implements Runnable {
         int y2 = (y + fm.getAscent() + 20);
         g.setColor(Color.WHITE);
         g.drawString(instruction, x2, y2);
+        panel.repaint();
+    }
+
+    /**
+     * Checks if a laser hit an alien.
+     *
+     */
+    public void displayLives(Graphics g ) {
+        // current size of biggest ship/cannon rectangle
+        FontMetrics fm = g.getFontMetrics();
+        String instruction = "LIVES: ";
+        g.setFont(new Font("TimesRoman", Font.BOLD, 15));
+        fm = g.getFontMetrics();
+        int x = 5;
+        int y = (fm.getAscent() + 10);
+        g.setColor(Color.WHITE);
+        g.drawString(instruction, x, y);
+
+        int lgWidth = 48;
+        int medWidth = 20;
+        int smWidth = 4;
+        int lgHeight = 12;
+        int medHeight = 6;
+        int smHeight = 4;
+        Point upperLeft = new Point(30, 10);
+        for(int i = 0; i < player.getLives(); i++){
+            g.fillRect(upperLeft.x, upperLeft.y,lgWidth, lgHeight);
+            g.fillRect((upperLeft.x + lgWidth/2) - (medWidth/2), upperLeft.y - medHeight, medWidth, medHeight);
+            g.fillRect((upperLeft.x + lgWidth/2) - (smWidth/2), upperLeft.y - (smHeight + medHeight), smWidth, smHeight);
+
+            upperLeft = new Point(lgWidth + 15, upperLeft.y);
+        }
         panel.repaint();
     }
 

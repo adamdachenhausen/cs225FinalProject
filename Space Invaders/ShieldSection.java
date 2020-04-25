@@ -62,7 +62,7 @@ public class ShieldSection extends AnimatedGraphicsObject
                         g.fillRect(upperLeft.x+5*i,upperLeft.y+5*j,SIZE/5,SIZE/5);
                     }
                     else{
-                        g.setColor(shieldColor);
+                        g.setColor(Color.GREEN);
                         g.fillRect(upperLeft.x+5*i,upperLeft.y+5*j,SIZE/5,SIZE/5);
                     }
                 }
