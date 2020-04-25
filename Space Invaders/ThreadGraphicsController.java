@@ -224,6 +224,14 @@ public class ThreadGraphicsController implements Runnable {
                                 explode.start();
                             }
                         }
+                        if(shields != null && shields.size()>0){
+                            if(checkShieldHit(l.getPosition())){
+
+                                lasers.remove(i);
+
+                            }
+                        }
+
                         //System.out.println("laser: "+l.getPosition().x +" "+ l.getPosition().y);
                         if (l.done()) {
                             lasers.remove(i);
@@ -435,26 +443,26 @@ public class ThreadGraphicsController implements Runnable {
         int rightPt = playerPoint.x + playerWidth;
         int bottom = playerPoint.y + playerHeight;
         int laserpt = p.x;
-        
+
         if (p.x > leftPt && p.x < rightPt) {
             if(p.y <= bottom && p.y >= playerPoint.y){
                 alienLasers.remove(laser);
 
-                
+                System.out.println("player: " + leftPt +" "+ rightPt);
+                System.out.println("laser: "+p.x+ " "+ p.y);
                 hit = true;
 
                 // player.setLives(player.getLives() - 1);
                 // System.out.println("Life removed");
                 // //update lives method that paints lives.
                 // if(player.getLives() < 1){
-                    // ArcadeMachine.gameEnded = true;
-                    // //ArcadeMachine.gameStart = false;
-                    // ArcadeMachine.gameWon = false;
+                // ArcadeMachine.gameEnded = true;
+                // //ArcadeMachine.gameStart = false;
+                // ArcadeMachine.gameWon = false;
                 // }
-            
 
+            }
         }
-    }
         return hit;
     }
 
@@ -495,22 +503,17 @@ public class ThreadGraphicsController implements Runnable {
      *
      */
     public boolean checkShieldHit(Point p) {
-        int i = 0;
+
         boolean hit = false;
-        while(i < shields.size()){
+
+        for(int i = 0; i < shields.size(); i++){
             Shields s = shields.get(i);
-
-            int j = 0;
-            while(j < s.sections.length){
-                if(s.sections[i][j].contains(p)){
-                    s.sections[i][j].hurt();
-
+            for(int j=0; j<shields.get(i).sections.length;j++){
+                for(int k=0; k<shields.get(i).sections[0].length;k++){   
+                    shields.get(i).sections[i][j].hurt();
                 }
-                j++;
             }
-            i++;
         }
-
         return hit;
     }
 

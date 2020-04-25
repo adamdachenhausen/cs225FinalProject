@@ -22,7 +22,7 @@ import javax.sound.sampled.*;
  * @author Adam Dachenhausen, Kate Nelligan, Lindsay Clark
  * @version Spring 2020
  */
-public class Tiles
+public class HexTiles
 {
     // instance variables - replace the example below with your own
     private int x;
@@ -30,7 +30,7 @@ public class Tiles
     /**
      * Constructor for objects of class Tiles
      */
-    public Tiles()
+    public HexTiles()
     {
         // initialise instance variables
         x = 0;

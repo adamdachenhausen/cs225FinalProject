@@ -118,7 +118,7 @@ public abstract class AnimatedGraphicsObject extends Thread {
     }
 
     /**
-     * Returns the current position of a bubble
+     * Returns the current position 
      *
      * @return status the position of the bubble
      */
