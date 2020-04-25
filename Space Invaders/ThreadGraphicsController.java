@@ -39,7 +39,7 @@ public class ThreadGraphicsController implements Runnable {
     protected java.util.List<AlienShip> alienShips;
 
     /** the player */
-    AnimatedGraphicsObject player;
+    PlayerShip player;
 
     /** the panel in which our graphics are drawn */
     protected JPanel panel;
@@ -135,8 +135,15 @@ public class ThreadGraphicsController implements Runnable {
                 // along the way
                 int i = 0;
 
-                if(player != null && !player.getStatus().equals("dead")){
-                    player.paint(g);
+                if(player != null){
+                    if(player.getLives() < 1){
+
+                        gameOverScreen(g);
+                        panel.repaint();
+
+                    }else{
+                        player.paint(g);
+                    }
                 }
 
                 if(shields != null){
@@ -180,7 +187,7 @@ public class ThreadGraphicsController implements Runnable {
                             alienLasers.add(alienlaser);
                             alienlaser.start();
                         }
-                        
+
                         i++;
                     }
                 }
@@ -371,6 +378,42 @@ public class ThreadGraphicsController implements Runnable {
 
             }
             i++;
+
+        }
+        return hit;
+    }
+
+    /**
+     * Checks if a laser hit an alien.
+     *
+     */
+    public boolean checkPlayerHit(Point p) {
+        int i = 0;
+        boolean hit = false;
+
+        Point playerPoint= player.getPosition();
+
+        int playerWidth = player.getWidth();
+
+        int playerHeight = player.getHeight();
+
+        //Point alienCenter = new Point(alienUpperLeft.x + alienWidth/2, alienUpperLeft.y + alienHeight/2);
+        int leftPt = playerPoint.x;
+        int rightPt = playerPoint.x + playerWidth;
+        int bottom = playerPoint.y + playerHeight;
+        int laserpt = p.x;
+
+        if (p.x > leftPt && p.x < rightPt) {
+            if(p.y <= bottom && p.y >= playerPoint.y){
+
+                hit = true;
+
+                player.setLives(player.getLives() - 1);
+
+                ArcadeMachine.scoreLabel.setText("Score: " + ArcadeMachine.score);
+                player.setStatus("dead");
+
+            }
 
         }
         return hit;

@@ -93,6 +93,23 @@ public class PlayerShip extends AnimatedGraphicsObject{
         done = true;
     }
 
+        /**
+     * Returns the current status of a ship (alive/dead)
+     *
+     * @return status the status of the ship
+     */
+    public int getWidth(){
+        return lgWidth + medWidth + smWidth;
+    }
+    
+        /**
+     * Returns the current status of a ship (alive/dead)
+     *
+     * @return status the status of the ship
+     */
+    public int getHeight(){
+        return lgHeight + medHeight + smHeight;
+    }
     /**
      * Returns the current status of a ship (alive/dead)
      *
@@ -127,6 +144,14 @@ public class PlayerShip extends AnimatedGraphicsObject{
      */
     public int getLives(){
         return lives;
+    }
+            /**
+     * Returns the current position of a cannon
+     *
+     * @return status the position of the cannon
+     */
+    public void setLives(int newLives){
+        lives = newLives;
     }
     
         /**
