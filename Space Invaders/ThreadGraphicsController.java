@@ -175,11 +175,12 @@ public class ThreadGraphicsController implements Runnable {
                         Alien a = aliens.get(i);
 
                         if(a.getAttack()){
-                            //Point laserPoint = new Point(a.getPosition().x + 20, a.getPosition().y + a.getAlienHeight());
+                            Point laserPoint = new Point(a.getPosition().x + 20, a.getPosition().y + a.getAlienHeight());
                             Laser alienlaser = new Laser(panel, new Point(a.getPosition().x + 20, a.getPosition().y + 50), "ALIEN");
                             alienLasers.add(alienlaser);
                             alienlaser.start();
                         }
+                        
                         i++;
                     }
                 }
@@ -260,7 +261,7 @@ public class ThreadGraphicsController implements Runnable {
                 i = 0;
                 synchronized (lock) {
                     while (i < alienLasers.size()) {
-                        Laser l = lasers.get(i);
+                        Laser l = alienLasers.get(i);
                         if (l.done()) {
                             alienLasers.remove(i);
                         }
