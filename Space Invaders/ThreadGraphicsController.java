@@ -448,10 +448,12 @@ public class ThreadGraphicsController implements Runnable {
             if(p.y <= bottom && p.y >= playerPoint.y){
                 alienLasers.remove(laser);
 
+<<<<<<< HEAD
                 System.out.println("player: " + leftPt +" "+ rightPt);
                 System.out.println("laser: "+p.x+ " "+ p.y);
+=======
+>>>>>>> 405760b500ef15aed04d9efd21e6d4b771d40d46
                 hit = true;
-
                 // player.setLives(player.getLives() - 1);
                 // System.out.println("Life removed");
                 // //update lives method that paints lives.
@@ -503,6 +505,7 @@ public class ThreadGraphicsController implements Runnable {
      *
      */
     public boolean checkShieldHit(Point p) {
+<<<<<<< HEAD
 
         boolean hit = false;
 
@@ -513,6 +516,13 @@ public class ThreadGraphicsController implements Runnable {
                     shields.get(i).sections[i][j].hurt();
                 }
             }
+=======
+        int i = 0;
+        boolean hit = false;
+        while(i < shields.size()){
+            Shields s = shields.get(i);
+            s.checkSectionHit(p);
+>>>>>>> 405760b500ef15aed04d9efd21e6d4b771d40d46
         }
         return hit;
     }

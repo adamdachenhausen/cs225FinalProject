@@ -43,15 +43,19 @@ public class ShieldSection extends AnimatedGraphicsObject
         damagePoints = new boolean[SIZE/5][SIZE/5];
 
         //Calculate the damage on init
-        hurt();
+        //hurt();
     }
 
     @Override
     public void paint(Graphics g){
+        //This is to set the color back to whatever it was before this paint was 
+        //called.
+        Color cur = g.getColor();
         if(!dead && damaged==0){
             //Draw one big full rectangle
             g.setColor(shieldColor);
             g.fillRect(upperLeft.x,upperLeft.y,SIZE,SIZE);
+            g.setColor(cur);
         }
         else if(!dead){
             //Draw a 5x5 matrix of smaller rectangles
@@ -60,10 +64,12 @@ public class ShieldSection extends AnimatedGraphicsObject
                     if(damagePoints[i][j]){
                         g.setColor(Color.BLACK);
                         g.fillRect(upperLeft.x+5*i,upperLeft.y+5*j,SIZE/5,SIZE/5);
+                        g.setColor(cur);
                     }
                     else{
                         g.setColor(Color.GREEN);
                         g.fillRect(upperLeft.x+5*i,upperLeft.y+5*j,SIZE/5,SIZE/5);
+                        g.setColor(cur);
                     }
                 }
             }
@@ -77,6 +83,7 @@ public class ShieldSection extends AnimatedGraphicsObject
         Random rand = new Random();
 
         maxDamage += 10;
+        damaged += 1;
         if(maxDamage >= SIZE){
             dead = true;
             done = true;
@@ -85,8 +92,8 @@ public class ShieldSection extends AnimatedGraphicsObject
             int i = maxDamage;
             while(i>=0){
                 //Select a random point in the double array to set damaged
-                int x = rand.nextInt(4);
-                int y = rand.nextInt(4);
+                int x = rand.nextInt(5);
+                int y = rand.nextInt(5);
 
                 //Set it to true, unless it is already, then just do nothing
                 if(damagePoints[x][y]){
@@ -104,13 +111,13 @@ public class ShieldSection extends AnimatedGraphicsObject
      *  @param p the point to see if this contains
      *  @return true if this contains p
      */
-    public boolean contains(Point p){
+    public void hit(Point p){
         if(p.x>=upperLeft.x && p.x<=upperLeft.x+SIZE){
             if(p.y>=upperLeft.y && p.y<=upperLeft.y+SIZE){
-                return true;
+                this.hurt();
+                container.repaint();
             }
         }
-        return false;
     }
 
     @Override
