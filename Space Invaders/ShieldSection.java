@@ -73,7 +73,7 @@ public class ShieldSection extends AnimatedGraphicsObject
         }
     }
 
-    private void hurt(){
+    protected void hurt(){
         Random rand = new Random();
 
         maxDamage += 10;

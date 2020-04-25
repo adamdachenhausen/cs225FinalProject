@@ -169,18 +169,19 @@ public class ThreadGraphicsController implements Runnable {
                     }
                 }
                 i = 0;
+                
                 // synchronized (lock) {
-                // while (i < aliens.size()) {
-                // Alien a = aliens.get(i);
+                    // while (i < aliens.size()) {
+                        // Alien a = aliens.get(i);
 
-                // // if(a.getAttack()){
-                // // //Point laserPoint = new Point(a.getPosition().x + 20, a.getPosition().y + a.getAlienHeight());
-                // // Laser alienlaser = new Laser(panel, new Point(a.getPosition().x + 20, a.getPosition().y + 50), "ALIEN");
-                // // alienLasers.add(alienlaser);
-                // // alienlaser.start();
-                // // }
+                        // if(a.getAttack()){
+                        // //Point laserPoint = new Point(a.getPosition().x + 20, a.getPosition().y + a.getAlienHeight());
+                        // Laser alienlaser = new Laser(panel, new Point(a.getPosition().x + 20, a.getPosition().y + 50), "ALIEN");
+                        // alienLasers.add(alienlaser);
+                        // alienlaser.start();
+                        // }
 
-                // }
+                    // }
                 // }
 
                 i = 0;
@@ -406,6 +407,30 @@ public class ThreadGraphicsController implements Runnable {
         return hit;
     }
 
+        /**
+     * Checks if a laser hit an alien.
+     *
+     */
+    public boolean checkShieldHit(Point p) {
+        int i = 0;
+        boolean hit = false;
+        while(i < shields.size()){
+            Shields s = shields.get(i);
+
+            int j = 0;
+            while(j < s.sections.length){
+                if(s.sections[i][j].contains(p)){
+                    s.sections[i][j].hurt();
+
+                }
+                j++;
+            }
+            i++;
+        }
+
+        return hit;
+    }
+    
     /**
      * Checks if a laser hit an alien.
      *
@@ -430,8 +455,8 @@ public class ThreadGraphicsController implements Runnable {
         g.drawString(instruction, x2, y2);
         panel.repaint();
     }
-    
-        /**
+
+    /**
      * Checks if a laser hit an alien.
      *
      */
@@ -455,8 +480,8 @@ public class ThreadGraphicsController implements Runnable {
         g.drawString(instruction, x2, y2);
         panel.repaint();
     }
-    
-            /**
+
+    /**
      * Checks if a laser hit an alien.
      *
      */
