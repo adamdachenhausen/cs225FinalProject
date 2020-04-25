@@ -60,7 +60,20 @@ public class PlayerShip extends AnimatedGraphicsObject{
         done = false;
         lives = 3;
     }
-   
+
+    // /**
+     // * Constructor for objects of class playerShip
+     // */
+    // public PlayerShip(Point upperLeft, JComponent container, int resurrect){
+        // super(container);
+        // this.upperLeft = upperLeft;
+        // status = "alive";
+        // width = container.getWidth();
+        // height = container.getHeight();
+        // type = "ship";
+        // done = false;
+        // lives = resurrect;
+    // }
 
     /**
      * Draw the cannon/ship at its current location.
@@ -86,7 +99,11 @@ public class PlayerShip extends AnimatedGraphicsObject{
             g.fillRect((upperLeft.x + lgWidth/2) - (medWidth/2), upperLeft.y - medHeight, medWidth, medHeight);
             g.fillRect((upperLeft.x + lgWidth/2) - (smWidth/2), upperLeft.y - (smHeight + medHeight), smWidth, smHeight);
         }else{
-            //do nothing   
+
+            g.setColor(Color.BLACK);
+            g.fillRect(upperLeft.x, upperLeft.y,lgWidth, lgHeight);
+            g.fillRect((upperLeft.x + lgWidth/2) - (medWidth/2), upperLeft.y - medHeight, medWidth, medHeight);
+            g.fillRect((upperLeft.x + lgWidth/2) - (smWidth/2), upperLeft.y - (smHeight + medHeight), smWidth, smHeight); 
         }
     }
 

@@ -29,7 +29,7 @@ import javax.sound.sampled.*;
 public class ThreadGraphicsController implements Runnable {
 
     protected int lives = 3;
-    protected java.util.List<Integer> kills;
+    protected int recreate = 0;
 
     /** list of animated graphics objects currently on the screen */
     protected java.util.List<Alien>  aliens;
@@ -108,7 +108,6 @@ public class ThreadGraphicsController implements Runnable {
         alienLasers = new ArrayList<Laser>();
         explosions = new ArrayList<Explosion>();
         alienShips = new ArrayList<AlienShip>();
-        kills = new ArrayList<Integer>();
 
         // JPanel with a paintComponent method
         panel = new JPanel() {
@@ -308,9 +307,9 @@ public class ThreadGraphicsController implements Runnable {
                         System.out.println("Life removed");
                         //update lives method that paints lives.
                         if(player.getLives() < 1){
-                            ArcadeMachine.gameEnded = true;
-                            //ArcadeMachine.gameStart = false;
-                            ArcadeMachine.gameWon = false;
+                            // ArcadeMachine.gameEnded = true;
+                            // ArcadeMachine.gameWon = false;
+
                         }
                     }
                     if(hit){
@@ -462,12 +461,11 @@ public class ThreadGraphicsController implements Runnable {
 
                 hit = true;
 
-
             }
         }
         return hit;
     }
-    
+
     /**
      * Checks if a laser hit an alien.
      *
