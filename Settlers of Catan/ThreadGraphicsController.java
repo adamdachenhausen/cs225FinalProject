@@ -28,7 +28,7 @@ public class ThreadGraphicsController implements Runnable {
     public static final int PANEL_HEIGHT = 150;
 
     /** list of animated graphics objects currently on the screen */
-    protected java.util.List<AnimatedGraphicsObject> list;
+    protected java.util.List<HexTiles> hexTilesList;
 
     /** the panel in which our graphics are drawn */
     protected JPanel panel;
@@ -108,10 +108,10 @@ public class ThreadGraphicsController implements Runnable {
                 // lock access in case any other code tries to
                 // access the list
                 synchronized (lock) {
-                    while (i < list.size()) {
-                        AnimatedGraphicsObject b = list.get(i);
+                    while (i < hexTilesList.size()) {
+                        HexTiles b = hexTilesList.get(i);
                         if (b.done()) {
-                            list.remove(i);
+                            hexTilesList.remove(i);
                         }
                         else {
                             b.paint(g);
@@ -135,7 +135,7 @@ public class ThreadGraphicsController implements Runnable {
         addListeners(panel);
 
         // construct the list of AnimatedGraphicsObject
-        list = new ArrayList<AnimatedGraphicsObject>();
+        hexTilesList = new ArrayList<HexTiles>();
 
         // display the window we've created
         frame.pack();

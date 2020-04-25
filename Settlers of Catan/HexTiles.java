@@ -23,8 +23,7 @@ import javax.sound.sampled.*;
  * @version Spring 2020
  */
 public class HexTiles extends AnimatedGraphicsObject{
-    // instance variables - replace the example below with your own
-    private int x;
+    protected String type;
 
     /**
      * Constructor for objects of class Tiles
@@ -32,6 +31,7 @@ public class HexTiles extends AnimatedGraphicsObject{
     public HexTiles(JComponent container){
         super(container);
     }
+
     @Override
     public void paint(Graphics g){
 
@@ -41,7 +41,6 @@ public class HexTiles extends AnimatedGraphicsObject{
     public void run(){
 
     }
-
 
 
 }
