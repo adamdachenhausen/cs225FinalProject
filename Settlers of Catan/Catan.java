@@ -209,15 +209,31 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     }
 
     /**
-     * Sets the hex tiles that make up the island
+     * Each player puts down a road and a settlement.
+     * 
+     * Continues in reverse order until every player puts down two 
+     * settlements and two roads.
+     * 
+     * Direction: clockwise/counterclockwise 
      *
      * @param 
      * @return 
      */
-    public void createInitialSettlements(){
-        // roll dice: highest roll chooses first player to 
+    public void createSettlements(){
+        // roll dice: highest roll chooses first player to play
 
     }
+    
+        /**
+     * Each player puts down a road and a settlement
+     * Direction: clockwise
+     *
+     * @param 
+     * @return 
+     */
+        public void getResources(){
+            // roll dice: highest roll chooses first player to play
+        }
 
     //----------------------------------------------------------
 
