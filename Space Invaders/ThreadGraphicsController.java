@@ -435,26 +435,23 @@ public class ThreadGraphicsController implements Runnable {
         int rightPt = playerPoint.x + playerWidth;
         int bottom = playerPoint.y + playerHeight;
         int laserpt = p.x;
-        
+
         if (p.x > leftPt && p.x < rightPt) {
             if(p.y <= bottom && p.y >= playerPoint.y){
                 alienLasers.remove(laser);
 
-                
                 hit = true;
-
                 // player.setLives(player.getLives() - 1);
                 // System.out.println("Life removed");
                 // //update lives method that paints lives.
                 // if(player.getLives() < 1){
-                    // ArcadeMachine.gameEnded = true;
-                    // //ArcadeMachine.gameStart = false;
-                    // ArcadeMachine.gameWon = false;
+                // ArcadeMachine.gameEnded = true;
+                // //ArcadeMachine.gameStart = false;
+                // ArcadeMachine.gameWon = false;
                 // }
-            
 
+            }
         }
-    }
         return hit;
     }
 
@@ -502,10 +499,9 @@ public class ThreadGraphicsController implements Runnable {
 
             int j = 0;
             while(j < s.sections.length){
-                if(s.sections[i][j].contains(p)){
-                    s.sections[i][j].hurt();
 
-                }
+                s.sections[i][j].hit(p);
+
                 j++;
             }
             i++;
