@@ -496,15 +496,7 @@ public class ThreadGraphicsController implements Runnable {
         boolean hit = false;
         while(i < shields.size()){
             Shields s = shields.get(i);
-
-            int j = 0;
-            while(j < s.sections.length){
-
-                s.sections[i][j].hit(p);
-
-                j++;
-            }
-            i++;
+            s.checkSectionHit(p);
         }
 
         return hit;
