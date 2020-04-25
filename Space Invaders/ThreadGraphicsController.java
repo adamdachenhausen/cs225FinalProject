@@ -29,7 +29,7 @@ import javax.sound.sampled.*;
 public class ThreadGraphicsController implements Runnable {
 
     protected int lives = 3;
-    
+
     /** list of animated graphics objects currently on the screen */
     protected java.util.List<Alien>  aliens;
     protected java.util.List<Shields> shields;
@@ -127,23 +127,7 @@ public class ThreadGraphicsController implements Runnable {
                 thisTGC.paint(g);
 
                 if(aliens.size() == 0 && alienShips.size() == 0){
-                    g.setColor(Color.GREEN);
-                    String intro = "SPACE INVADERS!";
-                    FontMetrics fm = g.getFontMetrics();
-
-                    g.setFont(new Font("TimesRoman", Font.BOLD, 70));
-                    fm = g.getFontMetrics();
-                    int x = (getWidth() - fm.stringWidth(intro)) / 2;
-                    int y = ((getHeight() - fm.getHeight()) / 2) + fm.getAscent();
-                    g.drawString(intro, x, y);
-
-                    String instruction = "PRESS START TO PLAY.";
-                    g.setFont(new Font("TimesRoman", Font.BOLD, 20));
-                    fm = g.getFontMetrics();
-                    int x2 = (getWidth() - fm.stringWidth(instruction)) / 2;
-                    int y2 = (y + fm.getAscent() + 20);
-                    g.setColor(Color.WHITE);
-                    g.drawString(instruction, x2, y2);
+                    introScreen(g);
                 }
                 //g.fillRect(0, 0, 850, 675);
                 // redraw each animated graphics object at its
@@ -299,11 +283,10 @@ public class ThreadGraphicsController implements Runnable {
                     }
                 }
 
-                
                 if(alienShips.size() == 0 && aliens.size() == 0){
-                    
+                    gameWonScreen(g);
                 }else if(lives == 0){
-                    
+                    gameOverScreen(g);
                 }
             }
         };
@@ -419,6 +402,81 @@ public class ThreadGraphicsController implements Runnable {
             i++;
         }
         return hit;
+    }
+
+    /**
+     * Checks if a laser hit an alien.
+     *
+     */
+    public void introScreen(Graphics g ) {
+        g.setColor(Color.GREEN);
+        String intro = "SPACE INVADERS!";
+        FontMetrics fm = g.getFontMetrics();
+
+        g.setFont(new Font("TimesRoman", Font.BOLD, 70));
+        fm = g.getFontMetrics();
+        int x = (panel.getWidth() - fm.stringWidth(intro)) / 2;
+        int y = ((panel.getHeight() - fm.getHeight()) / 2) + fm.getAscent();
+        g.drawString(intro, x, y);
+
+        String instruction = "PRESS START TO PLAY.";
+        g.setFont(new Font("TimesRoman", Font.BOLD, 20));
+        fm = g.getFontMetrics();
+        int x2 = (panel.getWidth() - fm.stringWidth(instruction)) / 2;
+        int y2 = (y + fm.getAscent() + 20);
+        g.setColor(Color.WHITE);
+        g.drawString(instruction, x2, y2);
+        panel.repaint();
+    }
+    
+        /**
+     * Checks if a laser hit an alien.
+     *
+     */
+    public void gameWonScreen(Graphics g ) {
+        g.setColor(Color.GREEN);
+        String intro = "YOU WON!";
+        FontMetrics fm = g.getFontMetrics();
+
+        g.setFont(new Font("TimesRoman", Font.BOLD, 70));
+        fm = g.getFontMetrics();
+        int x = (panel.getWidth() - fm.stringWidth(intro)) / 2;
+        int y = ((panel.getHeight() - fm.getHeight()) / 2) + fm.getAscent();
+        g.drawString(intro, x, y);
+
+        String instruction = "PRESS START TO PLAY AGAIN.";
+        g.setFont(new Font("TimesRoman", Font.BOLD, 20));
+        fm = g.getFontMetrics();
+        int x2 = (panel.getWidth() - fm.stringWidth(instruction)) / 2;
+        int y2 = (y + fm.getAscent() + 20);
+        g.setColor(Color.WHITE);
+        g.drawString(instruction, x2, y2);
+        panel.repaint();
+    }
+    
+            /**
+     * Checks if a laser hit an alien.
+     *
+     */
+    public void gameOverScreen(Graphics g ) {
+        g.setColor(Color.RED);
+        String intro = "GAME OVER.";
+        FontMetrics fm = g.getFontMetrics();
+
+        g.setFont(new Font("TimesRoman", Font.BOLD, 70));
+        fm = g.getFontMetrics();
+        int x = (panel.getWidth() - fm.stringWidth(intro)) / 2;
+        int y = ((panel.getHeight() - fm.getHeight()) / 2) + fm.getAscent();
+        g.drawString(intro, x, y);
+
+        String instruction = "PRESS START TO PLAY AGAIN.";
+        g.setFont(new Font("TimesRoman", Font.BOLD, 20));
+        fm = g.getFontMetrics();
+        int x2 = (panel.getWidth() - fm.stringWidth(instruction)) / 2;
+        int y2 = (y + fm.getAscent() + 20);
+        g.setColor(Color.WHITE);
+        g.drawString(instruction, x2, y2);
+        panel.repaint();
     }
 
     /**

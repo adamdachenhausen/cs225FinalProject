@@ -65,19 +65,11 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
 
     protected JLabel pressStartLabel;
 
-    protected static JLabel continueLabel;
-
-    protected static JLabel levelWonLabel;
-
-    protected JLabel gameWonLabel;
-
-    protected JLabel gameOverLabel;
-
     // label that holds the score to the game
     protected static JLabel scoreLabel;
 
     // label that holds the high score for the game
-    protected static JLabel highScoreLabel;
+    protected JLabel highScoreLabel;
 
     // label to show how many shots are left before the game ends.
     protected JLabel instructions;
@@ -94,7 +86,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
 
     protected static boolean gameEnded = false;
 
-    protected static boolean reset = false;
+    protected boolean reset = false;
 
     // main panel with buttons for the game
     protected JPanel mainPanel;
@@ -147,36 +139,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         //add graphics panel to main panel
         mainPanel.add(panel);
 
-        //add text to graphics pane 
-        // introTextLabel = new JLabel("SPACE INVADERS!");
-        // introTextLabel.setBackground(Color.YELLOW); 
-        // introTextLabel.setFont(introTextLabel.getFont().deriveFont(Font.BOLD,55));
-        // introTextLabel.setBorder(new EmptyBorder(15,20,15,20));
-        // introTextLabel.setHorizontalAlignment(JLabel.CENTER);
-        // panel.add(introTextLabel);
 
-        // pressStartLabel = new JLabel("Press start to play the game");
-        // pressStartLabel.setBackground(Color.GREEN); 
-        // pressStartLabel.setFont(pressStartLabel.getFont().deriveFont(Font.BOLD,25));
-        // introTextLabel.setBorder(new EmptyBorder(15,20,15,20));
-        // pressStartLabel.setHorizontalAlignment(JLabel.CENTER);
-        // panel.add(pressStartLabel);
-
-        levelWonLabel = new JLabel("You Won!");
-        levelWonLabel.setBackground(Color.GREEN); 
-        levelWonLabel.setFont(levelWonLabel.getFont().deriveFont(Font.BOLD,45));
-        levelWonLabel.setVisible(false);
-        levelWonLabel.setHorizontalAlignment(JLabel.CENTER);
-        panel.add(levelWonLabel);
-
-        continueLabel= new JLabel("Press start to play again!");
-        continueLabel.setBackground(Color.GREEN); 
-        continueLabel.setHorizontalAlignment(JLabel.CENTER);
-        continueLabel.setVisible(false);
-        panel.add(continueLabel);
-
-        //If we extend the game to have multiple levels
-        //gameWonLabel;
 
         //Add border around game panel
         Border blackLine = BorderFactory.createLineBorder(Color.BLACK);
@@ -467,9 +430,6 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
     public static void beatLevel() {
         gameStart = false;
         gameEnded = true;
-        continueLabel.setVisible(true);
-
-        levelWonLabel.setVisible(true);
         //player.setStatus("dead");
         //aliens.clear();
         //shields.clear();
@@ -632,7 +592,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
     }
 
     //SRC: https://stackoverflow.com/questions/26305/how-can-i-play-sound-in-java
-    public static synchronized void playSound(String soundIn) {
+    public synchronized void playSound(String soundIn) {
         new Thread(new Runnable() {
                 // The wrapper thread is unnecessary, unless it blocks on the
                 // Clip finishing; see comments.
