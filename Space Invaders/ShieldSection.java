@@ -48,10 +48,14 @@ public class ShieldSection extends AnimatedGraphicsObject
 
     @Override
     public void paint(Graphics g){
+        //This is to set the color back to whatever it was before this paint was 
+        //called.
+        Color cur = g.getColor();
         if(!dead && damaged==0){
             //Draw one big full rectangle
             g.setColor(shieldColor);
             g.fillRect(upperLeft.x,upperLeft.y,SIZE,SIZE);
+            g.setColor(cur);
         }
         else if(!dead){
             //Draw a 5x5 matrix of smaller rectangles
@@ -60,10 +64,12 @@ public class ShieldSection extends AnimatedGraphicsObject
                     if(damagePoints[i][j]){
                         g.setColor(Color.BLACK);
                         g.fillRect(upperLeft.x+5*i,upperLeft.y+5*j,SIZE/5,SIZE/5);
+                        g.setColor(cur);
                     }
                     else{
                         g.setColor(Color.GREEN);
                         g.fillRect(upperLeft.x+5*i,upperLeft.y+5*j,SIZE/5,SIZE/5);
+                        g.setColor(cur);
                     }
                 }
             }
