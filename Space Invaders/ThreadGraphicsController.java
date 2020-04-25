@@ -130,7 +130,7 @@ public class ThreadGraphicsController implements Runnable {
                 if(!ArcadeMachine.gameStart && !ArcadeMachine.gameEnded && !ArcadeMachine.gameWon){
                     clearScreen();
                     introScreen(g);
-                    
+
                 }else if(!ArcadeMachine.gameStart && ArcadeMachine.gameEnded && !ArcadeMachine.gameWon){
                     clearScreen();
                     gameOverScreen(g);
@@ -340,8 +340,9 @@ public class ThreadGraphicsController implements Runnable {
                 if(ArcadeMachine.gameStart  && aliens.size() == 0){
                     ArcadeMachine.gameWon = true;
                     ArcadeMachine.gameEnded = false;
-;
+                    System.out.println("finishedgame");
                     clearScreen();
+                    gameWonScreen(g);
                     panel.repaint();
                 }else if(lives == 0){
                     ArcadeMachine.gameEnded = true;
