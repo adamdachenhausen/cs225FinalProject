@@ -558,13 +558,13 @@ public class ThreadGraphicsController implements Runnable {
     public void displayLives(Graphics g ) {
         // current size of biggest ship/cannon rectangle
         FontMetrics fm = g.getFontMetrics();
-        String instruction = "LIVES: ";
-        g.setFont(new Font("TimesRoman", Font.BOLD, 15));
+        String livesText = "LIVES: ";
+        g.setFont(new Font("TimesRoman", Font.BOLD, 20));
         fm = g.getFontMetrics();
         int x = 5;
         int y = (fm.getAscent() + 10);
         g.setColor(Color.WHITE);
-        g.drawString(instruction, x, y);
+        g.drawString(livesText, x, y);
 
         int lgWidth = 48;
         int medWidth = 20;
@@ -572,13 +572,15 @@ public class ThreadGraphicsController implements Runnable {
         int lgHeight = 12;
         int medHeight = 6;
         int smHeight = 4;
-        Point upperLeft = new Point(30, 10);
-        for(int i = 0; i < player.getLives(); i++){
+        Point upperLeft = new Point(fm.stringWidth(livesText) + 5, fm.getAscent());
+        for(int i = 0; i <+ player.getLives(); i++){
+            g.setColor(Color.GREEN);
             g.fillRect(upperLeft.x, upperLeft.y,lgWidth, lgHeight);
             g.fillRect((upperLeft.x + lgWidth/2) - (medWidth/2), upperLeft.y - medHeight, medWidth, medHeight);
             g.fillRect((upperLeft.x + lgWidth/2) - (smWidth/2), upperLeft.y - (smHeight + medHeight), smWidth, smHeight);
 
-            upperLeft = new Point(lgWidth + 15, upperLeft.y);
+            upperLeft.x += lgWidth + 10;
+
         }
         panel.repaint();
     }
