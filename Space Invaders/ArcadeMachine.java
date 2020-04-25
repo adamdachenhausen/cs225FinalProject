@@ -25,7 +25,6 @@ import javax.sound.sampled.*;
 public class ArcadeMachine extends ThreadGraphicsController implements ActionListener, KeyListener{ 
     //Constants
 
-
     //Width of Frame
     public static final int FRAME_WIDTH = 850;
     public static final int FRAME_HEIGHT = 850;
@@ -140,7 +139,6 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         mainPanel.add(panel);
 
 
-
         //Add border around game panel
         Border blackLine = BorderFactory.createLineBorder(Color.BLACK);
         panel.setBorder(blackLine);
@@ -240,7 +238,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
     public void startGame() {
         resetGame();
         if(!gameStart){
-            
+
             //introTextLabel.setVisible(false);
 
             //pressStartLabel.setVisible(false);
@@ -373,9 +371,9 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
     }
 
     public void createAlienLasers(){
-        
+
     }
-    
+
     public void createShields() {
         //Create shield object
         int x = 125;
@@ -392,6 +390,13 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         for(Shields i: shields){
             i.start();  
         }
+        // for(int i = 0; i < shields.size(); i++){
+            // for(int j=0; j<shields.get(i).sections.length;j++){
+                // for(int k=0; k<shields.get(i).sections[0].length;k++){   
+                // shields.get(i).sections[i][j].start();
+                // }
+            // }
+        // }
 
         panel.repaint();
     }
@@ -478,7 +483,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
                 if(player.getPosition().x >= 10) {
                     player.getPosition().translate(-MOVE_BY, 0);
                     // if(aliens.size() == 0 && alienShips.size() == 0){
-                        // gameEnded = true;
+                    // gameEnded = true;
                     // }
                 }
                 //move ship
@@ -490,7 +495,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
 
                 }
                 // if(aliens.size() == 0 && alienShips.size() == 0){
-                    // gameEnded = true;
+                // gameEnded = true;
                 // }
                 //move ship
             }else if(e.getKeyCode() == KeyEvent.VK_SPACE){
@@ -503,7 +508,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
                 lasers.add(laser);
                 laser.start();
                 // if(aliens.size() == 0 && alienShips.size() == 0){
-                    // gameEnded = true;
+                // gameEnded = true;
                 // }
             }
             else{

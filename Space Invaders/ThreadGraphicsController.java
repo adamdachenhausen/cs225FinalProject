@@ -169,20 +169,20 @@ public class ThreadGraphicsController implements Runnable {
                     }
                 }
                 i = 0;
-                
-                // synchronized (lock) {
-                    // while (i < aliens.size()) {
-                        // Alien a = aliens.get(i);
 
-                        // if(a.getAttack()){
-                        // //Point laserPoint = new Point(a.getPosition().x + 20, a.getPosition().y + a.getAlienHeight());
-                        // Laser alienlaser = new Laser(panel, new Point(a.getPosition().x + 20, a.getPosition().y + 50), "ALIEN");
-                        // alienLasers.add(alienlaser);
-                        // alienlaser.start();
-                        // }
+                synchronized (lock) {
+                    while (i < aliens.size()) {
+                        Alien a = aliens.get(i);
 
-                    // }
-                // }
+                        if(a.getAttack()){
+                            //Point laserPoint = new Point(a.getPosition().x + 20, a.getPosition().y + a.getAlienHeight());
+                            Laser alienlaser = new Laser(panel, new Point(a.getPosition().x + 20, a.getPosition().y + 50), "ALIEN");
+                            alienLasers.add(alienlaser);
+                            alienlaser.start();
+                        }
+                        i++;
+                    }
+                }
 
                 i = 0;
                 synchronized (lock) {
@@ -407,7 +407,7 @@ public class ThreadGraphicsController implements Runnable {
         return hit;
     }
 
-        /**
+    /**
      * Checks if a laser hit an alien.
      *
      */
@@ -430,7 +430,7 @@ public class ThreadGraphicsController implements Runnable {
 
         return hit;
     }
-    
+
     /**
      * Checks if a laser hit an alien.
      *
