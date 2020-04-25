@@ -104,13 +104,12 @@ public class ShieldSection extends AnimatedGraphicsObject
      *  @param p the point to see if this contains
      *  @return true if this contains p
      */
-    public boolean contains(Point p){
+    public void hit(Point p){
         if(p.x>=upperLeft.x && p.x<=upperLeft.x+SIZE){
             if(p.y>=upperLeft.y && p.y<=upperLeft.y+SIZE){
-                return true;
+                this.hurt();
             }
         }
-        return false;
     }
 
     @Override
