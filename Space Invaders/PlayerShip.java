@@ -111,7 +111,7 @@ public class PlayerShip extends AnimatedGraphicsObject{
      * @return status the status of the ship
      */
     public int getWidth(){
-        return lgWidth + medWidth + smWidth;
+        return lgWidth;
     }
 
     /**

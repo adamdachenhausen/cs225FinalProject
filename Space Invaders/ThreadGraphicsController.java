@@ -224,13 +224,13 @@ public class ThreadGraphicsController implements Runnable {
                                 explode.start();
                             }
                         }
-                        if(shields != null && shields.size()>0){
-                            if(checkShieldHit(l.getPosition())){
+                        // if(shields != null && shields.size()>0){
+                            // if(checkShieldHit(l.getPosition())){
+                                // //get shield working
+                                // lasers.remove(i);
 
-                                lasers.remove(i);
-
-                            }
-                        }
+                            // }
+                        // }
 
                         //System.out.println("laser: "+l.getPosition().x +" "+ l.getPosition().y);
                         if (l.done()) {
@@ -304,7 +304,9 @@ public class ThreadGraphicsController implements Runnable {
                                 //ArcadeMachine.gameStart = false;
                                 ArcadeMachine.gameWon = false;
                             }
+                            break;
                         }
+                        
                     }
                 }
                 i = 0;
