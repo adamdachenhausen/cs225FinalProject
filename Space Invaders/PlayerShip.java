@@ -60,6 +60,7 @@ public class PlayerShip extends AnimatedGraphicsObject{
         done = false;
         lives = 3;
     }
+   
 
     /**
      * Draw the cannon/ship at its current location.

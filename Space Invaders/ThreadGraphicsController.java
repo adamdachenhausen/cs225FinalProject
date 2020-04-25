@@ -225,11 +225,11 @@ public class ThreadGraphicsController implements Runnable {
                             }
                         }
                         // if(shields != null && shields.size()>0){
-                            // if(checkShieldHit(l.getPosition())){
-                                // //get shield working
-                                // lasers.remove(i);
+                        // if(checkShieldHit(l.getPosition())){
+                        // //get shield working
+                        // lasers.remove(i);
 
-                            // }
+                        // }
                         // }
 
                         //System.out.println("laser: "+l.getPosition().x +" "+ l.getPosition().y);
@@ -294,21 +294,31 @@ public class ThreadGraphicsController implements Runnable {
                             l.paint(g);
                             i++;
                         }
-                        if(checkPlayerHit(l.getPosition(), i)){
-                            //alienLasers.remove(i);
-                            player.setLives(player.getLives() - 1);
-                            System.out.println("Life removed");
-                            //update lives method that paints lives.
-                            if(player.getLives() < 1){
-                                ArcadeMachine.gameEnded = true;
-                                //ArcadeMachine.gameStart = false;
-                                ArcadeMachine.gameWon = false;
-                            }
-                            break;
-                        }
-                        
+
                     }
                 }
+
+                i = 0;
+                while (i < alienLasers.size()) {
+                    Laser l = alienLasers.get(i);
+                    boolean hit = checkPlayerHit(l.getPosition(), i);
+                    if(hit){
+                        //alienLasers.remove(i);
+                        player.setLives(player.getLives() - 1);
+                        System.out.println("Life removed");
+                        //update lives method that paints lives.
+                        if(player.getLives() < 1){
+                            ArcadeMachine.gameEnded = true;
+                            //ArcadeMachine.gameStart = false;
+                            ArcadeMachine.gameWon = false;
+                        }
+                    }
+                    if(hit){
+                        i+= 20000;
+                    }
+                    i++;
+                }
+
                 i = 0;
                 if(alienShips != null){
                     while (i < alienShips.size()) {
@@ -451,20 +461,13 @@ public class ThreadGraphicsController implements Runnable {
                 alienLasers.remove(laser);
 
                 hit = true;
-                // player.setLives(player.getLives() - 1);
-                // System.out.println("Life removed");
-                // //update lives method that paints lives.
-                // if(player.getLives() < 1){
-                // ArcadeMachine.gameEnded = true;
-                // //ArcadeMachine.gameStart = false;
-                // ArcadeMachine.gameWon = false;
-                // }
+
 
             }
         }
         return hit;
     }
-
+    
     /**
      * Checks if a laser hit an alien.
      *
@@ -516,7 +519,7 @@ public class ThreadGraphicsController implements Runnable {
             // while(i < shields.size()){
             // Shields s = shields.get(i);
             // s.checkSectionHit(p);
- 
+
             // }
 
         }
