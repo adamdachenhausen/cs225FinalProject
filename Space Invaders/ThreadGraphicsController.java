@@ -128,12 +128,17 @@ public class ThreadGraphicsController implements Runnable {
                 thisTGC.paint(g);
 
                 if(!ArcadeMachine.gameStart && !ArcadeMachine.gameEnded && !ArcadeMachine.gameWon){
+                    clearScreen();
                     introScreen(g);
+                    
                 }else if(!ArcadeMachine.gameStart && ArcadeMachine.gameEnded && !ArcadeMachine.gameWon){
+                    clearScreen();
                     gameOverScreen(g);
                 }else if(!ArcadeMachine.gameStart && ArcadeMachine.gameWon && !ArcadeMachine.gameEnded){
+                    clearScreen();
                     gameWonScreen(g);
                 }else{
+
                     displayLives(g);   
                 }
                 //g.fillRect(0, 0, 850, 675);
@@ -332,13 +337,12 @@ public class ThreadGraphicsController implements Runnable {
                     }
                 }
 
-                if(ArcadeMachine.gameStart && alienShips.size() == 0 && aliens.size() == 0){
+                if(ArcadeMachine.gameStart  && aliens.size() == 0){
                     ArcadeMachine.gameWon = true;
-                    //ArcadeMachine.gameStart = false;
                     ArcadeMachine.gameEnded = false;
-                    //gameWonScreen(g);
-                    //clearScreen();
-                    //panel.repaint();
+;
+                    clearScreen();
+                    panel.repaint();
                 }else if(lives == 0){
                     ArcadeMachine.gameEnded = true;
                     //ArcadeMachine.gameStart = false;

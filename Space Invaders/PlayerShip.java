@@ -83,7 +83,7 @@ public class PlayerShip extends AnimatedGraphicsObject{
     @Override
     public void paint(Graphics g) {
         //(x, y, width, height)
-        if(lives == 3){
+        if(lives >= 3){
             g.setColor(Color.GREEN);
             g.fillRect(upperLeft.x, upperLeft.y,lgWidth, lgHeight);
             g.fillRect((upperLeft.x + lgWidth/2) - (medWidth/2), upperLeft.y - medHeight, medWidth, medHeight);
