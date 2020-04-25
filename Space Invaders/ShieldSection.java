@@ -77,6 +77,7 @@ public class ShieldSection extends AnimatedGraphicsObject
         Random rand = new Random();
 
         maxDamage += 10;
+        damaged += 1;
         if(maxDamage >= SIZE){
             dead = true;
             done = true;
@@ -85,8 +86,8 @@ public class ShieldSection extends AnimatedGraphicsObject
             int i = maxDamage;
             while(i>=0){
                 //Select a random point in the double array to set damaged
-                int x = rand.nextInt(4);
-                int y = rand.nextInt(4);
+                int x = rand.nextInt(5);
+                int y = rand.nextInt(5);
 
                 //Set it to true, unless it is already, then just do nothing
                 if(damagePoints[x][y]){
@@ -108,6 +109,7 @@ public class ShieldSection extends AnimatedGraphicsObject
         if(p.x>=upperLeft.x && p.x<=upperLeft.x+SIZE){
             if(p.y>=upperLeft.y && p.y<=upperLeft.y+SIZE){
                 this.hurt();
+                container.repaint();
             }
         }
     }
