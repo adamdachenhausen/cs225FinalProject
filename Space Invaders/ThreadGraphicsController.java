@@ -126,10 +126,14 @@ public class ThreadGraphicsController implements Runnable {
                 // paintComponent is called
                 thisTGC.paint(g);
 
-                if(!ArcadeMachine.gameStart && aliens.size() == 0 && alienShips.size() == 0){
+                if(!ArcadeMachine.gameStart && !ArcadeMachine.gameEnded && !ArcadeMachine.gameWon){
                     introScreen(g);
+                }else if(!ArcadeMachine.gameStart && ArcadeMachine.gameEnded && !ArcadeMachine.gameWon){
+                    gameOverScreen(g);
+                }else if(!ArcadeMachine.gameStart && ArcadeMachine.gameWon && !ArcadeMachine.gameEnded){
+                    gameWonScreen(g);
                 }else{
-                 displayLives(g);   
+                    displayLives(g);   
                 }
                 //g.fillRect(0, 0, 850, 675);
                 // redraw each animated graphics object at its
@@ -137,10 +141,12 @@ public class ThreadGraphicsController implements Runnable {
                 // along the way
                 int i = 0;
 
-                if(player != null){
+                if(player != null && ArcadeMachine.gameStart){
                     if(player.getLives() < 1){
 
-                        gameOverScreen(g);
+                            gameOverScreen(g);
+                        
+                        clearScreen();
                         panel.repaint();
 
                     }else{
@@ -278,6 +284,9 @@ public class ThreadGraphicsController implements Runnable {
                             l.paint(g);
                             i++;
                         }
+                        if(checkPlayerHit(l.getPosition())){
+                            alienLasers.remove(i);
+                        }
                     }
                 }
                 i = 0;
@@ -295,11 +304,23 @@ public class ThreadGraphicsController implements Runnable {
                 }
 
                 if(ArcadeMachine.gameStart && alienShips.size() == 0 && aliens.size() == 0){
-                    gameWonScreen(g);
-                    shields.clear();
+                    ArcadeMachine.gameWon = true;
+                    //ArcadeMachine.gameStart = false;
+                    ArcadeMachine.gameEnded = false;
+                    //gameWonScreen(g);
+                    //clearScreen();
+                    //panel.repaint();
                 }else if(lives == 0){
-                    gameOverScreen(g);
-                    shields.clear();
+                    ArcadeMachine.gameEnded = true;
+                    //ArcadeMachine.gameStart = false;
+                    ArcadeMachine.gameWon = false;
+
+                    System.out.println("won: " + ArcadeMachine.gameWon);
+                    System.out.println("start: " + ArcadeMachine.gameStart);
+                    System.out.println("ended: " + ArcadeMachine.gameEnded);
+                    //gameOverScreen(g);
+                    //clearScreen();
+                    //panel.repaint();
                 }
             }
         };
@@ -411,9 +432,13 @@ public class ThreadGraphicsController implements Runnable {
                 hit = true;
 
                 player.setLives(player.getLives() - 1);
-
+                System.out.println("Life removed");
                 //update lives method that paints lives.
-
+                if(player.getLives() < 1){
+                    ArcadeMachine.gameEnded = true;
+                    //ArcadeMachine.gameStart = false;
+                    ArcadeMachine.gameWon = false;
+                }
             }
 
         }
@@ -583,6 +608,19 @@ public class ThreadGraphicsController implements Runnable {
 
         }
         panel.repaint();
+    }
+
+    /**
+     * Checks if a laser hit an alien.
+     *
+     */
+    public void clearScreen( ) {
+        aliens.clear();
+        shields.clear();
+        lasers.clear();
+        alienLasers.clear();
+        explosions.clear();
+        alienShips.clear();
     }
 
     /**

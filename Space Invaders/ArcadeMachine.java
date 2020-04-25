@@ -138,7 +138,6 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         //add graphics panel to main panel
         mainPanel.add(panel);
 
-
         //Add border around game panel
         Border blackLine = BorderFactory.createLineBorder(Color.BLACK);
         panel.setBorder(blackLine);
@@ -244,6 +243,8 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
             //pressStartLabel.setVisible(false);
 
             gameStart = true;
+            gameWon = false;
+            gameEnded = false;
             reset = false;
             createPlayer();
 
@@ -391,11 +392,11 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
             i.start();  
         }
         // for(int i = 0; i < shields.size(); i++){
-            // for(int j=0; j<shields.get(i).sections.length;j++){
-                // for(int k=0; k<shields.get(i).sections[0].length;k++){   
-                // shields.get(i).sections[i][j].start();
-                // }
-            // }
+        // for(int j=0; j<shields.get(i).sections.length;j++){
+        // for(int k=0; k<shields.get(i).sections[0].length;k++){   
+        // shields.get(i).sections[i][j].start();
+        // }
+        // }
         // }
 
         panel.repaint();
@@ -408,6 +409,8 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
     public void resetGame() {
         if(gameStart){
             gameStart = false;
+            gameWon = false;
+            gameEnded = false;
             reset = true;
             player.setStatus("dead");
             aliens.clear();
@@ -434,7 +437,9 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
      */
     public static void beatLevel() {
         gameStart = false;
-        gameEnded = true;
+        gameEnded = false;
+        gameWon = true;
+
         //player.setStatus("dead");
         //aliens.clear();
         //shields.clear();
