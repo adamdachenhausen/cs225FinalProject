@@ -34,6 +34,8 @@ public class AlienShip extends AnimatedGraphicsObject implements ImageObserver{
         status = "alive";
         done = false;
     }
+    
+
 
     /**
      * Draw the alien at its current location.
