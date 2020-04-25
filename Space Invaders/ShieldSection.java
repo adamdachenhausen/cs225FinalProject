@@ -43,7 +43,7 @@ public class ShieldSection extends AnimatedGraphicsObject
         damagePoints = new boolean[SIZE/5][SIZE/5];
 
         //Calculate the damage on init
-        hurt();
+        //hurt();
     }
 
     @Override
