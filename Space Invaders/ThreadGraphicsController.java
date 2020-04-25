@@ -126,7 +126,7 @@ public class ThreadGraphicsController implements Runnable {
                 // paintComponent is called
                 thisTGC.paint(g);
 
-                if(aliens.size() == 0 && alienShips.size() == 0){
+                if(!ArcadeMachine.gameStart && aliens.size() == 0 && alienShips.size() == 0){
                     introScreen(g);
                 }
                 //g.fillRect(0, 0, 850, 675);
@@ -283,10 +283,12 @@ public class ThreadGraphicsController implements Runnable {
                     }
                 }
 
-                if(alienShips.size() == 0 && aliens.size() == 0){
+                if(ArcadeMachine.gameStart && alienShips.size() == 0 && aliens.size() == 0){
                     gameWonScreen(g);
+                    shields.clear();
                 }else if(lives == 0){
                     gameOverScreen(g);
+                    shields.clear();
                 }
             }
         };
