@@ -353,7 +353,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * @param a hex tile to move the robber to.
      * @return 
      */
-    public void removeCard(Card c){
+    public void removeCard(){
         //move the robber to a different hex
 
         //if players have more than 7 resource cards must remove them

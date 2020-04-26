@@ -1,4 +1,21 @@
-
+import javax.swing.Icon;
+import java.util.Timer;
+import java.util.TimerTask;
+import javax.swing.ImageIcon;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
+import javax.swing.*;
+import javax.swing.event.*;
+import javax.swing.border.AbstractBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.BorderFactory;
+import java.awt.BorderLayout;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
+import java.util.Random;
+import java.io.*;
+import javax.sound.sampled.*;
 /**
  * Abstract class Player - write a description of the class here
  *
@@ -18,6 +35,8 @@ public class Player
     protected int development;
     protected int victoryPoints;
     protected boolean turn = false;
+    protected ArrayList<DevelopmentCards> devCards;
+    protected ArrayList<ResourceCards> resourceCards;
     /**
      * An example of a method - replace this comment with your own
      *

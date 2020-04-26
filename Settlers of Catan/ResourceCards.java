@@ -1,32 +1,45 @@
-
+import javax.swing.Icon;
+import java.util.Timer;
+import java.util.TimerTask;
+import javax.swing.ImageIcon;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
+import javax.swing.*;
+import javax.swing.event.*;
+import javax.swing.border.AbstractBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.BorderFactory;
+import java.awt.BorderLayout;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
+import java.util.Random;
+import java.io.*;
+import javax.sound.sampled.*;
 /**
  * Write a description of class ResourceCards here.
  *
  * @author (your name)
  * @version (a version number or a date)
  */
-public class ResourceCards implements Card{
-    // instance variables - replace the example below with your own
-    private int x;
+public class ResourceCards extends AnimatedGraphicsObject{
 
     /**
      * Constructor for objects of class ResourceCards
      */
-    public ResourceCards()
+    public ResourceCards(JComponent container)
     {
-        // initialise instance variables
-        x = 0;
+          super(container);
     }
 
-    /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
+    @Override
+    public void paint(Graphics g){
+        
+    }
+
+    @Override
+    public void run(){
+
     }
 }
+

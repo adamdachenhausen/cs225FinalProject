@@ -42,6 +42,8 @@ public class ThreadGraphicsController implements Runnable {
 
     /** list of animated graphics objects currently on the screen */
     protected java.util.List<HexTiles> hexTilesList;
+    protected java.util.List<ResourceCards> resourceBank;
+    protected java.util.List<DevelopmentCards> devBank;
 
     /** the panel in which our graphics are drawn */
     protected JPanel panel;

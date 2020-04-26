@@ -18,7 +18,7 @@ public class GamePiece  extends AnimatedGraphicsObject{
     final static protected int ROADS = 2; 
     final static protected int SETTLEMENTS = 2;
     final static protected int ROBBER = 1;
-    /**
+   /**
      * Constructor for objects of class GamePieces
      */
     public GamePiece(JComponent container)
@@ -35,5 +35,4 @@ public class GamePiece  extends AnimatedGraphicsObject{
     public void run(){
 
     }
-
 }
