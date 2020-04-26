@@ -51,7 +51,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     public Catan() {
 
         super("Catan", FRAME_WIDTH, FRAME_HEIGHT);
-        //alienShip = new AlienShip(panel, start);
+        
     }
 
     /**
@@ -72,7 +72,18 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      */
     @Override
     protected void buildGUI(JFrame frame, JPanel panel) {
+        //main panel
+        JPanel mainPanel = new JPanel();
 
+        mainPanel.setLayout(new BorderLayout());
+        frame.add(mainPanel);
+        frame.setResizable(false);
+
+        //add graphics panel to main panel
+        mainPanel.add(panel);
+        
+        Border blackLine = BorderFactory.createLineBorder(Color.BLACK);
+        panel.setBorder(blackLine);
     }
 
     /**
@@ -90,8 +101,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
         //resetButton.addActionListener(this);
         //instructionsButton.addActionListener(this);
-   	panel.addMouseListener(this);
-	panel.addMouseMotionListener(this);
+    panel.addMouseListener(this);
+    panel.addMouseMotionListener(this);
     }
 
     /**
@@ -103,7 +114,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     @Override
     public void mousePressed(MouseEvent e) {
 
-	panel.repaint();
+    panel.repaint();
     }
     /**
        Mouse drag event handler to create remember the current point
@@ -114,9 +125,9 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     @Override
     public void mouseDragged(MouseEvent e) {
 
-	// = e.getPoint();
+    // = e.getPoint();
 
-	panel.repaint();
+    panel.repaint();
     }
 
     /**
@@ -130,7 +141,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     public void mouseReleased(MouseEvent e) {
 
 
-	panel.repaint();
+    panel.repaint();
     }
 
     // fill in unused methods needed to satify the interfaces, which
@@ -241,7 +252,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     
     //----------------------------------------------------------
     public static void main(String args[]) {
-
+        Dice.loadPic();
         //launch main thread that will manage the GUI
         javax.swing.SwingUtilities.invokeLater(new Catan());
     }
