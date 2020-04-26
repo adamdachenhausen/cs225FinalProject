@@ -22,29 +22,32 @@ import javax.sound.sampled.*;
  * @author Adam Dachenhausen, Kate Nelligan, Lindsay Clark
  * @version Spring 2020
  */
-public class HexTiles
-{
-    // instance variables - replace the example below with your own
-    private int x;
+public class HexTiles extends AnimatedGraphicsObject{
+    public static final int POINTS = 6;
+    public static final int WIDTH= 20;
+    public static final int HEIGHT= 20;
+    protected String type;
+    protected int[] hexPts = new int[POINTS];
 
     /**
      * Constructor for objects of class Tiles
      */
-    public HexTiles()
-    {
-        // initialise instance variables
-        x = 0;
+    public HexTiles(JComponent container){
+        super(container);
     }
 
-    /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
+    @Override
+    public void paint(Graphics g){
+        
     }
+
+    @Override
+    public void run(){
+
+    }
+
+    public void addPoints(){
+
+    }
+
 }
