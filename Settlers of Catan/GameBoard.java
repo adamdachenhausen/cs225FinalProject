@@ -1,4 +1,6 @@
-
+import javax.swing.JPanel;
+import java.awt.Container;
+import java.awt.Color;
 /**
  * Write a description of class GameBoard here.
  *
@@ -7,27 +9,12 @@
  */
 public class GameBoard
 {
-    // instance variables - replace the example below with your own
-    private int x;
-
-    /**
-     * Constructor for objects of class GameBoard
-     */
-    public GameBoard()
-    {
-        // initialise instance variables
-        x = 0;
+    public static final Color SEA = new Color(49, 159, 181);
+    JPanel panel;
+    Container frame;
+    public GameBoard(Container frame){
+        panel = new JPanel();
+        panel.setBackground(SEA);
     }
 
-    /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
-    }
 }
