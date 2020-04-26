@@ -2,8 +2,8 @@
 /**
  * Abstract class Player - write a description of the class here
  *
- * @author (your name here)
- * @version (version number or date here)
+ * @author Kate Nelligan, Lindsay Clark, Adam Dachenhausen
+ * @version Spring 2020
  */
 public class Player
 {

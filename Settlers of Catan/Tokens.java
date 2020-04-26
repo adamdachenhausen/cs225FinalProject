@@ -9,31 +9,29 @@ import java.util.Random;
 import java.io.*;
 import javax.sound.sampled.*;
 /**
- * Write a description of class GamePieces here.
+ * Write a description of class Tokens here.
  *
  * @author Kate Nelligan, Lindsay Clark, Adam Dachenhausen
  * @version Spring 2020
  */
-public class GamePiece  extends AnimatedGraphicsObject{
-    final static protected int ROADS = 2; 
-    final static protected int SETTLEMENTS = 2;
-    final static protected int ROBBER = 1;
+public class Tokens extends AnimatedGraphicsObject{
+    // instance variables - replace the example below with your own
+    private int x;
+
     /**
-     * Constructor for objects of class GamePieces
+     * Constructor for objects of class Tokens
      */
-    public GamePiece(JComponent container)
-    {
-          super(container);
+    public Tokens(JComponent container){
+        super(container);
     }
 
     @Override
     public void paint(Graphics g){
-        
+
     }
 
     @Override
     public void run(){
 
     }
-
 }
