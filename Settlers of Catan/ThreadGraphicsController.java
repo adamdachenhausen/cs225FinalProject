@@ -20,11 +20,11 @@ this and AnimatedGraphicsObject.
 
 public class ThreadGraphicsController implements Runnable {
     //Width of Frame
-    public static final int FRAME_WIDTH = 850;
+    public static final int FRAME_WIDTH = 1000;
     public static final int FRAME_HEIGHT = 850;
 
     //Width of Bottom button panel
-    public static final int PANEL_WIDTH = 850;
+    public static final int PANEL_WIDTH = 1000;
     public static final int PANEL_HEIGHT = 150;
 
     /** list of animated graphics objects currently on the screen */
@@ -32,6 +32,9 @@ public class ThreadGraphicsController implements Runnable {
 
     /** the panel in which our graphics are drawn */
     protected JPanel panel;
+    
+    /** the frame that contains all elements of gui */
+    protected JFrame frame;
 
     // these store the values passed to the constructor
     // for window label and size to be used when needed in
@@ -74,7 +77,7 @@ public class ThreadGraphicsController implements Runnable {
 
         // create a JFrame in which we will build our very
         // tiny GUI, and give the window a name
-        JFrame frame = new JFrame(windowLabel);
+        frame = new JFrame(windowLabel);
         frame.setPreferredSize(windowSize);
 
         // tell the JFrame that when someone closes the

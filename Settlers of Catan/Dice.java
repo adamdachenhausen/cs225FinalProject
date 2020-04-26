@@ -1,13 +1,8 @@
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.*;
 import javax.swing.*;
 import javax.swing.event.*;
-import java.util.Random;
-import java.io.*;
-import javax.sound.sampled.*;
+import java.awt.image.*;
 /**
  * Write a description of class Dice here.
  *
@@ -19,25 +14,37 @@ public class Dice extends AnimatedGraphicsObject implements ImageObserver{
     // instance variables - replace the example below with your own
     protected int value;
     private static Image dice1;
+    private static Image dice2;
+    private static Image dice3;
+    private static Image dice4;
+    private static Image dice5;
+    private static Image dice6;
+
     /**
      * Constructor for objects of class Dice
      */
     public Dice(JComponent container){
         super(container);
     }
+
     @Override
     public void paint(Graphics g){
         if(!done){
             //draw image of explosion
-            if(type.equals("SHOT")){
-                g.drawImage(shotExplosion, upperLeft.x , upperLeft.y, this);
-            }else if(type.equals("PLAYER")){
-                g.drawImage(playerExplosion, upperLeft.x , upperLeft.y, this);
-            }else if(type.equals("UFO")){
-                g.drawImage(ufoExplosion, upperLeft.x , upperLeft.y, this);
+            if(type.equals("1")){
+                g.drawImage(dice1, upperLeft.x , upperLeft.y, this);
+            }else if(type.equals("2")){
+                g.drawImage(dice2, upperLeft.x , upperLeft.y, this);
+            }else if(type.equals("3")){
+                g.drawImage(dice3, upperLeft.x , upperLeft.y, this);
+            }else if(type.equals("4")){
+                g.drawImage(dice4, upperLeft.x , upperLeft.y, this);
+            }else if(type.equals("5")){
+                g.drawImage(dice5, upperLeft.x , upperLeft.y, this);
+
             }else{
-                //If alien
-                g.drawImage(explosion, upperLeft.x , upperLeft.y, this);
+
+                g.drawImage(dice6, upperLeft.x , upperLeft.y, this);
             }
         }
     }
@@ -45,15 +52,13 @@ public class Dice extends AnimatedGraphicsObject implements ImageObserver{
     @Override
     public void run(){
         //upperLeft.x -= 25;
-        int i = 0;
-        while(i < 20){
+        while(!done){
             container.repaint();
             sleepWithCatch(DELAY_TIME);
             container.repaint();
-            i++;
+
         }
 
-        done = true;
     }
 
     public boolean imageUpdate(Image img, int infoflags, int x, int y,
@@ -69,11 +74,13 @@ public class Dice extends AnimatedGraphicsObject implements ImageObserver{
 
     protected static void loadPic(){
         Toolkit toolkit = Toolkit.getDefaultToolkit();
-        explosion = toolkit.getImage("explode.png");
+        dice1 = toolkit.getImage("dice1.png");
+        dice2 = toolkit.getImage("dice2.png");
+        dice3 = toolkit.getImage("dice3.png");
+        dice4 = toolkit.getImage("dice4.png");
+        dice5 = toolkit.getImage("dice5.png");
+        dice6 = toolkit.getImage("dice6.png");
 
-        shotExplosion = toolkit.getImage("shotexplosion.png");
-        playerExplosion = toolkit.getImage("playexplosion.png");
-        ufoExplosion = toolkit.getImage("ufoexplosion.png");
     }
 
 }
