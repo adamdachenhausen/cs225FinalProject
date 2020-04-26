@@ -24,18 +24,48 @@ import javax.sound.sampled.*;
  */
 public class HexTiles extends AnimatedGraphicsObject{
     public static final int POINTS = 6;
-    public static final int WIDTH= 20;
-    public static final int HEIGHT= 20;
-    protected String type;
-    protected int[] hexPts = new int[POINTS];
+    
+    //I found this give "nice" height and width
+    //SRC: https://hexagoncalculator.apphb.com/
+    public static final int SIDE_LENGTH = 17;
+    public static final double SIDE_SIDE_LENGTH = 29.5;
+    public static final int PERIMETER = 102;
+    public static final int AREA = 750;
+    public static final int VERTEX_VERTEX_LENGTH = 34;
+    
+    public static final int X_OFFSET = 15;
 
+    protected Point center;
+    
+    protected String type;
+
+    protected Polygon p;
     /**
      * Constructor for objects of class Tiles
      */
-    public HexTiles(JComponent container){
+    public HexTiles(JComponent container, Point center){
         super(container);
+        p = new Polygon();
+        this.center=center;
+        
+        //Outsource completing the polygon to make it a hexagon
+        completeHex();
     }
 
+    private void completeHex(){
+        //Add the northern most and southernmost points
+        p.addPoint(center.x+SIDE_LENGTH,center.y);
+        p.addPoint(center.x-SIDE_LENGTH,center.y);
+        
+        //Add right side points
+        p.addPoint(center.x+X_OFFSET,center.y+8);
+        p.addPoint(center.x+X_OFFSET,center.y-9);
+        
+        //Add left side points
+        p.addPoint(center.x-X_OFFSET,center.y+9);
+        p.addPoint(center.x-X_OFFSET,center.y-8);
+    }
+    
     @Override
     public void paint(Graphics g){
         
