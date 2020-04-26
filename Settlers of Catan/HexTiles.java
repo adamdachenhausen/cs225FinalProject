@@ -17,7 +17,7 @@ import java.util.Random;
 import java.io.*;
 import javax.sound.sampled.*;
 /**
- * Creates the hexagon tiles used to form the gameboard.
+ * Creates one of the hexagon tiles used to form the gameboard.
  *
  * @author Adam Dachenhausen, Kate Nelligan, Lindsay Clark
  * @version Spring 2020
@@ -55,6 +55,12 @@ public class HexTiles extends AnimatedGraphicsObject{
         completeHex();
     }
 
+    /**
+     *  Adds points to p to create a hexagon in this shape
+     *      /\
+     *      ||
+     *      \/
+     */
     private void completeHex(){
         //Add the northern most and southernmost points
         p.addPoint(center.x+SIDE_LENGTH,center.y);
@@ -113,7 +119,7 @@ public class HexTiles extends AnimatedGraphicsObject{
 
     @Override
     public void run(){
-
+        
     }
 
 }
