@@ -82,8 +82,39 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         //add graphics panel to main panel
         mainPanel.add(panel);
         
+         //Add border around game panel
         Border blackLine = BorderFactory.createLineBorder(Color.BLACK);
         panel.setBorder(blackLine);
+
+        //add bottom panel: a panel for the buttons
+        bottomPanel = new JPanel();
+        mainPanel.add(bottomPanel, BorderLayout.SOUTH);
+        bottomPanel.setPreferredSize(new Dimension(PANEL_WIDTH,PANEL_HEIGHT));
+        bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.Y_AXIS));
+
+        JPanel buttonPanel = new JPanel();
+        bottomPanel.add(buttonPanel);
+
+        JPanel scorePanel = new JPanel();
+        bottomPanel.add(scorePanel);
+
+        JLabel buttonInstructions = new JLabel("Click 'Start' to play the game!");
+        buttonInstructions.setFont(buttonInstructions.getFont().deriveFont(Font.BOLD,15));
+        buttonInstructions.setBorder(new EmptyBorder(5,330,10,330));
+        buttonPanel.add(buttonInstructions);
+
+        //Construct buttons
+        startButton = new JButton("Start");
+        startButton.setToolTipText("Press to begin the game");
+        resetButton = new JButton("Reset");
+        resetButton.setToolTipText("Press to reset the game");
+        instructionsButton = new JButton("Instructions");
+        instructionsButton.setToolTipText("Press for instructions on how to play the game");
+
+        //Add buttons
+        buttonPanel.add(startButton);
+        buttonPanel.add(resetButton);
+        buttonPanel.add(instructionsButton);
     }
 
     /**

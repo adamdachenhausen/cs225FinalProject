@@ -1,10 +1,21 @@
-
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.util.ArrayList;
-import java.util.List;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.Icon;
+import java.util.Timer;
+import java.util.TimerTask;
+import javax.swing.ImageIcon;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
+import javax.swing.*;
+import javax.swing.event.*;
+import javax.swing.border.AbstractBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.BorderFactory;
+import java.awt.BorderLayout;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
+import java.util.Random;
+import java.io.*;
+import javax.sound.sampled.*;
 
 /**
 A base class to help manage animated graphics programs where the
@@ -27,12 +38,14 @@ public class ThreadGraphicsController implements Runnable {
     public static final int PANEL_WIDTH = 1000;
     public static final int PANEL_HEIGHT = 150;
 
+    public static final Color SEA = new Color(49, 159, 181);
+
     /** list of animated graphics objects currently on the screen */
     protected java.util.List<HexTiles> hexTilesList;
 
     /** the panel in which our graphics are drawn */
     protected JPanel panel;
-    
+
     /** the frame that contains all elements of gui */
     protected JFrame frame;
 
@@ -131,6 +144,8 @@ public class ThreadGraphicsController implements Runnable {
         // here by overriding the default implementation of buildGUI
         // below
         buildGUI(frame, panel);
+
+        //panel.setBackground(SEA);
 
         // we don't know here what mouse, keyboard, or other listeners
         // a derived class might want to add, so derived classes that
