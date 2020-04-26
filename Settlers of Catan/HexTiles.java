@@ -23,7 +23,11 @@ import javax.sound.sampled.*;
  * @version Spring 2020
  */
 public class HexTiles extends AnimatedGraphicsObject{
+    public static final int POINTS = 6;
+    public static final int WIDTH= 20;
+    public static final int HEIGHT= 20;
     protected String type;
+    protected int[] hexPts = new int[POINTS];
 
     /**
      * Constructor for objects of class Tiles
@@ -34,7 +38,7 @@ public class HexTiles extends AnimatedGraphicsObject{
 
     @Override
     public void paint(Graphics g){
-
+        
     }
 
     @Override
@@ -42,5 +46,8 @@ public class HexTiles extends AnimatedGraphicsObject{
 
     }
 
+    public void addPoints(){
+
+    }
 
 }
