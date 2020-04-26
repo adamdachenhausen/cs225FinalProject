@@ -45,10 +45,11 @@ public class HexTiles extends AnimatedGraphicsObject{
     /**
      * Constructor for objects of class Tiles
      */
-    public HexTiles(JComponent container, Point center){
+    public HexTiles(JComponent container, Point center, Resource r){
         super(container);
         p = new Polygon();
         this.center=center;
+        this.r = r;
 
         //Outsource completing the polygon to make it a hexagon
         completeHex();
