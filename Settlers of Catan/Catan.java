@@ -196,7 +196,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      *
      */
     public void startGame() {
-        
+
     }
 
     /**
@@ -248,12 +248,10 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      */
     public void setBoard(){
         //draw gameboard
-        
-        //place tokens
-        
-        
-    }
 
+        //place tokens
+
+    }
     /**
      * Each player puts down a road and a settlement.
      * 
@@ -267,9 +265,9 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      */
     public void createSettlements(){
         // roll dice: highest roll chooses first player to play
-        
+
         //place settlement between two hexes
-        
+
         //place road between two hexes
     }
 
@@ -281,9 +279,29 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      */
     public void getResources(){
         // roll dice: highest roll chooses first player to play
-        
+
         //get resource cards based on the hex tiles that are 
         //adjacent to your settlement
+    }
+
+    
+    /**
+     * Players trade resource cards
+     *
+     * @param player1 Player initiating trade
+     * @param player2 Player trading with
+     * @return 
+     */
+    public void PlayerTurn(Player p){
+        //roll dice
+
+        //whichever token/hex (the tokens number the hexes) is rolled
+        //any settlement on the border of that hex gets resources.
+        //Determine players with "activated hexes"
+
+        //distribute resources *if not enough resources, none distributed
+
+        //offer trades
     }
 
     /**
@@ -294,13 +312,57 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * @return 
      */
     public void tradeResources(Player player1, Player player2){
+        //trading can only happen with the active player on a turn
+    }
+
+    /**
+     * Players build to develop your empire
+     *
+     * @param player1 Player initiating trade
+     * @param player2 Player trading with
+     * @return 
+     */
+    public void build(Player p){
+        //build: roads, settlements, cities, development cards
+
+        //need to provide info on what is required to build each
+
+        //player selects what to build
+
+        //building is placed on gameboard
+    }
+
+    /**
+     * Move the robber to a hex.
+     * Take action based on placement.
+     *
+     * @param a hex tile to move the robber to.
+     * @return 
+     */
+    public void moveRobber(HexTiles h){
+        //move the robber to a different hex
+
+        //if players have more than 7 resource cards must remove them
         
+        //
+    }
+    
+        /**
+     * Place card back in resource card bank.
+     *
+     * @param a hex tile to move the robber to.
+     * @return 
+     */
+    public void removeCard(Card c){
+        //move the robber to a different hex
+
+        //if players have more than 7 resource cards must remove them
+        
+        //
     }
 
     //----------------------------------------------------------
-
     //Starts the main run method
-
     //----------------------------------------------------------
     public static void main(String args[]) {
         Dice.loadPic();

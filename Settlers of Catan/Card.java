@@ -1,22 +1,13 @@
 
 /**
- * Write a description of class DevelopmentCards here.
+ * Abstract class Card - write a description of the class here
  *
  * @author Kate Nelligan, Lindsay Clark, Adam Dachenhausen
  * @version Spring 2020
  */
-public class DevelopmentCards implements Card{
+public interface Card{
     // instance variables - replace the example below with your own
-    private int x;
 
-    /**
-     * Constructor for objects of class DevelopmentCards
-     */
-    public DevelopmentCards()
-    {
-        // initialise instance variables
-        x = 0;
-    }
 
     /**
      * An example of a method - replace this comment with your own

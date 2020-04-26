@@ -5,8 +5,7 @@
  * @author (your name)
  * @version (a version number or a date)
  */
-public class ResourceCards
-{
+public class ResourceCards implements Card{
     // instance variables - replace the example below with your own
     private int x;
 
