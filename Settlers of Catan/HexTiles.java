@@ -81,7 +81,7 @@ public class HexTiles extends AnimatedGraphicsObject{
             break;
             
             case WOOD:
-            g.setColor(new Color(193,154,107));
+            g.setColor(new Color(34, 139, 34));
             break;
             
             case ORE:
@@ -93,7 +93,7 @@ public class HexTiles extends AnimatedGraphicsObject{
             break;
             
             case WOOL:
-            g.setColor(new Color(219, 219, 219));
+            g.setColor(new Color(86, 125, 70));
             break;
             
             case SAND:
