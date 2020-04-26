@@ -31,11 +31,11 @@ this and AnimatedGraphicsObject.
 
 public class ThreadGraphicsController implements Runnable {
     //Width of Frame
-    public static final int FRAME_WIDTH = 1000;
+    public static final int FRAME_WIDTH = 1100;
     public static final int FRAME_HEIGHT = 850;
 
     //Width of Bottom button panel
-    public static final int PANEL_WIDTH = 1000;
+    public static final int PANEL_WIDTH = 1100;
     public static final int PANEL_HEIGHT = 150;
 
     public static final Color SEA = new Color(49, 159, 181);

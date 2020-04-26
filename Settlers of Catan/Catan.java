@@ -252,6 +252,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         //place tokens
 
     }
+
     /**
      * Each player puts down a road and a settlement.
      * 
@@ -284,7 +285,6 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         //adjacent to your settlement
     }
 
-    
     /**
      * Players trade resource cards
      *
@@ -323,6 +323,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * @return 
      */
     public void build(Player p){
+        //called every turn after dice are rolled
+
         //build: roads, settlements, cities, development cards
 
         //need to provide info on what is required to build each
@@ -330,6 +332,32 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         //player selects what to build
 
         //building is placed on gameboard
+
+        //if building settlement, can only build in place
+        //connecting to existing roads
+
+        //if building city need to pay resources and replace
+        //existing settlement with a city piece
+    }
+
+    /**
+     * Move the robber to a hex.
+     * Take action based on placement.
+     *
+     * @param a hex tile to move the robber to.
+     * @return 
+     */
+    public void activateRobber(HexTiles h){
+        //call method when dice roll = 7
+
+        //anyone with more than 7 cards must discard extras to bank
+
+        //move robber to different hex (call method)
+
+        //can steal one card from player with a settlement touching 
+        //hex robber was placed on
+
+        //no resources are distributed from hex robber is touching
     }
 
     /**
@@ -342,23 +370,62 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     public void moveRobber(HexTiles h){
         //move the robber to a different hex
 
-        //if players have more than 7 resource cards must remove them
-        
-        //
     }
-    
-        /**
-     * Place card back in resource card bank.
+
+    /**
+     * Removes card for circulation and apply card benefit.
      *
-     * @param a hex tile to move the robber to.
+     * @param 
      * @return 
      */
-    public void removeCard(){
+    public void useDevelopmentCard(){
         //move the robber to a different hex
 
         //if players have more than 7 resource cards must remove them
-        
+
         //
+    }
+
+    /**
+     * Use card to build.
+     *
+     * @param 
+     * @return 
+     */
+    public void useResourceCard(){
+        //move the robber to a different hex
+
+        //if players have more than 7 resource cards must remove them
+
+        //
+    }
+
+        /**
+     * Draw a card from the resource card bank.
+     *
+     * @param 
+     * @return 
+     */
+    public void drawDevelopmentCard(){
+
+        // Add to player's hand
+
+    }
+    
+    /**
+     * Draw a card from the resource card bank.
+     *
+     * @param 
+     * @return 
+     */
+    public void drawResourceCard(){
+
+        //if player has a city, gets two resource cards
+
+        //else gets one card
+
+        // Add to player's hand
+
     }
 
     //----------------------------------------------------------

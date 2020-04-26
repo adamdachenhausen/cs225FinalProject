@@ -46,4 +46,12 @@ public class Player
     public Player(){
 
     }
+    
+    public int getCities(){
+        //if city is on hex border, you get two resource cards 
+        //instead of one.
+        return cities;
+    }
+    
+    
 }
