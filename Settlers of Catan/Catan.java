@@ -196,7 +196,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      *
      */
     public void startGame() {
-
+        
     }
 
     /**
@@ -247,10 +247,11 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * @return 
      */
     public void setBoard(){
-        // shuffle hex tiles (randomize order of tiles)
-
-        // place tiles together in a rough hex shape (see google doc for reference)
-
+        //draw gameboard
+        
+        //place tokens
+        
+        
     }
 
     /**
@@ -266,7 +267,10 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      */
     public void createSettlements(){
         // roll dice: highest roll chooses first player to play
-
+        
+        //place settlement between two hexes
+        
+        //place road between two hexes
     }
 
     /**
@@ -277,6 +281,9 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      */
     public void getResources(){
         // roll dice: highest roll chooses first player to play
+        
+        //get resource cards based on the hex tiles that are 
+        //adjacent to your settlement
     }
 
     /**
@@ -286,7 +293,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * @param player2 Player trading with
      * @return 
      */
-    public void tradeResources(){
+    public void tradeResources(Player player1, Player player2){
         
     }
 
