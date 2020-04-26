@@ -51,7 +51,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     public Catan() {
 
         super("Catan", FRAME_WIDTH, FRAME_HEIGHT);
-        
+
     }
 
     /**
@@ -81,8 +81,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
         //add graphics panel to main panel
         mainPanel.add(panel);
-        
-         //Add border around game panel
+
+        //Add border around game panel
         Border blackLine = BorderFactory.createLineBorder(Color.BLACK);
         panel.setBorder(blackLine);
 
@@ -132,55 +132,58 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
         //resetButton.addActionListener(this);
         //instructionsButton.addActionListener(this);
-    panel.addMouseListener(this);
-    panel.addMouseMotionListener(this);
+        panel.addMouseListener(this);
+        panel.addMouseMotionListener(this);
     }
 
     /**
-       Mouse press event handler to set up to create a new
-       BouncingGravityBall on subsequent release.
+    Mouse press event handler to set up to create a new
+    BouncingGravityBall on subsequent release.
 
-       @param e mouse event info
-    */
+    @param e mouse event info
+     */
     @Override
     public void mousePressed(MouseEvent e) {
 
-    panel.repaint();
+        panel.repaint();
     }
-    /**
-       Mouse drag event handler to create remember the current point
-       for sling line drawing.
 
-       @param e mouse event info
-    */
+    /**
+    Mouse drag event handler to create remember the current point
+    for sling line drawing.
+
+    @param e mouse event info
+     */
     @Override
     public void mouseDragged(MouseEvent e) {
 
-    // = e.getPoint();
+        // = e.getPoint();
 
-    panel.repaint();
+        panel.repaint();
     }
 
     /**
-       Mouse release event handler to create a new BouncingGravityBall
-       centered at the release point, initial velocities depending on 
-       distance from press point.
+    Mouse release event handler to create a new BouncingGravityBall
+    centered at the release point, initial velocities depending on 
+    distance from press point.
 
-       @param e mouse event info
-    */
+    @param e mouse event info
+     */
     @Override
     public void mouseReleased(MouseEvent e) {
 
-
-    panel.repaint();
+        panel.repaint();
     }
 
     // fill in unused methods needed to satify the interfaces, which
     // are needed since we can't use the MouseAdapter, as this class
     // now needs to extend the abstract class
     public void mouseMoved(MouseEvent e) {}
+
     public void mouseEntered(MouseEvent e) {}
+
     public void mouseExited(MouseEvent e) {}
+
     public void mouseClicked(MouseEvent e) {}
 
     //----------------------------------------------------------
@@ -265,22 +268,32 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         // roll dice: highest roll chooses first player to play
 
     }
-    
-        /**
+
+    /**
      * Each player puts down a road and a settlement
-     * Direction: clockwise
      *
      * @param 
      * @return 
      */
-        public void getResources(){
-            // roll dice: highest roll chooses first player to play
-        }
+    public void getResources(){
+        // roll dice: highest roll chooses first player to play
+    }
+
+    /**
+     * Players trade resource cards
+     *
+     * @param player1 Player initiating trade
+     * @param player2 Player trading with
+     * @return 
+     */
+    public void tradeResources(){
+        
+    }
 
     //----------------------------------------------------------
 
     //Starts the main run method
-    
+
     //----------------------------------------------------------
     public static void main(String args[]) {
         Dice.loadPic();
