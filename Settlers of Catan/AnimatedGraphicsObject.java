@@ -33,6 +33,9 @@ public abstract class AnimatedGraphicsObject extends Thread {
 
     /** status of the object */
     String status;
+    
+        /** delay time between frames of animation (ms)*/
+    public static final int DELAY_TIME = 33;
 
     /**
     Construct an AnimatedGraphicsObject.  All derived classes must
