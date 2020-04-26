@@ -99,6 +99,11 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
     /** amount to space aliens vertically apart*/
     public static final int V_SPACING = 70;
 
+    protected long lastShotTime;
+    
+    //The delay in between shots in ms, so the user can't spam
+    public static int SHOT_DELAY = 1000;
+
     /**
      * Constructor, which simply calls the superclass constructor
      * with an appropriate window label and dimensions.
@@ -106,6 +111,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
     public ArcadeMachine() {
 
         super("Space Invaders", FRAME_WIDTH, FRAME_HEIGHT);
+        lastShotTime = System.currentTimeMillis();
         //alienShip = new AlienShip(panel, start);
     }
 
@@ -504,17 +510,20 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
                 // }
                 //move ship
             }else if(e.getKeyCode() == KeyEvent.VK_SPACE){
-                //fire cannon code (call method)
-                playSound("shoot.wav");
-                Point p = player.getPosition();
-                int x = (p.x + 48/2) - (4/2);
-                int y = p.y - (4 + 6);
-                Laser laser = new Laser(panel, new Point(x,y), "PLAYER");
-                lasers.add(laser);
-                laser.start();
-                // if(aliens.size() == 0 && alienShips.size() == 0){
-                // gameEnded = true;
-                // }
+                if(System.currentTimeMillis() > lastShotTime + SHOT_DELAY){
+                    lastShotTime = System.currentTimeMillis();
+                    //fire cannon code (call method)
+                    playSound("shoot.wav");
+                    Point p = player.getPosition();
+                    int x = (p.x + 48/2) - (4/2);
+                    int y = p.y - (4 + 6);
+                    Laser laser = new Laser(panel, new Point(x,y), "PLAYER");
+                    lasers.add(laser);
+                    laser.start();
+                    // if(aliens.size() == 0 && alienShips.size() == 0){
+                    // gameEnded = true;
+                    // }
+                }
             }
             else{
                 e.consume();
