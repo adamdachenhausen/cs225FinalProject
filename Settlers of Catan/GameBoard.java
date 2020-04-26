@@ -9,10 +9,10 @@ import java.awt.Point;
 import javax.swing.JComponent;
 import java.awt.Graphics;
 /**
- * Write a description of class GameBoard here.
+ * A collection of HexTiles in a specific pattern
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Kate Nelligan, Lindsay Clark, Adam Dachenhausen
+ * @version Spring 2020
  */
 public class GameBoard extends AnimatedGraphicsObject
 {
@@ -31,7 +31,11 @@ public class GameBoard extends AnimatedGraphicsObject
     private JPanel panel;
     protected HexTiles[][] board;
     private Stack<Resource> r;
+    
+    //The current point to place a new hex at
     private Point cur;
+    
+    //The top left point of this
     private Point topLeft;
     public GameBoard(JComponent container, Point topLeft){
         super(container);
@@ -46,6 +50,9 @@ public class GameBoard extends AnimatedGraphicsObject
         cur = topLeft;
     }
 
+    /** Populates the r stack with exact number of each resource
+     *  Then shuffles the stack, so when items are popped, they are random
+     */
     private void populateR(){
 
         //Add everything to r
@@ -77,6 +84,11 @@ public class GameBoard extends AnimatedGraphicsObject
         Collections.shuffle(r);
     }
 
+    /**
+     *  Loops through board[][] and depending on loop variables, either:
+     *  -makes a null hex
+     *  -makes a hex with appropriate params.
+     */
     private void createBoard(){
 
         for(int i=0; i<board.length;i++){
@@ -113,6 +125,9 @@ public class GameBoard extends AnimatedGraphicsObject
 
     }
 
+    /**
+     *  Just loops through each item in board and calls its paint method
+     */
     @Override
     public void paint(Graphics g){
         for(int i=0; i<board.length;i++){
@@ -126,6 +141,6 @@ public class GameBoard extends AnimatedGraphicsObject
 
     @Override
     public void run(){
-        
+
     }
 }
