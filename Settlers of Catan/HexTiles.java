@@ -27,14 +27,17 @@ public class HexTiles extends AnimatedGraphicsObject{
 
     //I found this give "nice" height and width
     //SRC: https://hexagoncalculator.apphb.com/
-    public static final int SIDE_LENGTH = 17;
-    public static final double SIDE_SIDE_LENGTH = 29.5;
-    public static final int PERIMETER = 102;
-    public static final int AREA = 750;
-    public static final int VERTEX_VERTEX_LENGTH = 34;
+    public static final int MULTIPLIER = 4;
+    public static final int SIDE_LENGTH = 17*MULTIPLIER;
+    public static final double SIDE_SIDE_LENGTH = 29.5*MULTIPLIER;
+    public static final int PERIMETER = 102*MULTIPLIER;
+    public static final int AREA = 750*MULTIPLIER;
+    public static final int VERTEX_VERTEX_LENGTH = 34*MULTIPLIER;
 
-    public static final int X_OFFSET = 15;
-
+    public static final int X_OFFSET = 15*MULTIPLIER;
+    public static final int Y_OFFSET1 = 8*MULTIPLIER;
+    public static final int Y_OFFSET2 = 9*MULTIPLIER;
+    
     protected Point center;
 
     protected String type;
@@ -65,13 +68,13 @@ public class HexTiles extends AnimatedGraphicsObject{
         //Add points in clockwise rotation starting at northernmost point
         p.addPoint(center.x,center.y+SIDE_LENGTH);
 
-        p.addPoint(center.x+X_OFFSET,center.y+8);
+        p.addPoint(center.x+X_OFFSET,center.y+Y_OFFSET1);
 
-        p.addPoint(center.x+X_OFFSET,center.y-9);
+        p.addPoint(center.x+X_OFFSET,center.y-Y_OFFSET2);
         p.addPoint(center.x,center.y-SIDE_LENGTH);
 
-        p.addPoint(center.x-X_OFFSET,center.y-8);
-        p.addPoint(center.x-X_OFFSET,center.y+9);
+        p.addPoint(center.x-X_OFFSET,center.y-Y_OFFSET1);
+        p.addPoint(center.x-X_OFFSET,center.y+Y_OFFSET2);
 
     }
     @Override
