@@ -3,6 +3,11 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.image.*;
+import java.util.*;
+import javax.swing.*;
+import javax.swing.event.*;
+import java.util.Random;
+
 /**
  * Write a description of class Dice here.
  *
@@ -23,35 +28,41 @@ public class Dice extends AnimatedGraphicsObject implements ImageObserver{
     /**
      * Constructor for objects of class Dice
      */
-    public Dice(JComponent container){
+    public Dice(JComponent container, Point ul){
         super(container);
+        upperLeft = ul;
     }
 
     @Override
     public void paint(Graphics g){
         if(!done){
             //draw image of explosion
-            if(type.equals("1")){
+            if(value == 1){
                 g.drawImage(dice1, upperLeft.x , upperLeft.y, this);
-            }else if(type.equals("2")){
+            }else if(value == 2){
                 g.drawImage(dice2, upperLeft.x , upperLeft.y, this);
-            }else if(type.equals("3")){
+            }else if(value == 3){
                 g.drawImage(dice3, upperLeft.x , upperLeft.y, this);
-            }else if(type.equals("4")){
+            }else if(value == 4){
                 g.drawImage(dice4, upperLeft.x , upperLeft.y, this);
-            }else if(type.equals("5")){
+            }else if(value == 5){
                 g.drawImage(dice5, upperLeft.x , upperLeft.y, this);
-
             }else{
-
+                //If alien
                 g.drawImage(dice6, upperLeft.x , upperLeft.y, this);
             }
         }
     }
 
+    public int rollDice(){
+        Random r = new Random();
+        value = r.nextInt(5) + 1;
+        return value;
+    }
+
     @Override
     public void run(){
-        //upperLeft.x -= 25;
+
         while(!done){
             container.repaint();
             sleepWithCatch(DELAY_TIME);

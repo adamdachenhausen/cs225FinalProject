@@ -39,15 +39,17 @@ public class ThreadGraphicsController implements Runnable {
     public static final int PANEL_HEIGHT = 150;
 
     public static final Color SEA = new Color(49, 159, 181);
-    
-    
 
     /** list of animated graphics objects currently on the screen */
     protected java.util.List<HexTiles> hexTilesList;
     protected java.util.List<ResourceCards> resourceBank;
     protected java.util.List<DevelopmentCards> devBank;
-    
+    protected java.util.List<Tokens> tokens;
+
     protected GameBoard gameboard;
+
+    protected Dice die1;
+    protected Dice die2;
 
     /** the panel in which our graphics are drawn */
     protected JPanel panel;
@@ -102,8 +104,6 @@ public class ThreadGraphicsController implements Runnable {
         // tell the JFrame that when someone closes the
         // window, the application should terminate
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        
 
         // JPanel with a paintComponent method
         panel = new JPanel() {
@@ -131,11 +131,15 @@ public class ThreadGraphicsController implements Runnable {
                 // since we will be modifying the list, we will
                 // lock access in case any other code tries to
                 // access the list
-                
+
                 if(gameboard != null){
                     gameboard.paint(g);
                 }
-                
+
+                if(gameboard != null){
+                    gameboard.paint(g);
+                }
+
                 synchronized (lock) {
                     while (i < hexTilesList.size()) {
                         HexTiles b = hexTilesList.get(i);
@@ -167,6 +171,9 @@ public class ThreadGraphicsController implements Runnable {
 
         // construct the list of AnimatedGraphicsObject
         hexTilesList = new ArrayList<HexTiles>();
+        resourceBank = new ArrayList<ResourceCards>();
+        devBank = new ArrayList<DevelopmentCards>();
+        tokens = new ArrayList<Tokens>();
 
         // display the window we've created
         frame.pack();

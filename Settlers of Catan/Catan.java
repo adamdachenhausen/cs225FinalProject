@@ -20,7 +20,8 @@ import java.io.*;
  * @version Spring 2020
  */
 public class Catan extends ThreadGraphicsController implements MouseListener, MouseMotionListener, ActionListener{
-
+    //adds variables for gameplay
+    protected int roll;
     // button that starts the game
     protected JButton startButton;
 
@@ -72,6 +73,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      */
     @Override
     protected void buildGUI(JFrame frame, JPanel panel) {
+
         //main panel
         JPanel mainPanel = new JPanel();
 
@@ -248,14 +250,18 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      */
     public void setBoard(){
         //draw gameboard
-        
+
         //Forest Hex (4x), Pasture Hex (4x), Fields Hex (4x), Hills Hex (3x)
         //Mountain Hex(3x), Desert Hex(1x)
         gameboard = new GameBoard(panel,new Point(10,10));
         gameboard.start();
-        
+
+        //create dice
+        die1 = new Dice(panel, new Point(600,300));
+        die2 = new Dice(panel, new Point(600,360));
+
         //place tokens
-        
+
     }
 
     /**
@@ -271,7 +277,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      */
     public void createSettlements(){
         // roll dice: highest roll chooses first player to play
-
+        die1.rollDice();
+        die2.rollDice();
         //place settlement between two hexes
 
         //place road between two hexes
@@ -385,7 +392,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      */
     public void useDevelopmentCard(){
         //card types
-        
+
         //knight: move robber, don't discard the card
     }
 
@@ -403,7 +410,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         //
     }
 
-        /**
+    /**
      * Draw a card from the resource card bank.
      *
      * @param 
@@ -414,7 +421,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         // Add to player's hand
 
     }
-    
+
     /**
      * Draw a card from the resource card bank.
      *
@@ -430,8 +437,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         // Add to player's hand
 
     }
-    
-        /**
+
+    /**
      * Draw a card from the resource card bank.
      *
      * @param 
@@ -441,12 +448,12 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
         //first player to build 5 uninterrupted roads you get longest
         //road card worth 2 victory points.
-        
+
         //player can steal card if they build longer road.
 
     }
 
-            /**
+    /**
      * Draw a card from the resource card bank.
      *
      * @param 
@@ -456,11 +463,11 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
         //first player to get 3 knight development cards gets
         //largest army card.  
-        
+
         //player can steal card if they build longer road.
 
     }
-    
+
     //----------------------------------------------------------
     //Starts the main run method
     //----------------------------------------------------------
