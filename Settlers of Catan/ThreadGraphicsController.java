@@ -136,8 +136,9 @@ public class ThreadGraphicsController implements Runnable {
                     gameboard.paint(g);
                 }
 
-                if(gameboard != null){
-                    gameboard.paint(g);
+                if(die1 != null && die2 != null){
+                    die1.paint(g);
+                    die2.paint(g);
                 }
 
                 synchronized (lock) {

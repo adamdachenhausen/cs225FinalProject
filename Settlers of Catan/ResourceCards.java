@@ -29,12 +29,12 @@ public class ResourceCards extends AnimatedGraphicsObject{
      */
     public ResourceCards(JComponent container)
     {
-          super(container);
+        super(container);
     }
 
     @Override
     public void paint(Graphics g){
-        
+
     }
 
     @Override
