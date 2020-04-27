@@ -257,8 +257,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         //gameboard.start();
 
         //create dice
-        die1 = new Dice(panel, new Point(600,300));
-        die2 = new Dice(panel, new Point(600,375));
+        die1 = new Dice(panel, new Point(550,300));
+        die2 = new Dice(panel, new Point(550,375));
 
         //place tokens
         

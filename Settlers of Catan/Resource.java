@@ -7,5 +7,5 @@
  */
 public enum Resource
 {
-    BRICKS,WOOD,ORE,WHEAT,WOOL,SAND
+    BRICKS,WOOD,ORE,WHEAT,WOOL, SAND
 }
