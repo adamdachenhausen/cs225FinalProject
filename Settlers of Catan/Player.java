@@ -24,22 +24,32 @@ import javax.sound.sampled.*;
  */
 public class Player
 {
+    //Constants
+    public static final int MAX_ROADS = 15;
+    public static final int MAX_SETTLEMENTS = 5;
+    public static final int MAX_CITIES = 4;
+
     // instance variables - replace the example below with your own
     protected int playerNumber;
     protected Colors c;
+    protected boolean turn;
 
-    // Points for game--development is development cards
-    protected int cities;
-    protected int settlements;
-    protected int roads;
-    protected int development;
-    protected int victoryPoints;
-    protected int victoryPointCards;
-    protected int knights;
-    protected int roadLength;
-    protected boolean largestArmy;
-    protected boolean longestRoad;
-    protected boolean turn = false;
+    // Gamepices for game
+    protected int cities = 0;
+    protected int settlements = 0;
+    protected int roads = 0;
+
+    //variables based on development cards
+    protected int victoryPoints = 0;
+    protected int victoryPointCards = 0;
+    protected int knights = 0;
+    protected int roadLength = 0;
+
+    //variables based on special victory point cards (worth 2 victory points)
+    protected boolean largestArmy = false;
+    protected boolean longestRoad = false;
+
+    //arraylists to store cards
     protected ArrayList<DevelopmentCards> devCards;
     protected ArrayList<ResourceCards> resourceCards;
     /**
@@ -48,15 +58,116 @@ public class Player
      * @param  y  a sample parameter for a method
      * @return    the sum of x and y
      */
-    public Player(){
-
+    public Player(int playNum, Colors color){
+        playerNumber = playNum;
+        c = color;
+        turn = false;
+        devCards = new ArrayList<DevelopmentCards>();
+        resourceCards = new ArrayList<ResourceCards>();
     }
-    
+
+    public Colors getColor(){
+
+        return c;
+    }
+
+    public boolean getTurn(){
+
+        return turn;
+    }
+
     public int getCities(){
-        //if city is on hex border, you get two resource cards 
-        //instead of one.
+
         return cities;
     }
+
+    public int getSettlements(){
+
+        return settlements;
+    }
+
+    public int getRoads(){
+
+        return roads;
+    }
     
+        public int getVictoryPoints(){
+
+        return victoryPoints;
+    }
     
+        public int getVictoryPointCards(){
+
+        return victoryPointCards;
+    }
+    
+        public int getKnights(){
+
+        return knights;
+    }
+    
+        public int getRoadlength(){
+
+        return roadLength;
+    }
+    
+            public boolean getLargestArmy(){
+
+        return largestArmy;
+    }
+    
+        public boolean getLongestRoad(){
+
+        return longestRoad;
+    }
+
+
+    public boolean setTurn(boolean turnflag){
+
+        turn = turnflag;
+    }
+
+    public int getCities(int newcities){
+
+        cities = newcities;
+    }
+
+    public int getSettlements(int newsettle){
+
+         settlements = newsettle;
+    }
+
+    public int getRoads(int newroads){
+
+         roads = newroads;
+    }
+    
+        public int getVictoryPoints(int vp){
+
+         victoryPoints = vp;
+    }
+    
+        public int getVictoryPointCards(int vpc){
+
+         victoryPointCards = vpc;
+    }
+    
+        public int getKnights(int newknights){
+            knights = newknights;
+    }
+    
+        public int getRoadlength(int rl){
+
+         roadLength = rl;
+    }
+    
+            public boolean getLargestArmy(boolean la){
+
+         largestArmy = la;
+    }
+    
+        public boolean getLongestRoad(boolean lr){
+
+         longestRoad = lr;
+    }
 }

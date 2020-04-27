@@ -264,7 +264,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * Continues in reverse order until every player puts down two 
      * settlements and two roads.
      * 
-     * Direction: clockwise/counterclockwise 
+     * Direction: 1st round clockwise/2nd round counterclockwise 
      *
      * @param 
      * @return 
