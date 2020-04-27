@@ -202,7 +202,17 @@ public class ThreadGraphicsController implements Runnable {
                     while (i < aliens.size()) {
                         Alien a = aliens.get(i);
 
-                        if(a.getAttack()){
+                        Random rand = new Random();
+                        boolean attack = false;
+                        int randomShot = rand.nextInt(575);
+
+                        if(randomShot == 1){
+                            attack = true; 
+                        }else{
+                            attack = false;
+                        }
+
+                        if(attack){
                             Point laserPoint = new Point(a.getPosition().x + 20, a.getPosition().y + a.getAlienHeight());
                             Laser alienlaser = new Laser(panel, new Point(a.getPosition().x + 20, a.getPosition().y + 50), "ALIEN");
                             alienLasers.add(alienlaser);
@@ -309,11 +319,11 @@ public class ThreadGraphicsController implements Runnable {
                 // if no lives are left, displays game over screen.
                 while (i < alienLasers.size()) {
                     Laser l = alienLasers.get(i);
-                    boolean hit = checkPlayerHit(l.getPosition(), i);
-                    if(hit){
+                    boolean playerhit = checkPlayerHit(l.getPosition(), i);
+                    if(playerhit){
                         alienLasers.remove(i);
                         player.setLives(player.getLives() - 1);
-                        ;
+
                         //update lives method that paints lives.
                         if(player.getLives() < 1){
                             ArcadeMachine.gameEnded = true;
@@ -322,8 +332,13 @@ public class ThreadGraphicsController implements Runnable {
                             //ArcadeMachine.beatLevel();
                         }
                     }
-                    if(hit){
-                        i+= 20000;
+
+                    boolean shieldhit = checkShieldHit(l.getPosition());
+                    if(shields != null && shields.size()>0){
+                        if(checkShieldHit(l.getPosition())){
+                            //get shield working
+                            alienLasers.remove(i);
+                        }
                     }
                     i++;
                 }
@@ -520,199 +535,199 @@ public class ThreadGraphicsController implements Runnable {
                             //do nothing
                         }
                     }else{                    
-
-                        if(s.sections[j][k].hit(p)){
-                            s.sections[j][k].hurt();
-                            hit = true;
+                        if(s.sections[j][k] != null){
+                            if(s.sections[j][k].hit(p)){
+                                s.sections[j][k].hurt();
+                                hit = true;
+                            }
                         }
                     }
                 }
-            
+
+            }
+        }
+        return hit;
+    }
+
+    /**
+     * Checks if a laser hit an alien.
+     *
+     */
+    public boolean checkSectionHit(Point p) {
+        boolean hit = false;
+        return hit;
+    }
+
+    /**
+     * Checks if a laser hit an alien.
+     *
+     */
+    public void introScreen(Graphics g ) {
+        g.setColor(Color.GREEN);
+        String intro = "SPACE INVADERS!";
+        FontMetrics fm = g.getFontMetrics();
+
+        g.setFont(new Font("TimesRoman", Font.BOLD, 70));
+        fm = g.getFontMetrics();
+        int x = (panel.getWidth() - fm.stringWidth(intro)) / 2;
+        int y = ((panel.getHeight() - fm.getHeight()) / 2) + fm.getAscent();
+        g.drawString(intro, x, y);
+
+        String instruction = "PRESS START TO PLAY.";
+        g.setFont(new Font("TimesRoman", Font.BOLD, 20));
+        fm = g.getFontMetrics();
+        int x2 = (panel.getWidth() - fm.stringWidth(instruction)) / 2;
+        int y2 = (y + fm.getAscent() + 20);
+        g.setColor(Color.WHITE);
+        g.drawString(instruction, x2, y2);
+        panel.repaint();
+    }
+
+    /**
+     * Checks if a laser hit an alien.
+     *
+     */
+    public void gameWonScreen(Graphics g ) {
+        g.setColor(Color.GREEN);
+        String intro = "YOU WON!";
+        FontMetrics fm = g.getFontMetrics();
+
+        g.setFont(new Font("TimesRoman", Font.BOLD, 70));
+        fm = g.getFontMetrics();
+        int x = (panel.getWidth() - fm.stringWidth(intro)) / 2;
+        int y = ((panel.getHeight() - fm.getHeight()) / 2) + fm.getAscent();
+        g.drawString(intro, x, y);
+
+        String instruction = "PRESS START TO PLAY AGAIN.";
+        g.setFont(new Font("TimesRoman", Font.BOLD, 20));
+        fm = g.getFontMetrics();
+        int x2 = (panel.getWidth() - fm.stringWidth(instruction)) / 2;
+        int y2 = (y + fm.getAscent() + 20);
+        g.setColor(Color.WHITE);
+        g.drawString(instruction, x2, y2);
+        panel.repaint();
+    }
+
+    /**
+     * Checks if a laser hit an alien.
+     *
+     */
+    public void gameOverScreen(Graphics g ) {
+        g.setColor(Color.RED);
+        String intro = "GAME OVER.";
+        FontMetrics fm = g.getFontMetrics();
+
+        g.setFont(new Font("TimesRoman", Font.BOLD, 70));
+        fm = g.getFontMetrics();
+        int x = (panel.getWidth() - fm.stringWidth(intro)) / 2;
+        int y = ((panel.getHeight() - fm.getHeight()) / 2) + fm.getAscent();
+        g.drawString(intro, x, y);
+
+        String instruction = "PRESS START TO PLAY AGAIN.";
+        g.setFont(new Font("TimesRoman", Font.BOLD, 20));
+        fm = g.getFontMetrics();
+        int x2 = (panel.getWidth() - fm.stringWidth(instruction)) / 2;
+        int y2 = (y + fm.getAscent() + 20);
+        g.setColor(Color.WHITE);
+        g.drawString(instruction, x2, y2);
+        panel.repaint();
+    }
+
+    /**
+     * Checks if a laser hit an alien.
+     *
+     */
+    public void displayLives(Graphics g ) {
+        // current size of biggest ship/cannon rectangle
+        FontMetrics fm = g.getFontMetrics();
+        String livesText = "LIVES: ";
+        g.setFont(new Font("TimesRoman", Font.BOLD, 20));
+        fm = g.getFontMetrics();
+        int x = 5;
+        int y = (fm.getAscent() + 10);
+        g.setColor(Color.WHITE);
+        g.drawString(livesText, x, y);
+
+        int lgWidth = 48;
+        int medWidth = 20;
+        int smWidth = 4;
+        int lgHeight = 12;
+        int medHeight = 6;
+        int smHeight = 4;
+        Point upperLeft = new Point(fm.stringWidth(livesText) + 5, fm.getAscent());
+        for(int i = 0; i <+ player.getLives(); i++){
+            g.setColor(Color.GREEN);
+            g.fillRect(upperLeft.x, upperLeft.y,lgWidth, lgHeight);
+            g.fillRect((upperLeft.x + lgWidth/2) - (medWidth/2), upperLeft.y - medHeight, medWidth, medHeight);
+            g.fillRect((upperLeft.x + lgWidth/2) - (smWidth/2), upperLeft.y - (smHeight + medHeight), smWidth, smHeight);
+
+            upperLeft.x += lgWidth + 10;
 
         }
+        panel.repaint();
     }
-    return hit;
-}
 
-/**
- * Checks if a laser hit an alien.
- *
- */
-public boolean checkSectionHit(Point p) {
-boolean hit = false;
-return hit;
-}
+    /**
+     * Checks if a laser hit an alien.
+     *
+     */
+    public void clearScreen( ) {
+        aliens.clear();
+        shields.clear();
+        lasers.clear();
+        alienLasers.clear();
+        explosions.clear();
+        alienShips.clear();
+    }
 
-/**
- * Checks if a laser hit an alien.
- *
- */
-public void introScreen(Graphics g ) {
-g.setColor(Color.GREEN);
-String intro = "SPACE INVADERS!";
-FontMetrics fm = g.getFontMetrics();
+    /**
+    Default implementation of the method that will draw any static
+    image needed in the window and any visual feedback needed for
+    event handling (like mouse press to mouse location "sling"
+    lines).
 
-g.setFont(new Font("TimesRoman", Font.BOLD, 70));
-fm = g.getFontMetrics();
-int x = (panel.getWidth() - fm.stringWidth(intro)) / 2;
-int y = ((panel.getHeight() - fm.getHeight()) / 2) + fm.getAscent();
-g.drawString(intro, x, y);
+    Derived classes should override this if such functionality is
+    needed.
 
-String instruction = "PRESS START TO PLAY.";
-g.setFont(new Font("TimesRoman", Font.BOLD, 20));
-fm = g.getFontMetrics();
-int x2 = (panel.getWidth() - fm.stringWidth(instruction)) / 2;
-int y2 = (y + fm.getAscent() + 20);
-g.setColor(Color.WHITE);
-g.drawString(instruction, x2, y2);
-panel.repaint();
-}
+    @param g Graphics object in which to draw.
+     */
+    protected void paint(Graphics g) {
 
-/**
- * Checks if a laser hit an alien.
- *
- */
-public void gameWonScreen(Graphics g ) {
-g.setColor(Color.GREEN);
-String intro = "YOU WON!";
-FontMetrics fm = g.getFontMetrics();
+    }
 
-g.setFont(new Font("TimesRoman", Font.BOLD, 70));
-fm = g.getFontMetrics();
-int x = (panel.getWidth() - fm.stringWidth(intro)) / 2;
-int y = ((panel.getHeight() - fm.getHeight()) / 2) + fm.getAscent();
-g.drawString(intro, x, y);
+    /**
+     *  Default implementation of the method that will add listeners
+     *  at the appropriate time during creation of the window.
+     * 
+     *  Derived classes should override this if such functionality is
+     * needed.
 
-String instruction = "PRESS START TO PLAY AGAIN.";
-g.setFont(new Font("TimesRoman", Font.BOLD, 20));
-fm = g.getFontMetrics();
-int x2 = (panel.getWidth() - fm.stringWidth(instruction)) / 2;
-int y2 = (y + fm.getAscent() + 20);
-g.setColor(Color.WHITE);
-g.drawString(instruction, x2, y2);
-panel.repaint();
-}
+     * @param p the JPanel to which any mouse or keyboard listeners
+     * should be attached
+     */
+    protected void addListeners(JPanel p, JFrame f) {
 
-/**
- * Checks if a laser hit an alien.
- *
- */
-public void gameOverScreen(Graphics g ) {
-g.setColor(Color.RED);
-String intro = "GAME OVER.";
-FontMetrics fm = g.getFontMetrics();
+    }
 
-g.setFont(new Font("TimesRoman", Font.BOLD, 70));
-fm = g.getFontMetrics();
-int x = (panel.getWidth() - fm.stringWidth(intro)) / 2;
-int y = ((panel.getHeight() - fm.getHeight()) / 2) + fm.getAscent();
-g.drawString(intro, x, y);
+    /**
+     * Default implementation of the method that will connect the
+     * given frame, which represents the whole window and the panel,
+     * which is where graphics will be drawn and mouse events
+     * delivered.  If additional components are used, they can be set
+     * up here.  The default implementation simply adds the panel to
+     * the frame.
+     * 
+     * Derived classes should override this if such functionality is
+     * needed.
+     * 
+     * @param frame the JFrame to which components ultimately need to
+     * be added
+     * @param panel the JPanel where graphics will be drawn that needs
+     * to be added somewhere in the GUI hierarchy
+     */
+    protected void buildGUI(JFrame frame, JPanel panel) {
 
-String instruction = "PRESS START TO PLAY AGAIN.";
-g.setFont(new Font("TimesRoman", Font.BOLD, 20));
-fm = g.getFontMetrics();
-int x2 = (panel.getWidth() - fm.stringWidth(instruction)) / 2;
-int y2 = (y + fm.getAscent() + 20);
-g.setColor(Color.WHITE);
-g.drawString(instruction, x2, y2);
-panel.repaint();
-}
-
-/**
- * Checks if a laser hit an alien.
- *
- */
-public void displayLives(Graphics g ) {
-// current size of biggest ship/cannon rectangle
-FontMetrics fm = g.getFontMetrics();
-String livesText = "LIVES: ";
-g.setFont(new Font("TimesRoman", Font.BOLD, 20));
-fm = g.getFontMetrics();
-int x = 5;
-int y = (fm.getAscent() + 10);
-g.setColor(Color.WHITE);
-g.drawString(livesText, x, y);
-
-int lgWidth = 48;
-int medWidth = 20;
-int smWidth = 4;
-int lgHeight = 12;
-int medHeight = 6;
-int smHeight = 4;
-Point upperLeft = new Point(fm.stringWidth(livesText) + 5, fm.getAscent());
-for(int i = 0; i <+ player.getLives(); i++){
-g.setColor(Color.GREEN);
-g.fillRect(upperLeft.x, upperLeft.y,lgWidth, lgHeight);
-g.fillRect((upperLeft.x + lgWidth/2) - (medWidth/2), upperLeft.y - medHeight, medWidth, medHeight);
-g.fillRect((upperLeft.x + lgWidth/2) - (smWidth/2), upperLeft.y - (smHeight + medHeight), smWidth, smHeight);
-
-upperLeft.x += lgWidth + 10;
-
-}
-panel.repaint();
-}
-
-/**
- * Checks if a laser hit an alien.
- *
- */
-public void clearScreen( ) {
-aliens.clear();
-shields.clear();
-lasers.clear();
-alienLasers.clear();
-explosions.clear();
-alienShips.clear();
-}
-
-/**
-Default implementation of the method that will draw any static
-image needed in the window and any visual feedback needed for
-event handling (like mouse press to mouse location "sling"
-lines).
-
-Derived classes should override this if such functionality is
-needed.
-
-@param g Graphics object in which to draw.
- */
-protected void paint(Graphics g) {
-
-}
-
-/**
- *  Default implementation of the method that will add listeners
- *  at the appropriate time during creation of the window.
- * 
- *  Derived classes should override this if such functionality is
- * needed.
-
- * @param p the JPanel to which any mouse or keyboard listeners
- * should be attached
- */
-protected void addListeners(JPanel p, JFrame f) {
-
-}
-
-/**
- * Default implementation of the method that will connect the
- * given frame, which represents the whole window and the panel,
- * which is where graphics will be drawn and mouse events
- * delivered.  If additional components are used, they can be set
- * up here.  The default implementation simply adds the panel to
- * the frame.
- * 
- * Derived classes should override this if such functionality is
- * needed.
- * 
- * @param frame the JFrame to which components ultimately need to
- * be added
- * @param panel the JPanel where graphics will be drawn that needs
- * to be added somewhere in the GUI hierarchy
- */
-protected void buildGUI(JFrame frame, JPanel panel) {
-
-frame.add(panel);
-}
+        frame.add(panel);
+    }
 
 }
