@@ -379,11 +379,9 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * @return 
      */
     public void useDevelopmentCard(){
-        //move the robber to a different hex
-
-        //if players have more than 7 resource cards must remove them
-
-        //
+        //card types
+        
+        //knight: move robber, don't discard the card
     }
 
     /**
@@ -427,7 +425,37 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         // Add to player's hand
 
     }
+    
+        /**
+     * Draw a card from the resource card bank.
+     *
+     * @param 
+     * @return 
+     */
+    public void checkRoads(){
 
+        //first player to build 5 uninterrupted roads you get longest
+        //road card worth 2 victory points.
+        
+        //player can steal card if they build longer road.
+
+    }
+
+            /**
+     * Draw a card from the resource card bank.
+     *
+     * @param 
+     * @return 
+     */
+    public void checkKnights(){
+
+        //first player to get 3 knight development cards gets
+        //largest army card.  
+        
+        //player can steal card if they build longer road.
+
+    }
+    
     //----------------------------------------------------------
     //Starts the main run method
     //----------------------------------------------------------

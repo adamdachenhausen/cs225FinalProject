@@ -34,6 +34,8 @@ public class Player
     protected int roads;
     protected int development;
     protected int victoryPoints;
+    protected boolean largestArmy;
+    protected boolean longestRoad;
     protected boolean turn = false;
     protected ArrayList<DevelopmentCards> devCards;
     protected ArrayList<ResourceCards> resourceCards;
