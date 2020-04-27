@@ -204,7 +204,7 @@ public class ThreadGraphicsController implements Runnable {
 
                         Random rand = new Random();
                         boolean attack = false;
-                        int randomShot = rand.nextInt(775);
+                        int randomShot = rand.nextInt(875);
 
                         if(randomShot == 1){
                             attack = true; 
