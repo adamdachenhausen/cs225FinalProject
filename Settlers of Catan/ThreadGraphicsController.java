@@ -141,18 +141,18 @@ public class ThreadGraphicsController implements Runnable {
                     die2.paint(g);
                 }
 
-                synchronized (lock) {
-                    while (i < hexTilesList.size()) {
-                        HexTiles b = hexTilesList.get(i);
-                        if (b.done()) {
-                            hexTilesList.remove(i);
-                        }
-                        else {
-                            b.paint(g);
-                            i++;
-                        }
-                    }
-                }
+                // synchronized (lock) {
+                    // while (i < hexTilesList.size()) {
+                        // HexTiles b = hexTilesList.get(i);
+                        // if (b.done()) {
+                            // hexTilesList.remove(i);
+                        // }
+                        // else {
+                            // b.paint(g);
+                            // i++;
+                        // }
+                    // }
+                // }
             }
         };
 

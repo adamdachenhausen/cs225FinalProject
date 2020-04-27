@@ -31,23 +31,24 @@ public class GameBoard extends AnimatedGraphicsObject
     private JPanel panel;
     protected HexTiles[][] board;
     private Stack<Resource> r;
-    
+
     //The current point to place a new hex at
     private Point cur;
-    
+
     //The top left point of this
     private Point topLeft;
     public GameBoard(JComponent container, Point topLeft){
         super(container);
         this.container = container;
-        panel = new JPanel();
-        panel.setBackground(SEA);
+        //panel = new JPanel();
+        //panel.setBackground(SEA);
 
         board=new HexTiles[BOARD_WIDTH][BOARD_WIDTH];
         r = new Stack<Resource>();
         populateR();
         this.topLeft = topLeft;
         cur = topLeft;
+
     }
 
     /** Populates the r stack with exact number of each resource
@@ -89,7 +90,7 @@ public class GameBoard extends AnimatedGraphicsObject
      *  -makes a null hex
      *  -makes a hex with appropriate params.
      */
-    private void createBoard(){
+    protected void createBoard(){
 
         for(int i=0; i<board.length;i++){
             boolean shifted = false;
@@ -117,7 +118,7 @@ public class GameBoard extends AnimatedGraphicsObject
                         cur.translate(OFFSET,0);
                         shifted=true;
                     }
-                    board[i][j] = new HexTiles(panel,cur,r.pop());
+                    board[i][j] = new HexTiles(container,cur,r.pop());
                     cur.translate(OFFSET,0);
                 }
             }
@@ -130,10 +131,19 @@ public class GameBoard extends AnimatedGraphicsObject
      */
     @Override
     public void paint(Graphics g){
-        for(int i=0; i<board.length;i++){
+        // for(int i=0; i<board.length;i++){
+
+        // for(int j=0; j<board[0].length;j++){
+        // board[i][j].paint(g);
+        // }
+
+        // }
+                for(int i=0; i<board.length;i++){
 
             for(int j=0; j<board[0].length;j++){
-                board[i][j].paint(g);
+                if(board[i][j]!= null){
+                    board[i][j].paint(g);
+                }
             }
 
         }
@@ -142,5 +152,18 @@ public class GameBoard extends AnimatedGraphicsObject
     @Override
     public void run(){
 
+    }
+
+    public void startBoard(){
+        //starts each hex run method
+        for(int i=0; i<board.length;i++){
+
+            for(int j=0; j<board[0].length;j++){
+                if(board[i][j]!= null){
+                    board[i][j].start();
+                }
+            }
+
+        }
     }
 }
