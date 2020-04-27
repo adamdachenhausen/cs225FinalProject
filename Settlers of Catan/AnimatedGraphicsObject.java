@@ -13,7 +13,7 @@ An abstract class that provides some instance variables and
 default versions of methods that are needed by threaded objects
 representing animated graphics objects.
 
-@author Jim Teresco
+@author Jim Teresco modified by Kate Nelligan, Lindsay Clark, Adam Dachenhausen
 @version Spring 2020
  */
 public abstract class AnimatedGraphicsObject extends Thread {

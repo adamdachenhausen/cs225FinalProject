@@ -128,10 +128,10 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     protected void addListeners(JPanel panel) {
 
         //Add action listeners to buttons
-        //startButton.addActionListener(this);
+        startButton.addActionListener(this);
 
-        //resetButton.addActionListener(this);
-        //instructionsButton.addActionListener(this);
+        resetButton.addActionListener(this);
+        instructionsButton.addActionListener(this);
         panel.addMouseListener(this);
         panel.addMouseMotionListener(this);
     }
@@ -226,7 +226,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     public void actionPerformed(ActionEvent e) {
 
         if(e.getSource().equals(startButton)){
-
+            setBoard();
         }
         if(e.getSource().equals(resetButton)){
 
@@ -248,9 +248,9 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      */
     public void setBoard(){
         //draw gameboard
-
+        gameboard = new GameBoard(panel,new Point(10,10));
         //place tokens
-
+        gameboard.start();
     }
 
     /**
