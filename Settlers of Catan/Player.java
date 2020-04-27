@@ -122,51 +122,49 @@ public class Player
     }
 
 
-    public boolean setTurn(boolean turnflag){
+    public void setTurn(boolean turnflag){
 
         turn = turnflag;
     }
 
-    public int getCities(int newcities){
+    public void getCities(int newcities){
 
         cities = newcities;
     }
 
-    public int getSettlements(int newsettle){
+    public void getSettlements(int newsettle){
 
          settlements = newsettle;
     }
 
-    public int getRoads(int newroads){
+    public void getRoads(int newroads){
 
          roads = newroads;
     }
     
-        public int getVictoryPoints(int vp){
+        public void getVictoryPoints(int vp){
 
          victoryPoints = vp;
     }
     
-        public int getVictoryPointCards(int vpc){
+        public void getVictoryPointCards(int vpc){
 
          victoryPointCards = vpc;
     }
     
-        public int getKnights(int newknights){
+        public void getKnights(int newknights){
             knights = newknights;
     }
     
-        public int getRoadlength(int rl){
-
+        public void getRoadlength(int rl){
          roadLength = rl;
     }
     
-            public boolean getLargestArmy(boolean la){
-
+            public void getLargestArmy(boolean la){
          largestArmy = la;
     }
     
-        public boolean getLongestRoad(boolean lr){
+        public void getLongestRoad(boolean lr){
 
          longestRoad = lr;
     }
