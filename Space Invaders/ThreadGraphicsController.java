@@ -245,6 +245,14 @@ public class ThreadGraphicsController implements Runnable {
 
                             i++;
                         }
+                        if(aliens.size() < 1 && alienShips.size() < 1){
+                            ArcadeMachine.gameWon = true;
+                            ArcadeMachine.gameEnded = false;
+                            //System.out.println("finishedgame");
+                            //clearScreen();
+                            gameWonScreen(g);
+                            //panel.repaint();
+                        }
                     }
                 }
 
@@ -312,8 +320,13 @@ public class ThreadGraphicsController implements Runnable {
                         System.out.println("Life removed");
                         //update lives method that paints lives.
                         if(player.getLives() < 1){
-                            // ArcadeMachine.gameEnded = true;
-                            // ArcadeMachine.gameWon = false;
+                            ArcadeMachine.gameEnded = true;
+                            //ArcadeMachine.gameStart = false;
+                            ArcadeMachine.gameWon = false;
+
+                            System.out.println("won: " + ArcadeMachine.gameWon);
+                            System.out.println("start: " + ArcadeMachine.gameStart);
+                            System.out.println("ended: " + ArcadeMachine.gameEnded);
 
                         }
                     }
@@ -336,18 +349,28 @@ public class ThreadGraphicsController implements Runnable {
                         }
                     }
                 }
-                if(lives == 0){
-                    ArcadeMachine.gameEnded = true;
-                    //ArcadeMachine.gameStart = false;
-                    ArcadeMachine.gameWon = false;
+                // if(lives == 0){
+                // ArcadeMachine.gameEnded = true;
+                // //ArcadeMachine.gameStart = false;
+                // ArcadeMachine.gameWon = false;
 
-                    System.out.println("won: " + ArcadeMachine.gameWon);
-                    System.out.println("start: " + ArcadeMachine.gameStart);
-                    System.out.println("ended: " + ArcadeMachine.gameEnded);
-                    //gameOverScreen(g);
-                    //clearScreen();
-                    //panel.repaint();
-                }else if(ArcadeMachine.gameStart  && aliens.size() == 0){
+                // System.out.println("won: " + ArcadeMachine.gameWon);
+                // System.out.println("start: " + ArcadeMachine.gameStart);
+                // System.out.println("ended: " + ArcadeMachine.gameEnded);
+                // //gameOverScreen(g);
+                // //clearScreen();
+                // //panel.repaint();
+                // }else if(ArcadeMachine.gameStart  && aliens.size() == 0){
+                // ArcadeMachine.gameWon = true;
+                // ArcadeMachine.gameEnded = false;
+                // System.out.println("finishedgame");
+                // //clearScreen();
+                // gameWonScreen(g);
+                // //panel.repaint();
+                // }else{
+                // }
+
+                if(ArcadeMachine.gameStart  && aliens.size() == 0){
                     ArcadeMachine.gameWon = true;
                     ArcadeMachine.gameEnded = false;
                     System.out.println("finishedgame");
