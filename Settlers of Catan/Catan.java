@@ -30,6 +30,15 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
     // button that displays instructions for the game;
     protected JButton instructionsButton;
+    
+        // button that starts the game
+    protected JButton drawRescourceButton;
+
+    // button that resets the game;
+    protected JButton drawDevelopmentButton;
+
+    // button that displays instructions for the game;
+    protected JButton tradeButton;
 
     protected static boolean gameStart = false;
 
