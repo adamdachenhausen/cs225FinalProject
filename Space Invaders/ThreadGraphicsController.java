@@ -127,6 +127,9 @@ public class ThreadGraphicsController implements Runnable {
                 // paintComponent is called
                 thisTGC.paint(g);
 
+                //displays appropriate title screen:
+                //intro, gameover, or game won.
+                //otherwise, shows lives in upper left because game started.
                 if(!ArcadeMachine.gameStart && !ArcadeMachine.gameEnded && !ArcadeMachine.gameWon){
                     clearScreen();
                     introScreen(g);
@@ -141,12 +144,11 @@ public class ThreadGraphicsController implements Runnable {
 
                     displayLives(g);   
                 }
-                //g.fillRect(0, 0, 850, 675);
-                // redraw each animated graphics object at its
-                // current position, remove the ones that are done
-                // along the way
-                int i = 0;
 
+                int i = 0;
+                
+                //if player has no lives, ends game, shows end game screen
+                //otherwise paints the player object.
                 if(player != null && ArcadeMachine.gameStart){
                     if(player.getLives() < 1){
 
@@ -160,6 +162,7 @@ public class ThreadGraphicsController implements Runnable {
                     }
                 }
 
+                //creates shields, removes if done
                 if(shields != null){
                     while(i < shields.size()){
                         Shields s = shields.get(i);
@@ -173,9 +176,8 @@ public class ThreadGraphicsController implements Runnable {
                     }
                 }
                 i = 0;
-                // since we will be modifying the list, we will
-                // lock access in case any other code tries to
-                // access the list
+                
+                // creates aliens and removes if they are done.
                 synchronized (lock) {
                     while (i < aliens.size()) {
                         Alien a = aliens.get(i);
@@ -191,6 +193,7 @@ public class ThreadGraphicsController implements Runnable {
                 }
                 i = 0;
 
+                //creates alien laser attacks.
                 synchronized (lock) {
                     while (i < aliens.size()) {
                         Alien a = aliens.get(i);
@@ -207,6 +210,12 @@ public class ThreadGraphicsController implements Runnable {
                 }
 
                 i = 0;
+                
+                //draws player lasers if player if firing
+                //checks if an alien was hit, if so, creates explosion object
+                //checks if red ufo was hit, if so, creates explosion object
+                //removes lasers from arraylist if done
+                //checks if last alien/ufo hit, if so shows game won screen.
                 synchronized (lock) {
                     while (i < lasers.size()) {
                         Laser l = lasers.get(i);
@@ -256,32 +265,28 @@ public class ThreadGraphicsController implements Runnable {
                     }
                 }
 
-                i = 0;
-                if(alienLasers != null && alienLasers.size() > 0){                
-                    synchronized (lock) {
-                        while (i < alienLasers.size()) {
-                            Laser l = alienLasers.get(i);
-                            // if(checkAlienHit(l.getPosition())){
-                            // Explosion explode = new Explosion(panel,l.getPosition(), "ALIEN");
-                            // explosions.add(explode);
+                // i = 0;
+                // if(alienLasers != null && alienLasers.size() > 0){                
+                    // synchronized (lock) {
+                        // while (i < alienLasers.size()) {
+                            // Laser l = alienLasers.get(i);
 
-                            // lasers.remove(i);
-                            // explode.start();
+
+                            // if (l.done()) {
+                                // alienLasers.remove(i);
                             // }
+                            // else {
+                                // l.paint(g);
 
-                            if (l.done()) {
-                                alienLasers.remove(i);
-                            }
-                            else {
-                                l.paint(g);
-
-                                i++;
-                            }
-                        }
-                    }
-                }
+                                // i++;
+                            // }
+                        // }
+                    // }
+                // }
 
                 i = 0;
+                
+                //draws explosions if they exist.
                 synchronized (lock) {
                     while (i < explosions.size()) {
                         Explosion e = explosions.get(i);
@@ -296,6 +301,8 @@ public class ThreadGraphicsController implements Runnable {
                 }
 
                 i = 0;
+                
+                //redraws alien laser attacks if they exist.
                 synchronized (lock) {
                     while (i < alienLasers.size()) {
                         Laser l = alienLasers.get(i);
@@ -311,23 +318,22 @@ public class ThreadGraphicsController implements Runnable {
                 }
 
                 i = 0;
+                
+                // creates an alien laser randomly then checks if player hit
+                // if player hit, removes 1 life.
+                // if no lives are left, displays game over screen.
                 while (i < alienLasers.size()) {
                     Laser l = alienLasers.get(i);
                     boolean hit = checkPlayerHit(l.getPosition(), i);
                     if(hit){
-                        //alienLasers.remove(i);
+                        alienLasers.remove(i);
                         player.setLives(player.getLives() - 1);
-                        System.out.println("Life removed");
+;
                         //update lives method that paints lives.
                         if(player.getLives() < 1){
                             ArcadeMachine.gameEnded = true;
-                            //ArcadeMachine.gameStart = false;
+
                             ArcadeMachine.gameWon = false;
-
-                            System.out.println("won: " + ArcadeMachine.gameWon);
-                            System.out.println("start: " + ArcadeMachine.gameStart);
-                            System.out.println("ended: " + ArcadeMachine.gameEnded);
-
                         }
                     }
                     if(hit){
@@ -337,6 +343,8 @@ public class ThreadGraphicsController implements Runnable {
                 }
 
                 i = 0;
+                
+                //repaints red ufo if it exists
                 if(alienShips != null){
                     while (i < alienShips.size()) {
                         AlienShip as = alienShips.get(i);
@@ -349,34 +357,15 @@ public class ThreadGraphicsController implements Runnable {
                         }
                     }
                 }
-                // if(lives == 0){
-                // ArcadeMachine.gameEnded = true;
-                // //ArcadeMachine.gameStart = false;
-                // ArcadeMachine.gameWon = false;
 
-                // System.out.println("won: " + ArcadeMachine.gameWon);
-                // System.out.println("start: " + ArcadeMachine.gameStart);
-                // System.out.println("ended: " + ArcadeMachine.gameEnded);
-                // //gameOverScreen(g);
-                // //clearScreen();
-                // //panel.repaint();
-                // }else if(ArcadeMachine.gameStart  && aliens.size() == 0){
-                // ArcadeMachine.gameWon = true;
-                // ArcadeMachine.gameEnded = false;
-                // System.out.println("finishedgame");
-                // //clearScreen();
-                // gameWonScreen(g);
-                // //panel.repaint();
-                // }else{
-                // }
-
-                if(ArcadeMachine.gameStart  && aliens.size() == 0){
+                //updates variables to show game won screen
+                if(ArcadeMachine.gameStart  && aliens.size() == 0 && player.getLives() > 0){
                     ArcadeMachine.gameWon = true;
                     ArcadeMachine.gameEnded = false;
-                    System.out.println("finishedgame");
-                    //clearScreen();
+                    
+                    clearScreen();
                     gameWonScreen(g);
-                    //panel.repaint();
+                    panel.repaint();
                 }else{
                 }
             }
