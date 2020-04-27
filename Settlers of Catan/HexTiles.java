@@ -62,19 +62,18 @@ public class HexTiles extends AnimatedGraphicsObject{
      *      \/
      */
     private void completeHex(){
-        //Add the northern most and southernmost points
-        p.addPoint(center.x+SIDE_LENGTH,center.y);
-        p.addPoint(center.x-SIDE_LENGTH,center.y);
+        //Add points in clockwise rotation starting at northernmost point
+        p.addPoint(center.x,center.y+SIDE_LENGTH);
 
-        //Add right side points
         p.addPoint(center.x+X_OFFSET,center.y+8);
+
         p.addPoint(center.x+X_OFFSET,center.y-9);
+        p.addPoint(center.x,center.y-SIDE_LENGTH);
 
-        //Add left side points
-        p.addPoint(center.x-X_OFFSET,center.y+9);
         p.addPoint(center.x-X_OFFSET,center.y-8);
-    }
+        p.addPoint(center.x-X_OFFSET,center.y+9);
 
+    }
     @Override
     public void paint(Graphics g){
         //For returning g back to the original color
