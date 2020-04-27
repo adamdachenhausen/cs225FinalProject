@@ -28,7 +28,14 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     //adds variables for gameplay
     protected int roll;
     
+    //phase of gameplay
     protected String gamePhase;
+    
+    //player whose turn it is
+    protected int turn;
+    
+    //Players
+    protected Player player1, player2, player3, player4;
     
     // button that starts the game
     protected JButton startButton;
@@ -219,6 +226,12 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         gameStart = true;
         
         setBoard();
+        
+        //create players
+        player1 = new Player();
+        player2 = new Player();
+        player3 = new Player();
+        player4 = new Player();
         
     }
 
