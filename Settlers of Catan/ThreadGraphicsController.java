@@ -31,7 +31,7 @@ this and AnimatedGraphicsObject.
 
 public class ThreadGraphicsController implements Runnable {
     //Width of Frame
-    public static final int FRAME_WIDTH = 1100;
+    public static final int FRAME_WIDTH = 1200;
     public static final int FRAME_HEIGHT = 850;
 
     //Width of Bottom button panel
@@ -47,7 +47,7 @@ public class ThreadGraphicsController implements Runnable {
     protected java.util.List<Tokens> tokens;
 
     protected GameBoard gameboard;
-    
+
     protected StatusPane statusPane;
 
     protected Dice die1;
@@ -138,22 +138,26 @@ public class ThreadGraphicsController implements Runnable {
                     gameboard.paint(g);
                 }
 
+                if(statusPane != null){
+                    statusPane.paint(g);
+                }
+
                 if(die1 != null && die2 != null){
                     die1.paint(g);
                     die2.paint(g);
                 }
 
                 // synchronized (lock) {
-                    // while (i < hexTilesList.size()) {
-                        // HexTiles b = hexTilesList.get(i);
-                        // if (b.done()) {
-                            // hexTilesList.remove(i);
-                        // }
-                        // else {
-                            // b.paint(g);
-                            // i++;
-                        // }
-                    // }
+                // while (i < hexTilesList.size()) {
+                // HexTiles b = hexTilesList.get(i);
+                // if (b.done()) {
+                // hexTilesList.remove(i);
+                // }
+                // else {
+                // b.paint(g);
+                // i++;
+                // }
+                // }
                 // }
             }
         };

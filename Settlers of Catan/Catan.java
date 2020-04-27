@@ -218,6 +218,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         gamePhase = "Game starting";
         gameStart = true;
         
+        setBoard();
         
     }
 
@@ -283,6 +284,9 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         gameboard.createBoard();
         gameboard.start();
         gameboard.startBoard();
+        
+        //draw status pane
+        statusPane = new StatusPane(panel, gamePhase);
 
 
 

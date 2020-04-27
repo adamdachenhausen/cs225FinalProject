@@ -17,24 +17,32 @@ import java.util.Random;
 public class StatusPane extends AnimatedGraphicsObject implements ImageObserver{
     //constants
     public static final Color BEIGE = new Color(249, 228,183);
+    public static final Color LT_BROWN = new Color(207, 185,152);
     public static final Color BROWN = new Color(101, 67,33);
-    public static final int PANE_WIDTH = 200;
+    public static final int PANE_WIDTH = 300;
     public static final int PANE_HEIGHT = 850;
     // instance variables - replace the example below with your own
-    protected int value;
+    
+    
+    
     private static Image dice1;
     private static Image dice2;
     private static Image dice3;
     private static Image dice4;
     private static Image dice5;
     private static Image dice6;
+    
+    private String gamePhase;
+    private int turn;
 
     /**
      * Constructor for objects of class Dice
      */
-    public StatusPane(JComponent container){
+    public StatusPane(JComponent container, String phase, int turn){
         super(container);
-        upperLeft = new Point(container.getWidth() - 200, 0);
+        upperLeft = new Point(container.getWidth() - 300, 0);
+        this.turn = turn;
+        
     }
 
     @Override
@@ -42,29 +50,41 @@ public class StatusPane extends AnimatedGraphicsObject implements ImageObserver{
 
         g.setColor(BEIGE);
         g.fillRect(upperLeft.x,upperLeft.y, PANE_WIDTH, PANE_HEIGHT);
-        if(!done){
-            //draw image of explosion
-            if(value == 1){
-                g.drawImage(dice1, upperLeft.x , upperLeft.y, this);
-            }else if(value == 2){
-                g.drawImage(dice2, upperLeft.x , upperLeft.y, this);
-            }else if(value == 3){
-                g.drawImage(dice3, upperLeft.x , upperLeft.y, this);
-            }else if(value == 4){
-                g.drawImage(dice4, upperLeft.x , upperLeft.y, this);
-            }else if(value == 5){
-                g.drawImage(dice5, upperLeft.x , upperLeft.y, this);
-            }else{
-                //If alien
-                g.drawImage(dice6, upperLeft.x , upperLeft.y, this);
-            }
-        }
+        
+        g.setColor(LT_BROWN);
+        g.fillRect(upperLeft.x,upperLeft.y, PANE_WIDTH, 25);        
+        
+        // if(!done){
+            // //draw image of explosion
+            // if(value == 1){
+                // g.drawImage(dice1, upperLeft.x , upperLeft.y, this);
+            // }else if(value == 2){
+                // g.drawImage(dice2, upperLeft.x , upperLeft.y, this);
+            // }else if(value == 3){
+                // g.drawImage(dice3, upperLeft.x , upperLeft.y, this);
+            // }else if(value == 4){
+                // g.drawImage(dice4, upperLeft.x , upperLeft.y, this);
+            // }else if(value == 5){
+                // g.drawImage(dice5, upperLeft.x , upperLeft.y, this);
+            // }else{
+                // //If alien
+                // g.drawImage(dice6, upperLeft.x , upperLeft.y, this);
+            // }
+        // }
     }
 
-    public int rollDice(){
-        Random r = new Random();
-        value = r.nextInt(5) + 1;
-        return value;
+        public void updateText(){
+        //Player text
+            String player = "PLAYER " + ;
+        g.setFont(new Font("TimesRoman", Font.BOLD, 20));
+        fm = g.getFontMetrics();
+        int x2 = (panel.getWidth() - fm.stringWidth(instruction)) / 2;
+        int y2 = (y + fm.getAscent() + 20);
+        g.setColor(Color.WHITE);
+        g.drawString(instruction, x2, y2);
+        panel.repaint();
+        
+        //
     }
 
     @Override
