@@ -392,6 +392,11 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         for(Shields i: shields){
             i.start();  
         }
+
+        for(Shields i: shields){
+            i.startSections();  
+        }
+
         // for(int i = 0; i < shields.size(); i++){
         // for(int j=0; j<shields.get(i).sections.length;j++){
         // for(int k=0; k<shields.get(i).sections[0].length;k++){   
