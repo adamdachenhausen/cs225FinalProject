@@ -258,10 +258,13 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
         //create dice
         die1 = new Dice(panel, new Point(600,300));
-        die2 = new Dice(panel, new Point(600,360));
+        die2 = new Dice(panel, new Point(600,375));
 
         //place tokens
-
+        
+        
+        //set board with 2 settlements per player
+        createSettlements();
     }
 
     /**
@@ -282,6 +285,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         //place settlement between two hexes
 
         //place road between two hexes
+        
+        panel.repaint();
     }
 
     /**
