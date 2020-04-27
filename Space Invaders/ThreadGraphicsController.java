@@ -268,25 +268,6 @@ public class ThreadGraphicsController implements Runnable {
                     }
                 }
 
-                // i = 0;
-                // if(alienLasers != null && alienLasers.size() > 0){                
-                    // synchronized (lock) {
-                        // while (i < alienLasers.size()) {
-                            // Laser l = alienLasers.get(i);
-
-
-                            // if (l.done()) {
-                                // alienLasers.remove(i);
-                            // }
-                            // else {
-                                // l.paint(g);
-
-                                // i++;
-                            // }
-                        // }
-                    // }
-                // }
-
                 i = 0;
                 
                 //draws explosions if they exist.

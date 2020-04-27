@@ -100,7 +100,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
     public static final int V_SPACING = 70;
 
     protected long lastShotTime;
-    
+
     //The delay in between shots in ms, so the user can't spam
     public static int SHOT_DELAY = 1000;
 
@@ -244,21 +244,15 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         resetGame();
         if(!gameStart){
 
-            //introTextLabel.setVisible(false);
-
-            //pressStartLabel.setVisible(false);
-
             gameStart = true;
             gameWon = false;
             gameEnded = false;
             reset = false;
             createPlayer();
 
-            //Uncomment when ready
             createShields();
 
             createAliens();
-            //edit more instance variables here, this is a stub
 
             createTimer();
         }
@@ -314,8 +308,13 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
                 if(reset){
                     timer.cancel();
                     timer.purge();
-                }
-                else{
+                }else if(gameEnded){
+                    timer.cancel();
+                    timer.purge();
+                }else if(gameWon){
+                    timer.cancel();
+                    timer.purge();
+                }else{
                     alienShip = new AlienShip(panel, start);
                     //ships.add(alienShip);
                     alienShip.start();
@@ -376,7 +375,6 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         panel.repaint();
 
     }
-
 
     public void createShields() {
         //Create shield object
