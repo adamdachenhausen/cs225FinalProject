@@ -253,16 +253,20 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
         //Forest Hex (4x), Pasture Hex (4x), Fields Hex (4x), Hills Hex (3x)
         //Mountain Hex(3x), Desert Hex(1x)
-        //gameboard = new GameBoard(panel,new Point(10,10));
-        //gameboard.start();
+        panel.setBackground(SEA);
+        gameboard = new GameBoard(panel,new Point(10,10));
+        gameboard.createBoard();
+        gameboard.start();
+        gameboard.startBoard();
+
+
 
         //create dice
         die1 = new Dice(panel, new Point(550,300));
         die2 = new Dice(panel, new Point(550,375));
 
         //place tokens
-        
-        
+
         //set board with 2 settlements per player
         createSettlements();
     }
@@ -285,7 +289,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         //place settlement between two hexes
 
         //place road between two hexes
-        
+
         panel.repaint();
     }
 
@@ -480,9 +484,9 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         Dice.loadPic();
         //launch main thread that will manage the GUI
         javax.swing.SwingUtilities.invokeLater(new Catan());
-        
+
         while(gameStart){
-            
+
         }
     }
 }

@@ -40,7 +40,7 @@ public class HexTiles extends AnimatedGraphicsObject{
     protected String type;
 
     protected Resource r;
-    
+
     protected Polygon p;
     /**
      * Constructor for objects of class Tiles
@@ -79,47 +79,49 @@ public class HexTiles extends AnimatedGraphicsObject{
     public void paint(Graphics g){
         //For returning g back to the original color
         Color cur = g.getColor();
-        
+
         //Determine what color to make the tile based on its resource
         switch(r){
             case BRICKS:
             g.setColor(new Color(203, 65, 84));
             break;
-            
+
             case WOOD:
             g.setColor(new Color(34, 139, 34));
             break;
-            
+
             case ORE:
             g.setColor(new Color(149, 148, 139));
             break;
-            
+
             case WHEAT:
             g.setColor(new Color(245, 222, 179));
             break;
-            
+
             case WOOL:
             g.setColor(new Color(86, 125, 70));
             break;
-            
+
             case SAND:
             g.setColor(new Color(194, 178, 128));
             break;
         }
-        
+
         //Draw the filled polygon
         g.fillPolygon(p);
-        
+
         //Draw the polygon outline
         g.drawPolygon(p);
-        
+
         //Set g back to the original color
         g.setColor(cur);
     }
 
     @Override
     public void run(){
-        
-    }
+        while(!done){
 
+            container.repaint();
+        }
+    }
 }
