@@ -26,7 +26,7 @@ public class Player
 {
     // instance variables - replace the example below with your own
     protected int playerNumber;
-    protected String Color;
+    protected Colors c;
 
     // Points for game--development is development cards
     protected int cities;

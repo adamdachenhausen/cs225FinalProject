@@ -248,9 +248,14 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      */
     public void setBoard(){
         //draw gameboard
+        
+        //Forest Hex (4x), Pasture Hex (4x), Fields Hex (4x), Hills Hex (3x)
+        //Mountain Hex(3x), Desert Hex(1x)
         gameboard = new GameBoard(panel,new Point(10,10));
-        //place tokens
         gameboard.start();
+        
+        //place tokens
+        
     }
 
     /**

@@ -23,7 +23,7 @@ import javax.sound.sampled.*;
  * @version (a version number or a date)
  */
 public class ResourceCards extends AnimatedGraphicsObject{
-
+    //Cards: Lumber(19x), Wool(19x), Grain(19x), Brick(19x), Ore(19x);
     /**
      * Constructor for objects of class ResourceCards
      */
