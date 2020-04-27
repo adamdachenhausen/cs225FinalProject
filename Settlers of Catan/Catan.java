@@ -20,8 +20,16 @@ import java.io.*;
  * @version Spring 2020
  */
 public class Catan extends ThreadGraphicsController implements MouseListener, MouseMotionListener, ActionListener{
+    public static final int PLAYER_1 = 1;
+    public static final int PLAYER_2 = 2;
+    public static final int PLAYER_3 = 3;
+    public static final int PLAYER_4 = 4;
+    
     //adds variables for gameplay
     protected int roll;
+    
+    protected String gamePhase;
+    
     // button that starts the game
     protected JButton startButton;
 
@@ -207,7 +215,10 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      *
      */
     public void startGame() {
-
+        gamePhase = "Game starting";
+        gameStart = true;
+        
+        
     }
 
     /**
@@ -237,13 +248,17 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     public void actionPerformed(ActionEvent e) {
 
         if(e.getSource().equals(startButton)){
-            setBoard();
+            if(!gameStart){
+               startGame(); 
+            }
         }
         if(e.getSource().equals(resetButton)){
-
+                        if(gameStart){
+               resetGame(); 
+            }
         }
         if(e.getSource().equals(instructionsButton)){
-
+            showInstructions();
         }
     }
     //----------------------------------------------------------
@@ -258,6 +273,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * @return 
      */
     public void setBoard(){
+        gamePhase = "Setting Board";
         //draw gameboard
 
         //Forest Hex (4x), Pasture Hex (4x), Fields Hex (4x), Hills Hex (3x)

@@ -47,6 +47,8 @@ public class ThreadGraphicsController implements Runnable {
     protected java.util.List<Tokens> tokens;
 
     protected GameBoard gameboard;
+    
+    protected StatusPane statusPane;
 
     protected Dice die1;
     protected Dice die2;

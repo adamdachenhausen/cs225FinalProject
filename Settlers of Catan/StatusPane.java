@@ -18,6 +18,8 @@ public class StatusPane extends AnimatedGraphicsObject implements ImageObserver{
     //constants
     public static final Color BEIGE = new Color(249, 228,183);
     public static final Color BROWN = new Color(101, 67,33);
+    public static final int PANE_WIDTH = 200;
+    public static final int PANE_HEIGHT = 850;
     // instance variables - replace the example below with your own
     protected int value;
     private static Image dice1;
@@ -38,8 +40,8 @@ public class StatusPane extends AnimatedGraphicsObject implements ImageObserver{
     @Override
     public void paint(Graphics g){
 
-        g.setColor(beige);
-        g.fillRect(upperLeft.x,upperLeft.y, 200, 850);
+        g.setColor(BEIGE);
+        g.fillRect(upperLeft.x,upperLeft.y, PANE_WIDTH, PANE_HEIGHT);
         if(!done){
             //draw image of explosion
             if(value == 1){
