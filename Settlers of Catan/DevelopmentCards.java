@@ -23,20 +23,28 @@ import javax.sound.sampled.*;
  * @version Spring 2020
  */
 public class DevelopmentCards extends AnimatedGraphicsObject{
-    // instance variables - replace the example below with your own
-    private int x;
+
+    //Knight card (x14)- lets the player move the robber    
+    //Road Building (x2)- player can place 2 roads as if they just built them
+    //Year of Plenty (x2)- the player can draw 2 resource cards of their choice from the bank
+    //Monopoly (x2)- player can claim all resource cards of a specific declared type
+    //Victory Point card (x5)- 1 additional Victory Point is added to the owners total and doesn't need to be played to win.
 
     /**
      * Constructor for objects of class DevelopmentCards
      */
     public DevelopmentCards(JComponent container)
     {
-          super(container);
+        super(container);
     }
 
     @Override
     public void paint(Graphics g){
+        //draw colored rectangle
         
+        //paint image of card type icon
+        
+        //paint text that describes card type
     }
 
     @Override

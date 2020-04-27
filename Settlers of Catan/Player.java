@@ -34,6 +34,9 @@ public class Player
     protected int roads;
     protected int development;
     protected int victoryPoints;
+    protected int victoryPointCards;
+    protected int knights;
+    protected int roadLength;
     protected boolean largestArmy;
     protected boolean longestRoad;
     protected boolean turn = false;
