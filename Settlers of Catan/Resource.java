@@ -1,11 +1,11 @@
 
 /**
- * Enumeration class Resources - write a description of the enum class here
+ *  Every resource
  *
- * @author (your name here)
- * @version (version number or date here)
+ * @author Kate Nelligan, Lindsay Clark, Adam Dachenhausen
+ * @version Spring 2020
  */
 public enum Resource
 {
-    BRICKS,WOOD,ORE,WHEAT,WOOL, SAND
+    BRICKS,WOOD,ORE,WHEAT,WOOL
 }
