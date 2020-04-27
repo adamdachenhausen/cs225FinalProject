@@ -377,9 +377,6 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
 
     }
 
-    public void createAlienLasers(){
-
-    }
 
     public void createShields() {
         //Create shield object

@@ -137,9 +137,12 @@ public class ThreadGraphicsController implements Runnable {
                 }else if(!ArcadeMachine.gameStart && ArcadeMachine.gameEnded && !ArcadeMachine.gameWon){
                     clearScreen();
                     gameOverScreen(g);
+                    //ArcadeMachine.beatLevel();
                 }else if(!ArcadeMachine.gameStart && ArcadeMachine.gameWon && !ArcadeMachine.gameEnded){
                     clearScreen();
                     gameWonScreen(g);
+                    
+                    //ArcadeMachine.beatLevel();
                 }else{
 
                     displayLives(g);   
@@ -155,6 +158,7 @@ public class ThreadGraphicsController implements Runnable {
                         gameOverScreen(g);
 
                         clearScreen();
+                        //ArcadeMachine.beatLevel();
                         panel.repaint();
 
                     }else{
@@ -257,8 +261,7 @@ public class ThreadGraphicsController implements Runnable {
                         if(aliens.size() < 1 && alienShips.size() < 1){
                             ArcadeMachine.gameWon = true;
                             ArcadeMachine.gameEnded = false;
-                            //System.out.println("finishedgame");
-                            //clearScreen();
+                            //ArcadeMachine.beatLevel();
                             gameWonScreen(g);
                             //panel.repaint();
                         }
@@ -334,6 +337,7 @@ public class ThreadGraphicsController implements Runnable {
                             ArcadeMachine.gameEnded = true;
 
                             ArcadeMachine.gameWon = false;
+                            //ArcadeMachine.beatLevel();
                         }
                     }
                     if(hit){
@@ -365,7 +369,9 @@ public class ThreadGraphicsController implements Runnable {
                     
                     clearScreen();
                     gameWonScreen(g);
+                    //ArcadeMachine.beatLevel();
                     panel.repaint();
+                    
                 }else{
                 }
             }
@@ -439,7 +445,7 @@ public class ThreadGraphicsController implements Runnable {
                     aliens.remove(i);
                     if(aliens.isEmpty()){
                         if(alienShips.size()==0){
-                            ArcadeMachine.beatLevel();
+                            //ArcadeMachine.beatLevel();
                             panel.repaint();
                         }
                     }
