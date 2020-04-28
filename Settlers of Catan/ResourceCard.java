@@ -1,21 +1,13 @@
-import javax.swing.Icon;
-import java.util.Timer;
-import java.util.TimerTask;
-import javax.swing.ImageIcon;
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.event.*;
+import java.awt.image.*;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.event.*;
-import javax.swing.border.AbstractBorder;
-import javax.swing.border.EmptyBorder;
-import javax.swing.BorderFactory;
-import java.awt.BorderLayout;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
 import java.util.Random;
-import java.io.*;
-import javax.sound.sampled.*;
+
 /**
  * Write a description of class ResourceCards here.
  *
@@ -26,11 +18,11 @@ public class ResourceCard extends AnimatedGraphicsObject{
     //Cards: Lumber(19x), Wool(19x), Grain(19x), Brick(19x), Ore(19x);
     // Constants for card numbers in deck
 
-    public static final int KNIGHT = 14;
-    public static final int ROAD_BUILDING = 2;
-    public static final int YEAR_PLENTY = 2;
-    public static final int MONOPOLY = 2;
-    public static final int VICTORY_PT_CARD = 5;
+    public static final int LUMBER = 19;
+    public static final int WOOL = 19;
+    public static final int GRAIN = 19;
+    public static final int BRICK = 19;
+    public static final int ORE = 19;
 
     private static Image knight;    
     private static Image monopoly;
@@ -51,8 +43,7 @@ public class ResourceCard extends AnimatedGraphicsObject{
     /**
      * Constructor for objects of class ResourceCards
      */
-    public ResourceCard(JComponent container)
-    {
+    public ResourceCard(JComponent container){
         super(container);
     }
 
@@ -89,30 +80,30 @@ public class ResourceCard extends AnimatedGraphicsObject{
      *  Then shuffles the stack, so when items are popped, they are random
      */
     public static Stack populateR(){
-        Stack<Development> d = new Stack<Development>();
+        Stack<Resource> r = new Stack<Resource>();
 
         //Add everything to r
-        for(int i=0;i<KNIGHT;i++){
-            d.add(Development.KNIGHT);
+        for(int i=0;i<LUMBER;i++){
+            r.add(Resource.BRICKS);
         }
 
-        for(int i=0;i<ROAD_BUILDING;i++){
-            d.add(Development.ROADS);
+        for(int i=0;i<WOOL;i++){
+            r.add(Resource.WOOD);
         }
 
-        for(int i=0;i<YEAR_PLENTY;i++){
-            d.add(Development.PLENTY);
+        for(int i=0;i<GRAIN;i++){
+            r.add(Resource.WHEAT);
         }
 
-        for(int i=0;i<MONOPOLY;i++){
-            d.add(Development.MONOPOLY);
+        for(int i=0;i<BRICK;i++){
+            r.add(Resource.WOOL);
         }
 
-        for(int i=0;i<VICTORY_PT_CARD;i++){
-            d.add(Development.VICTORY);
+        for(int i=0;i<ORE;i++){
+            r.add(Resource.WOOL);
         }
 
-        return d;
+        return r;
     }
 
     public boolean imageUpdate(Image img, int infoflags, int x, int y,
