@@ -610,6 +610,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     //----------------------------------------------------------
     public static void main(String args[]) {
         Dice.loadPic();
+        ResourceCard.loadPic();
         //launch main thread that will manage the GUI
         javax.swing.SwingUtilities.invokeLater(new Catan());
 

@@ -20,6 +20,8 @@ public class ResourceDeck extends AnimatedGraphicsObject{
     public static final int GRAIN = 19;
     public static final int BRICK = 19;
     public static final int ORE = 19;
+    
+    private Point cardStartPoint = new Point(500,500);
     /**
      * Constructor for objects of class ResourceDeck
      */
@@ -31,30 +33,30 @@ public class ResourceDeck extends AnimatedGraphicsObject{
     /** Populates the r stack with exact number of each development card
      *  Then shuffles the stack, so when items are popped, they are random
      */
-    public static Stack populateR(){
+    public void populateDeck(){
 
         //Add everything to r
         for(int i=0;i<LUMBER;i++){
-            resourceDeck.add(Resource.BRICKS);
+            resourceDeck.add(new ResourceCard(container, Resource.WOOD, cardStartPoint));
         }
 
         for(int i=0;i<WOOL;i++){
-            resourceDeck.add(Resource.WOOL);
+            resourceDeck.add(new ResourceCard(container, Resource.WOOL, cardStartPoint));
         }
 
         for(int i=0;i<GRAIN;i++){
-            resourceDeck.add(Resource.WHEAT);
+            resourceDeck.add(new ResourceCard(container, Resource.WHEAT, cardStartPoint));
         }
 
         for(int i=0;i<BRICK;i++){
-            resourceDeck.add(Resource.BRICKS);
+            resourceDeck.add(new ResourceCard(container, Resource.BRICKS, cardStartPoint));
         }
 
         for(int i=0;i<ORE;i++){
-            resourceDeck.add(Resource.ORE);
+            resourceDeck.add(new ResourceCard(container, Resource.ORE, cardStartPoint));
         }
-        Collections.shuffle(r);
-        return r;
+        Collections.shuffle(resourceDeck);
+        
     }
 
     @Override

@@ -17,12 +17,8 @@ import java.util.Random;
 public class ResourceCard extends AnimatedGraphicsObject implements ImageObserver{
     //Cards: Lumber(19x), Wool(19x), Grain(19x), Brick(19x), Ore(19x);
     // Constants for card numbers in deck
-
-    public static final int LUMBER = 19;
-    public static final int WOOL = 19;
-    public static final int GRAIN = 19;
-    public static final int BRICK = 19;
-    public static final int ORE = 19;
+    public static final int CARD_WIDTH = 75;
+    public static final int CARD_HEIGHT = 125;
 
     private static Image brick;
     private static Image grain;
@@ -34,9 +30,10 @@ public class ResourceCard extends AnimatedGraphicsObject implements ImageObserve
     /**
      * Constructor for objects of class ResourceCards
      */
-    public ResourceCard(JComponent container, Resource r){
+    public ResourceCard(JComponent container, Resource r, Point upperLeft){
         super(container);
         cardType = r;
+        this.upperLeft = upperLeft;
     }
 
     public void showCard(){
@@ -46,61 +43,96 @@ public class ResourceCard extends AnimatedGraphicsObject implements ImageObserve
     public Resource getCardType(){
         return cardType;
     }
-    
+
     public void getColor(Graphics g){
-                    //Determine what color to make the tile based on its resource
-            switch(cardType){
-                case BRICKS:
-                g.setColor(new Color(203, 65, 84));
-                break;
+        //Determine what color to make the tile based on its resource
+        switch(cardType){
+            case BRICKS:
+            g.setColor(new Color(203, 65, 84));
+            break;
 
-                case WOOD:
-                g.setColor(new Color(34, 139, 34));
-                break;
+            case WOOD:
+            g.setColor(new Color(34, 139, 34));
+            break;
 
-                case ORE:
-                g.setColor(new Color(149, 148, 139));
-                break;
+            case ORE:
+            g.setColor(new Color(149, 148, 139));
+            break;
 
-                case WHEAT:
-                g.setColor(new Color(245, 222, 179));
-                break;
+            case WHEAT:
+            g.setColor(new Color(245, 222, 179));
+            break;
 
-                case WOOL:
-                g.setColor(new Color(86, 125, 70));
-                break;
+            case WOOL:
+            g.setColor(new Color(86, 125, 70));
+            break;
 
-                case SAND:
-                g.setColor(new Color(194, 178, 128));
-                break;
-            }
+            case SAND:
+            g.setColor(new Color(194, 178, 128));
+            break;
+        }
     }
+
     @Override
     public void paint(Graphics g){
 
         if(visible){
             // //draw colored rectangle
             getColor(g);
-            
+            g.fillRect(upperLeft.x,upperLeft.y, CARD_WIDTH, CARD_HEIGHT);
+            g.setColor(Color.WHITE);
+            g.drawRect(upperLeft.x,upperLeft.y, CARD_WIDTH, CARD_HEIGHT);
+
+            Point picturePoint = new Point(upperLeft.x + 5, upperLeft.y + 15);
             // //paint image of card type icon
-            // if(!done){
-            // //draw image of explosion
-            // if(value == 1){
-            // g.drawImage(dice1, upperLeft.x , upperLeft.y, this);
-            // }else if(value == 2){
-            // g.drawImage(dice2, upperLeft.x , upperLeft.y, this);
-            // }else if(value == 3){
-            // g.drawImage(dice3, upperLeft.x , upperLeft.y, this);
-            // }else if(value == 4){
-            // g.drawImage(dice4, upperLeft.x , upperLeft.y, this);
-            // }else if(value == 5){
-            // g.drawImage(dice5, upperLeft.x , upperLeft.y, this);
-            // }else{
-            // //If alien
-            // g.drawImage(dice6, upperLeft.x , upperLeft.y, this);
-            // }
-            // }
+            switch(cardType){
+                case BRICKS:
+                g.drawImage(brick, picturePoint.x , picturePoint.y, this);
+                break;
+
+                case WOOD:
+                g.drawImage(lumber, picturePoint.x , picturePoint.y, this);
+                break;
+
+                case ORE:
+                g.drawImage(ore, picturePoint.x , picturePoint.y, this);
+                break;
+
+                case WHEAT:
+                g.drawImage(grain, picturePoint.x , picturePoint.y, this);
+                break;
+
+                case WOOL:
+                g.drawImage(wool, picturePoint.x , picturePoint.y, this);
+                break;
+            }
+
             // //paint text that describes card type
+            Point textPoint = new Point(upperLeft.x + 5, upperLeft.y + 5);
+            
+            g.setColor(Color.BLACK);
+            g.setFont(new Font("TimesRoman", Font.BOLD, 15));
+            switch(cardType){
+                case BRICKS:
+                g.drawString("Brick", textPoint.x , textPoint.y);
+                break;
+
+                case WOOD:
+                g.drawString("Lumber", textPoint.x , textPoint.y);
+                break;
+
+                case ORE:
+                g.drawString("Ore", textPoint.x , textPoint.y);
+                break;
+
+                case WHEAT:
+                g.drawString("Grain", textPoint.x , textPoint.y);
+                break;
+
+                case WOOL:
+                g.drawString("Wool", textPoint.x , textPoint.y);
+                break;
+            }
         }
     }
 
