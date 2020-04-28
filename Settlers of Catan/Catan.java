@@ -58,6 +58,12 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
     // button that draws development card
     protected JButton drawDevelopmentButton;
+    
+        // button that draws development card
+    protected JButton discardCardButton;
+    
+            // button that draws development card
+    protected JButton useDevCardButton;
 
     // button that displays opens trade panel;
     protected JButton tradeButton;
@@ -307,6 +313,10 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         //Forest Hex (4x), Pasture Hex (4x), Fields Hex (4x), Hills Hex (3x)
         //Mountain Hex(3x), Desert Hex(1x)
         panel.setBackground(GameBoard.BACKGROUND);
+        
+        //ADD BACK WHEN SEA IS DONE
+        //sea = new Sea(panel, new Point(200, 5));
+        
         gameboard = new GameBoard(panel,new Point(10,10));
         gameboard.createBoard();
         gameboard.start();
@@ -598,8 +608,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         //launch main thread that will manage the GUI
         javax.swing.SwingUtilities.invokeLater(new Catan());
 
-        while(gameStart){
+        // while(gameStart){
 
-        }
+        // }
     }
 }

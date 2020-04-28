@@ -30,6 +30,22 @@ public class DevelopmentCards extends AnimatedGraphicsObject{
     //Monopoly (x2)- player can claim all resource cards of a specific declared type
     //Victory Point card (x5)- 1 additional Victory Point is added to the owners total and doesn't need to be played to win.
 
+    private static Image knight;    
+    private static Image monopoly;
+    private static Image plenty;
+    private static Image victoryPoint;
+
+    private static Image city;
+    private static Image settlement;
+    private static Image road;    
+    private static Image army;
+    private static Image robber;
+
+    private static Image brick;
+    private static Image grain;
+    private static Image ore;
+    private static Image lumber;
+    private static Image wool;
     /**
      * Constructor for objects of class DevelopmentCards
      */
@@ -41,9 +57,9 @@ public class DevelopmentCards extends AnimatedGraphicsObject{
     @Override
     public void paint(Graphics g){
         //draw colored rectangle
-        
+
         //paint image of card type icon
-        
+
         //paint text that describes card type
     }
 

@@ -33,8 +33,11 @@ public abstract class AnimatedGraphicsObject extends Thread {
 
     /** status of the object */
     String status;
-    
-        /** delay time between frames of animation (ms)*/
+
+    /** boolean flag to show or not show the game piece */
+    protected boolean visible;
+
+    /** delay time between frames of animation (ms)*/
     public static final int DELAY_TIME = 33;
 
     /**
@@ -114,6 +117,14 @@ public abstract class AnimatedGraphicsObject extends Thread {
      */
     public Point getPosition(){
         return upperLeft;
+    }
+
+    public boolean getVisible(){
+        return visible;
+    }
+
+    public void setVisible(boolean vis){
+        visible = vis;
     }
 
     /**

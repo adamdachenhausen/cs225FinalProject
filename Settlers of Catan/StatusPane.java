@@ -30,7 +30,10 @@ public class StatusPane extends AnimatedGraphicsObject implements ImageObserver{
     private static Image dice5;
     private static Image dice6;
 
+    //what is happening in the game? dice roll, trading etc
     private String gamePhase;
+
+    //which player's turn is it?
     private int turn;
 
     /**
@@ -52,8 +55,6 @@ public class StatusPane extends AnimatedGraphicsObject implements ImageObserver{
         g.setColor(LT_BROWN);
         g.fillRect(upperLeft.x,upperLeft.y, PANE_WIDTH, 35);  
 
-        g.setColor(Color.RED);
-        g.drawString("TEXT", 900,20);  
 
         updateText(g);
 
@@ -77,22 +78,27 @@ public class StatusPane extends AnimatedGraphicsObject implements ImageObserver{
     }
 
     public void updateText(Graphics g){
-        //Player text
-        Point startText = upperLeft;
-        System.out.println(upperLeft.x);
-        FontMetrics fm = g.getFontMetrics();
-        String player = "PLAYER " + turn;
-        g.setFont(new Font("TimesRoman", Font.BOLD, 15));
-        fm = g.getFontMetrics();
-        //int x = ((container.getWidth() -PANE_WIDTH);
-        int x = upperLeft.x ;
-        int y = (upperLeft.y - fm.getAscent() + 5);
+        // //Player text
+        // Point startText = upperLeft;
+        // //System.out.println(upperLeft.x);
+        // FontMetrics fm = g.getFontMetrics();
+        // String player = "PLAYER " + turn;
+        // g.setFont(new Font("TimesRoman", Font.BOLD, 15));
+        // fm = g.getFontMetrics();
+        // //int x = ((container.getWidth() -PANE_WIDTH);
+        // int x = upperLeft.x ;
+        // int y = (upperLeft.y - fm.getAscent() + 5);
 
-        //int x = 900;
-        //int y = 25;
+        // //int x = 900;
+        // //int y = 25;
 
+        // g.setColor(Color.BLACK);
+        // g.drawString(player, x, y);
+
+        String playerInfo = "PLAYER " + turn + " TURN";
         g.setColor(Color.BLACK);
-        g.drawString(player, x, y);
+        g.setFont(new Font("TimesRoman", Font.BOLD, 15));
+        g.drawString(playerInfo, 900,20);  
 
         container.repaint();
 
@@ -102,12 +108,10 @@ public class StatusPane extends AnimatedGraphicsObject implements ImageObserver{
     @Override
     public void run(){
 
-        while(!done){
-            container.repaint();
-            sleepWithCatch(DELAY_TIME);
-            container.repaint();
+        container.repaint();
+        // sleepWithCatch(DELAY_TIME);
+        // container.repaint();
 
-        }
 
     }
 

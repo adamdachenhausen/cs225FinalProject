@@ -18,7 +18,7 @@ public class Dice extends AnimatedGraphicsObject implements ImageObserver{
 
     // instance variables - replace the example below with your own
     protected int value;
-    protected boolean visible;
+
     private static Image dice1;
     private static Image dice2;
     private static Image dice3;
@@ -61,13 +61,7 @@ public class Dice extends AnimatedGraphicsObject implements ImageObserver{
         return value;
     }
 
-    public boolean getVisible(){
-        return visible;
-    }
 
-    public void setVisible(boolean vis){
-        visible = vis;
-    }
 
     @Override
     public void run(){

@@ -65,6 +65,7 @@ public class HexTiles extends AnimatedGraphicsObject{
      *      \/
      */
     private void completeHex(){
+
         //Add points in clockwise rotation starting at northernmost point
         p.addPoint(center.x,center.y+SIDE_LENGTH);
 
@@ -75,7 +76,6 @@ public class HexTiles extends AnimatedGraphicsObject{
 
         p.addPoint(center.x-X_OFFSET,center.y-Y_OFFSET1);
         p.addPoint(center.x-X_OFFSET,center.y+Y_OFFSET2);
-
     }
     @Override
     public void paint(Graphics g){

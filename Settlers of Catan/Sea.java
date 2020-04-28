@@ -6,8 +6,8 @@ import java.awt.Point;
  * @author Kate Nelligan, Lindsay Clark, Adam Dachenhausen
  * @version Spring 2020
  */
-public class Sea
-{
+public class Sea{
+
     //This is the polygon that constructs the hexagon sea
     public static final int SEA_SIDE_LENGTH = HexTiles.SIDE_LENGTH * GameBoard.BOARD_WIDTH;
     public static Polygon createSea(Point topLeft){
@@ -21,4 +21,7 @@ public class Sea
         //
         return p;
     }
+    
+
 }
+

@@ -48,6 +48,8 @@ public class ThreadGraphicsController implements Runnable {
 
     protected GameBoard gameboard;
 
+    protected Sea sea;
+
     protected StatusPane statusPane;
 
     protected Dice die1;
@@ -137,6 +139,10 @@ public class ThreadGraphicsController implements Runnable {
                 if(gameboard != null){
                     gameboard.paint(g);
                 }
+
+                // if(sea != null){
+                    // sea.paint(g);
+                // }
 
                 if(statusPane != null){
                     statusPane.paint(g);
