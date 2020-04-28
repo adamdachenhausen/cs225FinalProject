@@ -50,8 +50,8 @@ public class Player
     protected boolean longestRoad = false;
 
     //arraylists to store cards
-    protected ArrayList<DevelopmentCards> devCards;
-    protected ArrayList<ResourceCards> resourceCards;
+    protected ArrayList<DevelopmentCard> devCards;
+    protected ArrayList<ResourceCard> resourceCards;
     /**
      * An example of a method - replace this comment with your own
      *
@@ -62,8 +62,8 @@ public class Player
         playerNumber = playNum;
         c = color;
         turn = false;
-        devCards = new ArrayList<DevelopmentCards>();
-        resourceCards = new ArrayList<ResourceCards>();
+        devCards = new ArrayList<DevelopmentCard>();
+        resourceCards = new ArrayList<ResourceCard>();
     }
 
     public Color getColor(){
