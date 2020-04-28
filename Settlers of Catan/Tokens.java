@@ -37,46 +37,46 @@ public class Tokens extends AnimatedGraphicsObject{
      */
     public Tokens(JComponent container){
         super(container);
-        tokens = new Stack();
+        tokens = new Stack<Token>();
     }
 
     private void populateTokens(){
         //Add everything to tokens
         for(int i=0;i<NUM_TWO;i++){
-            tokens.add(2);
+            tokens.add(Token.TWO);
         }
         for(int i=0;i<NUM_THREE;i++){
-            tokens.add(3);
+            tokens.add(Token.THREE);
         }
         for(int i=0;i<NUM_FOUR;i++){
-            tokens.add(4);
+            tokens.add(Token.FOUR);
         }
         for(int i=0;i<NUM_FIVE;i++){
-            tokens.add(5);
+            tokens.add(Token.FIVE);
         }
         for(int i=0;i<NUM_SIX;i++){
-            tokens.add(6);
+            tokens.add(Token.SIX);
         }
         for(int i=0;i<NUM_EIGHT;i++){
-            tokens.add(8);
+            tokens.add(Token.EIGHT);
         }
         for(int i=0;i<NUM_NINE;i++){
-            tokens.add(9);
+            tokens.add(Token.NINE);
         }
         for(int i=0;i<NUM_TEN;i++){
-            tokens.add(10);
+            tokens.add(Token.TEN);
         }
         for(int i=0;i<NUM_ELEVEN;i++){
-            tokens.add(11);
+            tokens.add(Token.ELEVEN);
         }
         for(int i=0;i<NUM_TWELVE;i++){
-            tokens.add(12);
+            tokens.add(Token.TWELVE);
         }
     }
 
     @Override
     public void paint(Graphics g){
-
+        
     }
 
     @Override
