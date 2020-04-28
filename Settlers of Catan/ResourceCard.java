@@ -24,17 +24,6 @@ public class ResourceCard extends AnimatedGraphicsObject implements ImageObserve
     public static final int BRICK = 19;
     public static final int ORE = 19;
 
-    private static Image knight;    
-    private static Image monopoly;
-    private static Image plenty;
-    private static Image victoryPoint;
-
-    private static Image city;
-    private static Image settlement;
-    private static Image road;    
-    private static Image army;
-    private static Image robber;
-
     private static Image brick;
     private static Image grain;
     private static Image ore;
@@ -119,16 +108,6 @@ public class ResourceCard extends AnimatedGraphicsObject implements ImageObserve
 
     protected static void loadPic(){
         Toolkit toolkit = Toolkit.getDefaultToolkit();
-        knight = toolkit.getImage("knight.png");    
-        monopoly = toolkit.getImage("monopoly.png");
-        plenty = toolkit.getImage("plenty.png");
-        victoryPoint = toolkit.getImage("victorypoint.png");
-
-        city = toolkit.getImage("city.png");
-        settlement = toolkit.getImage("settlement.png");
-        road = toolkit.getImage("road.png");
-        army = toolkit.getImage("army.png");
-        robber = toolkit.getImage("robber.png");
 
         brick = toolkit.getImage("brick.png");
         grain = toolkit.getImage("grain.png");

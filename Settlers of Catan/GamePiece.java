@@ -18,7 +18,6 @@ public class GamePiece  extends AnimatedGraphicsObject implements ImageObserver{
     final static protected int SETTLEMENTS = 5;
     final static protected int ROADS = 15;
 
-
     private static Image cities;
     private static Image settlements;
     private static Image roads;    
@@ -79,12 +78,6 @@ public class GamePiece  extends AnimatedGraphicsObject implements ImageObserver{
             p.add(Pieces.ROADS);
         }
 
-        for(int i=0;i<ROBBER;i++){
-            p.add(Pieces.ROBBER);
-        }
-
-
-
         return p;
     }
 
@@ -101,22 +94,11 @@ public class GamePiece  extends AnimatedGraphicsObject implements ImageObserver{
 
     protected static void loadPic(){
         Toolkit toolkit = Toolkit.getDefaultToolkit();
-        knight = toolkit.getImage("knight.png");    
-        monopoly = toolkit.getImage("monopoly.png");
-        plenty = toolkit.getImage("plenty.png");
-        victoryPoint = toolkit.getImage("victorypoint.png");
+        
+        cities = toolkit.getImage("city.png");
+        settlements = toolkit.getImage("settlement.png");
+        roads = toolkit.getImage("road.png");
 
-        city = toolkit.getImage("city.png");
-        settlement = toolkit.getImage("settlement.png");
-        road = toolkit.getImage("road.png");
-        army = toolkit.getImage("army.png");
-        robber = toolkit.getImage("robber.png");
-
-        brick = toolkit.getImage("brick.png");
-        grain = toolkit.getImage("grain.png");
-        ore = toolkit.getImage("ore.png");
-        lumber = toolkit.getImage("lumber.png");
-        wool = toolkit.getImage("wool.png");
     }
 
     @Override
