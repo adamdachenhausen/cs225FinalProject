@@ -42,8 +42,8 @@ public class ThreadGraphicsController implements Runnable {
 
     /** list of animated graphics objects currently on the screen */
     protected java.util.List<HexTiles> hexTilesList;
-    protected java.util.List<ResourceCards> resourceBank;
-    protected java.util.List<DevelopmentCards> devBank;
+    protected java.util.List<ResourceCard> resourceBank;
+    protected java.util.List<DevelopmentCard> devBank;
     protected java.util.List<Tokens> tokens;
 
     protected GameBoard gameboard;
@@ -184,8 +184,8 @@ public class ThreadGraphicsController implements Runnable {
 
         // construct the list of AnimatedGraphicsObject
         hexTilesList = new ArrayList<HexTiles>();
-        resourceBank = new ArrayList<ResourceCards>();
-        devBank = new ArrayList<DevelopmentCards>();
+        resourceBank = new ArrayList<ResourceCard>();
+        devBank = new ArrayList<DevelopmentCard>();
         tokens = new ArrayList<Tokens>();
 
         // display the window we've created
