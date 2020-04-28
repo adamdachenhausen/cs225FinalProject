@@ -61,7 +61,9 @@ public class Dice extends AnimatedGraphicsObject implements ImageObserver{
         return value;
     }
 
-
+    public void showDice(){
+        visible = true;
+    }
 
     @Override
     public void run(){
