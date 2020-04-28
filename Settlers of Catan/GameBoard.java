@@ -8,6 +8,7 @@ import java.util.Stack;
 import java.awt.Point;
 import javax.swing.JComponent;
 import java.awt.Graphics;
+import java.awt.Polygon;
 /**
  * A collection of HexTiles in a specific pattern
  *
@@ -16,10 +17,15 @@ import java.awt.Graphics;
  */
 public class GameBoard extends AnimatedGraphicsObject
 {
+    public static final Color BACKGROUND = new Color(100,100,100);
     public static final Color SEA = new Color(49, 159, 181);
 
     public static final int BOARD_WIDTH = 5;
     public static final int OFFSET = HexTiles.SIDE_LENGTH;
+
+    //This is the polygon that constructs the hexagon sea
+    public static final int SEA_SIDE_LENGTH = OFFSET * BOARD_WIDTH;
+    
 
     private JPanel panel;
     protected HexTiles[][] board;
@@ -31,6 +37,8 @@ public class GameBoard extends AnimatedGraphicsObject
 
     //The top left point of this
     private Point topLeft;
+    
+    private Polygon sea;
     public GameBoard(JComponent container, Point topLeft){
         super(container);
         this.container = container;
@@ -42,7 +50,8 @@ public class GameBoard extends AnimatedGraphicsObject
         t = Tokens.populateT();
         this.topLeft = topLeft;
         cur = topLeft;
-
+        
+        sea = Sea.createSea(topLeft);
     }
 
     /**
@@ -83,7 +92,6 @@ public class GameBoard extends AnimatedGraphicsObject
                 }
             }
         }
-
     }
 
     /**
@@ -91,13 +99,11 @@ public class GameBoard extends AnimatedGraphicsObject
      */
     @Override
     public void paint(Graphics g){
-        // for(int i=0; i<board.length;i++){
-
-        // for(int j=0; j<board[0].length;j++){
-        // board[i][j].paint(g);
-        // }
-
-        // }
+        Color cur = g.getColor();
+        g.drawPolygon(sea);
+        g.setColor(SEA);
+        g.fillPolygon(sea);
+        g.setColor(cur);
         for(int i=0; i<board.length;i++){
 
             for(int j=0; j<board[0].length;j++){
@@ -107,6 +113,7 @@ public class GameBoard extends AnimatedGraphicsObject
             }
 
         }
+        g.setColor(cur);
     }
 
     @Override
