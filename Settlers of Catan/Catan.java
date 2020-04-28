@@ -318,7 +318,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         //place tokens
 
         //set board with 2 settlements per player
-        createSettlements();
+        //ADD THIS BACK WHEN METHOD CREATED
+        //createSettlements();
     }
 
     /**

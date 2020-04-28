@@ -52,6 +52,9 @@ public class StatusPane extends AnimatedGraphicsObject implements ImageObserver{
         g.setColor(LT_BROWN);
         g.fillRect(upperLeft.x,upperLeft.y, PANE_WIDTH, 35);  
 
+        g.setColor(Color.RED);
+        g.drawString("TEXT", 900,20);  
+
         updateText(g);
 
         // if(!done){
@@ -76,17 +79,19 @@ public class StatusPane extends AnimatedGraphicsObject implements ImageObserver{
     public void updateText(Graphics g){
         //Player text
         Point startText = upperLeft;
+        System.out.println(upperLeft.x);
         FontMetrics fm = g.getFontMetrics();
         String player = "PLAYER " + turn;
-        g.setFont(new Font("TimesRoman", Font.BOLD, 0));
+        g.setFont(new Font("TimesRoman", Font.BOLD, 15));
         fm = g.getFontMetrics();
-        //int x = ((container.getWidth() -PANE_WIDTH) - fm.stringWidth(player)) / 2;
-        //int y = (upperLeft.y + fm.getAscent() + 5);
+        //int x = ((container.getWidth() -PANE_WIDTH);
+        int x = upperLeft.x ;
+        int y = (upperLeft.y - fm.getAscent() + 5);
 
-        int x = 1000;
-        int y = 5;
+        //int x = 900;
+        //int y = 25;
 
-        g.setColor(BROWN);
+        g.setColor(Color.BLACK);
         g.drawString(player, x, y);
 
         container.repaint();
