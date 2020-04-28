@@ -36,6 +36,9 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
     //Players
     protected Player player1, player2, player3, player4;
+    
+    //Player 1 color
+    protected Colors p1Color;
 
     // button that starts the game
     protected JButton startButton;
@@ -229,10 +232,9 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
         //pick colors
         selectColor();
-        
+
         //create players
         createPlayer();
-
 
     }
 
@@ -300,8 +302,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         gameboard.startBoard();
 
         //draw status pane
-        statusPane = new StatusPane(panel, gamePhase);
-
+        statusPane = new StatusPane(panel, gamePhase, turn);
 
         //create dice
         die1 = new Dice(panel, new Point(550,300));
@@ -318,7 +319,19 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      *
      */
     public void selectColor() {
+        String[] colors = new String[] {"Red", "Blue", "White", "Orange"};
+        int choice = JOptionPane.showOptionDialog(null, "Pick a color!", "Color Selector",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
+                null, colors, colors[0]);
+        if(choice == 1){
+            p1Color = Colors.
+        }else if(choice ==2){
 
+        }else if(choice == 3){
+
+        }else{
+
+        }
     }
 
     /**

@@ -22,16 +22,14 @@ public class StatusPane extends AnimatedGraphicsObject implements ImageObserver{
     public static final int PANE_WIDTH = 300;
     public static final int PANE_HEIGHT = 850;
     // instance variables - replace the example below with your own
-    
-    
-    
+
     private static Image dice1;
     private static Image dice2;
     private static Image dice3;
     private static Image dice4;
     private static Image dice5;
     private static Image dice6;
-    
+
     private String gamePhase;
     private int turn;
 
@@ -42,7 +40,7 @@ public class StatusPane extends AnimatedGraphicsObject implements ImageObserver{
         super(container);
         upperLeft = new Point(container.getWidth() - 300, 0);
         this.turn = turn;
-        
+
     }
 
     @Override
@@ -50,41 +48,46 @@ public class StatusPane extends AnimatedGraphicsObject implements ImageObserver{
 
         g.setColor(BEIGE);
         g.fillRect(upperLeft.x,upperLeft.y, PANE_WIDTH, PANE_HEIGHT);
-        
+
         g.setColor(LT_BROWN);
-        g.fillRect(upperLeft.x,upperLeft.y, PANE_WIDTH, 25);        
+        g.fillRect(upperLeft.x,upperLeft.y, PANE_WIDTH, 25);  
         
+        updateText(g);
+
         // if(!done){
-            // //draw image of explosion
-            // if(value == 1){
-                // g.drawImage(dice1, upperLeft.x , upperLeft.y, this);
-            // }else if(value == 2){
-                // g.drawImage(dice2, upperLeft.x , upperLeft.y, this);
-            // }else if(value == 3){
-                // g.drawImage(dice3, upperLeft.x , upperLeft.y, this);
-            // }else if(value == 4){
-                // g.drawImage(dice4, upperLeft.x , upperLeft.y, this);
-            // }else if(value == 5){
-                // g.drawImage(dice5, upperLeft.x , upperLeft.y, this);
-            // }else{
-                // //If alien
-                // g.drawImage(dice6, upperLeft.x , upperLeft.y, this);
-            // }
+        // //draw image of explosion
+        // if(value == 1){
+        // g.drawImage(dice1, upperLeft.x , upperLeft.y, this);
+        // }else if(value == 2){
+        // g.drawImage(dice2, upperLeft.x , upperLeft.y, this);
+        // }else if(value == 3){
+        // g.drawImage(dice3, upperLeft.x , upperLeft.y, this);
+        // }else if(value == 4){
+        // g.drawImage(dice4, upperLeft.x , upperLeft.y, this);
+        // }else if(value == 5){
+        // g.drawImage(dice5, upperLeft.x , upperLeft.y, this);
+        // }else{
+        // //If alien
+        // g.drawImage(dice6, upperLeft.x , upperLeft.y, this);
+        // }
         // }
     }
 
-        public void updateText(){
+    public void updateText(Graphics g){
         //Player text
-            String player = "PLAYER " + ;
+        Point startText = upperLeft;
+        FontMetrics fm = g.getFontMetrics();
+        String player = "PLAYER " + turn;
         g.setFont(new Font("TimesRoman", Font.BOLD, 20));
         fm = g.getFontMetrics();
-        int x2 = (panel.getWidth() - fm.stringWidth(instruction)) / 2;
-        int y2 = (y + fm.getAscent() + 20);
-        g.setColor(Color.WHITE);
-        g.drawString(instruction, x2, y2);
-        panel.repaint();
+        int x = (container.getWidth() - fm.stringWidth(player)) / 2;
+        int y = (upperLeft.y + fm.getAscent() + 20);
+        g.setColor(BROWN);
+        g.drawString(player, x, y);
         
-        //
+        container.repaint();
+
+        //Player Instructions text
     }
 
     @Override

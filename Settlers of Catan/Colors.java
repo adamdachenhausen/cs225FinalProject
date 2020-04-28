@@ -7,5 +7,5 @@
  */
 public enum Colors
 {
-    RED, BLUE, WHITE, GREEN
+    RED, BLUE, WHITE, ORANGE
 }
