@@ -29,7 +29,9 @@ public class Tokens extends AnimatedGraphicsObject{
     public static final int NUM_TEN = 2;
     public static final int NUM_ELEVEN = 2;
     public static final int NUM_TWELVE = 1;
-    public static final int TOTAL_TOKENS = 18;
+    public static final int TOTAL_TOKENS = 19;
+    //Have to put this so we don't deal with null
+    public static final int NUM_ZERO = 1;
 
     
     /**
@@ -71,6 +73,9 @@ public class Tokens extends AnimatedGraphicsObject{
         }
         for(int i=0;i<NUM_TWELVE;i++){
             t.add(Token.TWELVE);
+        }
+        for(int i=0;i<NUM_ZERO;i++){
+            t.add(Token.ZERO);
         }
         return t;
     }
