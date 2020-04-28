@@ -1,13 +1,12 @@
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.event.*;
+import java.awt.image.*;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.event.*;
 import java.util.Random;
-import java.io.*;
-import javax.sound.sampled.*;
 /**
  * Write a description of class GamePieces here.
  *
@@ -35,27 +34,11 @@ public class Robber  extends AnimatedGraphicsObject implements ImageObserver{
 
     @Override
     public void paint(Graphics g){
-        // //draw colored rectangle
+        // //draw colored circle with robber picture
+        //g.drawFilledOval
+        
+        // g.drawImage(robber, upperLeft.x , upperLeft.y, this);
 
-        // //paint image of card type icon
-        // if(!done){
-        // //draw image of explosion
-        // if(value == 1){
-        // g.drawImage(dice1, upperLeft.x , upperLeft.y, this);
-        // }else if(value == 2){
-        // g.drawImage(dice2, upperLeft.x , upperLeft.y, this);
-        // }else if(value == 3){
-        // g.drawImage(dice3, upperLeft.x , upperLeft.y, this);
-        // }else if(value == 4){
-        // g.drawImage(dice4, upperLeft.x , upperLeft.y, this);
-        // }else if(value == 5){
-        // g.drawImage(dice5, upperLeft.x , upperLeft.y, this);
-        // }else{
-        // //If alien
-        // g.drawImage(dice6, upperLeft.x , upperLeft.y, this);
-        // }
-        // }
-        // //paint text that describes card type
     }
 
     public boolean imageUpdate(Image img, int infoflags, int x, int y,

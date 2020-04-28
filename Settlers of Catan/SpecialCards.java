@@ -7,27 +7,116 @@
  */
 public class SpecialCards
 {
-    // instance variables - replace the example below with your own
-    private int x;
+
+    //Knight card (x14)- lets the player move the robber    
+    //Road Building (x2)- player can place 2 roads as if they just built them
+    //Year of Plenty (x2)- the player can draw 2 resource cards of their choice from the bank
+    //Monopoly (x2)- player can claim all resource cards of a specific declared type
+    //Victory Point card (x5)- 1 additional Victory Point is added to the owners total and doesn't need to be played to win.
+
+    // Constants for card numbers in deck
+
+
+    //Special card constants
+    public static final int LONGEST_ROAD = 1;
+    public static final int LARGEST_ARMY = 1;
+
+
+    private static Image road;    
+    private static Image army;
 
     /**
-     * Constructor for objects of class SpecialObjects
+     * Constructor for objects of class DevelopmentCards
      */
-    public SpecialObjects()
+    public DevelopmentCard(JComponent container)
     {
-        // initialise instance variables
-        x = 0;
+        super(container);
+        visible = false;
     }
 
-    /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
+    public void showCard(){
+        visible = true;
+    }
+
+    @Override
+    public void paint(Graphics g){
+        // //draw colored rectangle
+
+        // //paint image of card type icon
+        // if(!done){
+        // //draw image of card
+        // if(value == 1){
+        // g.drawImage(dice1, upperLeft.x , upperLeft.y, this);
+        // }else if(value == 2){
+        // g.drawImage(dice2, upperLeft.x , upperLeft.y, this);
+     
+        // //paint text that describes card type
+    }
+
+    /** Populates the r stack with exact number of each development card
+     *  Then shuffles the stack, so when items are popped, they are random
      */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
+    public static Stack populateR(){
+        Stack<Development> d = new Stack<Development>();
+
+        //Add everything to r
+        for(int i=0;i<KNIGHT;i++){
+            d.add(Development.KNIGHT);
+        }
+
+        for(int i=0;i<ROAD_BUILDING;i++){
+            d.add(Development.ROADBUILD);
+        }
+
+        for(int i=0;i<YEAR_PLENTY;i++){
+            d.add(Development.PLENTY);
+        }
+
+        for(int i=0;i<MONOPOLY;i++){
+            d.add(Development.MONOPOLY);
+        }
+
+        for(int i=0;i<VICTORY_PT_CARD;i++){
+            d.add(Development.VICTORY);
+        }
+
+        return d;
+    }
+
+    public boolean imageUpdate(Image img, int infoflags, int x, int y,
+    int width, int height) {
+
+        if ((infoflags & ImageObserver.ALLBITS) > 0) {
+            container.repaint();
+            return false;
+        }
+        return true;
+
+    }
+
+    protected static void loadPic(){
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        knight = toolkit.getImage("knight.png");    
+        monopoly = toolkit.getImage("monopoly.png");
+        plenty = toolkit.getImage("plenty.png");
+        victoryPoint = toolkit.getImage("victorypoint.png");
+
+        city = toolkit.getImage("city.png");
+        settlement = toolkit.getImage("settlement.png");
+        road = toolkit.getImage("road.png");
+        army = toolkit.getImage("army.png");
+        robber = toolkit.getImage("robber.png");
+
+        brick = toolkit.getImage("brick.png");
+        grain = toolkit.getImage("grain.png");
+        ore = toolkit.getImage("ore.png");
+        lumber = toolkit.getImage("lumber.png");
+        wool = toolkit.getImage("wool.png");
+    }
+
+    @Override
+    public void run(){
+
     }
 }
+

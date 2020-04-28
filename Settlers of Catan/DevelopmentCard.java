@@ -28,26 +28,12 @@ public class DevelopmentCard extends AnimatedGraphicsObject implements ImageObse
     public static final int MONOPOLY = 2;
     public static final int VICTORY_PT_CARD = 5;
 
-    //Special card constants
-    public static final int LONGEST_ROAD = 1;
-    public static final int LARGEST_ARMY = 1;
-
     private static Image knight;    
     private static Image monopoly;
     private static Image plenty;
     private static Image victoryPoint;
-
-    private static Image city;
-    private static Image settlement;
     private static Image road;    
-    private static Image army;
-    private static Image robber;
 
-    private static Image brick;
-    private static Image grain;
-    private static Image ore;
-    private static Image lumber;
-    private static Image wool;
 
     /**
      * Constructor for objects of class DevelopmentCards
@@ -134,18 +120,7 @@ public class DevelopmentCard extends AnimatedGraphicsObject implements ImageObse
         monopoly = toolkit.getImage("monopoly.png");
         plenty = toolkit.getImage("plenty.png");
         victoryPoint = toolkit.getImage("victorypoint.png");
-
-        city = toolkit.getImage("city.png");
-        settlement = toolkit.getImage("settlement.png");
         road = toolkit.getImage("road.png");
-        army = toolkit.getImage("army.png");
-        robber = toolkit.getImage("robber.png");
-
-        brick = toolkit.getImage("brick.png");
-        grain = toolkit.getImage("grain.png");
-        ore = toolkit.getImage("ore.png");
-        lumber = toolkit.getImage("lumber.png");
-        wool = toolkit.getImage("wool.png");
     }
 
     @Override

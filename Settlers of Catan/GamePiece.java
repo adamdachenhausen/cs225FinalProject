@@ -1,13 +1,12 @@
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.event.*;
+import java.awt.image.*;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.event.*;
 import java.util.Random;
-import java.io.*;
-import javax.sound.sampled.*;
 /**
  * Write a description of class GamePieces here.
  *
@@ -18,13 +17,11 @@ public class GamePiece  extends AnimatedGraphicsObject implements ImageObserver{
     final static protected int CITIES = 4; 
     final static protected int SETTLEMENTS = 5;
     final static protected int ROADS = 15;
-    final static protected int ROBBER = 1;
+
 
     private static Image cities;
     private static Image settlements;
     private static Image roads;    
-    private static Image army;
-    private static Image robber;
 
     /**
      * Constructor for objects of class GamePieces
