@@ -29,6 +29,10 @@ public class DevelopmentCard extends AnimatedGraphicsObject implements ImageObse
     public static final int MONOPOLY = 2;
     public static final int VICTORY_PT_CARD = 5;
 
+    //Special card constants
+    public static final int LONGEST_ROAD = 1;
+    public static final int LARGEST_ARMY = 1;
+
     private static Image knight;    
     private static Image monopoly;
     private static Image plenty;
