@@ -18,19 +18,13 @@ public class GameBoard extends AnimatedGraphicsObject
 {
     public static final Color SEA = new Color(49, 159, 181);
 
-    public static final int NUM_BRICKS = 3;
-    public static final int NUM_WOOD = 4;
-    public static final int NUM_ORE = 3;
-    public static final int NUM_WHEAT = 4;
-    public static final int NUM_WOOL = 4;
-    public static final int NUM_SAND = 1;
-    public static final int NUM_RESOURCES = 19;
     public static final int BOARD_WIDTH = 5;
     public static final int OFFSET = HexTiles.SIDE_LENGTH;
 
     private JPanel panel;
     protected HexTiles[][] board;
     private Stack<Resource> r;
+    private Stack<Token> t;
 
     //The current point to place a new hex at
     private Point cur;
@@ -44,45 +38,11 @@ public class GameBoard extends AnimatedGraphicsObject
         //panel.setBackground(SEA);
 
         board=new HexTiles[BOARD_WIDTH][BOARD_WIDTH];
-        r = new Stack<Resource>();
-        populateR();
+        r = Resources.populateR();
+        t = Tokens.populateT();
         this.topLeft = topLeft;
         cur = topLeft;
 
-    }
-
-    /** Populates the r stack with exact number of each resource
-     *  Then shuffles the stack, so when items are popped, they are random
-     */
-    private void populateR(){
-
-        //Add everything to r
-        for(int i=0;i<NUM_BRICKS;i++){
-            r.add(Resource.BRICKS);
-        }
-
-        for(int i=0;i<NUM_WOOD;i++){
-            r.add(Resource.WOOD);
-        }
-
-        for(int i=0;i<NUM_ORE;i++){
-            r.add(Resource.ORE);
-        }
-
-        for(int i=0;i<NUM_WHEAT;i++){
-            r.add(Resource.WHEAT);
-        }
-
-        for(int i=0;i<NUM_WOOL;i++){
-            r.add(Resource.WOOL);
-        }
-
-        for(int i=0;i<NUM_SAND;i++){
-            r.add(Resource.SAND);
-        }
-
-        //Randomize r now, so we don't have to do this later
-        Collections.shuffle(r);
     }
 
     /**
@@ -118,7 +78,7 @@ public class GameBoard extends AnimatedGraphicsObject
                         cur.translate(OFFSET,0);
                         shifted=true;
                     }
-                    board[i][j] = new HexTiles(container,cur,r.pop());
+                    board[i][j] = new HexTiles(container,cur,r.pop(),t.pop());
                     cur.translate(OFFSET,0);
                 }
             }
@@ -138,7 +98,7 @@ public class GameBoard extends AnimatedGraphicsObject
         // }
 
         // }
-                for(int i=0; i<board.length;i++){
+        for(int i=0; i<board.length;i++){
 
             for(int j=0; j<board[0].length;j++){
                 if(board[i][j]!= null){
