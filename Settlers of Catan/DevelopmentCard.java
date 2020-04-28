@@ -14,7 +14,7 @@ import java.util.Random;
  * @author Kate Nelligan, Lindsay Clark, Adam Dachenhausen
  * @version Spring 2020
  */
-public class DevelopmentCards extends AnimatedGraphicsObject implements ImageObserver{
+public class DevelopmentCard extends AnimatedGraphicsObject implements ImageObserver{
 
     //Knight card (x14)- lets the player move the robber    
     //Road Building (x2)- player can place 2 roads as if they just built them
@@ -29,7 +29,6 @@ public class DevelopmentCards extends AnimatedGraphicsObject implements ImageObs
     public static final int MONOPOLY = 2;
     public static final int VICTORY_PT_CARD = 5;
 
-    
     private static Image knight;    
     private static Image monopoly;
     private static Image plenty;
@@ -50,7 +49,7 @@ public class DevelopmentCards extends AnimatedGraphicsObject implements ImageObs
     /**
      * Constructor for objects of class DevelopmentCards
      */
-    public DevelopmentCards(JComponent container)
+    public DevelopmentCard(JComponent container)
     {
         super(container);
         visible = false;
@@ -66,21 +65,21 @@ public class DevelopmentCards extends AnimatedGraphicsObject implements ImageObs
 
         // //paint image of card type icon
         // if(!done){
-            // //draw image of explosion
-            // if(value == 1){
-                // g.drawImage(dice1, upperLeft.x , upperLeft.y, this);
-            // }else if(value == 2){
-                // g.drawImage(dice2, upperLeft.x , upperLeft.y, this);
-            // }else if(value == 3){
-                // g.drawImage(dice3, upperLeft.x , upperLeft.y, this);
-            // }else if(value == 4){
-                // g.drawImage(dice4, upperLeft.x , upperLeft.y, this);
-            // }else if(value == 5){
-                // g.drawImage(dice5, upperLeft.x , upperLeft.y, this);
-            // }else{
-                // //If alien
-                // g.drawImage(dice6, upperLeft.x , upperLeft.y, this);
-            // }
+        // //draw image of explosion
+        // if(value == 1){
+        // g.drawImage(dice1, upperLeft.x , upperLeft.y, this);
+        // }else if(value == 2){
+        // g.drawImage(dice2, upperLeft.x , upperLeft.y, this);
+        // }else if(value == 3){
+        // g.drawImage(dice3, upperLeft.x , upperLeft.y, this);
+        // }else if(value == 4){
+        // g.drawImage(dice4, upperLeft.x , upperLeft.y, this);
+        // }else if(value == 5){
+        // g.drawImage(dice5, upperLeft.x , upperLeft.y, this);
+        // }else{
+        // //If alien
+        // g.drawImage(dice6, upperLeft.x , upperLeft.y, this);
+        // }
         // }
         // //paint text that describes card type
     }
@@ -112,7 +111,6 @@ public class DevelopmentCards extends AnimatedGraphicsObject implements ImageObs
             d.add(Development.VICTORY);
         }
 
-
         return d;
     }
 
@@ -129,13 +127,22 @@ public class DevelopmentCards extends AnimatedGraphicsObject implements ImageObs
 
     protected static void loadPic(){
         Toolkit toolkit = Toolkit.getDefaultToolkit();
-        // dice1 = toolkit.getImage("dice1.png");
-        // dice2 = toolkit.getImage("dice2.png");
-        // dice3 = toolkit.getImage("dice3.png");
-        // dice4 = toolkit.getImage("dice4.png");
-        // dice5 = toolkit.getImage("dice5.png");
-        // dice6 = toolkit.getImage("dice6.png");
+        knight = toolkit.getImage("knight.png");    
+        monopoly = toolkit.getImage("monopoly.png");
+        plenty = toolkit.getImage("plenty.png");
+        victoryPoint = toolkit.getImage("victorypoint.png");
 
+        city = toolkit.getImage("city.png");
+        settlement = toolkit.getImage("settlement.png");
+        road = toolkit.getImage("road.png");
+        army = toolkit.getImage("army.png");
+        robber = toolkit.getImage("robber.png");
+
+        brick = toolkit.getImage("brick.png");
+        grain = toolkit.getImage("grain.png");
+        ore = toolkit.getImage("ore.png");
+        lumber = toolkit.getImage("lumber.png");
+        wool = toolkit.getImage("wool.png");
     }
 
     @Override
