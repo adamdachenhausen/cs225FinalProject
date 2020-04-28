@@ -31,52 +31,53 @@ public class Tokens extends AnimatedGraphicsObject{
     public static final int NUM_TWELVE = 1;
     public static final int TOTAL_TOKENS = 18;
 
-    private Stack tokens;
+    
     /**
      * Constructor for objects of class Tokens
      */
     public Tokens(JComponent container){
         super(container);
-        tokens = new Stack();
     }
 
-    private void populateTokens(){
+    public static Stack populateT(){
+        Stack t = new Stack<Token>();
         //Add everything to tokens
         for(int i=0;i<NUM_TWO;i++){
-            tokens.add(2);
+            t.add(Token.TWO);
         }
         for(int i=0;i<NUM_THREE;i++){
-            tokens.add(3);
+            t.add(Token.THREE);
         }
         for(int i=0;i<NUM_FOUR;i++){
-            tokens.add(4);
+            t.add(Token.FOUR);
         }
         for(int i=0;i<NUM_FIVE;i++){
-            tokens.add(5);
+            t.add(Token.FIVE);
         }
         for(int i=0;i<NUM_SIX;i++){
-            tokens.add(6);
+            t.add(Token.SIX);
         }
         for(int i=0;i<NUM_EIGHT;i++){
-            tokens.add(8);
+            t.add(Token.EIGHT);
         }
         for(int i=0;i<NUM_NINE;i++){
-            tokens.add(9);
+            t.add(Token.NINE);
         }
         for(int i=0;i<NUM_TEN;i++){
-            tokens.add(10);
+            t.add(Token.TEN);
         }
         for(int i=0;i<NUM_ELEVEN;i++){
-            tokens.add(11);
+            t.add(Token.ELEVEN);
         }
         for(int i=0;i<NUM_TWELVE;i++){
-            tokens.add(12);
+            t.add(Token.TWELVE);
         }
+        return t;
     }
 
     @Override
     public void paint(Graphics g){
-
+        
     }
 
     @Override
