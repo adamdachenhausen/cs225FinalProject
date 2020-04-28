@@ -14,7 +14,7 @@ import javax.sound.sampled.*;
  * @author Kate Nelligan, Lindsay Clark, Adam Dachenhausen
  * @version Spring 2020
  */
-public class GamePiece  extends AnimatedGraphicsObject{
+public class GamePiece  extends AnimatedGraphicsObject implements ImageObserver{
     final static protected int CITIES = 4; 
     final static protected int SETTLEMENTS = 5;
     final static protected int ROADS = 15;

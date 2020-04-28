@@ -1,49 +1,31 @@
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import java.awt.*;
 import java.awt.event.*;
-import javax.swing.*;
-import javax.swing.event.*;
-import java.awt.image.*;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.event.*;
 import java.util.Random;
-
+import java.io.*;
+import javax.sound.sampled.*;
 /**
- * Write a description of class ResourceCards here.
+ * Write a description of class GamePieces here.
  *
  * @author Kate Nelligan, Lindsay Clark, Adam Dachenhausen
  * @version Spring 2020
  */
-public class ResourceCard extends AnimatedGraphicsObject implements ImageObserver{
-    //Cards: Lumber(19x), Wool(19x), Grain(19x), Brick(19x), Ore(19x);
-    // Constants for card numbers in deck
+public class Robber  extends AnimatedGraphicsObject implements ImageObserver{
 
-    public static final int LUMBER = 19;
-    public static final int WOOL = 19;
-    public static final int GRAIN = 19;
-    public static final int BRICK = 19;
-    public static final int ORE = 19;
+    final static protected int ROBBER = 1;
 
-    private static Image knight;    
-    private static Image monopoly;
-    private static Image plenty;
-    private static Image victoryPoint;
 
-    private static Image city;
-    private static Image settlement;
-    private static Image road;    
-    private static Image army;
     private static Image robber;
 
-    private static Image brick;
-    private static Image grain;
-    private static Image ore;
-    private static Image lumber;
-    private static Image wool;
     /**
-     * Constructor for objects of class ResourceCards
+     * Constructor for objects of class GamePieces
      */
-    public ResourceCard(JComponent container){
+    public Robber(JComponent container)
+    {
         super(container);
     }
 
@@ -74,36 +56,6 @@ public class ResourceCard extends AnimatedGraphicsObject implements ImageObserve
         // }
         // }
         // //paint text that describes card type
-    }
-
-    /** Populates the r stack with exact number of each development card
-     *  Then shuffles the stack, so when items are popped, they are random
-     */
-    public static Stack populateR(){
-        Stack<Resource> r = new Stack<Resource>();
-
-        //Add everything to r
-        for(int i=0;i<LUMBER;i++){
-            r.add(Resource.BRICKS);
-        }
-
-        for(int i=0;i<WOOL;i++){
-            r.add(Resource.WOOD);
-        }
-
-        for(int i=0;i<GRAIN;i++){
-            r.add(Resource.WHEAT);
-        }
-
-        for(int i=0;i<BRICK;i++){
-            r.add(Resource.WOOL);
-        }
-
-        for(int i=0;i<ORE;i++){
-            r.add(Resource.WOOL);
-        }
-
-        return r;
     }
 
     public boolean imageUpdate(Image img, int infoflags, int x, int y,
@@ -142,4 +94,3 @@ public class ResourceCard extends AnimatedGraphicsObject implements ImageObserve
 
     }
 }
-

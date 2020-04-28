@@ -7,5 +7,5 @@
  */
 public enum Special
 {
-    LONGESTROAD, ARMY, ROBBER
+    LONGESTROAD, ARMY
 }
