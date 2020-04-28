@@ -31,7 +31,7 @@ public class Player
 
     // instance variables - replace the example below with your own
     protected int playerNumber;
-    protected Colors c;
+    protected Color c;
     protected boolean turn;
 
     // Gamepices for game
@@ -58,7 +58,7 @@ public class Player
      * @param  y  a sample parameter for a method
      * @return    the sum of x and y
      */
-    public Player(int playNum, Colors color){
+    public Player(int playNum, Color color){
         playerNumber = playNum;
         c = color;
         turn = false;
@@ -66,7 +66,7 @@ public class Player
         resourceCards = new ArrayList<ResourceCards>();
     }
 
-    public Colors getColor(){
+    public Color getColor(){
 
         return c;
     }

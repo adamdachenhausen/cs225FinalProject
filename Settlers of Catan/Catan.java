@@ -25,6 +25,9 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     public static final int PLAYER_3 = 3;
     public static final int PLAYER_4 = 4;
 
+    //Color list
+    protected Color[] playerColors = {Color.RED, Color.BLUE, Color.WHITE, Color.Orange};
+
     //adds variables for gameplay
     protected int roll;
 
@@ -36,9 +39,9 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
     //Players
     protected Player player1, player2, player3, player4;
-    
+
     //Player 1 color
-    protected Colors p1Color;
+    protected Color p1Color;
 
     // button that starts the game
     protected JButton startButton;
@@ -324,13 +327,13 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                 JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
                 null, colors, colors[0]);
         if(choice == 1){
-            p1Color = Colors.
+            p1Color = Color.RED;
         }else if(choice ==2){
-
+            p1Color = Color.BLUE;
         }else if(choice == 3){
-
+            p1Color = Color.WHITE;
         }else{
-
+            p1Color = Color.ORANGE;
         }
     }
 
@@ -339,10 +342,30 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      *
      */
     public void createPlayers() {
-        player1 = new Player();
-        player2 = new Player();
-        player3 = new Player();
-        player4 = new Player();
+        player1 = new Player(PLAYER_1, p1Color);
+        int i = 0;
+        boolean found = false;
+        while(i < 4 && !found){
+            if(!player1.getColor().equals(playerColors[i])){
+                player2 = new Player(PLAYER_2, playerColors[i]);
+                found = true;
+            }
+            i++;
+        }
+        i = 0;
+        found = false;
+        while(i < 4 && !found){
+            if(!player1.getColor().equals(playerColors[i])){
+                if(!player2.getColor().equals(playerColors[i])){
+                    player3 = new Player(PLAYER_2, playerColors[i]);
+                    found = true;
+                }
+            }
+            i++;
+        }
+
+        player3 = new Player(PLAYER_3);
+        player4 = new Player(PLAYER_4);
 
     }
 
