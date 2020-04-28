@@ -26,7 +26,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     public static final int PLAYER_4 = 4;
 
     //Color list
-    protected Color[] playerColors = {Color.RED, Color.BLUE, Color.WHITE, Color.Orange};
+    public static final Color ORANGE = new Color(230, 108, 44);
+    protected Color[] playerColors = {Color.RED, Color.BLUE, Color.WHITE, ORANGE};
 
     //adds variables for gameplay
     protected int roll;
@@ -46,20 +47,23 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     // button that starts the game
     protected JButton startButton;
 
-    // button that resets the game;
+    // button that resets the game
     protected JButton resetButton;
 
     // button that displays instructions for the game;
     protected JButton instructionsButton;
 
-    // button that starts the game
+    // button that draws resource card
     protected JButton drawRescourceButton;
 
-    // button that resets the game;
+    // button that draws development card
     protected JButton drawDevelopmentButton;
 
-    // button that displays instructions for the game;
+    // button that displays opens trade panel;
     protected JButton tradeButton;
+    
+        // button that rolls dice;
+    protected JButton rollDice;
 
     protected static boolean gameStart = false;
 
@@ -392,8 +396,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      */
     public void createSettlements(){
         // roll dice: highest roll chooses first player to play
-        die1.rollDice();
-        die2.rollDice();
+        roll = die1.rollDice();
+        roll += die2.rollDice();
         //place settlement between two hexes
 
         //place road between two hexes
