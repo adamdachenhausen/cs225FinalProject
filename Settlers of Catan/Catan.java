@@ -252,7 +252,12 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         
         //create players
         createPlayers();
-
+        
+        //display the player's gamepieces (roads, settlements and cities)
+        //createGamepieces();
+        
+        //add the robber to the desert
+        //createRobber();
     }
 
     /**

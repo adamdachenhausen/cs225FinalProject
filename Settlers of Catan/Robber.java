@@ -8,7 +8,7 @@ import javax.swing.*;
 import javax.swing.event.*;
 import java.util.Random;
 /**
- * Write a description of class GamePieces here.
+ * Write a description of class Robber here.
  *
  * @author Kate Nelligan, Lindsay Clark, Adam Dachenhausen
  * @version Spring 2020
@@ -16,8 +16,6 @@ import java.util.Random;
 public class Robber  extends AnimatedGraphicsObject implements ImageObserver{
 
     final static protected int ROBBER = 1;
-
-
     private static Image robber;
 
     /**
@@ -36,7 +34,7 @@ public class Robber  extends AnimatedGraphicsObject implements ImageObserver{
     public void paint(Graphics g){
         // //draw colored circle with robber picture
         //g.drawFilledOval
-        
+
         // g.drawImage(robber, upperLeft.x , upperLeft.y, this);
 
     }
@@ -54,22 +52,8 @@ public class Robber  extends AnimatedGraphicsObject implements ImageObserver{
 
     protected static void loadPic(){
         Toolkit toolkit = Toolkit.getDefaultToolkit();
-        knight = toolkit.getImage("knight.png");    
-        monopoly = toolkit.getImage("monopoly.png");
-        plenty = toolkit.getImage("plenty.png");
-        victoryPoint = toolkit.getImage("victorypoint.png");
-
-        city = toolkit.getImage("city.png");
-        settlement = toolkit.getImage("settlement.png");
-        road = toolkit.getImage("road.png");
-        army = toolkit.getImage("army.png");
         robber = toolkit.getImage("robber.png");
 
-        brick = toolkit.getImage("brick.png");
-        grain = toolkit.getImage("grain.png");
-        ore = toolkit.getImage("ore.png");
-        lumber = toolkit.getImage("lumber.png");
-        wool = toolkit.getImage("wool.png");
     }
 
     @Override

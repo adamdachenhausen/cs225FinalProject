@@ -46,14 +46,21 @@ public class ThreadGraphicsController implements Runnable {
     protected java.util.List<DevelopmentCard> devBank;
     protected java.util.List<Tokens> tokens;
 
+    /** the whole gameboard where tiles are stored */
     protected GameBoard gameboard;
 
+    /** the sea around our hex tiles */
     protected Sea sea;
 
+    /** the status pane to give player directions */
     protected StatusPane statusPane;
 
+    /** Two dice */
     protected Dice die1;
     protected Dice die2;
+
+    /** the robber gamepiece */
+    protected Robber robber;
 
     /** the panel in which our graphics are drawn */
     protected JPanel panel;
@@ -141,7 +148,7 @@ public class ThreadGraphicsController implements Runnable {
                 }
 
                 // if(sea != null){
-                    // sea.paint(g);
+                // sea.paint(g);
                 // }
 
                 if(statusPane != null){
@@ -151,6 +158,10 @@ public class ThreadGraphicsController implements Runnable {
                 if(die1 != null && die2 != null){
                     die1.paint(g);
                     die2.paint(g);
+                }
+
+                if(robber != null){
+                    robber.paint(g);
                 }
 
                 // synchronized (lock) {
