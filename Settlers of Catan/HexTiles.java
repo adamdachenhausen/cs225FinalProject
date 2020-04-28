@@ -45,11 +45,14 @@ public class HexTiles extends AnimatedGraphicsObject{
     protected Resource r;
 
     protected Polygon p;
+
+    private boolean debug = true;
     /**
      * Constructor for objects of class Tiles
      */
     public HexTiles(JComponent container, Point center, Resource r,Token t){
         super(container);
+        this.container = container;
         p = new Polygon();
         this.center=center;
         this.r = r;
@@ -80,17 +83,24 @@ public class HexTiles extends AnimatedGraphicsObject{
      *      \/
      */
     private void completeHex(){
+        //Init points as degrees around a circle, so they can be used multiple times
+        Point zero = new Point(center.x,center.y+SIDE_LENGTH);
+        Point sixty = new Point(center.x+X_OFFSET,center.y+Y_OFFSET1);
+        Point oneHTwenty = new Point(center.x+X_OFFSET,center.y-Y_OFFSET2);
+        Point oneHEighty = new Point(center.x,center.y-SIDE_LENGTH);
+        Point twoHFourty = new Point(center.x-X_OFFSET,center.y-Y_OFFSET1);
+        Point threeH = new Point(center.x-X_OFFSET,center.y+Y_OFFSET2);
 
         //Add points in clockwise rotation starting at northernmost point
-        p.addPoint(center.x,center.y+SIDE_LENGTH);
+        p.addPoint(zero.x,zero.y);
 
-        p.addPoint(center.x+X_OFFSET,center.y+Y_OFFSET1);
+        p.addPoint(sixty.x,sixty.y);
 
-        p.addPoint(center.x+X_OFFSET,center.y-Y_OFFSET2);
-        p.addPoint(center.x,center.y-SIDE_LENGTH);
+        p.addPoint(oneHTwenty.x,oneHTwenty.y);
+        p.addPoint(oneHEighty.x,oneHEighty.y);
 
-        p.addPoint(center.x-X_OFFSET,center.y-Y_OFFSET1);
-        p.addPoint(center.x-X_OFFSET,center.y+Y_OFFSET2);
+        p.addPoint(twoHFourty.x,twoHFourty.y);
+        p.addPoint(threeH.x,threeH.y);
     }
 
     @Override
@@ -131,6 +141,9 @@ public class HexTiles extends AnimatedGraphicsObject{
 
             //Draw the filled polygon
             g.fillPolygon(p);
+
+            //Outline the polygon in black
+            g.setColor(Color.BLACK);
 
             //Draw the polygon outline
             g.drawPolygon(p);
