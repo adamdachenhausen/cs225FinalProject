@@ -233,11 +233,15 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
         setBoard();
 
+        //create dice
+        die1 = new Dice(panel, new Point(550,300));
+        die2 = new Dice(panel, new Point(550,375));
+        
         //pick colors
         selectColor();
-
+        
         //create players
-        createPlayer();
+        createPlayers();
 
     }
 
@@ -307,10 +311,6 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         //draw status pane
         statusPane = new StatusPane(panel, gamePhase, turn);
 
-        //create dice
-        die1 = new Dice(panel, new Point(550,300));
-        die2 = new Dice(panel, new Point(550,375));
-
         //place tokens
 
         //set board with 2 settlements per player
@@ -357,15 +357,25 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         while(i < 4 && !found){
             if(!player1.getColor().equals(playerColors[i])){
                 if(!player2.getColor().equals(playerColors[i])){
-                    player3 = new Player(PLAYER_2, playerColors[i]);
+                    player3 = new Player(PLAYER_3, playerColors[i]);
                     found = true;
                 }
             }
             i++;
         }
-
-        player3 = new Player(PLAYER_3);
-        player4 = new Player(PLAYER_4);
+        i = 0;
+        found = false;
+        while(i < 4 && !found){
+            if(!player1.getColor().equals(playerColors[i])){
+                if(!player2.getColor().equals(playerColors[i])){
+                    if(!player3.getColor().equals(playerColors[i])){
+                        player4 = new Player(PLAYER_4, playerColors[i]);
+                        found = true;
+                    }
+                }
+            }
+            i++;
+        }
 
     }
 
