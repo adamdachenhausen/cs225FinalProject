@@ -7,5 +7,5 @@
  */
 public enum Development
 {
-    MONOPOLY, ROADS, KNIGHT, PLENTY, VICTORY
+    MONOPOLY, ROADBUILD, KNIGHT, PLENTY, VICTORY
 }
