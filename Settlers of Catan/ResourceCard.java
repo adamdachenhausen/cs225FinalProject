@@ -17,7 +17,7 @@ import java.util.Random;
 public class ResourceCard extends AnimatedGraphicsObject implements ImageObserver{
     //Cards: Lumber(19x), Wool(19x), Grain(19x), Brick(19x), Ore(19x);
     // Constants for card numbers in deck
-    public static final int CARD_WIDTH = 75;
+    public static final int CARD_WIDTH = 80;
     public static final int CARD_HEIGHT = 125;
 
     private static Image brick;
@@ -109,7 +109,7 @@ public class ResourceCard extends AnimatedGraphicsObject implements ImageObserve
             }
 
             // //paint text that describes card type
-            Point textPoint = new Point(upperLeft.x + 5, upperLeft.y + 5);
+            Point textPoint = new Point(upperLeft.x + 5, upperLeft.y + CARD_HEIGHT);
             
             g.setColor(Color.BLACK);
             g.setFont(new Font("TimesRoman", Font.BOLD, 15));

@@ -169,7 +169,7 @@ public class ThreadGraphicsController implements Runnable {
 
                 ResourceCard rc;
 
-                //rc = new ResourceCard(panel, Resource.WOOD, new Point(500,500));
+                rc = new ResourceCard(panel, Resource.WOOD, new Point(500,500));
 
 
                 //rc = new  ResourceCard(panel, Resource.WOOL, new Point(500,500));
@@ -178,7 +178,7 @@ public class ThreadGraphicsController implements Runnable {
 
                 //rc = new  ResourceCard(panel, Resource.BRICKS, new Point(500,500));
 
-                rc = new  ResourceCard(panel, Resource.WHEAT, new Point(500,500));
+                //rc = new  ResourceCard(panel, Resource.WHEAT, new Point(500,500));
                 rc.start();
                 rc.paint(g);
 
