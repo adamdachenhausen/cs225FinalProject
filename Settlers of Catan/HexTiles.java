@@ -35,8 +35,7 @@ public class HexTiles extends AnimatedGraphicsObject{
     public static final int VERTEX_VERTEX_LENGTH = 34*MULTIPLIER;
 
     public static final int X_OFFSET = 15*MULTIPLIER;
-    public static final int Y_OFFSET1 = 8*MULTIPLIER;
-    public static final int Y_OFFSET2 = 9*MULTIPLIER;
+    public static final int Y_OFFSET = 8*MULTIPLIER;
 
     protected Point center;
 
@@ -85,11 +84,11 @@ public class HexTiles extends AnimatedGraphicsObject{
     private void completeHex(){
         //Init points as degrees around a circle, so they can be used multiple times
         Point zero = new Point(center.x,center.y+SIDE_LENGTH);
-        Point sixty = new Point(center.x+X_OFFSET,center.y+Y_OFFSET1);
-        Point oneHTwenty = new Point(center.x+X_OFFSET,center.y-Y_OFFSET2);
+        Point sixty = new Point(center.x+X_OFFSET,center.y+Y_OFFSET);
+        Point oneHTwenty = new Point(center.x+X_OFFSET,center.y-Y_OFFSET);
         Point oneHEighty = new Point(center.x,center.y-SIDE_LENGTH);
-        Point twoHFourty = new Point(center.x-X_OFFSET,center.y-Y_OFFSET1);
-        Point threeH = new Point(center.x-X_OFFSET,center.y+Y_OFFSET2);
+        Point twoHFourty = new Point(center.x-X_OFFSET,center.y-Y_OFFSET);
+        Point threeH = new Point(center.x-X_OFFSET,center.y+Y_OFFSET);
 
         //Add points in clockwise rotation starting at northernmost point
         p.addPoint(zero.x,zero.y);
