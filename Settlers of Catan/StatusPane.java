@@ -77,7 +77,7 @@ public class StatusPane extends AnimatedGraphicsObject implements ImageObserver{
         g.setFont(new Font("TimesRoman", Font.BOLD, 15));
         FontMetrics fm = g.getFontMetrics();
 
-        playerInfo = "Brick";
+        playerInfo = "PLAYER: " + turn;
         x = (upperLeft.x + (PANE_WIDTH - fm.stringWidth(playerInfo)) / 2);
         y = (upperLeft.y + fm.getAscent()) + 5;
         g.drawString(playerInfo, x, y);
