@@ -55,6 +55,9 @@ public class ThreadGraphicsController implements Runnable {
     /** the status pane to give player directions */
     protected StatusPane statusPane;
 
+    /** Card decks */
+    protected ResourceDeck resourceDeck;
+
     /** Two dice */
     protected Dice die1;
     protected Dice die2;
@@ -163,6 +166,21 @@ public class ThreadGraphicsController implements Runnable {
                 if(robber != null){
                     robber.paint(g);
                 }
+
+                ResourceCard rc;
+
+                //rc = new ResourceCard(panel, Resource.WOOD, new Point(500,500));
+
+
+                //rc = new  ResourceCard(panel, Resource.WOOL, new Point(500,500));
+
+                //rc = new  ResourceCard(panel, Resource.ORE, new Point(500,500));
+
+                //rc = new  ResourceCard(panel, Resource.BRICKS, new Point(500,500));
+
+                rc = new  ResourceCard(panel, Resource.WHEAT, new Point(500,500));
+                rc.start();
+                rc.paint(g);
 
                 // synchronized (lock) {
                 // while (i < hexTilesList.size()) {

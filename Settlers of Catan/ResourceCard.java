@@ -34,6 +34,7 @@ public class ResourceCard extends AnimatedGraphicsObject implements ImageObserve
         super(container);
         cardType = r;
         this.upperLeft = upperLeft;
+        visible = true;
     }
 
     public void showCard(){

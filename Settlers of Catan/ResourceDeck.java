@@ -30,6 +30,10 @@ public class ResourceDeck extends AnimatedGraphicsObject{
         new ArrayList<ResourceCard>();
     }
 
+    public ArrayList getList(){
+    return resourceDeck;    
+    }
+    
     /** Populates the r stack with exact number of each development card
      *  Then shuffles the stack, so when items are popped, they are random
      */
