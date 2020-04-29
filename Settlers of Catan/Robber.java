@@ -16,26 +16,36 @@ import java.util.Random;
 public class Robber  extends AnimatedGraphicsObject implements ImageObserver{
 
     final static protected int ROBBER = 1;
+    
+    final static protected int SIZE = 50;
+    
     private static Image robber;
-
+    
+    private Point upperLeft;
+    
     /**
      * Constructor for objects of class GamePieces
      */
-    public Robber(JComponent container)
+    public Robber(JComponent container, Point upperLeft)
     {
         super(container);
+        
+        this.upperLeft = upperLeft;
     }
 
-    public void showCard(){
+    public void showRobber(){
         visible = true;
     }
 
     @Override
     public void paint(Graphics g){
         // //draw colored circle with robber picture
-        //g.drawFilledOval
+        
+        g.setColor(Color.BLACK);
+        
+        g.fillOval(upperLeft.x + 2, upperLeft.y + 2, SIZE , SIZE);
 
-        // g.drawImage(robber, upperLeft.x , upperLeft.y, this);
+        g.drawImage(robber, upperLeft.x + 2, upperLeft.y + 2, this);
 
     }
 

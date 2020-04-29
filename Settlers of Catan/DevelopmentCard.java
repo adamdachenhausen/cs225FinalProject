@@ -14,23 +14,10 @@ import java.util.Random;
  * @version Spring 2020
  */
 public class DevelopmentCard extends AnimatedGraphicsObject implements ImageObserver{
-
-    //Knight card (x14)- lets the player move the robber    
-    //Road Building (x2)- player can place 2 roads as if they just built them
-    //Year of Plenty (x2)- the player can draw 2 resource cards of their choice from the bank
-    //Monopoly (x2)- player can claim all resource cards of a specific declared type
-    //Victory Point card (x5)- 1 additional Victory Point is added to the owners total and doesn't need to be played to win.
     // Constants for card numbers in deck
     
     public static final int CARD_WIDTH = 80;
     public static final int CARD_HEIGHT = 125;
-    
-    // Constants for card numbers in deck
-    public static final int KNIGHT = 14;
-    public static final int ROAD_BUILDING = 2;
-    public static final int YEAR_PLENTY = 2;
-    public static final int MONOPOLY = 2;
-    public static final int VICTORY_PT_CARD = 5;
 
     private static Image knight;    
     private static Image monopoly;

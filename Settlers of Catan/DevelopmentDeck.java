@@ -23,6 +23,9 @@ public class DevelopmentDeck extends AnimatedGraphicsObject{
     public static final int YEAR_PLENTY = 2;
     public static final int MONOPOLY = 2;
     public static final int VICTORY_PT_CARD = 5;
+    
+        //temporary start point to draw the card
+    private Point cardStartPoint = new Point(500,500);
 
     /**
      * Constructor for objects of class DevelopmentDeck
