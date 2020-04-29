@@ -387,7 +387,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         //ADD BACK WHEN SEA IS DONE
         //sea = new Sea(panel, new Point(200, 5));
 
-        gameboard = new GameBoard(panel,new Point(300,300));
+        gameboard = new GameBoard(panel,new Point(350,350));
         gameboard.createBoard();
         gameboard.start();
         gameboard.startBoard();
