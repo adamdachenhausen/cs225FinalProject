@@ -81,8 +81,8 @@ public class ResourceCard extends AnimatedGraphicsObject implements ImageObserve
             // //draw colored rectangle
             getColor(g);
             g.fillRect(upperLeft.x,upperLeft.y, CARD_WIDTH, CARD_HEIGHT);
-            g.setColor(Color.WHITE);
-            g.drawRect(upperLeft.x,upperLeft.y, CARD_WIDTH, CARD_HEIGHT);
+            // g.setColor(Color.BLACK);
+            // g.drawRect(upperLeft.x,upperLeft.y, CARD_WIDTH, CARD_HEIGHT);
 
             Point picturePoint = new Point(upperLeft.x + 5, upperLeft.y + 15);
             // //paint image of card type icon
@@ -109,29 +109,48 @@ public class ResourceCard extends AnimatedGraphicsObject implements ImageObserve
             }
 
             // //paint text that describes card type
-            Point textPoint = new Point(upperLeft.x + 5, upperLeft.y + CARD_HEIGHT);
-            
-            g.setColor(Color.BLACK);
+            String cardString;
+            int x = 0;
+            int y = 0;
+
+
+            g.setColor(Color.WHITE);
             g.setFont(new Font("TimesRoman", Font.BOLD, 15));
+                        FontMetrics fm = g.getFontMetrics();
             switch(cardType){
                 case BRICKS:
-                g.drawString("Brick", textPoint.x , textPoint.y);
+                cardString = "Brick";
+                x = (upperLeft.x + (CARD_WIDTH - fm.stringWidth(cardString)) / 2);
+                y = (upperLeft.y + CARD_HEIGHT - fm.getAscent());
+                g.drawString(cardString, x, y);
                 break;
 
                 case WOOD:
-                g.drawString("Lumber", textPoint.x , textPoint.y);
+                cardString = "Lumber";
+                x = (upperLeft.x + (CARD_WIDTH - fm.stringWidth(cardString)) / 2);
+                y = (upperLeft.y + CARD_HEIGHT - fm.getAscent());
+                g.drawString(cardString, x, y);
                 break;
 
                 case ORE:
-                g.drawString("Ore", textPoint.x , textPoint.y);
+                cardString = "Ore";
+                x = (upperLeft.x + (CARD_WIDTH - fm.stringWidth(cardString)) / 2);
+                y = (upperLeft.y + CARD_HEIGHT - fm.getAscent());
+                g.drawString(cardString, x, y);
                 break;
 
                 case WHEAT:
-                g.drawString("Grain", textPoint.x , textPoint.y);
+                cardString = "Grain";
+                x = (upperLeft.x + (CARD_WIDTH - fm.stringWidth(cardString)) / 2);
+                y = (upperLeft.y + CARD_HEIGHT - fm.getAscent());
+                g.drawString(cardString, x, y);
                 break;
 
                 case WOOL:
-                g.drawString("Wool", textPoint.x , textPoint.y);
+                cardString = "Wool";
+                x = (upperLeft.x + (CARD_WIDTH - fm.stringWidth(cardString)) / 2);
+                y = (upperLeft.y + CARD_HEIGHT - fm.getAscent());
+                g.drawString(cardString, x, y);
                 break;
             }
         }

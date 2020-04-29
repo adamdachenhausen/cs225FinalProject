@@ -21,14 +21,6 @@ public class StatusPane extends AnimatedGraphicsObject implements ImageObserver{
     public static final Color BROWN = new Color(101, 67,33);
     public static final int PANE_WIDTH = 300;
     public static final int PANE_HEIGHT = 850;
-    // instance variables - replace the example below with your own
-
-    private static Image dice1;
-    private static Image dice2;
-    private static Image dice3;
-    private static Image dice4;
-    private static Image dice5;
-    private static Image dice6;
 
     //what is happening in the game? dice roll, trading etc
     private String gamePhase;
@@ -55,9 +47,7 @@ public class StatusPane extends AnimatedGraphicsObject implements ImageObserver{
         g.setColor(LT_BROWN);
         g.fillRect(upperLeft.x,upperLeft.y, PANE_WIDTH, 35);  
 
-
         updateText(g);
-
         // if(!done){
         // //draw image of explosion
         // if(value == 1){
@@ -78,27 +68,20 @@ public class StatusPane extends AnimatedGraphicsObject implements ImageObserver{
     }
 
     public void updateText(Graphics g){
-        // //Player text
-        // Point startText = upperLeft;
-        // //System.out.println(upperLeft.x);
-        // FontMetrics fm = g.getFontMetrics();
-        // String player = "PLAYER " + turn;
-        // g.setFont(new Font("TimesRoman", Font.BOLD, 15));
-        // fm = g.getFontMetrics();
-        // //int x = ((container.getWidth() -PANE_WIDTH);
-        // int x = upperLeft.x ;
-        // int y = (upperLeft.y - fm.getAscent() + 5);
+        //Variables to paint text
+        String playerInfo;
+        int x = 0;
+        int y = 0;
 
-        // //int x = 900;
-        // //int y = 25;
-
-        // g.setColor(Color.BLACK);
-        // g.drawString(player, x, y);
-
-        String playerInfo = "PLAYER " + turn + " TURN";
-        g.setColor(Color.BLACK);
+        g.setColor(BROWN);
         g.setFont(new Font("TimesRoman", Font.BOLD, 15));
-        g.drawString(playerInfo, 900,20);  
+        FontMetrics fm = g.getFontMetrics();
+
+        playerInfo = "Brick";
+        x = (upperLeft.x + (PANE_WIDTH - fm.stringWidth(playerInfo)) / 2);
+        y = (upperLeft.y + fm.getAscent()) + 5;
+        g.drawString(playerInfo, x, y);
+
 
         container.repaint();
 
@@ -111,7 +94,6 @@ public class StatusPane extends AnimatedGraphicsObject implements ImageObserver{
         container.repaint();
         // sleepWithCatch(DELAY_TIME);
         // container.repaint();
-
 
     }
 
@@ -128,12 +110,7 @@ public class StatusPane extends AnimatedGraphicsObject implements ImageObserver{
 
     protected static void loadPic(){
         Toolkit toolkit = Toolkit.getDefaultToolkit();
-        dice1 = toolkit.getImage("dice1.png");
-        dice2 = toolkit.getImage("dice2.png");
-        dice3 = toolkit.getImage("dice3.png");
-        dice4 = toolkit.getImage("dice4.png");
-        dice5 = toolkit.getImage("dice5.png");
-        dice6 = toolkit.getImage("dice6.png");
+
 
     }
 
