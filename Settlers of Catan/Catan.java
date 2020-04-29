@@ -54,22 +54,25 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     protected JButton instructionsButton;
 
     // button that draws resource card
-    protected JButton drawRescourceButton;
+    protected JButton drawResourceButton;
 
     // button that draws development card
     protected JButton drawDevelopmentButton;
-    
-        // button that draws development card
-    protected JButton discardCardButton;
-    
-            // button that draws development card
+
+    // button that makes game continue to next phase
+    protected JButton continueButton;
+
+    // button that draws development card
     protected JButton useDevCardButton;
+
+    // button that draws development card
+    protected JButton buildButton;
 
     // button that displays opens trade panel;
     protected JButton tradeButton;
-    
-        // button that rolls dice;
-    protected JButton rollDice;
+
+    // button that rolls dice;
+    protected JButton rollDiceButton;
 
     protected static boolean gameStart = false;
 
@@ -140,23 +143,55 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         JPanel scorePanel = new JPanel();
         bottomPanel.add(scorePanel);
 
-        JLabel buttonInstructions = new JLabel("Click 'Start' to play the game!");
-        buttonInstructions.setFont(buttonInstructions.getFont().deriveFont(Font.BOLD,15));
-        buttonInstructions.setBorder(new EmptyBorder(5,330,10,330));
-        buttonPanel.add(buttonInstructions);
+        // JLabel buttonInstructions = new JLabel("Click 'Start' to play the game!");
+        // buttonInstructions.setFont(buttonInstructions.getFont().deriveFont(Font.BOLD,15));
+        // buttonInstructions.setBorder(new EmptyBorder(5,330,10,330));
+        // buttonPanel.add(buttonInstructions);
 
         //Construct buttons
         startButton = new JButton("Start");
         startButton.setToolTipText("Press to begin the game");
+
         resetButton = new JButton("Reset");
         resetButton.setToolTipText("Press to reset the game");
+
         instructionsButton = new JButton("Instructions");
         instructionsButton.setToolTipText("Press for instructions on how to play the game");
+
+        drawResourceButton = new JButton("Draw Resource");
+        drawResourceButton.setToolTipText("Draws a resource card");
+
+        drawDevelopmentButton = new JButton("Draw Development");
+        drawDevelopmentButton.setToolTipText("Draws a development card");
+
+        useDevCardButton = new JButton("Use Development");
+        useDevCardButton.setToolTipText("Uses a development card");
+
+        buildButton = new JButton("Build");
+        buildButton.setToolTipText("Build using resources");
+
+        tradeButton = new JButton("Trade Resource");
+        tradeButton.setToolTipText("Trade with another player");
+
+        rollDiceButton = new JButton("Roll Dice");
+        rollDiceButton.setToolTipText("Rolls the dice");
+
+        continueButton = new JButton("Continue");
+        continueButton.setToolTipText("Continues to the next phase of the game");
 
         //Add buttons
         buttonPanel.add(startButton);
         buttonPanel.add(resetButton);
         buttonPanel.add(instructionsButton);
+        buttonPanel.add(drawResourceButton);
+        buttonPanel.add(drawDevelopmentButton);
+        buttonPanel.add(useDevCardButton);
+        buttonPanel.add(buildButton);
+        buttonPanel.add(tradeButton);
+        buttonPanel.add(rollDiceButton);
+        buttonPanel.add(continueButton);
+
+
     }
 
     /**
@@ -171,9 +206,19 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
         //Add action listeners to buttons
         startButton.addActionListener(this);
+        resetButton.addActionListener(this);
+        instructionsButton.addActionListener(this);
 
         resetButton.addActionListener(this);
         instructionsButton.addActionListener(this);
+        drawResourceButton.addActionListener(this);
+        drawDevelopmentButton.addActionListener(this);
+        useDevCardButton.addActionListener(this);
+        rollDiceButton.addActionListener(this);
+        tradeButton.addActionListener(this);
+        continueButton.addActionListener(this);
+        buildButton.addActionListener(this);
+
         panel.addMouseListener(this);
         panel.addMouseMotionListener(this);
     }
@@ -246,16 +291,16 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         //create dice
         die1 = new Dice(panel, new Point(550,300));
         die2 = new Dice(panel, new Point(550,375));
-        
+
         //pick colors
         selectColor();
-        
+
         //create players
         createPlayers();
-        
+
         //display the player's gamepieces (roads, settlements and cities)
         //createGamepieces();
-        
+
         //add the robber to the desert
         //createRobber();
     }
@@ -299,6 +344,26 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         if(e.getSource().equals(instructionsButton)){
             showInstructions();
         }
+
+        //fix these buttons
+        if(e.getSource().equals(drawResourceButton)){
+            showInstructions();
+        }
+        if(e.getSource().equals(drawDevelopmentButton)){
+            showInstructions();
+        }
+        if(e.getSource().equals(useDevCardButton)){
+            showInstructions();
+        }
+        if(e.getSource().equals(rollDiceButton)){
+            showInstructions();
+        }
+        if(e.getSource().equals(continueButton)){
+            showInstructions();
+        }
+        if(e.getSource().equals(tradeButton)){
+            showInstructions();
+        }
     }
     //----------------------------------------------------------
 
@@ -318,10 +383,10 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         //Forest Hex (4x), Pasture Hex (4x), Fields Hex (4x), Hills Hex (3x)
         //Mountain Hex(3x), Desert Hex(1x)
         panel.setBackground(GameBoard.BACKGROUND);
-        
+
         //ADD BACK WHEN SEA IS DONE
         //sea = new Sea(panel, new Point(200, 5));
-        
+
         gameboard = new GameBoard(panel,new Point(300,300));
         gameboard.createBoard();
         gameboard.start();
