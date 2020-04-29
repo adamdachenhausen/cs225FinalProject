@@ -155,9 +155,9 @@ public class HexTiles extends AnimatedGraphicsObject{
 
     @Override
     public void run(){
-        while(!done){
+        // while(!done){
 
-            container.repaint();
-        }
+            // container.repaint();
+        // }
     }
 }
