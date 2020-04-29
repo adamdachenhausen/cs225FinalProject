@@ -21,7 +21,10 @@ public class ResourceDeck extends AnimatedGraphicsObject{
     public static final int BRICK = 19;
     public static final int ORE = 19;
     
+    
+    //temporary start point to draw the card
     private Point cardStartPoint = new Point(500,500);
+    
     /**
      * Constructor for objects of class ResourceDeck
      */
