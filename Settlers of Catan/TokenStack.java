@@ -60,12 +60,14 @@ public class TokenStack extends AnimatedGraphicsObject{
         while(tokenValue <= 12){
             if(tokenValue == 1 || tokenValue == 12){
                 Tokens t = new Tokens(container, upperLeft, tokenValue);
+                tokenStack.push(t);
             }else if(tokenValue == 7){
                 //do nothing (maybe create robber here?)
                 
             }else{
                 for(int i = 0; i < 2; i++){
                   Tokens t = new Tokens(container, upperLeft, tokenValue);  
+                  tokenStack.push(t);
                 }
             }
 
