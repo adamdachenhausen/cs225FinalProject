@@ -21,17 +21,17 @@ public class Tokens extends AnimatedGraphicsObject{
 
     final static protected int SIZE = 75;
 
-    public static final int NUM_TWO = 1;
-    public static final int NUM_THREE = 2;
-    public static final int NUM_FOUR = 2;
-    public static final int NUM_FIVE =2;
-    public static final int NUM_SIX = 2;
-    public static final int NUM_EIGHT = 2;
-    public static final int NUM_NINE = 2;
-    public static final int NUM_TEN = 2;
-    public static final int NUM_ELEVEN = 2;
-    public static final int NUM_TWELVE = 1;
-    public static final int TOTAL_TOKENS = 19;
+    public static final int NUM_TWO = 2;
+    public static final int NUM_THREE = 3;
+    public static final int NUM_FOUR = 4;
+    public static final int NUM_FIVE =5;
+    public static final int NUM_SIX = 6;
+    public static final int NUM_EIGHT = 8;
+    public static final int NUM_NINE = 9;
+    public static final int NUM_TEN = 10;
+    public static final int NUM_ELEVEN = 11;
+    public static final int NUM_TWELVE = 12;
+
     //Have to put this so we don't deal with null
     public static final int NUM_ZERO = 1;
 
@@ -55,7 +55,7 @@ public class Tokens extends AnimatedGraphicsObject{
     @Override
     public void paint(Graphics g){
         if(visible){
-            // //draw oval that represents token
+            //draw oval that represents token
             g.setColor(Color.WHITE);
 
             g.fillOval(upperLeft.x, upperLeft.y, SIZE , SIZE);
@@ -65,127 +65,68 @@ public class Tokens extends AnimatedGraphicsObject{
             g.drawOval(upperLeft.x, upperLeft.y, SIZE , SIZE);
 
             Point numberPoint = new Point(upperLeft.x + 5, upperLeft.y + 15);
-            
+
             //paint number value on the token
             switch(tokenValue){
-                case BRICKS:
-                g.drawImage(brick, picturePoint.x , picturePoint.y, this);
+                case NUM_TWO:
+                getNumberText(g);
                 break;
 
-                case WOOD:
-                g.drawImage(lumber, picturePoint.x , picturePoint.y, this);
+                case NUM_THREE:
+                getNumberText(g);
                 break;
 
-                case ORE:
-                g.drawImage(ore, picturePoint.x , picturePoint.y, this);
+                case NUM_FOUR:
+                getNumberText(g);
                 break;
 
-                case WHEAT:
-                g.drawImage(grain, picturePoint.x , picturePoint.y, this);
+                case NUM_FIVE:
+                getNumberText(g);
                 break;
 
-                case WOOL:
-                g.drawImage(wool, picturePoint.x , picturePoint.y, this);
+                case NUM_SIX:
+                getNumberText(g);
                 break;
 
-                case BRICKS:
-                g.drawImage(brick, picturePoint.x , picturePoint.y, this);
+                case NUM_EIGHT:
+                getNumberText(g);
                 break;
 
-                case WOOD:
-                g.drawImage(lumber, picturePoint.x , picturePoint.y, this);
+                case NUM_NINE:
+                getNumberText(g);
                 break;
 
-                case ORE:
-                g.drawImage(ore, picturePoint.x , picturePoint.y, this);
+                case NUM_TEN:
+                getNumberText(g);
                 break;
 
-                case WHEAT:
-                g.drawImage(grain, picturePoint.x , picturePoint.y, this);
+                case NUM_ELEVEN:
+                getNumberText(g);
                 break;
 
-                case WOOL:
-                g.drawImage(wool, picturePoint.x , picturePoint.y, this);
-                break;
-            }
-
-            // //paint text that describes card type
-            String cardString;
-            int x = 0;
-            int y = 0;
-
-            g.setColor(Color.WHITE);
-            g.setFont(new Font("TimesRoman", Font.BOLD, 15));
-            FontMetrics fm = g.getFontMetrics();
-            switch(cardType){
-                case BRICKS:
-                cardString = "Brick";
-                x = (upperLeft.x + (CARD_WIDTH - fm.stringWidth(cardString)) / 2);
-                y = (upperLeft.y + CARD_HEIGHT - fm.getAscent());
-                g.drawString(cardString, x, y);
-                break;
-
-                case WOOD:
-                cardString = "Lumber";
-                x = (upperLeft.x + (CARD_WIDTH - fm.stringWidth(cardString)) / 2);
-                y = (upperLeft.y + CARD_HEIGHT - fm.getAscent());
-                g.drawString(cardString, x, y);
-                break;
-
-                case ORE:
-                cardString = "Ore";
-                x = (upperLeft.x + (CARD_WIDTH - fm.stringWidth(cardString)) / 2);
-                y = (upperLeft.y + CARD_HEIGHT - fm.getAscent());
-                g.drawString(cardString, x, y);
-                break;
-
-                case WHEAT:
-                cardString = "Grain";
-                x = (upperLeft.x + (CARD_WIDTH - fm.stringWidth(cardString)) / 2);
-                y = (upperLeft.y + CARD_HEIGHT - fm.getAscent());
-                g.drawString(cardString, x, y);
-                break;
-
-                case WOOL:
-                cardString = "Wool";
-                x = (upperLeft.x + (CARD_WIDTH - fm.stringWidth(cardString)) / 2);
-                y = (upperLeft.y + CARD_HEIGHT - fm.getAscent());
-                g.drawString(cardString, x, y);
+                case NUM_TWELVE:
+                getNumberText(g);
                 break;
             }
+
         }
-        // for(int i=0; i<GameBoard.board.length;i++){
 
-        // for(int j=0; j<board[0].length;j++){
-        // if(board[i][j]!= null){
-        // Point tokenPt = board[i][j].getUpperLeft();
 
-        // g.setColor(Color.WHITE);
-        // g.fillOval(upperLeft.x, upperLeft.y, SIZE , SIZE);
-        // g.setColor(Color.BLACK);
-        // g.drawOval(upperLeft.x, upperLeft.y, SIZE , SIZE);
-        // int x = upperLeft.x + SIZE/2 - (robber.getWidth(this)/2);
-        // int y = upperLeft.y + SIZE/2 - (robber.getHeight(this)/2);
-        // g.drawImage(robber, x, y, this);
+    }
 
-        // String playerInfo;
-        // int x = 0;
-        // int y = 0;
+    public void getNumberText(Graphics g){
+        String numberInfo;
+        int x = 0;
+        int y = 0;
 
-        // g.setColor(BROWN);
-        // g.setFont(new Font("TimesRoman", Font.BOLD, 15));
-        // FontMetrics fm = g.getFontMetrics();
+        g.setColor(Color.BLACK);
+        g.setFont(new Font("TimesRoman", Font.BOLD, 25));
+        FontMetrics fm = g.getFontMetrics();
 
-        // playerInfo = "PLAYER: " + turn;
-        // x = (upperLeft.x + (PANE_WIDTH - fm.stringWidth(playerInfo)) / 2);
-        // y = (upperLeft.y + fm.getAscent()) + 5;
-        // g.drawString(playerInfo, x, y);
-
-        // }
-        // }
-
-        // }
-
+        numberInfo = "" + tokenValue;
+        x = (upperLeft.x + (SIZE - fm.stringWidth(numberInfo)) / 2);
+        y = (upperLeft.y + fm.getAscent()) + 5;
+        g.drawString(numberInfo, x, y);
     }
 
     @Override
