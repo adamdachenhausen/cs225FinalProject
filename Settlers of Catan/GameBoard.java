@@ -23,6 +23,8 @@ public class GameBoard extends AnimatedGraphicsObject
     public static final int BOARD_WIDTH = 5;
     public static final int OFFSET = HexTiles.SIDE_LENGTH;
 
+    public static final int HEX_SIZE = 136;
+
     //This is the polygon that constructs the hexagon sea
     public static final int SEA_SIDE_LENGTH = OFFSET * BOARD_WIDTH;
 
@@ -87,9 +89,7 @@ public class GameBoard extends AnimatedGraphicsObject
         board[2][4] = new HexTiles(panel,center, r.pop(),t.pop(),(int)(HexTiles.SIDE_SIDE_LENGTH+4) * 2,0);
         board[2][3] = new HexTiles(panel,center, r.pop(),t.pop(),(int)HexTiles.SIDE_SIDE_LENGTH+4,0);
 
-        
         //CREATE ROW 3
-
         //Create left side
         board[3][0] = new HexTiles(panel,center, r.pop(),t.pop(),(int)-HexTiles.SIDE_LENGTH*2-47,(int)HexTiles.SIDE_SIDE_LENGTH-15);
         board[3][1] = new HexTiles(panel,center, r.pop(),t.pop(),(int)-HexTiles.SIDE_LENGTH+7,(int)HexTiles.SIDE_SIDE_LENGTH-15);
@@ -151,12 +151,34 @@ public class GameBoard extends AnimatedGraphicsObject
         }
     }
 
-    public Point getHexPoint(){
+    /**
+     * This returns the point where the hex is located
+     *
+     * @return The return value
+     */
+    public Point getHexPosition(){
         return center;
     }
-    
-        public Point getHexSize(){
-        return center;
+
+    public int getHexSize(){
+
+        return HEX_SIZE;
+    }
+
+    public Point findHex(String hexType){
+        Point hexPt = upperLeft;
+        for(int i=0; i<board.length;i++){
+
+            for(int j=0; j<board[0].length;j++){
+                if(board[i][j]!= null){
+                    if(board[i][j].getHexType().equals(hexType)){
+                        hexPt = board[i][j].getHexPoint();
+                    }
+                }
+            }
+
+        }
+        return hexPt;
     }
 
     public HexTiles[][] getTiles(){
