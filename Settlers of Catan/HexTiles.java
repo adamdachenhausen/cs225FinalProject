@@ -58,6 +58,10 @@ public class HexTiles extends AnimatedGraphicsObject{
 
         //Outsource completing the polygon to make it a hexagon
         completeHex();
+        
+        //Creates a string value of the type of hex it is
+        //ex. brick resource is a "hill"
+        createHexType();
     }
 
     /**
@@ -150,6 +154,43 @@ public class HexTiles extends AnimatedGraphicsObject{
             //Set g back to the original color
             g.setColor(cur);
         }
+    }
+
+    public Point getHexPoint(){
+        return center;
+    }
+    
+        public String getHexType(){
+        return type;
+    }
+
+    public void createHexType(){
+        switch(r){
+            case BRICKS:
+            type = "Hill";
+            break;
+
+            case WOOD:
+            type = "Forest";
+            break;
+
+            case ORE:
+            type = "Mountain";
+            break;
+
+            case WHEAT:
+            type = "Field";
+            break;
+
+            case WOOL:
+            type = "Pasture";
+            break;
+
+            case SAND:
+            type = "Desert";
+            break;
+        }
+
     }
 
     @Override

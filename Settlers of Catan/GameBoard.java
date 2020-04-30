@@ -43,7 +43,7 @@ public class GameBoard extends AnimatedGraphicsObject
 
         board=new HexTiles[BOARD_WIDTH][BOARD_WIDTH];
         r = Resources.populateR();
-        t = Tokens.populateT();
+        //t = Tokens.populateT();
         this.center = center;
 
         sea = Sea.createSea(center);
@@ -53,31 +53,29 @@ public class GameBoard extends AnimatedGraphicsObject
      *  
      */
     protected void createBoard(){
-        
+
         //CREATE ROW 0
-        
+
         //Create left side hexagon
         board[0][0] = new HexTiles(panel,center, r.pop(),t.pop(),-(int)HexTiles.SIDE_LENGTH-54,-(int)HexTiles.SIDE_LENGTH*3-2);
-        
+
         //Create middle hexagon
         board[0][1] = new HexTiles(panel,center, r.pop(),t.pop(),0,-(int)HexTiles.SIDE_LENGTH*3-2);
-        
+
         //Create right hexagon
         board[0][2] = new HexTiles(panel,center, r.pop(),t.pop(),(int)HexTiles.SIDE_LENGTH+54,-(int)HexTiles.SIDE_LENGTH*3-2);
-        
-        
+
         //CREATE ROW 1
-        
         //Create left side
         board[1][0] = new HexTiles(panel,center, r.pop(),t.pop(),(int)-HexTiles.SIDE_LENGTH*2-47,(int)-HexTiles.SIDE_SIDE_LENGTH+15);
         board[1][1] = new HexTiles(panel,center, r.pop(),t.pop(),(int)-HexTiles.SIDE_LENGTH+7,(int)-HexTiles.SIDE_SIDE_LENGTH+15);
-        
+
         //Create right side
         board[1][2] = new HexTiles(panel,center, r.pop(),t.pop(),(int)HexTiles.SIDE_LENGTH-7,(int)-HexTiles.SIDE_SIDE_LENGTH+15);
         board[1][3] = new HexTiles(panel,center, r.pop(),t.pop(),(int)HexTiles.SIDE_LENGTH*2+47,(int)-HexTiles.SIDE_SIDE_LENGTH+15);
-        
+
         //CREATE ROW 2
-        
+
         //Create middle hexagon
         board[2][2] = new HexTiles(panel,center, r.pop(),t.pop());
 
@@ -88,30 +86,29 @@ public class GameBoard extends AnimatedGraphicsObject
         //Create hexagons to the right of center
         board[2][4] = new HexTiles(panel,center, r.pop(),t.pop(),(int)(HexTiles.SIDE_SIDE_LENGTH+4) * 2,0);
         board[2][3] = new HexTiles(panel,center, r.pop(),t.pop(),(int)HexTiles.SIDE_SIDE_LENGTH+4,0);
-        
-        
+
         
         //CREATE ROW 3
-        
+
         //Create left side
         board[3][0] = new HexTiles(panel,center, r.pop(),t.pop(),(int)-HexTiles.SIDE_LENGTH*2-47,(int)HexTiles.SIDE_SIDE_LENGTH-15);
         board[3][1] = new HexTiles(panel,center, r.pop(),t.pop(),(int)-HexTiles.SIDE_LENGTH+7,(int)HexTiles.SIDE_SIDE_LENGTH-15);
-        
+
         //Create right side
         board[3][2] = new HexTiles(panel,center, r.pop(),t.pop(),(int)HexTiles.SIDE_LENGTH-7,(int)HexTiles.SIDE_SIDE_LENGTH-15);
         board[3][3] = new HexTiles(panel,center, r.pop(),t.pop(),(int)HexTiles.SIDE_LENGTH*2+47,(int)HexTiles.SIDE_SIDE_LENGTH-15);
-        
+
         //CREATE ROW 4
-        
+
         //Create left side hexagon
         board[4][0] = new HexTiles(panel,center, r.pop(),t.pop(),-(int)HexTiles.SIDE_LENGTH-54,(int)HexTiles.SIDE_LENGTH*3+2);
-        
+
         //Create middle hexagon
         board[4][1] = new HexTiles(panel,center, r.pop(),t.pop(),0,(int)HexTiles.SIDE_LENGTH*3+2);
-        
+
         //Create right hexagon
         board[4][2] = new HexTiles(panel,center, r.pop(),t.pop(),(int)HexTiles.SIDE_LENGTH+54,(int)HexTiles.SIDE_LENGTH*3+2);
-        
+
     }
 
     /**
@@ -153,7 +150,15 @@ public class GameBoard extends AnimatedGraphicsObject
 
         }
     }
+
+    public Point getHexPoint(){
+        return center;
+    }
     
+        public Point getHexSize(){
+        return center;
+    }
+
     public HexTiles[][] getTiles(){
         return board;
     }
