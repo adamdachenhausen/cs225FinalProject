@@ -41,9 +41,9 @@ public class ThreadGraphicsController implements Runnable {
     public static final Color SEA = new Color(49, 159, 181);
 
     /** list of animated graphics objects currently on the screen */
-    protected java.util.List<HexTiles> hexTilesList;
-    protected java.util.List<ResourceCard> resourceBank;
-    protected java.util.List<DevelopmentCard> devBank;
+    //protected java.util.List<HexTiles> hexTilesList;
+    protected java.util.List<ResourceDeck> resourceBank;
+    protected java.util.List<DevelopmentDeck> devBank;
     protected java.util.List<Tokens> tokens;
 
     /** the whole gameboard where tiles are stored */
@@ -54,9 +54,6 @@ public class ThreadGraphicsController implements Runnable {
 
     /** the status pane to give player directions */
     protected StatusPane statusPane;
-
-    /** Card decks */
-    protected ResourceDeck resourceDeck;
 
     /** Two dice */
     protected Dice die1;
@@ -171,13 +168,9 @@ public class ThreadGraphicsController implements Runnable {
 
                 // rc = new ResourceCard(panel, Resource.WOOD, new Point(500,500));
 
-
                 //rc = new  ResourceCard(panel, Resource.WOOL, new Point(500,500));
-
                 //rc = new  ResourceCard(panel, Resource.ORE, new Point(500,500));
-
                 //rc = new  ResourceCard(panel, Resource.BRICKS, new Point(500,500));
-
                 //rc = new  ResourceCard(panel, Resource.WHEAT, new Point(500,500));
                 // rc.start();
                 // rc.paint(g);
@@ -212,9 +205,9 @@ public class ThreadGraphicsController implements Runnable {
         addListeners(panel);
 
         // construct the list of AnimatedGraphicsObject
-        hexTilesList = new ArrayList<HexTiles>();
-        resourceBank = new ArrayList<ResourceCard>();
-        devBank = new ArrayList<DevelopmentCard>();
+        //hexTilesList = new ArrayList<HexTiles>();
+        resourceBank = new ArrayList<ResourceDeck>();
+        devBank = new ArrayList<DevelopmentDeck>();
         tokens = new ArrayList<Tokens>();
 
         // display the window we've created

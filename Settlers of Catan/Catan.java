@@ -386,7 +386,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
         //ADD BACK WHEN SEA IS DONE
         //sea = new Sea(panel, new Point(200, 5));
-
+        
+        //Draw the gameboard pieces
         gameboard = new GameBoard(panel,new Point(350,350));
         gameboard.createBoard();
         gameboard.start();
@@ -396,6 +397,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         statusPane = new StatusPane(panel, gamePhase, turn);
 
         //place tokens
+        //tokens.populateT();
+        
         
         //place robber in the desert
         //Point robberPt = gameboard.getDesert() -- placeholder point below

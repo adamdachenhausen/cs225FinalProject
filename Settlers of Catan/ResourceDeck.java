@@ -30,7 +30,7 @@ public class ResourceDeck extends AnimatedGraphicsObject{
      */
     public ResourceDeck(JComponent container){
         super(container);
-        new ArrayList<ResourceCard>();
+        resourceDeck = new ArrayList<ResourceCard>();
     }
 
     public ArrayList getList(){
