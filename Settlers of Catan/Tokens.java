@@ -33,7 +33,7 @@ public class Tokens extends AnimatedGraphicsObject{
     public static final int NUM_TWELVE = 12;
 
     //Have to put this so we don't deal with null
-    public static final int NUM_ZERO = 1;
+    //public static final int NUM_ZERO = 1;
 
     protected int tokenValue;
 
