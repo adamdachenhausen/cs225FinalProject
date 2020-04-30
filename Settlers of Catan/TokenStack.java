@@ -14,7 +14,7 @@ import java.util.Random;
  * @version Spring 2020
  */
 public class TokenStack extends AnimatedGraphicsObject{
-    ArrayList<Tokens> tokenStack;
+    Stack<Tokens> tokenStack;
     
     public static final int NUM_TWO = 1;
     public static final int NUM_THREE = 2;
@@ -35,10 +35,10 @@ public class TokenStack extends AnimatedGraphicsObject{
      */
     public TokenStack(JComponent container){
         super(container);
-        new ArrayList<ResourceCard>();
+        tokenStack = new Stack<Tokens>();
     }
 
-    public ArrayList getList(){
+    public Stack getList(){
         return tokenStack;    
     }
 
@@ -46,40 +46,40 @@ public class TokenStack extends AnimatedGraphicsObject{
      *  Then shuffles the stack, so when items are popped, they are random
      */
     public void populateDeck(){
-        Stack t = new Stack<Token>();
+        //Stack t = new Stack<Token>();
         //Add everything to tokens
         for(int i=0;i<NUM_TWO;i++){
-            t.add(Token.TWO);
+            tokenStack.add(Token.TWO);
         }
         for(int i=0;i<NUM_THREE;i++){
-            t.add(Token.THREE);
+            tokenStack.add(Token.THREE);
         }
         for(int i=0;i<NUM_FOUR;i++){
-            t.add(Token.FOUR);
+            tokenStack.add(Token.FOUR);
         }
         for(int i=0;i<NUM_FIVE;i++){
-            t.add(Token.FIVE);
+            tokenStack.add(Token.FIVE);
         }
         for(int i=0;i<NUM_SIX;i++){
-            t.add(Token.SIX);
+            tokenStack.add(Token.SIX);
         }
         for(int i=0;i<NUM_EIGHT;i++){
-            t.add(Token.EIGHT);
+            tokenStack.add(Token.EIGHT);
         }
         for(int i=0;i<NUM_NINE;i++){
-            t.add(Token.NINE);
+            tokenStack.add(Token.NINE);
         }
         for(int i=0;i<NUM_TEN;i++){
-            t.add(Token.TEN);
+            tokenStack.add(Token.TEN);
         }
         for(int i=0;i<NUM_ELEVEN;i++){
-            t.add(Token.ELEVEN);
+            tokenStack.add(Token.ELEVEN);
         }
         for(int i=0;i<NUM_TWELVE;i++){
-            t.add(Token.TWELVE);
+            tokenStack.add(Token.TWELVE);
         }
         for(int i=0;i<NUM_ZERO;i++){
-            t.add(Token.ZERO);
+            tokenStack.add(Token.ZERO);
         }
         Collections.shuffle(tokenStack);
         //return tokenStack;

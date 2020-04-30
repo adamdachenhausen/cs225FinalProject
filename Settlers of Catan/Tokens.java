@@ -35,15 +35,16 @@ public class Tokens extends AnimatedGraphicsObject{
     //Have to put this so we don't deal with null
     public static final int NUM_ZERO = 1;
     
-    
+    protected int tokenValue;
 
     /**
      * Constructor for objects of class Tokens
      * @param Point p a point to use to draw the circle for the token
      */
-    public Tokens(JComponent container, Point p){
+    public Tokens(JComponent container, Point p, int val){
         super(container);
         upperLeft = p;
+        tokenValue = val;
     }
 
     public static Stack populateT(){
