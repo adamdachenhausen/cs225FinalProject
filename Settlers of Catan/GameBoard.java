@@ -31,7 +31,7 @@ public class GameBoard extends AnimatedGraphicsObject
     private JPanel panel;
     protected HexTiles[][] board;
     private Stack<Resource> r;
-    private Stack<Token> t;
+    private Stack<Tokens> t;
 
     //The center point of this
     private Point center;
@@ -40,13 +40,19 @@ public class GameBoard extends AnimatedGraphicsObject
     public GameBoard(JComponent container, Point center){
         super(container);
         this.container = container;
+        this.center = center;
         //panel = new JPanel();
         //panel.setBackground(SEA);
 
         board=new HexTiles[BOARD_WIDTH][BOARD_WIDTH];
         r = Resources.populateR();
-        //t = Tokens.populateT();
-        this.center = center;
+        
+        //Create tokenStack, populate it and return it
+        
+        TokenStack tokenStack = new TokenStack(container);
+        tokenStack.populateStack();
+        t = tokenStack.getList();
+        
 
         sea = Sea.createSea(center);
     }
