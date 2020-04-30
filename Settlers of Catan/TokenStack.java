@@ -40,6 +40,16 @@ public class TokenStack extends AnimatedGraphicsObject{
         //upperleft will change with call for placeToken();
         upperLeft = new Point(500,500);
     }
+    
+    /**
+     * Constructor for objects of class TokenStack
+     */
+    public TokenStack(JComponent container,Point upperLeft){
+        super(container);
+        tokenStack = new Stack<Tokens>();
+
+        this.upperLeft = upperLeft;
+    }
 
     public Stack getList(){
         return tokenStack;    
