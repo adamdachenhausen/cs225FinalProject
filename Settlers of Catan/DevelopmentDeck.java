@@ -32,7 +32,7 @@ public class DevelopmentDeck extends AnimatedGraphicsObject{
      */
     public DevelopmentDeck(JComponent container){
         super(container);
-        new ArrayList<DevelopmentCard>();
+        developmentDeck = new ArrayList<DevelopmentCard>();
     }
 
     public ArrayList getList(){
@@ -41,27 +41,7 @@ public class DevelopmentDeck extends AnimatedGraphicsObject{
 
     @Override
     public void paint(Graphics g){
-        // //draw colored rectangle
 
-        // //paint image of card type icon
-        // if(!done){
-        // //draw image of explosion
-        // if(value == 1){
-        // g.drawImage(dice1, upperLeft.x , upperLeft.y, this);
-        // }else if(value == 2){
-        // g.drawImage(dice2, upperLeft.x , upperLeft.y, this);
-        // }else if(value == 3){
-        // g.drawImage(dice3, upperLeft.x , upperLeft.y, this);
-        // }else if(value == 4){
-        // g.drawImage(dice4, upperLeft.x , upperLeft.y, this);
-        // }else if(value == 5){
-        // g.drawImage(dice5, upperLeft.x , upperLeft.y, this);
-        // }else{
-        // //If alien
-        // g.drawImage(dice6, upperLeft.x , upperLeft.y, this);
-        // }
-        // }
-        // //paint text that describes card type
     }
 
     /** Populates the development arraylist with exact number of each development card

@@ -46,7 +46,44 @@ public class TokenStack extends AnimatedGraphicsObject{
      *  Then shuffles the stack, so when items are popped, they are random
      */
     public void populateDeck(){
-
+        Stack t = new Stack<Token>();
+        //Add everything to tokens
+        for(int i=0;i<NUM_TWO;i++){
+            t.add(Token.TWO);
+        }
+        for(int i=0;i<NUM_THREE;i++){
+            t.add(Token.THREE);
+        }
+        for(int i=0;i<NUM_FOUR;i++){
+            t.add(Token.FOUR);
+        }
+        for(int i=0;i<NUM_FIVE;i++){
+            t.add(Token.FIVE);
+        }
+        for(int i=0;i<NUM_SIX;i++){
+            t.add(Token.SIX);
+        }
+        for(int i=0;i<NUM_EIGHT;i++){
+            t.add(Token.EIGHT);
+        }
+        for(int i=0;i<NUM_NINE;i++){
+            t.add(Token.NINE);
+        }
+        for(int i=0;i<NUM_TEN;i++){
+            t.add(Token.TEN);
+        }
+        for(int i=0;i<NUM_ELEVEN;i++){
+            t.add(Token.ELEVEN);
+        }
+        for(int i=0;i<NUM_TWELVE;i++){
+            t.add(Token.TWELVE);
+        }
+        for(int i=0;i<NUM_ZERO;i++){
+            t.add(Token.ZERO);
+        }
+        Collections.shuffle(tokenStack);
+        //return tokenStack;
+        
         // //Add everything to r
         // for(int i=0;i<LUMBER;i++){
         // resourceDeck.add(new ResourceCard(container, Resource.WOOD, cardStartPoint));
