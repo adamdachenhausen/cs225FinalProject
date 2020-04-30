@@ -435,13 +435,16 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      *
      */
     public void createPlayers() {
+        players = new ArrayList<Player>();
         player1 = new Player(PLAYER_1, p1Color);
+        players.add(player1);
         int i = 0;
         boolean found = false;
         while(i < 4 && !found){
             if(!player1.getColor().equals(playerColors[i])){
                 player2 = new Player(PLAYER_2, playerColors[i]);
                 found = true;
+                players.add(player2);
             }
             i++;
         }
@@ -452,6 +455,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                 if(!player2.getColor().equals(playerColors[i])){
                     player3 = new Player(PLAYER_3, playerColors[i]);
                     found = true;
+                    players.add(player3);
                 }
             }
             i++;
@@ -464,6 +468,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                     if(!player3.getColor().equals(playerColors[i])){
                         player4 = new Player(PLAYER_4, playerColors[i]);
                         found = true;
+                        players.add(player4);
                     }
                 }
             }

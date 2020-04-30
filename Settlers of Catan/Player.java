@@ -66,6 +66,11 @@ public class Player
         resourceCards = new ArrayList<ResourceCard>();
     }
 
+        public int getPlayerNumber(){
+
+        return playerNumber;
+    }
+    
     public Color getColor(){
 
         return c;
@@ -90,40 +95,38 @@ public class Player
 
         return roads;
     }
-    
-        public int getVictoryPoints(){
+
+    public int getVictoryPoints(){
 
         return victoryPoints;
     }
-    
-        public int getVictoryPointCards(){
+
+    public int getVictoryPointCards(){
 
         return victoryPointCards;
     }
-    
-        public int getKnights(){
+
+    public int getKnights(){
 
         return knights;
     }
-    
-        public int getRoadlength(){
+
+    public int getRoadlength(){
 
         return roadLength;
     }
-    
-            public boolean getLargestArmy(){
+
+    public boolean getLargestArmy(){
 
         return largestArmy;
     }
-    
-        public boolean getLongestRoad(){
+
+    public boolean getLongestRoad(){
 
         return longestRoad;
     }
 
-
     public void setTurn(boolean turnflag){
-
         turn = turnflag;
     }
 
@@ -134,38 +137,38 @@ public class Player
 
     public void getSettlements(int newsettle){
 
-         settlements = newsettle;
+        settlements = newsettle;
     }
 
     public void getRoads(int newroads){
 
-         roads = newroads;
+        roads = newroads;
     }
-    
-        public void getVictoryPoints(int vp){
 
-         victoryPoints = vp;
-    }
-    
-        public void getVictoryPointCards(int vpc){
+    public void getVictoryPoints(int vp){
 
-         victoryPointCards = vpc;
+        victoryPoints = vp;
     }
-    
-        public void getKnights(int newknights){
-            knights = newknights;
-    }
-    
-        public void getRoadlength(int rl){
-         roadLength = rl;
-    }
-    
-            public void getLargestArmy(boolean la){
-         largestArmy = la;
-    }
-    
-        public void getLongestRoad(boolean lr){
 
-         longestRoad = lr;
+    public void getVictoryPointCards(int vpc){
+
+        victoryPointCards = vpc;
+    }
+
+    public void getKnights(int newknights){
+        knights = newknights;
+    }
+
+    public void getRoadlength(int rl){
+        roadLength = rl;
+    }
+
+    public void getLargestArmy(boolean la){
+        largestArmy = la;
+    }
+
+    public void getLongestRoad(boolean lr){
+
+        longestRoad = lr;
     }
 }

@@ -45,6 +45,7 @@ public class ThreadGraphicsController implements Runnable {
     protected java.util.List<ResourceDeck> resourceBank;
     protected java.util.List<DevelopmentDeck> devBank;
     protected java.util.List<Tokens> tokens;
+    protected java.util.List<Player> players;
 
     /** the whole gameboard where tiles are stored */
     protected GameBoard gameboard;
@@ -142,7 +143,10 @@ public class ThreadGraphicsController implements Runnable {
                 // since we will be modifying the list, we will
                 // lock access in case any other code tries to
                 // access the list
-
+                if(players != null && checkForWinner() > 0){
+                    displayWinScreen();
+                }
+                
                 if(gameboard != null){
                     gameboard.paint(g);
                 }
@@ -213,6 +217,32 @@ public class ThreadGraphicsController implements Runnable {
         // display the window we've created
         frame.pack();
         frame.setVisible(true);
+    }
+
+    /**
+     * Checks if someone won the game.
+     *
+     * @param 
+     * @return 
+     */
+    public int checkForWinner(){
+        int winner = 0;
+        for(int i = 0; i < 4; i++){
+            if(players.get(i).getVictoryPoints() == 10){
+                winner = players.get(i).getPlayerNumber();
+            }
+        }
+        return winner;
+    }
+    
+        /**
+     * Shows a screen displaying game win info
+     *
+     * @param 
+     * @return 
+     */
+    public void displayWinScreen(){
+
     }
 
     /**
