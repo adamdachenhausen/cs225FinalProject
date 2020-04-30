@@ -44,17 +44,20 @@ public class HexTiles extends AnimatedGraphicsObject{
     protected Resource r;
 
     protected Polygon p;
+    
+    protected Tokens t;
 
     private boolean debug = true;
     /**
      * Constructor for objects of class Tiles
      */
-    public HexTiles(JComponent container, Point center, Resource r,Token t){
+    public HexTiles(JComponent container, Point center, Resource r,Tokens t){
         super(container);
         this.container = container;
         p = new Polygon();
         this.center=center;
         this.r = r;
+        this.t=t;
 
         //Outsource completing the polygon to make it a hexagon
         completeHex();
@@ -67,12 +70,13 @@ public class HexTiles extends AnimatedGraphicsObject{
     /**
      * Constructor for objects of class Tiles, but with added translate center functionality
      */
-    public HexTiles(JComponent container, Point center, Resource r,Token t,int dx, int dy){
+    public HexTiles(JComponent container, Point center, Resource r,Tokens t,int dx, int dy){
         super(container);
         p = new Polygon();
         //this.center=center;
         this.r = r;
-
+        this.t = t;
+        
         this.center = new Point(center.x+dx,center.y+dy);
 
         //Outsource completing the polygon to make it a hexagon
