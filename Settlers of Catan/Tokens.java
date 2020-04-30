@@ -37,6 +37,8 @@ public class Tokens extends AnimatedGraphicsObject{
 
     protected int tokenValue;
 
+    protected Token t;
+
     /**
      * Constructor for objects of class Tokens
      * @param Point p a point to use to draw the circle for the token
@@ -46,10 +48,56 @@ public class Tokens extends AnimatedGraphicsObject{
         upperLeft = p;
         tokenValue = val;
         visible = true;
+        getToken(tokenValue); 
     }
 
     public int getTokenValue(){
+
         return tokenValue;
+    }
+
+    public void getToken(int tokenValue){
+        switch(tokenValue){
+            case NUM_TWO:
+            t = Token.TWO;
+            break;
+
+            case NUM_THREE:
+            t = Token.THREE;
+            break;
+
+            case NUM_FOUR:
+            t = Token.FOUR;
+            break;
+
+            case NUM_FIVE:
+            t = Token.FIVE;
+            break;
+
+            case NUM_SIX:
+            t = Token.SIX;
+            break;
+
+            case NUM_EIGHT:
+            t = Token.EIGHT;
+            break;
+
+            case NUM_NINE:
+            t = Token.NINE;
+            break;
+
+            case NUM_TEN:
+            t = Token.TEN;
+            break;
+
+            case NUM_ELEVEN:
+            t = Token.ELEVEN;
+            break;
+
+            case NUM_TWELVE:
+            t = Token.TWELVE;
+            break;
+        }
     }
 
     @Override
@@ -64,7 +112,6 @@ public class Tokens extends AnimatedGraphicsObject{
             //draw border around oval
             g.drawOval(upperLeft.x, upperLeft.y, SIZE , SIZE);
 
-            Point numberPoint = new Point(upperLeft.x + 5, upperLeft.y + 15);
 
             //paint number value on the token
             switch(tokenValue){
@@ -111,9 +158,7 @@ public class Tokens extends AnimatedGraphicsObject{
 
         }
 
-
     }
-
     public void getNumberText(Graphics g){
         String numberInfo;
         int x = 0;
