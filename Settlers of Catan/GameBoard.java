@@ -153,4 +153,8 @@ public class GameBoard extends AnimatedGraphicsObject
 
         }
     }
+    
+    public HexTiles[][] getTiles(){
+        return board;
+    }
 }

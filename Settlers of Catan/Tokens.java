@@ -19,6 +19,8 @@ import javax.sound.sampled.*;
 public class Tokens extends AnimatedGraphicsObject{
     //1x"2" 2x"3" 2x"4" 2x"5" 2x"6" 2x"8" 2x"9" 2x"10" 2x"11" 1x"12"
 
+    final static protected int SIZE = 75;
+
     public static final int NUM_TWO = 1;
     public static final int NUM_THREE = 2;
     public static final int NUM_FOUR = 2;
@@ -33,7 +35,6 @@ public class Tokens extends AnimatedGraphicsObject{
     //Have to put this so we don't deal with null
     public static final int NUM_ZERO = 1;
 
-    
     /**
      * Constructor for objects of class Tokens
      */
@@ -82,9 +83,41 @@ public class Tokens extends AnimatedGraphicsObject{
 
     @Override
     public void paint(Graphics g){
-        
-    }
 
+        // for(int i=0; i<GameBoard.board.length;i++){
+
+            // for(int j=0; j<board[0].length;j++){
+                // if(board[i][j]!= null){
+                    // Point tokenPt = board[i][j].getUpperLeft();
+
+                    // g.setColor(Color.WHITE);
+                    // g.fillOval(upperLeft.x, upperLeft.y, SIZE , SIZE);
+                    // g.setColor(Color.BLACK);
+                    // g.drawOval(upperLeft.x, upperLeft.y, SIZE , SIZE);
+                    // int x = upperLeft.x + SIZE/2 - (robber.getWidth(this)/2);
+                    // int y = upperLeft.y + SIZE/2 - (robber.getHeight(this)/2);
+                    // g.drawImage(robber, x, y, this);
+
+        
+                    // String playerInfo;
+                    // int x = 0;
+                    // int y = 0;
+
+                    // g.setColor(BROWN);
+                    // g.setFont(new Font("TimesRoman", Font.BOLD, 15));
+                    // FontMetrics fm = g.getFontMetrics();
+
+                    // playerInfo = "PLAYER: " + turn;
+                    // x = (upperLeft.x + (PANE_WIDTH - fm.stringWidth(playerInfo)) / 2);
+                    // y = (upperLeft.y + fm.getAscent()) + 5;
+                    // g.drawString(playerInfo, x, y);
+
+                // }
+            // }
+
+        // }
+
+    }
     @Override
     public void run(){
 
