@@ -41,9 +41,6 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     //Players
     protected Player player1, player2, player3, player4;
 
-    //Player 1 color
-    protected Color p1Color;
-
     // button that starts the game
     protected JButton startButton;
 
@@ -87,6 +84,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
     // bottom panel with buttons for the game
     protected JPanel bottomPanel;
+
+    ImageIcon icon = new ImageIcon("catanicon.png");
 
     /**
      * Constructor, which simply calls the superclass constructor
@@ -191,7 +190,6 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         buttonPanel.add(rollDiceButton);
         buttonPanel.add(continueButton);
 
-
     }
 
     /**
@@ -287,17 +285,16 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         gameStart = true;
 
         setBoard();
-        
-        
+
         //create dice
         die1 = new Dice(panel, new Point(700,300));
         die2 = new Dice(panel, new Point(700,375));
 
-        //pick colors
-        selectColor();
+        //intro dialog
+        introDialog();
 
         //create players
-        createPlayers();
+        createPlayers(selectColor());
 
         //display the player's gamepieces (roads, settlements and cities)
         //createGamepieces();
@@ -312,6 +309,21 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      */
     public void resetGame() {
         gameStart = false;
+    }
+
+    /**
+     * Sets up the game after start button pressed
+     *
+     */
+    public int introDialog() {
+        //reference for dialog boxes: https://docs.oracle.com/javase/tutorial/uiswing/components/dialog.html
+        Object[] options = {"Continue","Quit"};
+        int answer = JOptionPane.showOptionDialog(frame, "Welcome to Catan! Press "
+                + "continue to select your gamepiece colors","Catan",
+                JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,
+                icon,options,options[1]);
+
+        return answer;
     }
 
     /**
@@ -387,7 +399,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
         //ADD BACK WHEN SEA IS DONE
         //sea = new Sea(panel, new Point(200, 5));
-        
+
         //Draw the gameboard pieces
         gameboard = new GameBoard(panel,new Point(350,350));
         gameboard.createBoard();
@@ -399,8 +411,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
         //place tokens
         //tokens.populateT();
-        
-        
+
         //place robber in the desert
         //Point robberPt = gameboard.getDesert() -- placeholder point below
         Point pt = new Point(200,200);
@@ -415,7 +426,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * Sets up the game after start button pressed
      *
      */
-    public void selectColor() {
+    public Color selectColor() {
+        Color p1Color;
         String[] colors = new String[] {"Red", "Blue", "White", "Orange"};
         int choice = JOptionPane.showOptionDialog(null, "Pick a color!", "Color Selector",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
@@ -429,15 +441,16 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         }else{
             p1Color = Color.ORANGE;
         }
+        return p1Color;
     }
 
     /**
      * Sets up the game after start button pressed
      *
      */
-    public void createPlayers() {
+    public void createPlayers(Color c) {
         players = new ArrayList<Player>();
-        player1 = new Player(PLAYER_1, p1Color);
+        player1 = new Player(PLAYER_1, c);
         players.add(player1);
         int i = 0;
         boolean found = false;
@@ -498,9 +511,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         panel.repaint();
     }
 
-
-
-        /**
+    /**
      * Players trade resource cards
      *
      * @param player1 Player initiating trade
@@ -509,19 +520,19 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      */
     public void playGame(){
         while(gameStart){
-        //roll dice
+            //roll dice
 
-        //whichever token/hex (the tokens number the hexes) is rolled
-        //any settlement on the border of that hex gets resources.
-        //Determine players with "activated hexes"
+            //whichever token/hex (the tokens number the hexes) is rolled
+            //any settlement on the border of that hex gets resources.
+            //Determine players with "activated hexes"
 
-        //distribute resources *if not enough resources, none distributed
+            //distribute resources *if not enough resources, none distributed
 
-        //offer trades
-        panel.repaint();
+            //offer trades
+            panel.repaint();
+        }
     }
-    }
-    
+
     /**
      * Players trade resource cards
      *
@@ -540,8 +551,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
         //offer trades
     }
-    
-        /**
+
+    /**
      * Each player puts down a road and a settlement
      *
      * @param 
@@ -553,7 +564,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         roll += die2.rollDice();
 
     }
-    
+
     /**
      * Each player puts down a road and a settlement
      *
@@ -566,7 +577,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         //get resource cards based on the hex tiles that are 
         //adjacent to your settlement
     }
-    
+
     /**
      * Players trade resource cards
      *
