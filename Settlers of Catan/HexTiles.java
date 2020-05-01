@@ -210,6 +210,9 @@ public class HexTiles extends AnimatedGraphicsObject{
                 public Tokens getToken(){
             return t;
         }
+                        public void setToken(Tokens newToken){
+            t = newToken;
+        }
 
 
     @Override

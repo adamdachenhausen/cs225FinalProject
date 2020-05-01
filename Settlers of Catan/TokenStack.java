@@ -68,7 +68,7 @@ public class TokenStack extends AnimatedGraphicsObject{
         //need to fix upperleft call a place token method here
         //place token takes hex upperleft as input to place each token
         while(tokenValue <= 12){
-            if(tokenValue == 1 || tokenValue == 12){
+            if(tokenValue == 1 || tokenValue == 2 || tokenValue == 12){
                 Tokens t = new Tokens(container, upperLeft, tokenValue);
                 tokenList.push(t);
             }else if(tokenValue == 7){

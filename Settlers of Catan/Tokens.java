@@ -39,6 +39,8 @@ public class Tokens extends AnimatedGraphicsObject{
 
     protected Token t;
 
+    protected boolean placed;
+
     /**
      * Constructor for objects of class Tokens
      * @param Point p a point to use to draw the circle for the token
@@ -47,8 +49,13 @@ public class Tokens extends AnimatedGraphicsObject{
         super(container);
         upperLeft = p;
         tokenValue = val;
-        visible = true;
+        if(val == 1){
+            visible = false;
+        }else{
+            visible = true;
+        }
         getToken(tokenValue); 
+        placed = false;
     }
 
     public int getTokenValue(){
@@ -102,7 +109,7 @@ public class Tokens extends AnimatedGraphicsObject{
 
     @Override
     public void paint(Graphics g){
-        
+
         if(visible){
             //draw oval that represents token
             g.setColor(Color.WHITE);
@@ -174,14 +181,20 @@ public class Tokens extends AnimatedGraphicsObject{
         //y = (upperLeft.y + fm.getAscent()) + 5;
         y = (upperLeft.y + SIZE/2) + (fm.getAscent()/2);
         //y = (upperLeft.y + (SIZE + fm.getAscent())/2) - fm.getAscent()/2;
-      //y = (upperLeft.y + ((SIZE - fm.getAscent())/2));
+        //y = (upperLeft.y + ((SIZE - fm.getAscent())/2));
         g.drawString(numberInfo, x, y);
     }
-
-
 
     @Override
     public void run(){
         container.repaint();
+    }
+
+    public boolean getPlaced(){
+        return placed;
+    }
+
+    public void setPlaced(boolean newPlaced){
+        placed = newPlaced;
     }
 }
