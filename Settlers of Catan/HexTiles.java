@@ -39,7 +39,7 @@ public class HexTiles extends AnimatedGraphicsObject{
 
     protected Point center;
 
-    protected String type;
+    protected String type = "";
 
     protected Resource r;
 
@@ -64,7 +64,7 @@ public class HexTiles extends AnimatedGraphicsObject{
         
         //Creates a string value of the type of hex it is
         //ex. brick resource is a "hill"
-        createHexType();
+        //type = createHexType();
     }
 
     /**
@@ -169,33 +169,48 @@ public class HexTiles extends AnimatedGraphicsObject{
     }
 
     public void createHexType(){
+        String hextype = "";
         switch(r){
             case BRICKS:
-            type = "Hill";
+            hextype = "Hill";
+            type = hextype;
             break;
 
             case WOOD:
-            type = "Forest";
+            hextype = "Forest";
+            type = hextype;
             break;
 
             case ORE:
-            type = "Mountain";
+            hextype = "Mountain";
+            type = hextype;
             break;
 
             case WHEAT:
-            type = "Field";
+            hextype = "Field";
+            type = hextype;
             break;
 
             case WOOL:
-            type = "Pasture";
+            hextype = "Pasture";
+            type = hextype;
             break;
 
             case SAND:
-            type = "Desert";
+            hextype = "Desert";
+            type = hextype;
             break;
         }
+        //return hextype;
 
     }
+        public Resource getResource(){
+            return r;
+        }
+                public Tokens getToken(){
+            return t;
+        }
+
 
     @Override
     public void run(){

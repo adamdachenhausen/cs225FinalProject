@@ -8,13 +8,13 @@ import javax.swing.*;
 import javax.swing.event.*;
 import java.util.Random;
 /**
- * Write a description of class TokenStack here.
+ * Write a description of class tokenList here.
  *
  * @author Kate Nelligan, Lindsay Clark, Adam Dachenhausen
  * @version Spring 2020
  */
 public class TokenStack extends AnimatedGraphicsObject{
-    Stack<Tokens> tokenStack;
+    Stack<Tokens> tokenList;
 
     public static final int NUM_TWO = 1;
     public static final int NUM_THREE = 2;
@@ -31,28 +31,28 @@ public class TokenStack extends AnimatedGraphicsObject{
     public static final int NUM_ZERO = 1;
 
     /**
-     * Constructor for objects of class TokenStack
+     * Constructor for objects of class tokenList
      */
     public TokenStack(JComponent container){
         super(container);
-        tokenStack = new Stack<Tokens>();
+        tokenList = new Stack<Tokens>();
 
         //upperleft will change with call for placeToken();
         upperLeft = new Point(500,500);
     }
     
     /**
-     * Constructor for objects of class TokenStack
+     * Constructor for objects of class tokenList
      */
     public TokenStack(JComponent container,Point upperLeft){
         super(container);
-        tokenStack = new Stack<Tokens>();
+        tokenList = new Stack<Tokens>();
 
         this.upperLeft = upperLeft;
     }
 
     public Stack getList(){
-        return tokenStack;    
+        return tokenList;    
     }
 
     
@@ -70,21 +70,27 @@ public class TokenStack extends AnimatedGraphicsObject{
         while(tokenValue <= 12){
             if(tokenValue == 1 || tokenValue == 12){
                 Tokens t = new Tokens(container, upperLeft, tokenValue);
-                tokenStack.push(t);
+                tokenList.push(t);
             }else if(tokenValue == 7){
                 //do nothing (maybe create robber here?)
                 
             }else{
                 for(int i = 0; i < 2; i++){
                   Tokens t = new Tokens(container, upperLeft, tokenValue);  
-                  tokenStack.push(t);
+                  tokenList.push(t);
                 }
             }
 
             tokenValue++;
         }
 
-        Collections.shuffle(tokenStack);
+        Collections.shuffle(tokenList);
+    }
+    
+        public void startTokens(){
+        for(Tokens t: tokenList){
+            t.start();
+        }
     }
 
     @Override

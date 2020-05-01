@@ -46,7 +46,7 @@ public class ThreadGraphicsController implements Runnable {
     //protected java.util.List<DevelopmentDeck> devBank;
     protected ResourceDeck resourceDeck;
     protected DevelopmentDeck developmentDeck;
-    protected TokenStack tokens;
+    //protected TokenStack tokens;
     //protected java.util.List<Tokens> tokens;
     protected java.util.List<Player> players;
 
@@ -189,6 +189,11 @@ public class ThreadGraphicsController implements Runnable {
                 //rc = new  ResourceCard(panel, Resource.WHEAT, new Point(500,500));
                 // rc.start();
                 // rc.paint(g);
+                
+                // Tokens t;
+                // t = new Tokens(panel, new Point(500,500), 5);
+                // t.start();
+                // t.paint(g);
 
                 // synchronized (lock) {
                     // while (i < hexTilesList.size()) {
@@ -223,7 +228,7 @@ public class ThreadGraphicsController implements Runnable {
         //hexTilesList = new ArrayList<HexTiles>();
         resourceDeck = new ResourceDeck(panel);
         developmentDeck = new DevelopmentDeck(panel);
-        tokens = new TokenStack(panel);
+        //tokens = new TokenStack(panel);
 
         // display the window we've created
         frame.pack();
@@ -294,7 +299,7 @@ public class ThreadGraphicsController implements Runnable {
     public void clearScreen(){
         resourceDeck = null;
         developmentDeck = null;
-        tokens = null;
+        //tokens = null;
         players = null;
         gameboard = null;
         robber = null;

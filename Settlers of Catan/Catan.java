@@ -410,7 +410,10 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         statusPane = new StatusPane(panel, gamePhase, turn);
 
         //place tokens
-        //tokens.populateT();
+        //tokens.populateStack();
+        //t = tokenStack.getList();
+        //tokens.startTokens();
+        //gameboard.placeToken();
 
         //place robber in the desert
         //Point robberPt = gameboard.getDesert() -- placeholder point below
@@ -489,6 +492,22 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
             i++;
         }
 
+    }
+
+    /**
+     * Place tokens on the gameboard
+     *
+     * @param 
+     * @return 
+     */
+    public void placeTokens(){
+        
+        // for(int i = 0; i < tokens.getList().size(); i++){
+            // tokens.
+        // }
+
+
+        panel.repaint();
     }
 
     /**

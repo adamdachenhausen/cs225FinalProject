@@ -28,8 +28,8 @@ public abstract class AnimatedGraphicsObject extends Thread {
     /** point to draw object from */
     protected Point upperLeft;
 
-    /** type of animated object */
-    protected String type;
+    // /** type of animated object */
+    // protected String type;
 
     /** status of the object */
     String status;
@@ -117,6 +117,15 @@ public abstract class AnimatedGraphicsObject extends Thread {
      */
     public Point getPosition(){
         return upperLeft;
+    }
+    
+        /**
+     * Returns the current position 
+     *
+     * @return status the position of the bubble
+     */
+    public void setPosition(Point p){
+        upperLeft = p;
     }
 
     public boolean getVisible(){

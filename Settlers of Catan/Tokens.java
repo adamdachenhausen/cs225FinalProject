@@ -112,7 +112,6 @@ public class Tokens extends AnimatedGraphicsObject{
             //draw border around oval
             g.drawOval(upperLeft.x, upperLeft.y, SIZE , SIZE);
 
-
             //paint number value on the token
             switch(tokenValue){
                 case NUM_TWO:
@@ -159,23 +158,29 @@ public class Tokens extends AnimatedGraphicsObject{
         }
 
     }
+
     public void getNumberText(Graphics g){
         String numberInfo;
         int x = 0;
         int y = 0;
 
         g.setColor(Color.BLACK);
-        g.setFont(new Font("TimesRoman", Font.BOLD, 25));
+        g.setFont(new Font("TimesRoman", Font.BOLD, 35));
         FontMetrics fm = g.getFontMetrics();
 
         numberInfo = "" + tokenValue;
         x = (upperLeft.x + (SIZE - fm.stringWidth(numberInfo)) / 2);
-        y = (upperLeft.y + fm.getAscent()) + 5;
+        //y = (upperLeft.y + fm.getAscent()) + 5;
+        y = (upperLeft.y + SIZE/2) + (fm.getAscent()/2);
+        //y = (upperLeft.y + (SIZE + fm.getAscent())/2) - fm.getAscent()/2;
+      //y = (upperLeft.y + ((SIZE - fm.getAscent())/2));
         g.drawString(numberInfo, x, y);
     }
 
+
+
     @Override
     public void run(){
-
+        container.repaint();
     }
 }
