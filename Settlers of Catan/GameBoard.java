@@ -18,7 +18,7 @@ import java.util.ArrayList;
  */
 public class GameBoard extends AnimatedGraphicsObject
 {
-    public static final Color BACKGROUND = new Color(100,100,100);
+    public static final Color BACKGROUND = new Color(225,225,225);
     public static final Color SEA = new Color(49, 159, 181);
 
     public static final int BOARD_WIDTH = 5;
