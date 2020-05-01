@@ -490,9 +490,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * @return 
      */
     public void createSettlements(){
-        // roll dice: highest roll chooses first player to play
-        roll = die1.rollDice();
-        roll += die2.rollDice();
+
         //place settlement between two hexes
 
         //place road between two hexes
@@ -500,19 +498,30 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         panel.repaint();
     }
 
-    /**
-     * Each player puts down a road and a settlement
+
+
+        /**
+     * Players trade resource cards
      *
-     * @param 
+     * @param player1 Player initiating trade
+     * @param player2 Player trading with
      * @return 
      */
-    public void getResources(){
-        // roll dice: highest roll chooses first player to play
+    public void playGame(){
+        while(gameStart){
+        //roll dice
 
-        //get resource cards based on the hex tiles that are 
-        //adjacent to your settlement
+        //whichever token/hex (the tokens number the hexes) is rolled
+        //any settlement on the border of that hex gets resources.
+        //Determine players with "activated hexes"
+
+        //distribute resources *if not enough resources, none distributed
+
+        //offer trades
+        panel.repaint();
     }
-
+    }
+    
     /**
      * Players trade resource cards
      *
@@ -531,7 +540,33 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
         //offer trades
     }
+    
+        /**
+     * Each player puts down a road and a settlement
+     *
+     * @param 
+     * @return 
+     */
+    public void roll(){
+        // roll dice: highest roll chooses first player to play
+        roll = die1.rollDice();
+        roll += die2.rollDice();
 
+    }
+    
+    /**
+     * Each player puts down a road and a settlement
+     *
+     * @param 
+     * @return 
+     */
+    public void getResources(){
+        // roll dice: highest roll chooses first player to play
+
+        //get resource cards based on the hex tiles that are 
+        //adjacent to your settlement
+    }
+    
     /**
      * Players trade resource cards
      *
