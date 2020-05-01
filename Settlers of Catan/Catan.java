@@ -287,10 +287,11 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         gameStart = true;
 
         setBoard();
-
+        
+        
         //create dice
-        die1 = new Dice(panel, new Point(550,300));
-        die2 = new Dice(panel, new Point(550,375));
+        die1 = new Dice(panel, new Point(700,300));
+        die2 = new Dice(panel, new Point(700,375));
 
         //pick colors
         selectColor();
@@ -310,7 +311,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      *
      */
     public void resetGame() {
-
+        gameStart = false;
     }
 
     /**

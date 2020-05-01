@@ -143,7 +143,9 @@ public class ThreadGraphicsController implements Runnable {
                 // since we will be modifying the list, we will
                 // lock access in case any other code tries to
                 // access the list
-                if(players != null && checkForWinner() > 0){
+                if(gameboard != null && players != null && checkForWinner() > 0){
+                    displayWinScreen();
+                }else if(!Catan.gameStart) {
                     displayWinScreen();
                 }
 
@@ -157,17 +159,21 @@ public class ThreadGraphicsController implements Runnable {
                 // sea.paint(g);
                 // }
 
-                if(statusPane != null){
+                if(gameboard != null && statusPane != null){
                     statusPane.paint(g);
                 }
 
-                if(die1 != null && die2 != null){
+                if(gameboard != null && die1 != null && die2 != null){
                     die1.paint(g);
                     die2.paint(g);
                 }
 
-                if(robber != null){
+                if(gameboard != null && robber != null){
                     robber.paint(g);
+                }
+
+                if(!Catan.gameStart && gameboard != null){
+                    clearScreen();
                 }
 
                 // ResourceCard rc;
@@ -274,6 +280,24 @@ public class ThreadGraphicsController implements Runnable {
 
         g.drawString(instruction, x2, y2);
         panel.repaint();
+    }
+
+    /**
+     * Shows a screen displaying game win info
+     *
+     * @param 
+     * @return 
+     */
+    public void clearScreen(){
+        resourceBank = null;
+        devBank = null;
+        tokens = null;
+        players = null;
+        gameboard = null;
+        robber = null;
+        die1 = null;
+        die2 = null; 
+        sea = null;
     }
 
     /**
