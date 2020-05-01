@@ -50,6 +50,9 @@ public class ThreadGraphicsController implements Runnable {
     //protected java.util.List<Tokens> tokens;
     protected java.util.List<Player> players;
 
+        /** the table for the board */
+    protected Table table;
+    
     /** the whole gameboard where tiles are stored */
     protected GameBoard gameboard;
 
@@ -153,6 +156,7 @@ public class ThreadGraphicsController implements Runnable {
                 }
 
                 if(gameboard != null){
+                    table.paint(g);
                     gameboard.paint(g);
                 }else{
                     introScreen(g);
@@ -306,6 +310,7 @@ public class ThreadGraphicsController implements Runnable {
         die1 = null;
         die2 = null; 
         sea = null;
+        table = null; 
     }
 
     /**

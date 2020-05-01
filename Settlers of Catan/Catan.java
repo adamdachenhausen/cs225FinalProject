@@ -283,7 +283,9 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     public void startGame() {
         gamePhase = "Game starting";
         gameStart = true;
-
+        
+        //Create table, then set board
+        table = new Table(panel);
         setBoard();
 
         //create dice
@@ -395,7 +397,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
         //Forest Hex (4x), Pasture Hex (4x), Fields Hex (4x), Hills Hex (3x)
         //Mountain Hex(3x), Desert Hex(1x)
-        panel.setBackground(GameBoard.BACKGROUND);
+        //panel.setBackground(GameBoard.BACKGROUND);
 
         //ADD BACK WHEN SEA IS DONE
         //sea = new Sea(panel, new Point(200, 5));
@@ -757,6 +759,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         ResourceCard.loadPic();
         DevelopmentCard.loadPic();
         Robber.loadPic();
+        Table.loadPic();
 
         //launch main thread that will manage the GUI
         javax.swing.SwingUtilities.invokeLater(new Catan());
