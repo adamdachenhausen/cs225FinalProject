@@ -42,9 +42,12 @@ public class ThreadGraphicsController implements Runnable {
 
     /** list of animated graphics objects currently on the screen */
     //protected java.util.List<HexTiles> hexTilesList;
-    protected java.util.List<ResourceDeck> resourceBank;
-    protected java.util.List<DevelopmentDeck> devBank;
-    protected java.util.List<Tokens> tokens;
+    //protected java.util.List<ResourceDeck> resourceBank;
+    //protected java.util.List<DevelopmentDeck> devBank;
+    protected ResourceDeck resourceDeck;
+    protected DevelopmentDeck developmentDeck;
+    protected TokenStack tokens;
+    //protected java.util.List<Tokens> tokens;
     protected java.util.List<Player> players;
 
     /** the whole gameboard where tiles are stored */
@@ -188,16 +191,16 @@ public class ThreadGraphicsController implements Runnable {
                 // rc.paint(g);
 
                 // synchronized (lock) {
-                // while (i < hexTilesList.size()) {
-                // HexTiles b = hexTilesList.get(i);
-                // if (b.done()) {
-                // hexTilesList.remove(i);
-                // }
-                // else {
-                // b.paint(g);
-                // i++;
-                // }
-                // }
+                    // while (i < hexTilesList.size()) {
+                        // HexTiles b = hexTilesList.get(i);
+                        // if (b.done()) {
+                            // hexTilesList.remove(i);
+                        // }
+                        // else {
+                            // b.paint(g);
+                            // i++;
+                        // }
+                    // }
                 // }
             }
         };
@@ -218,9 +221,9 @@ public class ThreadGraphicsController implements Runnable {
 
         // construct the list of AnimatedGraphicsObject
         //hexTilesList = new ArrayList<HexTiles>();
-        resourceBank = new ArrayList<ResourceDeck>();
-        devBank = new ArrayList<DevelopmentDeck>();
-        tokens = new ArrayList<Tokens>();
+        resourceDeck = new ResourceDeck(panel);
+        developmentDeck = new DevelopmentDeck(panel);
+        tokens = new TokenStack(panel);
 
         // display the window we've created
         frame.pack();
@@ -289,8 +292,8 @@ public class ThreadGraphicsController implements Runnable {
      * @return 
      */
     public void clearScreen(){
-        resourceBank = null;
-        devBank = null;
+        resourceDeck = null;
+        developmentDeck = null;
         tokens = null;
         players = null;
         gameboard = null;
