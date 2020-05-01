@@ -35,7 +35,7 @@ public class ThreadGraphicsController implements Runnable {
     public static final int FRAME_HEIGHT = 850;
 
     //Width of Bottom button panel
-    public static final int PANEL_WIDTH = 1100;
+    public static final int PANEL_WIDTH = 1200;
     public static final int PANEL_HEIGHT = 150;
 
     public static final Color SEA = new Color(49, 159, 181);
@@ -146,9 +146,11 @@ public class ThreadGraphicsController implements Runnable {
                 if(players != null && checkForWinner() > 0){
                     displayWinScreen();
                 }
-                
+
                 if(gameboard != null){
                     gameboard.paint(g);
+                }else{
+                    introScreen(g);
                 }
 
                 // if(sea != null){
@@ -234,8 +236,8 @@ public class ThreadGraphicsController implements Runnable {
         }
         return winner;
     }
-    
-        /**
+
+    /**
      * Shows a screen displaying game win info
      *
      * @param 
@@ -243,6 +245,35 @@ public class ThreadGraphicsController implements Runnable {
      */
     public void displayWinScreen(){
 
+    }
+
+    /**
+     * Shows a screen displaying game win info
+     *
+     * @param 
+     * @return 
+     */
+    public void introScreen(Graphics g){
+        g.setColor(new Color(182, 30, 44));
+        g.fillRect(0,0,FRAME_WIDTH,FRAME_HEIGHT);
+
+        g.setColor(new Color(250, 210, 24));
+        String catan = "CATAN";
+        g.setFont(new Font("TimesRoman", Font.BOLD, 150));
+        FontMetrics fm = g.getFontMetrics();
+        int x = ((panel.getWidth() - fm.stringWidth(catan)) / 2);
+
+        int y = ((panel.getHeight() - fm.getHeight()) / 2) + fm.getAscent();
+        g.drawString(catan, x, y);
+
+        String instruction = "Press start to play.";
+        g.setFont(new Font("TimesRoman", Font.BOLD, 20));
+        fm = g.getFontMetrics();
+        int x2 = (panel.getWidth() - fm.stringWidth(instruction)) / 2;
+        int y2 = (y + fm.getAscent() + 20);
+
+        g.drawString(instruction, x2, y2);
+        panel.repaint();
     }
 
     /**
