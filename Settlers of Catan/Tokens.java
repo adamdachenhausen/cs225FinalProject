@@ -19,7 +19,7 @@ import javax.sound.sampled.*;
 public class Tokens extends AnimatedGraphicsObject{
     //1x"2" 2x"3" 2x"4" 2x"5" 2x"6" 2x"8" 2x"9" 2x"10" 2x"11" 1x"12"
 
-    final static protected int SIZE = 75;
+    final static protected int SIZE = 55;
 
     public static final int NUM_TWO = 2;
     public static final int NUM_THREE = 3;
@@ -102,6 +102,7 @@ public class Tokens extends AnimatedGraphicsObject{
 
     @Override
     public void paint(Graphics g){
+        
         if(visible){
             //draw oval that represents token
             g.setColor(Color.WHITE);
@@ -165,7 +166,7 @@ public class Tokens extends AnimatedGraphicsObject{
         int y = 0;
 
         g.setColor(Color.BLACK);
-        g.setFont(new Font("TimesRoman", Font.BOLD, 35));
+        g.setFont(new Font("TimesRoman", Font.BOLD, 25));
         FontMetrics fm = g.getFontMetrics();
 
         numberInfo = "" + tokenValue;

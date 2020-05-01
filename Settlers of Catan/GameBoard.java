@@ -66,6 +66,7 @@ public class GameBoard extends AnimatedGraphicsObject
         // tstack2 = tokenStack2.getList();
 
         sea = Sea.createSea(center);
+        
     }
 
     /**
@@ -167,6 +168,8 @@ public class GameBoard extends AnimatedGraphicsObject
         board[4][2] = new HexTiles(panel,center, r.pop(),t.pop(),(int)HexTiles.SIDE_LENGTH+54,(int)HexTiles.SIDE_LENGTH*3+2);
         board[4][2].createHexType();
         board[4][2].getToken().start();
+        
+        placeToken();
     }
 
     /**
@@ -189,6 +192,15 @@ public class GameBoard extends AnimatedGraphicsObject
 
         }
         g.setColor(cur);
+                for(int i=0; i<board.length;i++){
+
+            for(int j=0; j<board[0].length;j++){
+                if(board[i][j]!= null){
+                    board[i][j].getToken().paint(g);
+                }
+            }
+
+        }
     }
 
     @Override
@@ -244,15 +256,7 @@ public class GameBoard extends AnimatedGraphicsObject
     }
 
     public void placeToken(){
-        ArrayList<Tokens> tokenArray = new ArrayList<Tokens>();
-        int loopvar = 0;
-        while(!tstack2.isEmpty()){
-            tokenArray.add(tstack2.pop());
-            loopvar++;
-        }
-        // for(int i = 0; i < tstack2.size(); i++){
-        // tokenArray.add(tstack2.pop());
-        // }
+
         Point tokenPoint = new Point(0,0);
         Point robberPoint = new Point(0,0);
         for(int i=0; i<board.length;i++){
@@ -262,7 +266,7 @@ public class GameBoard extends AnimatedGraphicsObject
                     HexTiles h = board[i][j];
                     if(!board[i][j].getHexType().equals("Desert")){
                         tokenPoint = board[i][j].getHexPoint();
-                        tokenArray.get(i).setPosition(tokenPoint);
+                        board[i][j].getToken().setPosition(tokenPoint);
                     }else{
                         robberPoint = board[i][j].getHexPoint();
                     }
