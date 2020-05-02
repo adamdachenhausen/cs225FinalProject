@@ -49,12 +49,13 @@ public class HexTiles extends AnimatedGraphicsObject{
 
     protected Point[] pts;
 
-    private boolean debug = true;
+    protected String subType;
+
     private boolean hasRobber;
     /**
      * Constructor for objects of class Tiles
      */
-    public HexTiles(JComponent container, Point center, Resource r,Tokens t){
+    public HexTiles(JComponent container, Point center, Resource r,Tokens t, String type, String subType){
         super(container);
         this.container = container;
         p = new Polygon();
@@ -62,6 +63,8 @@ public class HexTiles extends AnimatedGraphicsObject{
         this.r = r;
         this.t=t;
         this.pts = new Point[6];
+        this.type=type;
+        this.subType=subType;
         //Outsource completing the polygon to make it a hexagon
         completeHex();
 
@@ -74,13 +77,14 @@ public class HexTiles extends AnimatedGraphicsObject{
     /**
      * Constructor for objects of class Tiles, but with added translate center functionality
      */
-    public HexTiles(JComponent container, Point center, Resource r,Tokens t,int dx, int dy){
+    public HexTiles(JComponent container, Point center, Resource r,Tokens t,int dx, int dy, String type, String subType){
         super(container);
         p = new Polygon();
         //this.center=center;
         this.r = r;
         this.t = t;
-
+        this.type=type;
+        this.subType=subType;
         this.pts = new Point[6];
         this.center = new Point(center.x+dx,center.y+dy);
 
@@ -234,10 +238,60 @@ public class HexTiles extends AnimatedGraphicsObject{
         hasRobber = newHasRobber;
     }
 
-    public Point[] getCityLocations(){
-        Point[] pts = new Point[6];
+    /**
+     *  @param type refers to where in the gameboard this is.
+     *  Can be type: CORNER, MIDDLE, INBETWEEN, or left null for default
+     *  @param subType refers to where this type is, for instance if this was the
+     *  top left hex, type would be corner, and subType would be topLeft
+     *  
+     */
+    public ArrayList getCityLocations(){
+        //loc is the 
+        ArrayList<Point> loc = new ArrayList(6);
 
-        return pts;
+        //We always need the northernmost and southernmost points, aka tips
+        loc.add(pts[0]);
+        loc.add(pts[3]);
+
+        //Depending if we have a special case, we will add those extra points too
+        if(type!=null && subType!=null){
+            if(type.equals("CORNER")){
+                if(subType.equals("TOP")){
+                    loc.add(pts[1]);
+                    loc.add(pts[5]);
+                }
+                else if(subType.equals("BOTTOM")){
+                    loc.add(pts[2]);
+                    loc.add(pts[4]);
+                }
+            }
+            else if(type.equals("INBETWEEN")){
+                if(subType.equals("TOPLEFT")){
+                    loc.add(pts[5]);
+                }
+                else if(subType.equals("TOPRIGHT")){
+                    loc.add(pts[1]);
+                }
+                else if(subType.equals("BOTTOMLEFT")){
+                    loc.add(pts[4]);
+                }
+                else if(subType.equals("BOTTOMRIGHT")){
+                    loc.add(pts[2]);
+                }
+            }
+            else if(type.equals("MIDDLE")){
+                if(subType.equals("LEFT")){
+                    loc.add(pts[4]);
+                    loc.add(pts[5]);
+                }
+                else if(subType.equals("RIGHT")){
+                    loc.add(pts[1]);
+                    loc.add(pts[2]);
+                }
+            }
+        }
+
+        return loc;
     }
 
     @Override
