@@ -26,6 +26,7 @@ public class GameBoard extends AnimatedGraphicsObject
 
     public static final int HEX_SIZE = 136;
     public static final int TOKEN_SIZE = 54;
+    public static final int ROBBER_SIZE = 76;
 
     //This is the polygon that constructs the hexagon sea
     public static final int SEA_SIDE_LENGTH = OFFSET * BOARD_WIDTH;
@@ -35,7 +36,8 @@ public class GameBoard extends AnimatedGraphicsObject
     private Stack<Resource> r;
     private Stack<Tokens> t;
 
-    private Stack<Tokens> tstack2;
+    //Create robber
+    Robber robber;
 
     //The center point of this
     private Point center;
@@ -56,17 +58,12 @@ public class GameBoard extends AnimatedGraphicsObject
         TokenStack tokenStack = new TokenStack(container);
         tokenStack.start();
         tokenStack.populateStack();
-        //tokenStack.startTokens();
+
         t = tokenStack.getList();
 
-        //just testing if i can get the tokens to draw
-        // TokenStack tokenStack2 = new TokenStack(container);
-        // tokenStack2.start();
-        // tokenStack2.populateStack();
-        // tokenStack2.startTokens();
-        // tstack2 = tokenStack2.getList();
-
         sea = Sea.createSea(center);
+
+        robber = new Robber(panel, new Point(0,0));
 
     }
 
@@ -204,6 +201,9 @@ public class GameBoard extends AnimatedGraphicsObject
             }
 
         }
+        if(robber != null){
+            robber.paint(g);
+        }
     }
 
     @Override
@@ -270,7 +270,7 @@ public class GameBoard extends AnimatedGraphicsObject
                 if(board[i][j]!= null){
                     HexTiles h = board[i][j];
                     if(!board[i][j].getHexType().equals("Desert")){
-                        tokenPoint = findCenter(board[i][j].getHexPoint());
+                        tokenPoint = findCenter(board[i][j].getHexPoint(), false);
                         board[i][j].getToken().setPosition(tokenPoint);
                         board[i][j].getToken().setPlaced(true);
                     }else{
@@ -280,7 +280,10 @@ public class GameBoard extends AnimatedGraphicsObject
                         }else{
                             board[i][j].removeToken();
                         }
-                        robberPoint = board[i][j].getHexPoint();
+                        robberPoint = findCenter(board[i][j].getHexPoint(), true);
+                        robber.setPosition(robberPoint);
+                        board[i][j].setRobber(true);
+                        robber.start();
                     }
                 }
             }
@@ -306,12 +309,23 @@ public class GameBoard extends AnimatedGraphicsObject
             }
         }
     }
-    
-    public Point findCenter(Point p){
+
+    public Point findCenter(Point p, boolean isRobber){
         Point tPoint = p;
-        tPoint.x = tPoint.x - ((TOKEN_SIZE/2));
-        tPoint.y = tPoint.y - ((TOKEN_SIZE/2));
-        
+        if(!isRobber){
+
+            tPoint.x = tPoint.x - ((TOKEN_SIZE/2));
+            tPoint.y = tPoint.y - ((TOKEN_SIZE/2));
+        }else{
+
+            tPoint.x = tPoint.x - ((ROBBER_SIZE/2));
+            tPoint.y = tPoint.y - ((ROBBER_SIZE/2));
+        }
         return tPoint;
     }
+
+    public Robber getRobber(){
+        return robber;
+    }
+
 }

@@ -17,7 +17,7 @@ public class Robber  extends AnimatedGraphicsObject implements ImageObserver{
 
     final static protected int ROBBER = 1;
 
-    final static protected int SIZE = 75;
+    final static protected int SIZE = 76;
 
     private static Image robber;
 
@@ -52,6 +52,7 @@ public class Robber  extends AnimatedGraphicsObject implements ImageObserver{
 
     }
 
+
     public boolean imageUpdate(Image img, int infoflags, int x, int y,
     int width, int height) {
 
@@ -69,6 +70,11 @@ public class Robber  extends AnimatedGraphicsObject implements ImageObserver{
 
     }
 
+        @Override    
+    public void setPosition(Point p){
+        upperLeft = p;
+    }
+    
     @Override
     public void run(){
 

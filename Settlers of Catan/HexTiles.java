@@ -48,6 +48,7 @@ public class HexTiles extends AnimatedGraphicsObject{
     protected Tokens t;
 
     private boolean debug = true;
+    private boolean hasRobber;
     /**
      * Constructor for objects of class Tiles
      */
@@ -65,6 +66,7 @@ public class HexTiles extends AnimatedGraphicsObject{
         //Creates a string value of the type of hex it is
         //ex. brick resource is a "hill"
         //type = createHexType();
+        hasRobber = false;
     }
 
     /**
@@ -219,6 +221,13 @@ public class HexTiles extends AnimatedGraphicsObject{
 
     public void removeToken(){
         t = null;
+    }
+
+    public boolean getHasRobber(){
+        return hasRobber;
+    }
+        public void setRobber(boolean newHasRobber){
+        hasRobber = newHasRobber;
     }
 
     @Override

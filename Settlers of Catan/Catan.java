@@ -420,7 +420,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         //place robber in the desert
         //Point robberPt = gameboard.getDesert() -- placeholder point below
         Point pt = new Point(200,200);
-        robber = new Robber(panel, pt);
+        //robber = new Robber(panel, pt);
 
         //set board with 2 settlements per player
         //ADD THIS BACK WHEN METHOD CREATED

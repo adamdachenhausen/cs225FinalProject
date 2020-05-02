@@ -66,8 +66,8 @@ public class ThreadGraphicsController implements Runnable {
     protected Dice die1;
     protected Dice die2;
 
-    /** the robber gamepiece */
-    protected Robber robber;
+    // /** the robber gamepiece */
+    // protected Robber robber;
 
     /** the panel in which our graphics are drawn */
     protected JPanel panel;
@@ -175,9 +175,9 @@ public class ThreadGraphicsController implements Runnable {
                     die2.paint(g);
                 }
 
-                if(gameboard != null && robber != null){
-                    robber.paint(g);
-                }
+                // if(gameboard != null && robber != null){
+                    // robber.paint(g);
+                // }
 
                 if(!Catan.gameStart && gameboard != null){
                     clearScreen();
@@ -306,7 +306,7 @@ public class ThreadGraphicsController implements Runnable {
         //tokens = null;
         players = null;
         gameboard = null;
-        robber = null;
+        //robber = null;
         die1 = null;
         die2 = null; 
         sea = null;
