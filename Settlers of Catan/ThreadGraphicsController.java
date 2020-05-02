@@ -25,7 +25,7 @@ here.  Event handlers and specifics of the animated and
 non-animated graphics are to be given in the classes that extend
 this and AnimatedGraphicsObject.
 
-@author Jim Teresco
+@author Jim Teresco modified by Kate Nelligan, Lindsay Clark, Adam Dachenhausen
 @version Spring 2020
  */
 
@@ -37,8 +37,6 @@ public class ThreadGraphicsController implements Runnable {
     //Width of Bottom button panel
     public static final int PANEL_WIDTH = 1200;
     public static final int PANEL_HEIGHT = 150;
-
-    public static final Color SEA = new Color(49, 159, 181);
 
     /** list of animated graphics objects currently on the screen */
     protected java.util.List<GamePiece> player1Pieces;
@@ -57,18 +55,12 @@ public class ThreadGraphicsController implements Runnable {
     /** the whole gameboard where tiles are stored */
     protected GameBoard gameboard;
 
-    /** the sea around our hex tiles */
-    protected Sea sea;
-
     /** the status pane to give player directions */
     protected StatusPane statusPane;
 
     /** Two dice */
     protected Dice die1;
     protected Dice die2;
-
-    // /** the robber gamepiece */
-    // protected Robber robber;
 
     /** the panel in which our graphics are drawn */
     protected JPanel panel;
@@ -163,10 +155,6 @@ public class ThreadGraphicsController implements Runnable {
                     introScreen(g);
                 }
 
-                // if(sea != null){
-                // sea.paint(g);
-                // }
-
                 if(gameboard != null && statusPane != null){
                     statusPane.paint(g);
                 }
@@ -176,9 +164,6 @@ public class ThreadGraphicsController implements Runnable {
                     die2.paint(g);
                 }
 
-                // if(gameboard != null && robber != null){
-                // robber.paint(g);
-                // }
 
                 if(!Catan.gameStart && gameboard != null){
                     clearScreen();
@@ -360,8 +345,12 @@ public class ThreadGraphicsController implements Runnable {
         //robber = null;
         die1 = null;
         die2 = null; 
-        sea = null;
+
         table = null; 
+        player1Pieces = null; 
+        player2Pieces = null; 
+        player3Pieces = null; 
+        player4Pieces = null; 
     }
 
     /**
