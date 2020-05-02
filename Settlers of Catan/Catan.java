@@ -315,6 +315,9 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
         //add the robber to the desert
         //createRobber();
+
+        //Play game
+        //playGame();
     }
 
     /**
@@ -557,6 +560,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * @return 
      */
     public void PlayerTurn(Player p){
+        boolean turnDone = false;
         //roll dice
 
         //whichever token/hex (the tokens number the hexes) is rolled
@@ -576,8 +580,24 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      */
     public void roll(){
         // roll dice: highest roll chooses first player to play
-        roll = die1.rollDice();
-        roll += die2.rollDice();
+        //Custom button text
+        Object[] options = {"Roll Dice",
+                "Cancel"};
+        int answer = JOptionPane.showOptionDialog(frame,
+                "Roll the dice or cancel.",
+                "Roll the Dice",
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[2]);
+        if(answer ==0){
+            roll = die1.rollDice();
+            roll += die2.rollDice();
+
+        }else{
+            roll();
+        }
 
     }
 
@@ -656,11 +676,23 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * @param player2 Player trading with
      * @return 
      */
-    public void build(Player p){
+    public void build(Player p, int choice){
         //called every turn after dice are rolled
 
         //build: roads, settlements, cities, development cards
+        switch(choice){
+            case 0:
+            buildRoad();
+            break;
 
+            case 1:
+            buildSettlement();
+            break;
+
+            case 2:
+            buildCity();
+            break;
+        }
         //need to provide info on what is required to build each
 
         //player selects what to build
@@ -673,6 +705,64 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         //if building city need to pay resources and replace
         //existing settlement with a city piece
     }
+        /**
+     * Move the robber to a hex.
+     * Take action based on placement.
+     *
+     * @param a hex tile to move the robber to.
+     * @return 
+     */
+    public void buildRoad(){
+        //call method when dice roll = 7
+
+        //anyone with more than 7 cards must discard extras to bank
+
+        //move robber to different hex (call method)
+
+        //can steal one card from player with a settlement touching 
+        //hex robber was placed on
+
+        //no resources are distributed from hex robber is touching
+    }
+                /**
+     * Move the robber to a hex.
+     * Take action based on placement.
+     *
+     * @param a hex tile to move the robber to.
+     * @return 
+     */
+    public void buildSettlement(){
+        //call method when dice roll = 7
+
+        //anyone with more than 7 cards must discard extras to bank
+
+        //move robber to different hex (call method)
+
+        //can steal one card from player with a settlement touching 
+        //hex robber was placed on
+
+        //no resources are distributed from hex robber is touching
+    }
+            /**
+     * Move the robber to a hex.
+     * Take action based on placement.
+     *
+     * @param a hex tile to move the robber to.
+     * @return 
+     */
+    public void buildCity(){
+        //call method when dice roll = 7
+
+        //anyone with more than 7 cards must discard extras to bank
+
+        //move robber to different hex (call method)
+
+        //can steal one card from player with a settlement touching 
+        //hex robber was placed on
+
+        //no resources are distributed from hex robber is touching
+    }
+    
 
     /**
      * Move the robber to a hex.
@@ -844,8 +934,6 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         //launch main thread that will manage the GUI
         javax.swing.SwingUtilities.invokeLater(new Catan());
 
-        // while(gameStart){
 
-        // }
     }
 }
