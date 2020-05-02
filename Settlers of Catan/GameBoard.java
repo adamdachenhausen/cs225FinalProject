@@ -43,10 +43,13 @@ public class GameBoard extends AnimatedGraphicsObject
     private Point center;
 
     private Polygon sea;
+
+    protected List<Point> cityLocations;
     public GameBoard(JComponent container, Point center){
         super(container);
         this.container = container;
         this.center = center;
+        cityLocations = new ArrayList<Point>();
         //panel = new JPanel();
         //panel.setBackground(SEA);
 
@@ -75,98 +78,101 @@ public class GameBoard extends AnimatedGraphicsObject
         //CREATE ROW 0
 
         //Create left side hexagon
-        board[0][0] = new HexTiles(panel,center, r.pop(),t.pop(),-(int)HexTiles.SIDE_LENGTH-54,-(int)HexTiles.SIDE_LENGTH*3-2);
+        board[0][0] = new HexTiles(panel,center, r.pop(),t.pop(),-(int)HexTiles.SIDE_LENGTH-54,-(int)HexTiles.SIDE_LENGTH*3-2, "CORNER", "TOP");
         board[0][0].createHexType();
         board[0][0].getToken().start();
         //Create middle hexagon
-        board[0][1] = new HexTiles(panel,center, r.pop(),t.pop(),0,-(int)HexTiles.SIDE_LENGTH*3-2);
+        board[0][1] = new HexTiles(panel,center, r.pop(),t.pop(),0,-(int)HexTiles.SIDE_LENGTH*3-2,null,null);
         board[0][1].createHexType();
         board[0][1].getToken().start();
 
         //Create right hexagon
-        board[0][2] = new HexTiles(panel,center, r.pop(),t.pop(),(int)HexTiles.SIDE_LENGTH+54,-(int)HexTiles.SIDE_LENGTH*3-2);
+        board[0][2] = new HexTiles(panel,center, r.pop(),t.pop(),(int)HexTiles.SIDE_LENGTH+54,-(int)HexTiles.SIDE_LENGTH*3-2, "CORNER", "TOP");
         board[0][2].createHexType();
         board[0][2].getToken().start();
 
         //CREATE ROW 1
+
         //Create left side
-        board[1][0] = new HexTiles(panel,center, r.pop(),t.pop(),(int)-HexTiles.SIDE_LENGTH*2-47,(int)-HexTiles.SIDE_SIDE_LENGTH+15);
+        board[1][0] = new HexTiles(panel,center, r.pop(),t.pop(),(int)-HexTiles.SIDE_LENGTH*2-47,(int)-HexTiles.SIDE_SIDE_LENGTH+15,"INBETWEEN","TOPLEFT");
         board[1][0].createHexType();
         board[1][0].getToken().start();
 
-        board[1][1] = new HexTiles(panel,center, r.pop(),t.pop(),(int)-HexTiles.SIDE_LENGTH+7,(int)-HexTiles.SIDE_SIDE_LENGTH+15);
+        board[1][1] = new HexTiles(panel,center, r.pop(),t.pop(),(int)-HexTiles.SIDE_LENGTH+7,(int)-HexTiles.SIDE_SIDE_LENGTH+15,null,null);
         board[1][1].createHexType();
         board[1][1].getToken().start();
 
         //Create right side
-        board[1][2] = new HexTiles(panel,center, r.pop(),t.pop(),(int)HexTiles.SIDE_LENGTH-7,(int)-HexTiles.SIDE_SIDE_LENGTH+15);
+        board[1][2] = new HexTiles(panel,center, r.pop(),t.pop(),(int)HexTiles.SIDE_LENGTH-7,(int)-HexTiles.SIDE_SIDE_LENGTH+15,null,null);
         board[1][2].createHexType();
         board[1][2].getToken().start();
 
-        board[1][3] = new HexTiles(panel,center, r.pop(),t.pop(),(int)HexTiles.SIDE_LENGTH*2+47,(int)-HexTiles.SIDE_SIDE_LENGTH+15);
+        board[1][3] = new HexTiles(panel,center, r.pop(),t.pop(),(int)HexTiles.SIDE_LENGTH*2+47,(int)-HexTiles.SIDE_SIDE_LENGTH+15,"INBETWEEN","TOPRIGHT");
         board[1][3].createHexType();
         board[1][3].getToken().start();
 
         //CREATE ROW 2
 
         //Create middle hexagon
-        board[2][2] = new HexTiles(panel,center, r.pop(),t.pop());
+        board[2][2] = new HexTiles(panel,center, r.pop(),t.pop(),null,null);
         board[2][2].createHexType();
         board[2][2].getToken().start();
 
         //Create hexagons to the left of center
-        board[2][0] = new HexTiles(panel,center, r.pop(),t.pop(),(int)(-HexTiles.SIDE_SIDE_LENGTH-4) * 2,0);
+        board[2][0] = new HexTiles(panel,center, r.pop(),t.pop(),(int)(-HexTiles.SIDE_SIDE_LENGTH-4) * 2,0,"MIDDLE","LEFT");
         board[2][0].createHexType();
 
-        board[2][1] = new HexTiles(panel,center, r.pop(),t.pop(),(int)-HexTiles.SIDE_SIDE_LENGTH-4,0);
+        board[2][1] = new HexTiles(panel,center, r.pop(),t.pop(),(int)-HexTiles.SIDE_SIDE_LENGTH-4,0,null,null);
         board[2][1].createHexType();
         board[2][1].getToken().start();
 
         //Create hexagons to the right of center
-        board[2][4] = new HexTiles(panel,center, r.pop(),t.pop(),(int)(HexTiles.SIDE_SIDE_LENGTH+4) * 2,0);
+        board[2][4] = new HexTiles(panel,center, r.pop(),t.pop(),(int)(HexTiles.SIDE_SIDE_LENGTH+4) * 2,0,"MIDDLE","RIGHT");
         board[2][4].createHexType();
         board[2][4].getToken().start();
 
-        board[2][3] = new HexTiles(panel,center, r.pop(),t.pop(),(int)HexTiles.SIDE_SIDE_LENGTH+4,0);
+        board[2][3] = new HexTiles(panel,center, r.pop(),t.pop(),(int)HexTiles.SIDE_SIDE_LENGTH+4,0,null,null);
         board[2][3].createHexType();
         board[2][3].getToken().start();
 
         //CREATE ROW 3
+
         //Create left side
-        board[3][0] = new HexTiles(panel,center, r.pop(),t.pop(),(int)-HexTiles.SIDE_LENGTH*2-47,(int)HexTiles.SIDE_SIDE_LENGTH-15);
+        board[3][0] = new HexTiles(panel,center, r.pop(),t.pop(),(int)-HexTiles.SIDE_LENGTH*2-47,(int)HexTiles.SIDE_SIDE_LENGTH-15,"INBETWEEN","BOTTOMLEFT");
         board[3][0].createHexType();
         board[3][0].getToken().start();
 
-        board[3][1] = new HexTiles(panel,center, r.pop(),t.pop(),(int)-HexTiles.SIDE_LENGTH+7,(int)HexTiles.SIDE_SIDE_LENGTH-15);
+        board[3][1] = new HexTiles(panel,center, r.pop(),t.pop(),(int)-HexTiles.SIDE_LENGTH+7,(int)HexTiles.SIDE_SIDE_LENGTH-15,null,null);
         board[3][1].createHexType();
         board[3][1].getToken().start();
 
         //Create right side
-        board[3][2] = new HexTiles(panel,center, r.pop(),t.pop(),(int)HexTiles.SIDE_LENGTH-7,(int)HexTiles.SIDE_SIDE_LENGTH-15);
+        board[3][2] = new HexTiles(panel,center, r.pop(),t.pop(),(int)HexTiles.SIDE_LENGTH-7,(int)HexTiles.SIDE_SIDE_LENGTH-15,null,null);
         board[3][2].createHexType();
         board[3][2].getToken().start();
 
-        board[3][3] = new HexTiles(panel,center, r.pop(),t.pop(),(int)HexTiles.SIDE_LENGTH*2+47,(int)HexTiles.SIDE_SIDE_LENGTH-15);
+        board[3][3] = new HexTiles(panel,center, r.pop(),t.pop(),(int)HexTiles.SIDE_LENGTH*2+47,(int)HexTiles.SIDE_SIDE_LENGTH-15,"INBETWEEN","BOTTOMRIGHT");
         board[3][3].createHexType();
         board[3][3].getToken().start();
 
         //CREATE ROW 4
 
         //Create left side hexagon
-        board[4][0] = new HexTiles(panel,center, r.pop(),t.pop(),-(int)HexTiles.SIDE_LENGTH-54,(int)HexTiles.SIDE_LENGTH*3+2);
+        board[4][0] = new HexTiles(panel,center, r.pop(),t.pop(),-(int)HexTiles.SIDE_LENGTH-54,(int)HexTiles.SIDE_LENGTH*3+2,"CORNER","BOTTOM");
         board[4][0].createHexType();
         board[4][0].getToken().start();
 
         //Create middle hexagon
-        board[4][1] = new HexTiles(panel,center, r.pop(),t.pop(),0,(int)HexTiles.SIDE_LENGTH*3+2);
+        board[4][1] = new HexTiles(panel,center, r.pop(),t.pop(),0,(int)HexTiles.SIDE_LENGTH*3+2,null,null);
         board[4][1].createHexType();
         board[4][1].getToken().start();
 
         //Create right hexagon
-        board[4][2] = new HexTiles(panel,center, r.pop(),t.pop(),(int)HexTiles.SIDE_LENGTH+54,(int)HexTiles.SIDE_LENGTH*3+2);
+        board[4][2] = new HexTiles(panel,center, r.pop(),t.pop(),(int)HexTiles.SIDE_LENGTH+54,(int)HexTiles.SIDE_LENGTH*3+2,"CORNER","BOTTOM");
         board[4][2].createHexType();
         board[4][2].getToken().start();
 
+        findCityLocations();
         placeToken();
     }
 
@@ -308,6 +314,23 @@ public class GameBoard extends AnimatedGraphicsObject
 
             }
         }
+    }
+
+    private void findCityLocations(){
+        for(int i=0; i<board.length;i++){
+
+            for(int j=0; j<board[0].length;j++){
+                if(board[i][j]!= null){
+                    ArrayList<Point> temp = board[i][j].getCityLocations();
+
+                    for(int k = 0; k<temp.size();k++){
+                        cityLocations.add(temp.get(k));
+                    }
+                }
+            }
+
+        }
+        System.out.println();
     }
 
     public Point findCenter(Point p, boolean isRobber){
