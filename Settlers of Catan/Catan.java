@@ -587,6 +587,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      */
     public void PlayerTurn(){
         boolean turnDone = false;
+        
         //roll dice
         rollDialog();
         

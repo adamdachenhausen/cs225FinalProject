@@ -20,14 +20,17 @@ public class GamePiece  extends AnimatedGraphicsObject implements ImageObserver{
 
     private static Image cities;
     private static Image settlements;
-    private static Image roads;    
+    private static Image roads;   
+    
+    String type;
 
     /**
      * Constructor for objects of class GamePieces
      */
-    public GamePiece(JComponent container)
+    public GamePiece(JComponent container, String type)
     {
         super(container);
+        this.type = type;
     }
 
     public void showCard(){
