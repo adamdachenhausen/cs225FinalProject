@@ -111,7 +111,7 @@ public class Player
         return knights;
     }
 
-    public int getRoadlength(){
+    public int getRoadLength(){
 
         return roadLength;
     }
@@ -129,6 +129,56 @@ public class Player
     public void setTurn(boolean turnflag){
         turn = turnflag;
     }
+
+    public void setCities(int newcities){
+
+        cities = newcities;
+    }
+
+    public void setSettlements(int newsettle){
+
+        settlements = newsettle;
+    }
+
+    public void setRoads(int newroads){
+
+        roads = newroads;
+    }
+
+    public void setVictoryPoints(int vp){
+
+        victoryPoints = vp;
+    }
+
+    public void setVictoryPointCards(int vpc){
+
+        victoryPointCards = vpc;
+    }
+
+    public void setKnights(int newknights){
+        knights = newknights;
+    }
+
+    public void setRoadlength(int rl){
+        roadLength = rl;
+    }
+
+    public void setLargestArmy(boolean la){
+        largestArmy = la;
+    }
+
+    public void setLongestRoad(boolean lr){
+
+        longestRoad = lr;
+    }
+
+
+    public void setRoadLength(int newRoadLength){
+
+         roadLength = newRoadLength;
+    }
+
+
 
     public void getCities(int newcities){
 

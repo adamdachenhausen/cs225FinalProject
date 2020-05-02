@@ -24,6 +24,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     public static final int PLAYER_2 = 2;
     public static final int PLAYER_3 = 3;
     public static final int PLAYER_4 = 4;
+    public static final int WINNING_POINTS = 10;
 
     //Color list
     public static final Color ORANGE = new Color(230, 108, 44);
@@ -76,6 +77,14 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     protected static boolean gameWon = false;
 
     protected static boolean gameEnded = false;
+
+    protected static boolean longestRoad = false;
+
+    protected static boolean largestArmy = false;
+
+    protected static int longestRoadAmt = 0;
+
+    protected static int largestArmyAmt = 0;
 
     protected boolean reset = false;
 
@@ -441,11 +450,12 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     }
 
     /**
-     * Sets up the game after start button pressed
+     * Displays building cost info on how you would build
+     * roads, cities, settlements, or purchase development cards.
      *
      */
     public void displayBuildingCosts() {
-       //research on jtable: https://stackoverflow.com/questions/27832268/how-to-format-a-table-in-joptionpane
+        //research on jtable: https://stackoverflow.com/questions/27832268/how-to-format-a-table-in-joptionpane
         JLabel buildingTitle = new JLabel("Building Costs");
         //JLabel buildingInfo = new JLabel("Below are the required components to build or acquire special cards as well as victory points associated with each item.");
         Object[][] rows = {
@@ -457,341 +467,385 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                 {"Special"," "," "},
                 {"Longest road", "2","At least 5 contiguous road pieces"},
                 {"Largest army","2","At least 3 knight cards"}};
-    Object[] cols = {"Item","Victory Points","Cost"};
-    JTable table = new JTable(rows, cols);
-    JOptionPane buildingCosts = new JOptionPane();
-   // buildingCosts.add(buildingInfo);
+        Object[] cols = {"Item","Victory Points","Cost"};
+        JTable table = new JTable(rows, cols);
+        JOptionPane buildingCosts = new JOptionPane();
+        // buildingCosts.add(buildingInfo);
 
-    buildingCosts.showMessageDialog(null,new JScrollPane(table), "BuildingCosts",JOptionPane.PLAIN_MESSAGE);
-    //JOptionPane.showMessageDialog(null,new JScrollPane(table));
-}
+        buildingCosts.showMessageDialog(null,new JScrollPane(table), "BuildingCosts",JOptionPane.PLAIN_MESSAGE);
+        //JOptionPane.showMessageDialog(null,new JScrollPane(table));
+    }
 
-/**
- * Sets up the game after start button pressed
- *
- */
-public void createPlayers(Color c) {
-players = new ArrayList<Player>();
-player1 = new Player(PLAYER_1, c);
-players.add(player1);
-int i = 0;
-boolean found = false;
-while(i < 4 && !found){
-if(!player1.getColor().equals(playerColors[i])){
-player2 = new Player(PLAYER_2, playerColors[i]);
-found = true;
-players.add(player2);
-}
-i++;
-}
-i = 0;
-found = false;
-while(i < 4 && !found){
-if(!player1.getColor().equals(playerColors[i])){
-if(!player2.getColor().equals(playerColors[i])){
-player3 = new Player(PLAYER_3, playerColors[i]);
-found = true;
-players.add(player3);
-}
-}
-i++;
-}
-i = 0;
-found = false;
-while(i < 4 && !found){
-if(!player1.getColor().equals(playerColors[i])){
-if(!player2.getColor().equals(playerColors[i])){
-if(!player3.getColor().equals(playerColors[i])){
-player4 = new Player(PLAYER_4, playerColors[i]);
-found = true;
-players.add(player4);
-}
-}
-}
-i++;
-}
+    /**
+     * Sets up the game after start button pressed
+     *
+     */
+    public void createPlayers(Color c) {
+        players = new ArrayList<Player>();
+        player1 = new Player(PLAYER_1, c);
+        players.add(player1);
+        int i = 0;
+        boolean found = false;
+        while(i < 4 && !found){
+            if(!player1.getColor().equals(playerColors[i])){
+                player2 = new Player(PLAYER_2, playerColors[i]);
+                found = true;
+                players.add(player2);
+            }
+            i++;
+        }
+        i = 0;
+        found = false;
+        while(i < 4 && !found){
+            if(!player1.getColor().equals(playerColors[i])){
+                if(!player2.getColor().equals(playerColors[i])){
+                    player3 = new Player(PLAYER_3, playerColors[i]);
+                    found = true;
+                    players.add(player3);
+                }
+            }
+            i++;
+        }
+        i = 0;
+        found = false;
+        while(i < 4 && !found){
+            if(!player1.getColor().equals(playerColors[i])){
+                if(!player2.getColor().equals(playerColors[i])){
+                    if(!player3.getColor().equals(playerColors[i])){
+                        player4 = new Player(PLAYER_4, playerColors[i]);
+                        found = true;
+                        players.add(player4);
+                    }
+                }
+            }
+            i++;
+        }
 
-}
+    }
 
-/**
- * Players trade resource cards
- *
- * @param player1 Player initiating trade
- * @param player2 Player trading with
- * @return 
- */
-public void playGame(){
+    /**
+     * Players trade resource cards
+     *
+     * @param player1 Player initiating trade
+     * @param player2 Player trading with
+     * @return 
+     */
+    public void playGame(){
 
-while(gameStart){
-//roll dice
+        while(gameStart){
+            //roll dice
 
-//whichever token/hex (the tokens number the hexes) is rolled
-//any settlement on the border of that hex gets resources.
-//Determine players with "activated hexes"
+            //whichever token/hex (the tokens number the hexes) is rolled
+            //any settlement on the border of that hex gets resources.
+            //Determine players with "activated hexes"
 
-//distribute resources *if not enough resources, none distributed
+            //distribute resources *if not enough resources, none distributed
 
-//offer trades
-panel.repaint();
-}
-}
+            //offer trades
+            panel.repaint();
 
-/**
- * Players trade resource cards
- *
- * @param player1 Player initiating trade
- * @param player2 Player trading with
- * @return 
- */
-public void PlayerTurn(Player p){
-//roll dice
+            //check if anyone has 10 victory points
+            checkPoints();
+        }
+    }
 
-//whichever token/hex (the tokens number the hexes) is rolled
-//any settlement on the border of that hex gets resources.
-//Determine players with "activated hexes"
+    /**
+     * Players trade resource cards
+     *
+     * @param player1 Player initiating trade
+     * @param player2 Player trading with
+     * @return 
+     */
+    public void PlayerTurn(Player p){
+        //roll dice
 
-//distribute resources *if not enough resources, none distributed
+        //whichever token/hex (the tokens number the hexes) is rolled
+        //any settlement on the border of that hex gets resources.
+        //Determine players with "activated hexes"
 
-//offer trades
-}
+        //distribute resources *if not enough resources, none distributed
 
-/**
- * Each player puts down a road and a settlement
- *
- * @param 
- * @return 
- */
-public void roll(){
-// roll dice: highest roll chooses first player to play
-roll = die1.rollDice();
-roll += die2.rollDice();
+        //offer trades
+    }
 
-}
+    /**
+     * Each player puts down a road and a settlement
+     *
+     * @param 
+     * @return 
+     */
+    public void roll(){
+        // roll dice: highest roll chooses first player to play
+        roll = die1.rollDice();
+        roll += die2.rollDice();
 
-/**
- * Each player puts down a road and a settlement
- *
- * @param 
- * @return 
- */
-public void distributeGamepieces(){
-// roll dice: highest roll chooses first player to play
+    }
 
-//get resource cards based on the hex tiles that are 
-//adjacent to your settlement
-}
+    /**
+     * Each player puts down a road and a settlement
+     *
+     * @param 
+     * @return 
+     */
+    public void distributeGamepieces(){
+        // roll dice: highest roll chooses first player to play
 
-/**
- * Each player puts down a road and a settlement.
- * 
- * Continues in reverse order until every player puts down two 
- * settlements and two roads.
- * 
- * Direction: 1st round clockwise/2nd round counterclockwise 
- *
- * @param 
- * @return 
- */
-public void placeGamepiece(){
+        //get resource cards based on the hex tiles that are 
+        //adjacent to your settlement
+    }
 
-//place settlement between two hexes
+    /**
+     * Each player puts down a road and a settlement.
+     * 
+     * Continues in reverse order until every player puts down two 
+     * settlements and two roads.
+     * 
+     * Direction: 1st round clockwise/2nd round counterclockwise 
+     *
+     * @param 
+     * @return 
+     */
+    public void placeGamepiece(){
 
-//place road between two hexes
+        //place settlement between two hexes
 
-panel.repaint();
-}
+        //place road between two hexes
 
-/**
- * Each player puts down a road and a settlement
- *
- * @param 
- * @return 
- */
-public void getResources(){
-// roll dice: highest roll chooses first player to play
+        panel.repaint();
+    }
 
-//get resource cards based on the hex tiles that are 
-//adjacent to your settlement
-}
+    /**
+     * Each player puts down a road and a settlement
+     *
+     * @param 
+     * @return 
+     */
+    public void getResources(){
+        // roll dice: highest roll chooses first player to play
 
-/**
- * Players trade resource cards
- *
- * @param player1 Player initiating trade
- * @param player2 Player trading with
- * @return 
- */
-public void tradeResources(Player player1, Player player2){
-//trading can only happen with the active player on a turn
-}
+        //get resource cards based on the hex tiles that are 
+        //adjacent to your settlement
+    }
 
-/**
- * Exchanges cards between two players
- *
- * @param player1 Player initiating trade
- * @param player2 Player trading with
- * @return 
- */
-public void swapCards(Player player1, Player player2){
-//trading can only happen with the active player on a turn
-}
+    /**
+     * Players trade resource cards
+     *
+     * @param player1 Player initiating trade
+     * @param player2 Player trading with
+     * @return 
+     */
+    public void tradeResources(Player player1, Player player2){
+        //trading can only happen with the active player on a turn
+    }
 
-/**
- * Players build to develop your empire
- *
- * @param player1 Player initiating trade
- * @param player2 Player trading with
- * @return 
- */
-public void build(Player p){
-//called every turn after dice are rolled
+    /**
+     * Exchanges cards between two players
+     *
+     * @param player1 Player initiating trade
+     * @param player2 Player trading with
+     * @return 
+     */
+    public void swapCards(Player player1, Player player2){
+        //trading can only happen with the active player on a turn
+    }
 
-//build: roads, settlements, cities, development cards
+    /**
+     * Players build to develop your empire
+     *
+     * @param player1 Player initiating trade
+     * @param player2 Player trading with
+     * @return 
+     */
+    public void build(Player p){
+        //called every turn after dice are rolled
 
-//need to provide info on what is required to build each
+        //build: roads, settlements, cities, development cards
 
-//player selects what to build
+        //need to provide info on what is required to build each
 
-//building is placed on gameboard
+        //player selects what to build
 
-//if building settlement, can only build in place
-//connecting to existing roads
+        //building is placed on gameboard
 
-//if building city need to pay resources and replace
-//existing settlement with a city piece
-}
+        //if building settlement, can only build in place
+        //connecting to existing roads
 
-/**
- * Move the robber to a hex.
- * Take action based on placement.
- *
- * @param a hex tile to move the robber to.
- * @return 
- */
-public void activateRobber(HexTiles h){
-//call method when dice roll = 7
+        //if building city need to pay resources and replace
+        //existing settlement with a city piece
+    }
 
-//anyone with more than 7 cards must discard extras to bank
+    /**
+     * Move the robber to a hex.
+     * Take action based on placement.
+     *
+     * @param a hex tile to move the robber to.
+     * @return 
+     */
+    public void activateRobber(HexTiles h){
+        //call method when dice roll = 7
 
-//move robber to different hex (call method)
+        //anyone with more than 7 cards must discard extras to bank
 
-//can steal one card from player with a settlement touching 
-//hex robber was placed on
+        //move robber to different hex (call method)
 
-//no resources are distributed from hex robber is touching
-}
+        //can steal one card from player with a settlement touching 
+        //hex robber was placed on
 
-/**
- * Move the robber to a hex.
- * Take action based on placement.
- *
- * @param a hex tile to move the robber to.
- * @return 
- */
-public void moveRobber(HexTiles h){
-//move the robber to a different hex
+        //no resources are distributed from hex robber is touching
+    }
 
-}
+    /**
+     * Move the robber to a hex.
+     * Take action based on placement.
+     *
+     * @param a hex tile to move the robber to.
+     * @return 
+     */
+    public void moveRobber(HexTiles h){
+        //move the robber to a different hex
 
-/**
- * Removes card for circulation and apply card benefit.
- *
- * @param 
- * @return 
- */
-public void useDevelopmentCard(){
-//card types
+    }
 
-//knight: move robber, don't discard the card
-}
+    /**
+     * Removes card for circulation and apply card benefit.
+     *
+     * @param 
+     * @return 
+     */
+    public void useDevelopmentCard(){
+        //card types
 
-/**
- * Use card to build.
- *
- * @param 
- * @return 
- */
-public void useResourceCard(){
-//move the robber to a different hex
+        //knight: move robber, don't discard the card
+    }
 
-//if players have more than 7 resource cards must remove them
+    /**
+     * Use card to build.
+     *
+     * @param 
+     * @return 
+     */
+    public void useResourceCard(){
+        //move the robber to a different hex
 
-//
-}
+        //if players have more than 7 resource cards must remove them
 
-/**
- * Draw a card from the resource card bank.
- *
- * @param 
- * @return 
- */
-public void drawDevelopmentCard(){
+        //
+    }
 
-// Add to player's hand
+    /**
+     * Draw a card from the resource card bank.
+     *
+     * @param 
+     * @return 
+     */
+    public void drawDevelopmentCard(){
 
-}
+        // Add to player's hand
 
-/**
- * Draw a card from the resource card bank.
- *
- * @param 
- * @return 
- */
-public void drawResourceCard(){
+    }
 
-//if player has a city, gets two resource cards
+    /**
+     * Draw a card from the resource card bank.
+     *
+     * @param 
+     * @return 
+     */
+    public void drawResourceCard(){
 
-//else gets one card
+        //if player has a city, gets two resource cards
 
-// Add to player's hand
+        //else gets one card
 
-}
+        // Add to player's hand
 
-/**
- * Draw a card from the resource card bank.
- *
- * @param 
- * @return 
- */
-public void checkRoads(){
+    }
 
-//first player to build 5 uninterrupted roads you get longest
-//road card worth 2 victory points.
+    /**
+     * Draw a card from the resource card bank.
+     *
+     * @param 
+     * @return winner if no one won yet, returns 0, else returns 
+     * player number. 10 points wins the game.
+     */
+    public int checkPoints(){
+        int winner = 0;
 
-//player can steal card if they build longer road.
+        for(int i = 0; i < 4; i++){
+            if(players.get(i) != null){
+                if(players.get(i).getVictoryPoints()>=10){
+                    winner = players.get(i).getPlayerNumber();
+                }
+            }
+        }
 
-}
+        return winner;
+    }
 
-/**
- * Draw a card from the resource card bank.
- *
- * @param 
- * @return 
- */
-public void checkKnights(){
+    /**
+     * Draw a card from the resource card bank.
+     *
+     * @param 
+     * @return 
+     */
+    public void checkRoads(){
 
-//first player to get 3 knight development cards gets
-//largest army card.  
+        //first player to build 5 uninterrupted roads you get longest
+        //road card worth 2 victory points.
+        if(!longestRoad){
+            for(int i = 0; i < 4; i++){
+                if(players.get(i) != null){
+                    if(players.get(i).getRoadLength()>=5){
+                        longestRoad = true;
+                        longestRoadAmt = players.get(i).getRoadLength();
+                        players.get(i).setLongestRoad(true);
+                    }
+                }
+            }
+        }else{
+            //see if someone can steal longest road card
+            for(int i = 0; i < 4; i++){
+                if(players.get(i) != null){
+                    if(players.get(i).getRoadLength()>=longestRoadAmt){
+                        longestRoadAmt = players.get(i).getRoadLength();
+                        players.get(i).setLongestRoad(true);
+                    }
+                }
+            }
+        }
 
-//player can steal card if they build longer road.
+        //player can steal card if they build longer road.
+    }
 
-}
+    /**
+     * Draw a card from the resource card bank.
+     *
+     * @param 
+     * @return 
+     */
+    public void checkKnights(){
 
-//----------------------------------------------------------
-//Starts the main run method
-//----------------------------------------------------------
-public static void main(String args[]) {
-Dice.loadPic();
-ResourceCard.loadPic();
-DevelopmentCard.loadPic();
-Robber.loadPic();
-Table.loadPic();
+        //first player to get 3 knight development cards gets
+        //largest army card.  
 
-//launch main thread that will manage the GUI
-javax.swing.SwingUtilities.invokeLater(new Catan());
+        //player can steal card if they build longer road.
 
-// while(gameStart){
+    }
 
-// }
-}
+    //----------------------------------------------------------
+    //Starts the main run method
+    //----------------------------------------------------------
+    public static void main(String args[]) {
+        Dice.loadPic();
+        ResourceCard.loadPic();
+        DevelopmentCard.loadPic();
+        Robber.loadPic();
+        Table.loadPic();
+
+        //launch main thread that will manage the GUI
+        javax.swing.SwingUtilities.invokeLater(new Catan());
+
+        // while(gameStart){
+
+        // }
+    }
 }
