@@ -676,36 +676,30 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * @return 
      */
     public void distributeGamepieces(){
-        for(int i = 0; i < players.size(); i++){
             //generate settlements
             for(int s = 0; s < SETTLEMENTS; s++){
                 player1Pieces.add(new GamePiece(panel, "Settlement", players.get(0).getColor()));
-                player2Pieces.add(new GamePiece(panel, "Settlement", players.get(0).getColor()));
-                player3Pieces.add(new GamePiece(panel, "Settlement", players.get(0).getColor()));
-                player4Pieces.add(new GamePiece(panel, "Settlement", players.get(0).getColor()));
+                player2Pieces.add(new GamePiece(panel, "Settlement", players.get(1).getColor()));
+                player3Pieces.add(new GamePiece(panel, "Settlement", players.get(2).getColor()));
+                player4Pieces.add(new GamePiece(panel, "Settlement", players.get(3).getColor()));
 
             }
+            //generate cities
             for(int c = 0; c < CITIES; c++){
+                player1Pieces.add(new GamePiece(panel, "City", players.get(0).getColor()));
+                player2Pieces.add(new GamePiece(panel, "City", players.get(1).getColor()));
+                player3Pieces.add(new GamePiece(panel, "City", players.get(2).getColor()));
+                player4Pieces.add(new GamePiece(panel, "City", players.get(3).getColor()));
+
             }
+            //generate roads
             for(int r = 0; r < ROADS; r++){
+                player1Pieces.add(new GamePiece(panel, "Road", players.get(0).getColor()));
+                player2Pieces.add(new GamePiece(panel, "Road", players.get(1).getColor()));
+                player3Pieces.add(new GamePiece(panel, "Road", players.get(2).getColor()));
+                player4Pieces.add(new GamePiece(panel, "Road", players.get(3).getColor()));
+
             }
-            
-            // Stack<Pieces> p = new Stack<Pieces>();
-            // //Add everything to r
-            // for(int i=0;i<CITIES;i++){
-            // p.add(Pieces.CITIES);
-            // }
-
-            // for(int i=0;i<SETTLEMENTS;i++){
-            // p.add(Pieces.SETTLEMENTS);
-            // }
-
-            // for(int i=0;i<ROADS;i++){
-            // p.add(Pieces.ROADS);
-            // }
-
-            // return p;
-        }
     }
 
     /**
