@@ -21,19 +21,24 @@ public class GamePiece  extends AnimatedGraphicsObject implements ImageObserver{
     private static Image cities;
     private static Image settlements;
     private static Image roads;   
-    
-    String type;
 
+    String type;
+    boolean visible;
+    Color c;
+    Pieces p;
     /**
      * Constructor for objects of class GamePieces
      */
-    public GamePiece(JComponent container, String type)
+    public GamePiece(JComponent container, String type, Color c)
     {
         super(container);
         this.type = type;
+        visible = false;
+        this.c = c;
+        setPiece(type);
     }
 
-    public void showCard(){
+    public void showGamePiece(){
         visible = true;
     }
 
@@ -61,27 +66,17 @@ public class GamePiece  extends AnimatedGraphicsObject implements ImageObserver{
         // }
         // //paint text that describes card type
     }
-
-    /** Populates the r stack with exact number of each development card
+        /** Populates the r stack with exact number of each development card
      *  Then shuffles the stack, so when items are popped, they are random
      */
-    public static Stack populateR(){
-        Stack<Pieces> p = new Stack<Pieces>();
-
-        //Add everything to r
-        for(int i=0;i<CITIES;i++){
-            p.add(Pieces.CITIES);
+    public void setPiece(String s){
+        if(s.equals("Settlement")){
+            p = Pieces.SETTLEMENTS;
+        }else if(s.equals("City")){
+            p = Pieces.CITIES;
+        }else if(s.equals("Road")){
+            p = Pieces.ROADS;
         }
-
-        for(int i=0;i<SETTLEMENTS;i++){
-            p.add(Pieces.SETTLEMENTS);
-        }
-
-        for(int i=0;i<ROADS;i++){
-            p.add(Pieces.ROADS);
-        }
-
-        return p;
     }
 
     public boolean imageUpdate(Image img, int infoflags, int x, int y,
@@ -97,7 +92,7 @@ public class GamePiece  extends AnimatedGraphicsObject implements ImageObserver{
 
     protected static void loadPic(){
         Toolkit toolkit = Toolkit.getDefaultToolkit();
-        
+
         cities = toolkit.getImage("city.png");
         settlements = toolkit.getImage("settlement.png");
         roads = toolkit.getImage("road.png");

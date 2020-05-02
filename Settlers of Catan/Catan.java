@@ -26,6 +26,10 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     public static final int PLAYER_4 = 4;
     public static final int WINNING_POINTS = 10;
 
+    final static protected int CITIES = 4; 
+    final static protected int SETTLEMENTS = 5;
+    final static protected int ROADS = 15;
+
     //Color list
     public static final Color ORANGE = new Color(230, 108, 44);
     protected Color[] playerColors = {Color.RED, Color.BLUE, Color.WHITE, ORANGE};
@@ -587,10 +591,10 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      */
     public void PlayerTurn(){
         boolean turnDone = false;
-        
+
         //roll dice
         rollDialog();
-        
+
         //whichever token/hex (the tokens number the hexes) is rolled
         //any settlement on the border of that hex gets resources.
         //Determine players with "activated hexes"
@@ -611,7 +615,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         boolean turnDone = false;
         //roll dice
         autoRoll();
-        
+
         //whichever token/hex (the tokens number the hexes) is rolled
         //any settlement on the border of that hex gets resources.
         //Determine players with "activated hexes"
@@ -672,10 +676,36 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * @return 
      */
     public void distributeGamepieces(){
-        // roll dice: highest roll chooses first player to play
+        for(int i = 0; i < players.size(); i++){
+            //generate settlements
+            for(int s = 0; s < SETTLEMENTS; s++){
+                player1Pieces.add(new GamePiece(panel, "Settlement", players.get(0).getColor()));
+                player2Pieces.add(new GamePiece(panel, "Settlement", players.get(0).getColor()));
+                player3Pieces.add(new GamePiece(panel, "Settlement", players.get(0).getColor()));
+                player4Pieces.add(new GamePiece(panel, "Settlement", players.get(0).getColor()));
 
-        //get resource cards based on the hex tiles that are 
-        //adjacent to your settlement
+            }
+            for(int c = 0; c < CITIES; c++){
+            }
+            for(int r = 0; r < ROADS; r++){
+            }
+            
+            // Stack<Pieces> p = new Stack<Pieces>();
+            // //Add everything to r
+            // for(int i=0;i<CITIES;i++){
+            // p.add(Pieces.CITIES);
+            // }
+
+            // for(int i=0;i<SETTLEMENTS;i++){
+            // p.add(Pieces.SETTLEMENTS);
+            // }
+
+            // for(int i=0;i<ROADS;i++){
+            // p.add(Pieces.ROADS);
+            // }
+
+            // return p;
+        }
     }
 
     /**
