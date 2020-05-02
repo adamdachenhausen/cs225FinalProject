@@ -47,6 +47,8 @@ public class HexTiles extends AnimatedGraphicsObject{
 
     protected Tokens t;
 
+    protected Point[] pts;
+
     private boolean debug = true;
     private boolean hasRobber;
     /**
@@ -59,7 +61,7 @@ public class HexTiles extends AnimatedGraphicsObject{
         this.center=center;
         this.r = r;
         this.t=t;
-
+        this.pts = new Point[6];
         //Outsource completing the polygon to make it a hexagon
         completeHex();
 
@@ -79,6 +81,7 @@ public class HexTiles extends AnimatedGraphicsObject{
         this.r = r;
         this.t = t;
 
+        this.pts = new Point[6];
         this.center = new Point(center.x+dx,center.y+dy);
 
         //Outsource completing the polygon to make it a hexagon
@@ -92,24 +95,24 @@ public class HexTiles extends AnimatedGraphicsObject{
      *      \/
      */
     private void completeHex(){
-        //Init points as degrees around a circle, so they can be used multiple times
-        Point zero = new Point(center.x,center.y+SIDE_LENGTH);
-        Point sixty = new Point(center.x+X_OFFSET,center.y+Y_OFFSET);
-        Point oneHTwenty = new Point(center.x+X_OFFSET,center.y-Y_OFFSET);
-        Point oneHEighty = new Point(center.x,center.y-SIDE_LENGTH);
-        Point twoHFourty = new Point(center.x-X_OFFSET,center.y-Y_OFFSET);
-        Point threeH = new Point(center.x-X_OFFSET,center.y+Y_OFFSET);
+        //Init points in array, so they can be used again
+        pts[0] = new Point(center.x,center.y+SIDE_LENGTH);
+        pts[1] = new Point(center.x+X_OFFSET,center.y+Y_OFFSET);
+        pts[2] = new Point(center.x+X_OFFSET,center.y-Y_OFFSET);
+        pts[3] = new Point(center.x,center.y-SIDE_LENGTH);
+        pts[4] = new Point(center.x-X_OFFSET,center.y-Y_OFFSET);
+        pts[5] = new Point(center.x-X_OFFSET,center.y+Y_OFFSET);
 
         //Add points in clockwise rotation starting at northernmost point
-        p.addPoint(zero.x,zero.y);
+        p.addPoint(pts[0].x,pts[0].y);
 
-        p.addPoint(sixty.x,sixty.y);
+        p.addPoint(pts[1].x,pts[1].y);
 
-        p.addPoint(oneHTwenty.x,oneHTwenty.y);
-        p.addPoint(oneHEighty.x,oneHEighty.y);
+        p.addPoint(pts[2].x,pts[2].y);
+        p.addPoint(pts[3].x,pts[3].y);
 
-        p.addPoint(twoHFourty.x,twoHFourty.y);
-        p.addPoint(threeH.x,threeH.y);
+        p.addPoint(pts[4].x,pts[4].y);
+        p.addPoint(pts[5].x,pts[5].y);
     }
 
     @Override
@@ -226,8 +229,15 @@ public class HexTiles extends AnimatedGraphicsObject{
     public boolean getHasRobber(){
         return hasRobber;
     }
-        public void setRobber(boolean newHasRobber){
+
+    public void setRobber(boolean newHasRobber){
         hasRobber = newHasRobber;
+    }
+
+    public Point[] getCityLocations(){
+        Point[] pts = new Point[6];
+
+        return pts;
     }
 
     @Override
