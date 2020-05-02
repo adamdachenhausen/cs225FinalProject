@@ -326,6 +326,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         //display the player's gamepieces (roads, settlements and cities)
         distributeGamepieces();
 
+        
         //place first two settlements
         turn = 1;
         for(int i = 0; i < 2; i++){
@@ -340,6 +341,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
             turn = 1;
         }
 
+        
         //Play game
         //playGame();
     }
@@ -538,11 +540,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     }
 
     /**
-     * Players trade resource cards
+     * Controls the gameplay as long as someone doesn't have 10 Victory Points, the game continues.
      *
-     * @param player1 Player initiating trade
-     * @param player2 Player trading with
-     * @return 
      */
     public void playGame(){
         turn = PLAYER_1;
@@ -559,7 +558,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
             //Determine players with "activated hexes"
 
             //distribute resources *if not enough resources, none distributed
-
+            distributeResources(roll);
+            panel.repaint();
             //offer trades
             panel.repaint();
 
@@ -736,13 +736,13 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     }
 
     /**
-     * Each player puts down a road and a settlement
+     * Distributes resource cards to each player based on the roll of the player in control's dice.
      *
-     * @param 
-     * @return 
+     * @param tokenVal the value of the roll of the dice that corresponds to token pieces on the board.
+     * 
      */
-    public void getResources(){
-        // roll dice: highest roll chooses first player to play
+    public void distributeResources(int tokenVal){
+        //call method from hextiles or gameboard to determine how many of each
 
         //get resource cards based on the hex tiles that are 
         //adjacent to your settlement
