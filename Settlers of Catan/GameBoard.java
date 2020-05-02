@@ -44,12 +44,12 @@ public class GameBoard extends AnimatedGraphicsObject
 
     private Polygon sea;
 
-    protected List<Point> cityLocations;
+    protected CityLocations c;
     public GameBoard(JComponent container, Point center){
         super(container);
         this.container = container;
         this.center = center;
-        cityLocations = new ArrayList<Point>();
+        c = new CityLocations(container);
         //panel = new JPanel();
         //panel.setBackground(SEA);
 
@@ -210,6 +210,9 @@ public class GameBoard extends AnimatedGraphicsObject
         if(robber != null){
             robber.paint(g);
         }
+        if(c != null){
+            c.paint(g);
+        }
     }
 
     @Override
@@ -324,7 +327,7 @@ public class GameBoard extends AnimatedGraphicsObject
                     ArrayList<Point> temp = board[i][j].getCityLocations();
 
                     for(int k = 0; k<temp.size();k++){
-                        cityLocations.add(temp.get(k));
+                        c.addLocation(temp.get(k));
                     }
                 }
             }
