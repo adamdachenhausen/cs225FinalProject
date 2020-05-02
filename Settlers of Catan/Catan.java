@@ -301,7 +301,6 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
             answer = introDialog(); 
         }
 
-
         //display the player's gamepieces (roads, settlements and cities)
         //createGamepieces();
 
@@ -375,10 +374,10 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
             showInstructions();
         }
         if(e.getSource().equals(rollDiceButton)){
-            showInstructions();
+            roll();
         }
         if(e.getSource().equals(continueButton)){
-            showInstructions();
+            displayBuildingCosts();
         }
         if(e.getSource().equals(tradeButton)){
             showInstructions();
@@ -415,13 +414,9 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         //draw status pane
         statusPane = new StatusPane(panel, gamePhase, turn);
 
-
         //set board with 2 settlements per player
-
         //distributeGamepieces();
-        
     }
-
     /**
      * Sets up the game after start button pressed
      *
@@ -442,6 +437,21 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
             p1Color = Color.ORANGE;
         }
         return p1Color;
+    }
+
+    /**
+     * Sets up the game after start button pressed
+     *
+     */
+    public void displayBuildingCosts() {
+        Object[][] rows = {
+                {"Road", "Settlement", "City", "Development card","","Special", "Longest road", "Largest army" }
+            };
+        Object[] cols = {
+                "Item","VP","Cost"
+            };
+        JTable table = new JTable(rows, cols);
+        JOptionPane.showMessageDialog(null, new JScrollPane(table));
     }
 
     /**
@@ -490,7 +500,6 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         }
 
     }
-
 
 
     /**
@@ -547,8 +556,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         roll += die2.rollDice();
 
     }
-    
-        /**
+
+    /**
      * Each player puts down a road and a settlement
      *
      * @param 
@@ -560,7 +569,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         //get resource cards based on the hex tiles that are 
         //adjacent to your settlement
     }
-    
+
     /**
      * Each player puts down a road and a settlement.
      * 
@@ -580,6 +589,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
         panel.repaint();
     }
+
     /**
      * Each player puts down a road and a settlement
      *
@@ -601,6 +611,17 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * @return 
      */
     public void tradeResources(Player player1, Player player2){
+        //trading can only happen with the active player on a turn
+    }
+
+    /**
+     * Exchanges cards between two players
+     *
+     * @param player1 Player initiating trade
+     * @param player2 Player trading with
+     * @return 
+     */
+    public void swapCards(Player player1, Player player2){
         //trading can only happen with the active player on a turn
     }
 
