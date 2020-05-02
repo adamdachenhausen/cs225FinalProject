@@ -35,13 +35,13 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     protected Color[] playerColors = {Color.RED, Color.BLUE, Color.WHITE, ORANGE};
 
     //adds variables for gameplay
-    protected int roll;
+    protected int roll = 0;
 
     //phase of gameplay
     protected String gamePhase;
 
     //player whose turn it is
-    protected int turn;
+    protected int turn = 0;
 
     //Players
     protected Player player1, player2, player3, player4;
@@ -323,25 +323,28 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
             answer = introDialog(); 
         }
 
+        //draw status pane
+        statusPane = new StatusPane(panel, gamePhase, turn, roll, players);
+        statusPane.start();
+        panel.repaint();
+
         //display the player's gamepieces (roads, settlements and cities)
-        distributeGamepieces();
+        //distributeGamepieces();
 
-        
         //place first two settlements
-        turn = 1;
-        for(int i = 0; i < 2; i++){
-            while(turn <= 4){
-                if(turn == 1){
-                    placeGamePiece("Settlement");
-                }else{
-                    autoPlacePiece("Settlement", turn);
-                }
-                turn++;
-            }
-            turn = 1;
-        }
+        // turn = 1;
+        // for(int i = 0; i < 2; i++){
+            // while(turn <= 4){
+                // if(turn == 1){
+                    // placeGamePiece("Settlement");
+                // }else{
+                    // autoPlacePiece("Settlement", turn);
+                // }
+                // turn++;
+            // }
+            // turn = 1;
+        // }
 
-        
         //Play game
         //playGame();
     }
@@ -367,6 +370,15 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                 icon,options,options[1]);
 
         return answer;
+    }
+
+    /**
+     * Players trade resource cards
+     *
+     * @return 
+     */
+    public void updateStatusPane(){
+
     }
 
     /**
@@ -433,8 +445,6 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         gameboard.start();
         gameboard.startBoard();
 
-        //draw status pane
-        statusPane = new StatusPane(panel, gamePhase, turn);
 
         //set board with 2 settlements per player
         //distributeGamepieces();
@@ -544,6 +554,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      *
      */
     public void playGame(){
+
         turn = PLAYER_1;
         while(gameStart){
             //call player turn with correct player
@@ -552,6 +563,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
             }else{
                 NpcTurn();
             }
+            gamePhase = "Distributing Resources...";
 
             //whichever token/hex (the tokens number the hexes) is rolled
             //any settlement on the border of that hex gets resources.
@@ -560,6 +572,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
             //distribute resources *if not enough resources, none distributed
             distributeResources(roll);
             panel.repaint();
+
             //offer trades
             panel.repaint();
 

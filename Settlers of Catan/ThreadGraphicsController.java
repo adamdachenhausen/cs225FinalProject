@@ -47,7 +47,7 @@ public class ThreadGraphicsController implements Runnable {
     protected ResourceDeck resourceDeck;
     protected DevelopmentDeck developmentDeck;
 
-    protected java.util.List<Player> players;
+    protected java.util.ArrayList<Player> players;
 
     /** the table for the board */
     protected Table table;

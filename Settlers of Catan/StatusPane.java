@@ -27,15 +27,17 @@ public class StatusPane extends AnimatedGraphicsObject implements ImageObserver{
 
     //which player's turn is it?
     private int turn;
-
+    private int roll;
+    private ArrayList<Player> p ;
     /**
      * Constructor for objects of class Dice
      */
-    public StatusPane(JComponent container, String phase, int turn){
+    public StatusPane(JComponent container, String phase, int turn, int roll, ArrayList<Player>p){
         super(container);
         upperLeft = new Point(container.getWidth() - 300, 0);
         this.turn = turn;
-
+        this.roll = roll;
+        this.p = p;
     }
 
     @Override
@@ -69,6 +71,7 @@ public class StatusPane extends AnimatedGraphicsObject implements ImageObserver{
 
     public void updateText(Graphics g){
         //Variables to paint text
+        String statusTitle;
         String playerInfo;
         int x = 0;
         int y = 0;
@@ -77,14 +80,56 @@ public class StatusPane extends AnimatedGraphicsObject implements ImageObserver{
         g.setFont(new Font("TimesRoman", Font.BOLD, 15));
         FontMetrics fm = g.getFontMetrics();
 
-        playerInfo = "PLAYER: " + turn;
-        x = (upperLeft.x + (PANE_WIDTH - fm.stringWidth(playerInfo)) / 2);
+        //Title
+        statusTitle = "GAME STATUS";
+        x = (upperLeft.x + (PANE_WIDTH - fm.stringWidth(statusTitle)) / 2);
         y = (upperLeft.y + fm.getAscent()) + 5;
-        g.drawString(playerInfo, x, y);
+        g.drawString(statusTitle, x, y);
 
+        //Turn status
+        String currentTurn;
+        if(turn == 0){
+           currentTurn = "Game has not started.";
+        }else{
+         currentTurn = "Player " + turn + "'s turn."; 
+        }
+        g.setFont(new Font("TimesRoman", Font.BOLD, 15));
+        int x2 = (upperLeft.x + 3);
+        int y2 = (upperLeft.y + 55);
+        g.drawString(currentTurn, x2, y2);
+
+        //Game status
+        String currentRoll = "Dice roll: " + roll;
+        g.setFont(new Font("TimesRoman", Font.BOLD, 15));
+        int x3 = (upperLeft.x + 3);
+        int y3 = (y2 + 20);
+        g.drawString(currentRoll, x3, y3);
+        
+        //player1Info = "PLAYER: " + turn;
+        String p1Status = "Player 1 points: " + p.get(0).getVictoryPoints();
+        int x4 = (upperLeft.x + 3);
+        int y4 = (y3 + 20);
+        g.drawString(p1Status, x4, y4);
+
+        //player2Info = "PLAYER: " + turn;
+        String p2Status = "Player 2 points: " + p.get(1).getVictoryPoints();
+        int x5 = (upperLeft.x + 3);
+        int y5 = (y4 + 20);
+        g.drawString(p2Status, x5, y5);
+
+        //player3Info = "PLAYER: " + turn;
+        String p3Status = "Player 3 points: " + p.get(2).getVictoryPoints();
+        int x6 = (upperLeft.x + 3);
+        int y6 = (y5 + 20);
+        g.drawString(p3Status, x6, y6);
+        
+                //player4Info = "PLAYER: " + turn;
+        String p4Status = "Player 4 points: " + p.get(3).getVictoryPoints();
+        int x7 = (upperLeft.x + 3);
+        int y7 = (y6 + 20);
+        g.drawString(p4Status, x7, y7);
 
         container.repaint();
-
         //Player Instructions text
     }
 
@@ -111,7 +156,5 @@ public class StatusPane extends AnimatedGraphicsObject implements ImageObserver{
     protected static void loadPic(){
         Toolkit toolkit = Toolkit.getDefaultToolkit();
 
-
     }
-
 }

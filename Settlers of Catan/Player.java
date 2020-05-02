@@ -40,7 +40,7 @@ public class Player
     protected int roads = 0;
 
     //variables based on development cards
-    protected int victoryPoints = 0;
+    protected int victoryPoints;
     protected int victoryPointCards = 0;
     protected int knights = 0;
     protected int roadLength = 0;
@@ -62,6 +62,7 @@ public class Player
         playerNumber = playNum;
         c = color;
         turn = false;
+        victoryPoints = 0;
         devCards = new ArrayList<DevelopmentCard>();
         resourceCards = new ArrayList<ResourceCard>();
     }
