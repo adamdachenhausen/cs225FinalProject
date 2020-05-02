@@ -44,7 +44,7 @@ public class HexTiles extends AnimatedGraphicsObject{
     protected Resource r;
 
     protected Polygon p;
-    
+
     protected Tokens t;
 
     private boolean debug = true;
@@ -61,7 +61,7 @@ public class HexTiles extends AnimatedGraphicsObject{
 
         //Outsource completing the polygon to make it a hexagon
         completeHex();
-        
+
         //Creates a string value of the type of hex it is
         //ex. brick resource is a "hill"
         //type = createHexType();
@@ -76,7 +76,7 @@ public class HexTiles extends AnimatedGraphicsObject{
         //this.center=center;
         this.r = r;
         this.t = t;
-        
+
         this.center = new Point(center.x+dx,center.y+dy);
 
         //Outsource completing the polygon to make it a hexagon
@@ -163,8 +163,8 @@ public class HexTiles extends AnimatedGraphicsObject{
     public Point getHexPoint(){
         return center;
     }
-    
-        public String getHexType(){
+
+    public String getHexType(){
         return type;
     }
 
@@ -204,16 +204,22 @@ public class HexTiles extends AnimatedGraphicsObject{
         //return hextype;
 
     }
-        public Resource getResource(){
-            return r;
-        }
-                public Tokens getToken(){
-            return t;
-        }
-                        public void setToken(Tokens newToken){
-            t = newToken;
-        }
 
+    public Resource getResource(){
+        return r;
+    }
+
+    public Tokens getToken(){
+        return t;
+    }
+
+    public void setToken(Tokens newToken){
+        t = newToken;
+    }
+
+    public void removeToken(){
+        t = null;
+    }
 
     @Override
     public void run(){
