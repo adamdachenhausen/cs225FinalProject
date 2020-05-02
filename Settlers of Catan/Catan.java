@@ -283,7 +283,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     public void startGame() {
         gamePhase = "Game starting";
         gameStart = true;
-        
+
         //Create table, then set board
         table = new Table(panel);
         setBoard();
@@ -293,10 +293,14 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         die2 = new Dice(panel, new Point(700,375));
 
         //intro dialog
-        introDialog();
+        int answer = introDialog();
+        if(answer == 0){
+            //create players
+            createPlayers(selectColor());
+        }else{
+            answer = introDialog(); 
+        }
 
-        //create players
-        createPlayers(selectColor());
 
         //display the player's gamepieces (roads, settlements and cities)
         //createGamepieces();
@@ -402,7 +406,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         //ADD BACK WHEN SEA IS DONE
         //sea = new Sea(panel, new Point(200, 5));
 
-        //Draw the gameboard pieces
+        //Draw the gameboard pieces, tokens and robber
         gameboard = new GameBoard(panel,new Point(350,350));
         gameboard.createBoard();
         gameboard.start();
@@ -411,20 +415,11 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         //draw status pane
         statusPane = new StatusPane(panel, gamePhase, turn);
 
-        //place tokens
-        //tokens.populateStack();
-        //t = tokenStack.getList();
-        //tokens.startTokens();
-        //gameboard.placeToken();
-
-        //place robber in the desert
-        //Point robberPt = gameboard.getDesert() -- placeholder point below
-        Point pt = new Point(200,200);
-        //robber = new Robber(panel, pt);
 
         //set board with 2 settlements per player
-        //ADD THIS BACK WHEN METHOD CREATED
-        //createSettlements();
+
+        //distributeGamepieces();
+        
     }
 
     /**
@@ -496,41 +491,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
     }
 
-    /**
-     * Place tokens on the gameboard
-     *
-     * @param 
-     * @return 
-     */
-    public void placeTokens(){
-        
-        // for(int i = 0; i < tokens.getList().size(); i++){
-            // tokens.
-        // }
 
-
-        panel.repaint();
-    }
-
-    /**
-     * Each player puts down a road and a settlement.
-     * 
-     * Continues in reverse order until every player puts down two 
-     * settlements and two roads.
-     * 
-     * Direction: 1st round clockwise/2nd round counterclockwise 
-     *
-     * @param 
-     * @return 
-     */
-    public void createSettlements(){
-
-        //place settlement between two hexes
-
-        //place road between two hexes
-
-        panel.repaint();
-    }
 
     /**
      * Players trade resource cards
@@ -540,6 +501,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * @return 
      */
     public void playGame(){
+
         while(gameStart){
             //roll dice
 
@@ -585,7 +547,39 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         roll += die2.rollDice();
 
     }
+    
+        /**
+     * Each player puts down a road and a settlement
+     *
+     * @param 
+     * @return 
+     */
+    public void distributeGamepieces(){
+        // roll dice: highest roll chooses first player to play
 
+        //get resource cards based on the hex tiles that are 
+        //adjacent to your settlement
+    }
+    
+    /**
+     * Each player puts down a road and a settlement.
+     * 
+     * Continues in reverse order until every player puts down two 
+     * settlements and two roads.
+     * 
+     * Direction: 1st round clockwise/2nd round counterclockwise 
+     *
+     * @param 
+     * @return 
+     */
+    public void placeGamepiece(){
+
+        //place settlement between two hexes
+
+        //place road between two hexes
+
+        panel.repaint();
+    }
     /**
      * Each player puts down a road and a settlement
      *
