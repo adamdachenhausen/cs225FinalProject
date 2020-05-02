@@ -51,6 +51,7 @@ public class GameBoard extends AnimatedGraphicsObject
         super(container);
         this.container = container;
         this.center = center;
+        robber = new Robber(container, new Point(0,0));
         c = new CityLocations(container);
         roads = new Roads(container);
         //panel = new JPanel();
@@ -69,7 +70,7 @@ public class GameBoard extends AnimatedGraphicsObject
 
         sea = Sea.createSea(center);
 
-        robber = new Robber(panel, new Point(0,0));
+        
 
     }
 
@@ -211,7 +212,9 @@ public class GameBoard extends AnimatedGraphicsObject
 
         }
         if(robber != null){
-            robber.paint(g);
+            if(robber.container != null){
+                robber.paint(g);
+            }
         }
         if(c != null){
             c.paint(g);

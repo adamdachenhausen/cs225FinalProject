@@ -26,6 +26,10 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     public static final int PLAYER_4 = 4;
     public static final int WINNING_POINTS = 10;
 
+    final static protected int CITIES = 4; 
+    final static protected int SETTLEMENTS = 5;
+    final static protected int ROADS = 15;
+
     //Color list
     public static final Color ORANGE = new Color(230, 108, 44);
     protected Color[] playerColors = {Color.RED, Color.BLUE, Color.WHITE, ORANGE};
@@ -51,26 +55,29 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     // button that displays instructions for the game;
     protected JButton instructionsButton;
 
-    // button that draws resource card
-    protected JButton drawResourceButton;
+    // button that displays building costs for the game;
+    protected JButton buildingCostsButton;
 
-    // button that draws development card
-    protected JButton drawDevelopmentButton;
+    // // button that draws resource card
+    // protected JButton drawResourceButton;
+
+    // // button that draws development card
+    // protected JButton drawDevelopmentButton;
 
     // button that makes game continue to next phase
     protected JButton continueButton;
 
-    // button that draws development card
-    protected JButton useDevCardButton;
+    // // button that draws development card
+    // protected JButton useDevCardButton;
 
-    // button that draws development card
-    protected JButton buildButton;
+    // // button that draws development card
+    // protected JButton buildButton;
 
-    // button that displays opens trade panel;
-    protected JButton tradeButton;
+    // // button that displays opens trade panel;
+    // protected JButton tradeButton;
 
-    // button that rolls dice;
-    protected JButton rollDiceButton;
+    // // button that rolls dice;
+    // protected JButton rollDiceButton;
 
     protected static boolean gameStart = false;
 
@@ -166,38 +173,43 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         instructionsButton = new JButton("Instructions");
         instructionsButton.setToolTipText("Press for instructions on how to play the game");
 
-        drawResourceButton = new JButton("Draw Resource");
-        drawResourceButton.setToolTipText("Draws a resource card");
-
-        drawDevelopmentButton = new JButton("Draw Development");
-        drawDevelopmentButton.setToolTipText("Draws a development card");
-
-        useDevCardButton = new JButton("Use Development");
-        useDevCardButton.setToolTipText("Uses a development card");
-
-        buildButton = new JButton("Build");
-        buildButton.setToolTipText("Build using resources");
-
-        tradeButton = new JButton("Trade Resource");
-        tradeButton.setToolTipText("Trade with another player");
-
-        rollDiceButton = new JButton("Roll Dice");
-        rollDiceButton.setToolTipText("Rolls the dice");
+        buildingCostsButton = new JButton("Building Costs");
+        buildingCostsButton.setToolTipText("Press for information about building in the game");
 
         continueButton = new JButton("Continue");
         continueButton.setToolTipText("Continues to the next phase of the game");
+
+        // drawResourceButton = new JButton("Draw Resource");
+        // drawResourceButton.setToolTipText("Draws a resource card");
+
+        // drawDevelopmentButton = new JButton("Draw Development");
+        // drawDevelopmentButton.setToolTipText("Draws a development card");
+
+        // useDevCardButton = new JButton("Use Development");
+        // useDevCardButton.setToolTipText("Uses a development card");
+
+        // buildButton = new JButton("Build");
+        // buildButton.setToolTipText("Build using resources");
+
+        // tradeButton = new JButton("Trade Resource");
+        // tradeButton.setToolTipText("Trade with another player");
+
+        // rollDiceButton = new JButton("Roll Dice");
+        // rollDiceButton.setToolTipText("Rolls the dice");
 
         //Add buttons
         buttonPanel.add(startButton);
         buttonPanel.add(resetButton);
         buttonPanel.add(instructionsButton);
-        buttonPanel.add(drawResourceButton);
-        buttonPanel.add(drawDevelopmentButton);
-        buttonPanel.add(useDevCardButton);
-        buttonPanel.add(buildButton);
-        buttonPanel.add(tradeButton);
-        buttonPanel.add(rollDiceButton);
+        buttonPanel.add(buildingCostsButton);
         buttonPanel.add(continueButton);
+
+        // buttonPanel.add(drawResourceButton);
+        // buttonPanel.add(drawDevelopmentButton);
+        // buttonPanel.add(useDevCardButton);
+        // buttonPanel.add(buildButton);
+        // buttonPanel.add(tradeButton);
+        // buttonPanel.add(rollDiceButton);
 
     }
 
@@ -215,16 +227,17 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         startButton.addActionListener(this);
         resetButton.addActionListener(this);
         instructionsButton.addActionListener(this);
-
+        buildingCostsButton.addActionListener(this);
         resetButton.addActionListener(this);
-        instructionsButton.addActionListener(this);
-        drawResourceButton.addActionListener(this);
-        drawDevelopmentButton.addActionListener(this);
-        useDevCardButton.addActionListener(this);
-        rollDiceButton.addActionListener(this);
-        tradeButton.addActionListener(this);
+
         continueButton.addActionListener(this);
-        buildButton.addActionListener(this);
+        // drawResourceButton.addActionListener(this);
+        // drawDevelopmentButton.addActionListener(this);
+        // useDevCardButton.addActionListener(this);
+        // rollDiceButton.addActionListener(this);
+        // tradeButton.addActionListener(this);
+
+        // buildButton.addActionListener(this);
 
         panel.addMouseListener(this);
         panel.addMouseMotionListener(this);
@@ -374,26 +387,29 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         if(e.getSource().equals(instructionsButton)){
             showInstructions();
         }
-
-        //fix these buttons
-        if(e.getSource().equals(drawResourceButton)){
-            showInstructions();
-        }
-        if(e.getSource().equals(drawDevelopmentButton)){
-            showInstructions();
-        }
-        if(e.getSource().equals(useDevCardButton)){
-            showInstructions();
-        }
-        if(e.getSource().equals(rollDiceButton)){
-            roll();
-        }
-        if(e.getSource().equals(continueButton)){
+        if(e.getSource().equals(buildingCostsButton)){
             displayBuildingCosts();
         }
-        if(e.getSource().equals(tradeButton)){
-            showInstructions();
-        }
+
+        // //fix these buttons
+        // if(e.getSource().equals(drawResourceButton)){
+        // showInstructions();
+        // }
+        // if(e.getSource().equals(drawDevelopmentButton)){
+        // showInstructions();
+        // }
+        // if(e.getSource().equals(useDevCardButton)){
+        // showInstructions();
+        // }
+        // if(e.getSource().equals(rollDiceButton)){
+        // roll();
+        // }
+        // if(e.getSource().equals(continueButton)){
+        // displayBuildingCosts();
+        // }
+        // if(e.getSource().equals(tradeButton)){
+        // showInstructions();
+        // }
     }
     //----------------------------------------------------------
 
@@ -462,10 +478,10 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         JLabel buildingTitle = new JLabel("Building Costs");
         //JLabel buildingInfo = new JLabel("Below are the required components to build or acquire special cards as well as victory points associated with each item.");
         Object[][] rows = {
-                {"Road", "0", "1 Brick and 1 Lumber"},
-                {"Settlement","1","1 Brick, 1 Lumber, 1 Grain and 1 Wool"},
+                {"Road", "0", "1 Brick & 1 Lumber"},
+                {"Settlement","1","1 Brick, 1 Lumber, 1 Grain & 1 Wool"},
                 {"City", "2","2 Grain and 3 Ore"},
-                {"Development card","?","1 Wool, 1 Grain and 1 Ore"},
+                {"Development card","?","1 Wool, 1 Grain & 1 Ore"},
                 {" "," "," "},
                 {"Special"," "," "},
                 {"Longest road", "2","At least 5 contiguous road pieces"},
@@ -474,6 +490,9 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         JTable table = new JTable(rows, cols);
         JOptionPane buildingCosts = new JOptionPane();
         // buildingCosts.add(buildingInfo);
+
+        buildingCosts.setSize(new Dimension(880, 400));
+        // buildingCosts.setPreferredSize(new Dimension(680, buildingCosts.getPreferredSize().height));
 
         buildingCosts.showMessageDialog(null,new JScrollPane(table), "BuildingCosts",JOptionPane.PLAIN_MESSAGE);
         //JOptionPane.showMessageDialog(null,new JScrollPane(table));
@@ -534,9 +553,14 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * @return 
      */
     public void playGame(){
-
+        turn = PLAYER_1;
         while(gameStart){
-            //roll dice
+            //call player turn with correct player
+            if(turn == PLAYER_1){
+                PlayerTurn();
+            }else{
+                NpcTurn();
+            }
 
             //whichever token/hex (the tokens number the hexes) is rolled
             //any settlement on the border of that hex gets resources.
@@ -547,21 +571,50 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
             //offer trades
             panel.repaint();
 
+            //update player turn
+            turn++;
+            if(turn > PLAYER_4){
+                turn = PLAYER_1;
+            }
+
             //check if anyone has 10 victory points
             checkPoints();
         }
     }
 
     /**
-     * Players trade resource cards
+     * The turn for the person playing the game
      *
      * @param player1 Player initiating trade
      * @param player2 Player trading with
      * @return 
      */
-    public void PlayerTurn(Player p){
+    public void PlayerTurn(){
+        boolean turnDone = false;
+
+        //roll dice
+        rollDialog();
+
+        //whichever token/hex (the tokens number the hexes) is rolled
+        //any settlement on the border of that hex gets resources.
+        //Determine players with "activated hexes"
+
+        //distribute resources *if not enough resources, none distributed
+
+        //offer trades
+    }
+
+    /**
+     * The turn for the non-player character (NPC)
+     * Most steps are automated/randomized
+     *
+
+     * @return 
+     */
+    public void NpcTurn(){
         boolean turnDone = false;
         //roll dice
+        autoRoll();
 
         //whichever token/hex (the tokens number the hexes) is rolled
         //any settlement on the border of that hex gets resources.
@@ -578,7 +631,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * @param 
      * @return 
      */
-    public void roll(){
+    public void rollDialog(){
         // roll dice: highest roll chooses first player to play
         //Custom button text
         Object[] options = {"Roll Dice",
@@ -591,13 +644,28 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                 null,
                 options,
                 options[2]);
-        if(answer ==0){
+        if(answer == 0){
+            roll = 0;
             roll = die1.rollDice();
             roll += die2.rollDice();
 
         }else{
-            roll();
+            rollDialog();
         }
+
+    }
+
+    /**
+     * Automatically rolls dice for NPC
+     *
+     * @param 
+     * @return 
+     */
+    public void autoRoll(){
+
+        roll = 0;
+        roll = die1.rollDice();
+        roll += die2.rollDice();
 
     }
 
@@ -608,10 +676,30 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * @return 
      */
     public void distributeGamepieces(){
-        // roll dice: highest roll chooses first player to play
+            //generate settlements
+            for(int s = 0; s < SETTLEMENTS; s++){
+                player1Pieces.add(new GamePiece(panel, "Settlement", players.get(0).getColor()));
+                player2Pieces.add(new GamePiece(panel, "Settlement", players.get(1).getColor()));
+                player3Pieces.add(new GamePiece(panel, "Settlement", players.get(2).getColor()));
+                player4Pieces.add(new GamePiece(panel, "Settlement", players.get(3).getColor()));
 
-        //get resource cards based on the hex tiles that are 
-        //adjacent to your settlement
+            }
+            //generate cities
+            for(int c = 0; c < CITIES; c++){
+                player1Pieces.add(new GamePiece(panel, "City", players.get(0).getColor()));
+                player2Pieces.add(new GamePiece(panel, "City", players.get(1).getColor()));
+                player3Pieces.add(new GamePiece(panel, "City", players.get(2).getColor()));
+                player4Pieces.add(new GamePiece(panel, "City", players.get(3).getColor()));
+
+            }
+            //generate roads
+            for(int r = 0; r < ROADS; r++){
+                player1Pieces.add(new GamePiece(panel, "Road", players.get(0).getColor()));
+                player2Pieces.add(new GamePiece(panel, "Road", players.get(1).getColor()));
+                player3Pieces.add(new GamePiece(panel, "Road", players.get(2).getColor()));
+                player4Pieces.add(new GamePiece(panel, "Road", players.get(3).getColor()));
+
+            }
     }
 
     /**
@@ -705,7 +793,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         //if building city need to pay resources and replace
         //existing settlement with a city piece
     }
-        /**
+
+    /**
      * Move the robber to a hex.
      * Take action based on placement.
      *
@@ -713,18 +802,10 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * @return 
      */
     public void buildRoad(){
-        //call method when dice roll = 7
 
-        //anyone with more than 7 cards must discard extras to bank
-
-        //move robber to different hex (call method)
-
-        //can steal one card from player with a settlement touching 
-        //hex robber was placed on
-
-        //no resources are distributed from hex robber is touching
     }
-                /**
+
+    /**
      * Move the robber to a hex.
      * Take action based on placement.
      *
@@ -732,18 +813,10 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * @return 
      */
     public void buildSettlement(){
-        //call method when dice roll = 7
 
-        //anyone with more than 7 cards must discard extras to bank
-
-        //move robber to different hex (call method)
-
-        //can steal one card from player with a settlement touching 
-        //hex robber was placed on
-
-        //no resources are distributed from hex robber is touching
     }
-            /**
+
+    /**
      * Move the robber to a hex.
      * Take action based on placement.
      *
@@ -751,18 +824,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * @return 
      */
     public void buildCity(){
-        //call method when dice roll = 7
 
-        //anyone with more than 7 cards must discard extras to bank
-
-        //move robber to different hex (call method)
-
-        //can steal one card from player with a settlement touching 
-        //hex robber was placed on
-
-        //no resources are distributed from hex robber is touching
     }
-    
 
     /**
      * Move the robber to a hex.
@@ -933,7 +996,6 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
         //launch main thread that will manage the GUI
         javax.swing.SwingUtilities.invokeLater(new Catan());
-
 
     }
 }

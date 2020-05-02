@@ -25,7 +25,7 @@ here.  Event handlers and specifics of the animated and
 non-animated graphics are to be given in the classes that extend
 this and AnimatedGraphicsObject.
 
-@author Jim Teresco
+@author Jim Teresco modified by Kate Nelligan, Lindsay Clark, Adam Dachenhausen
 @version Spring 2020
  */
 
@@ -38,26 +38,22 @@ public class ThreadGraphicsController implements Runnable {
     public static final int PANEL_WIDTH = 1200;
     public static final int PANEL_HEIGHT = 150;
 
-    public static final Color SEA = new Color(49, 159, 181);
-
     /** list of animated graphics objects currently on the screen */
-    //protected java.util.List<HexTiles> hexTilesList;
-    //protected java.util.List<ResourceDeck> resourceBank;
-    //protected java.util.List<DevelopmentDeck> devBank;
+    protected java.util.List<GamePiece> player1Pieces;
+    protected java.util.List<GamePiece> player2Pieces;
+    protected java.util.List<GamePiece> player3Pieces;
+    protected java.util.List<GamePiece> player4Pieces;
+
     protected ResourceDeck resourceDeck;
     protected DevelopmentDeck developmentDeck;
-    //protected TokenStack tokens;
-    //protected java.util.List<Tokens> tokens;
+
     protected java.util.List<Player> players;
 
-        /** the table for the board */
+    /** the table for the board */
     protected Table table;
-    
+
     /** the whole gameboard where tiles are stored */
     protected GameBoard gameboard;
-
-    /** the sea around our hex tiles */
-    protected Sea sea;
 
     /** the status pane to give player directions */
     protected StatusPane statusPane;
@@ -65,9 +61,6 @@ public class ThreadGraphicsController implements Runnable {
     /** Two dice */
     protected Dice die1;
     protected Dice die2;
-
-    // /** the robber gamepiece */
-    // protected Robber robber;
 
     /** the panel in which our graphics are drawn */
     protected JPanel panel;
@@ -162,10 +155,6 @@ public class ThreadGraphicsController implements Runnable {
                     introScreen(g);
                 }
 
-                // if(sea != null){
-                // sea.paint(g);
-                // }
-
                 if(gameboard != null && statusPane != null){
                     statusPane.paint(g);
                 }
@@ -175,9 +164,6 @@ public class ThreadGraphicsController implements Runnable {
                     die2.paint(g);
                 }
 
-                // if(gameboard != null && robber != null){
-                    // robber.paint(g);
-                // }
 
                 if(!Catan.gameStart && gameboard != null){
                     clearScreen();
@@ -193,24 +179,71 @@ public class ThreadGraphicsController implements Runnable {
                 //rc = new  ResourceCard(panel, Resource.WHEAT, new Point(500,500));
                 // rc.start();
                 // rc.paint(g);
-                
-                // Tokens t;
-                // t = new Tokens(panel, new Point(500,500), 5);
-                // t.start();
-                // t.paint(g);
 
-                // synchronized (lock) {
-                    // while (i < hexTilesList.size()) {
-                        // HexTiles b = hexTilesList.get(i);
-                        // if (b.done()) {
-                            // hexTilesList.remove(i);
-                        // }
-                        // else {
-                            // b.paint(g);
-                            // i++;
-                        // }
-                    // }
-                // }
+                i = 0;
+                synchronized (lock) {
+                    while (i < player1Pieces.size()) {
+                        GamePiece gp1 = player1Pieces.get(i);
+                        if (gp1.done()) {
+                            player1Pieces.remove(i);
+                        }
+                        else {
+                            if(gp1.getVisible()){
+                                gp1.paint(g);
+                                i++;
+                            }
+                        }
+                    }
+                }
+
+                i = 0;
+                synchronized (lock) {
+                    while (i < player2Pieces.size()) {
+                        GamePiece gp2 = player2Pieces.get(i);
+                        if (gp2.done()) {
+                            player2Pieces.remove(i);
+                        }
+                        else {
+                            if(gp2.getVisible()){
+                                gp2.paint(g);
+                                i++;
+                            }
+                        }
+                    }
+                }
+
+                i = 0;
+                synchronized (lock) {
+                    while (i < player3Pieces.size()) {
+                        GamePiece gp3 = player3Pieces.get(i);
+                        if (gp3.done()) {
+                            player1Pieces.remove(i);
+                        }
+                        else {
+                            if(gp3.getVisible()){
+                                gp3.paint(g);
+                                i++;
+                            }
+                        }
+                    }
+                }
+
+                i = 0;
+                synchronized (lock) {
+                    while (i < player4Pieces.size()) {
+                        GamePiece gp4 = player4Pieces.get(i);
+                        if (gp4.done()) {
+                            player1Pieces.remove(i);
+                        }
+                        else {
+                            if(gp4.getVisible()){
+                                gp4.paint(g);
+                                i++;
+                            }
+                        }
+                    }
+                }
+
             }
         };
 
@@ -232,7 +265,10 @@ public class ThreadGraphicsController implements Runnable {
         //hexTilesList = new ArrayList<HexTiles>();
         resourceDeck = new ResourceDeck(panel);
         developmentDeck = new DevelopmentDeck(panel);
-        //tokens = new TokenStack(panel);
+        player1Pieces = new ArrayList<GamePiece>();
+        player2Pieces = new ArrayList<GamePiece>();
+        player3Pieces = new ArrayList<GamePiece>();
+        player4Pieces = new ArrayList<GamePiece>();
 
         // display the window we've created
         frame.pack();
@@ -309,8 +345,12 @@ public class ThreadGraphicsController implements Runnable {
         //robber = null;
         die1 = null;
         die2 = null; 
-        sea = null;
+
         table = null; 
+        player1Pieces = null; 
+        player2Pieces = null; 
+        player3Pieces = null; 
+        player4Pieces = null; 
     }
 
     /**
