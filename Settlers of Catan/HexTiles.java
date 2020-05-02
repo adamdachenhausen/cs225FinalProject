@@ -49,13 +49,15 @@ public class HexTiles extends AnimatedGraphicsObject{
 
     protected Point[] pts;
 
+    protected String locationType;
+    
     protected String subType;
 
     private boolean hasRobber;
     /**
      * Constructor for objects of class Tiles
      */
-    public HexTiles(JComponent container, Point center, Resource r,Tokens t, String type, String subType){
+    public HexTiles(JComponent container, Point center, Resource r,Tokens t, String locationType, String subType){
         super(container);
         this.container = container;
         p = new Polygon();
@@ -63,7 +65,7 @@ public class HexTiles extends AnimatedGraphicsObject{
         this.r = r;
         this.t=t;
         this.pts = new Point[6];
-        this.type=type;
+        this.locationType=locationType;
         this.subType=subType;
         //Outsource completing the polygon to make it a hexagon
         completeHex();
@@ -77,13 +79,13 @@ public class HexTiles extends AnimatedGraphicsObject{
     /**
      * Constructor for objects of class Tiles, but with added translate center functionality
      */
-    public HexTiles(JComponent container, Point center, Resource r,Tokens t,int dx, int dy, String type, String subType){
+    public HexTiles(JComponent container, Point center, Resource r,Tokens t,int dx, int dy, String locationType, String subType){
         super(container);
         p = new Polygon();
         //this.center=center;
         this.r = r;
         this.t = t;
-        this.type=type;
+        this.locationType=locationType;
         this.subType=subType;
         this.pts = new Point[6];
         this.center = new Point(center.x+dx,center.y+dy);
@@ -107,7 +109,6 @@ public class HexTiles extends AnimatedGraphicsObject{
         pts[4] = new Point(center.x-X_OFFSET,center.y-Y_OFFSET);
         pts[5] = new Point(center.x-X_OFFSET,center.y+Y_OFFSET);
 
-        //Add points in clockwise rotation starting at northernmost point
         p.addPoint(pts[0].x,pts[0].y);
 
         p.addPoint(pts[1].x,pts[1].y);
@@ -254,32 +255,32 @@ public class HexTiles extends AnimatedGraphicsObject{
         loc.add(pts[3]);
 
         //Depending if we have a special case, we will add those extra points too
-        if(type!=null && subType!=null){
-            if(type.equals("CORNER")){
+        if(locationType!=null && subType!=null){
+            if(locationType.equals("CORNER")){
                 if(subType.equals("TOP")){
-                    loc.add(pts[1]);
-                    loc.add(pts[5]);
+                    loc.add(pts[2]);
+                    loc.add(pts[4]);
                 }
                 else if(subType.equals("BOTTOM")){
-                    loc.add(pts[2]);
-                    loc.add(pts[4]);
-                }
-            }
-            else if(type.equals("INBETWEEN")){
-                if(subType.equals("TOPLEFT")){
+                    loc.add(pts[1]);
                     loc.add(pts[5]);
                 }
-                else if(subType.equals("TOPRIGHT")){
-                    loc.add(pts[1]);
-                }
-                else if(subType.equals("BOTTOMLEFT")){
+            }
+            else if(locationType.equals("INBETWEEN")){
+                if(subType.equals("TOPLEFT")){
                     loc.add(pts[4]);
                 }
-                else if(subType.equals("BOTTOMRIGHT")){
+                else if(subType.equals("TOPRIGHT")){
                     loc.add(pts[2]);
                 }
+                else if(subType.equals("BOTTOMLEFT")){
+                    loc.add(pts[5]);
+                }
+                else if(subType.equals("BOTTOMRIGHT")){
+                    loc.add(pts[1]);
+                }
             }
-            else if(type.equals("MIDDLE")){
+            else if(locationType.equals("MIDDLE")){
                 if(subType.equals("LEFT")){
                     loc.add(pts[4]);
                     loc.add(pts[5]);
