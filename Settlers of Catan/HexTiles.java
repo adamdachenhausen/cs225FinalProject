@@ -247,7 +247,7 @@ public class HexTiles extends AnimatedGraphicsObject{
      *  
      */
     public ArrayList getCityLocations(){
-        //loc is the 
+        
         ArrayList<Point> loc = new ArrayList(6);
 
         //We always need the northernmost and southernmost points, aka tips
@@ -295,6 +295,40 @@ public class HexTiles extends AnimatedGraphicsObject{
         return loc;
     }
 
+    public ArrayList getRoads(){
+        ArrayList<Point> roads = new ArrayList(6);
+        
+        roads.add(midPoint(pts[3],pts[4]));
+        roads.add(midPoint(pts[3],pts[2]));
+        
+        
+        if(locationType!=null && subType!=null){
+            if(locationType.equals("CORNER")){
+                if(subType.equals("TOP")){
+                    roads.add(midPoint(pts[4],pts[5]));
+                    roads.add(midPoint(pts[1],pts[2]));
+                }
+                else if(subType.equals("BOTTOM")){
+                    roads.add(midPoint(pts[4],pts[5]));
+                    roads.add(midPoint(pts[5],pts[0]));
+                    roads.add(midPoint(pts[0],pts[1]));
+                    roads.add(midPoint(pts[1],pts[2]));
+                }
+            }
+        
+        }
+        
+        return roads;
+    }
+    
+    /** Given two points, returns the midpoint
+     *  @param p1 The first point of the line to calculate midpoint
+     *  @param p2 The second point of the line to calculate midpoint
+     */
+    private Point midPoint(Point p1, Point p2){
+        return new Point((p1.x + p2.x)/2,(p1.y + p2.y)/2);
+    }
+    
     @Override
     public void run(){
 
