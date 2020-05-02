@@ -336,7 +336,7 @@ public class GameBoard extends AnimatedGraphicsObject
             }
 
         }
-        System.out.println();
+        //System.out.println();
     }
 
     public Point findCenter(Point p, boolean isRobber){

@@ -324,10 +324,21 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         }
 
         //display the player's gamepieces (roads, settlements and cities)
-        //createGamepieces();
+        distributeGamepieces();
 
-        //add the robber to the desert
-        //createRobber();
+        //place first two settlements
+        turn = 1;
+        for(int i = 0; i < 2; i++){
+            while(turn <= 4){
+                if(turn == 1){
+                    placeGamePiece("Settlement");
+                }else{
+                    autoPlacePiece("Settlement", turn);
+                }
+                turn++;
+            }
+            turn = 1;
+        }
 
         //Play game
         //playGame();
@@ -391,25 +402,6 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
             displayBuildingCosts();
         }
 
-        // //fix these buttons
-        // if(e.getSource().equals(drawResourceButton)){
-        // showInstructions();
-        // }
-        // if(e.getSource().equals(drawDevelopmentButton)){
-        // showInstructions();
-        // }
-        // if(e.getSource().equals(useDevCardButton)){
-        // showInstructions();
-        // }
-        // if(e.getSource().equals(rollDiceButton)){
-        // roll();
-        // }
-        // if(e.getSource().equals(continueButton)){
-        // displayBuildingCosts();
-        // }
-        // if(e.getSource().equals(tradeButton)){
-        // showInstructions();
-        // }
     }
     //----------------------------------------------------------
 
@@ -676,30 +668,30 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * @return 
      */
     public void distributeGamepieces(){
-            //generate settlements
-            for(int s = 0; s < SETTLEMENTS; s++){
-                player1Pieces.add(new GamePiece(panel, "Settlement", players.get(0).getColor()));
-                player2Pieces.add(new GamePiece(panel, "Settlement", players.get(1).getColor()));
-                player3Pieces.add(new GamePiece(panel, "Settlement", players.get(2).getColor()));
-                player4Pieces.add(new GamePiece(panel, "Settlement", players.get(3).getColor()));
+        //generate settlements
+        for(int s = 0; s < SETTLEMENTS; s++){
+            player1Pieces.add(new GamePiece(panel, "Settlement", players.get(0).getColor()));
+            player2Pieces.add(new GamePiece(panel, "Settlement", players.get(1).getColor()));
+            player3Pieces.add(new GamePiece(panel, "Settlement", players.get(2).getColor()));
+            player4Pieces.add(new GamePiece(panel, "Settlement", players.get(3).getColor()));
 
-            }
-            //generate cities
-            for(int c = 0; c < CITIES; c++){
-                player1Pieces.add(new GamePiece(panel, "City", players.get(0).getColor()));
-                player2Pieces.add(new GamePiece(panel, "City", players.get(1).getColor()));
-                player3Pieces.add(new GamePiece(panel, "City", players.get(2).getColor()));
-                player4Pieces.add(new GamePiece(panel, "City", players.get(3).getColor()));
+        }
+        //generate cities
+        for(int c = 0; c < CITIES; c++){
+            player1Pieces.add(new GamePiece(panel, "City", players.get(0).getColor()));
+            player2Pieces.add(new GamePiece(panel, "City", players.get(1).getColor()));
+            player3Pieces.add(new GamePiece(panel, "City", players.get(2).getColor()));
+            player4Pieces.add(new GamePiece(panel, "City", players.get(3).getColor()));
 
-            }
-            //generate roads
-            for(int r = 0; r < ROADS; r++){
-                player1Pieces.add(new GamePiece(panel, "Road", players.get(0).getColor()));
-                player2Pieces.add(new GamePiece(panel, "Road", players.get(1).getColor()));
-                player3Pieces.add(new GamePiece(panel, "Road", players.get(2).getColor()));
-                player4Pieces.add(new GamePiece(panel, "Road", players.get(3).getColor()));
+        }
+        //generate roads
+        for(int r = 0; r < ROADS; r++){
+            player1Pieces.add(new GamePiece(panel, "Road", players.get(0).getColor()));
+            player2Pieces.add(new GamePiece(panel, "Road", players.get(1).getColor()));
+            player3Pieces.add(new GamePiece(panel, "Road", players.get(2).getColor()));
+            player4Pieces.add(new GamePiece(panel, "Road", players.get(3).getColor()));
 
-            }
+        }
     }
 
     /**
@@ -710,10 +702,31 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * 
      * Direction: 1st round clockwise/2nd round counterclockwise 
      *
-     * @param 
+     * @param pieceType either a settlement, city or road
      * @return 
      */
-    public void placeGamepiece(){
+    public void placeGamePiece(String pieceType){
+
+        //place settlement between two hexes
+
+        //place road between two hexes
+
+        panel.repaint();
+    }
+
+    /**
+     * Each player puts down a road and a settlement.
+     * 
+     * Continues in reverse order until every player puts down two 
+     * settlements and two roads.
+     * 
+     * Direction: 1st round clockwise/2nd round counterclockwise 
+     *
+     * @param pNum the player who is placing the piece
+     * @param pieceType either a settlement, city or road
+     * @return 
+     */
+    public void autoPlacePiece(String pieceType, int pNum){
 
         //place settlement between two hexes
 
