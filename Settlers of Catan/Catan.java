@@ -490,8 +490,6 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         buildingCosts.setSize(new Dimension(880, 400));
         // buildingCosts.setPreferredSize(new Dimension(680, buildingCosts.getPreferredSize().height));
 
-        
-        
         buildingCosts.showMessageDialog(null,new JScrollPane(table), "BuildingCosts",JOptionPane.PLAIN_MESSAGE);
         //JOptionPane.showMessageDialog(null,new JScrollPane(table));
     }
@@ -551,9 +549,14 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * @return 
      */
     public void playGame(){
-
+        turn = PLAYER_1;
         while(gameStart){
-            //roll dice
+            //call player turn with correct player
+            if(turn == PLAYER_1){
+                PlayerTurn();
+            }else{
+                NpcTurn();
+            }
 
             //whichever token/hex (the tokens number the hexes) is rolled
             //any settlement on the border of that hex gets resources.
@@ -564,22 +567,50 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
             //offer trades
             panel.repaint();
 
+            //update player turn
+            turn++;
+            if(turn > PLAYER_4){
+                turn = PLAYER_1;
+            }
+
             //check if anyone has 10 victory points
             checkPoints();
         }
     }
 
     /**
-     * Players trade resource cards
+     * The turn for the person playing the game
      *
      * @param player1 Player initiating trade
      * @param player2 Player trading with
      * @return 
      */
-    public void PlayerTurn(Player p){
+    public void PlayerTurn(){
         boolean turnDone = false;
         //roll dice
+        rollDialog();
+        
+        //whichever token/hex (the tokens number the hexes) is rolled
+        //any settlement on the border of that hex gets resources.
+        //Determine players with "activated hexes"
 
+        //distribute resources *if not enough resources, none distributed
+
+        //offer trades
+    }
+
+    /**
+     * The turn for the non-player character (NPC)
+     * Most steps are automated/randomized
+     *
+
+     * @return 
+     */
+    public void NpcTurn(){
+        boolean turnDone = false;
+        //roll dice
+        autoRoll();
+        
         //whichever token/hex (the tokens number the hexes) is rolled
         //any settlement on the border of that hex gets resources.
         //Determine players with "activated hexes"
@@ -595,7 +626,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * @param 
      * @return 
      */
-    public void roll(){
+    public void rollDialog(){
         // roll dice: highest roll chooses first player to play
         //Custom button text
         Object[] options = {"Roll Dice",
@@ -608,14 +639,28 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                 null,
                 options,
                 options[2]);
-        if(answer ==0){
+        if(answer == 0){
             roll = 0;
             roll = die1.rollDice();
             roll += die2.rollDice();
 
         }else{
-            roll();
+            rollDialog();
         }
+
+    }
+
+    /**
+     * Automatically rolls dice for NPC
+     *
+     * @param 
+     * @return 
+     */
+    public void autoRoll(){
+
+        roll = 0;
+        roll = die1.rollDice();
+        roll += die2.rollDice();
 
     }
 
