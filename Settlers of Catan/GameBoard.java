@@ -25,6 +25,7 @@ public class GameBoard extends AnimatedGraphicsObject
     public static final int OFFSET = HexTiles.SIDE_LENGTH;
 
     public static final int HEX_SIZE = 136;
+    public static final int TOKEN_SIZE = 54;
 
     //This is the polygon that constructs the hexagon sea
     public static final int SEA_SIDE_LENGTH = OFFSET * BOARD_WIDTH;
@@ -269,12 +270,14 @@ public class GameBoard extends AnimatedGraphicsObject
                 if(board[i][j]!= null){
                     HexTiles h = board[i][j];
                     if(!board[i][j].getHexType().equals("Desert")){
-                        tokenPoint = board[i][j].getHexPoint();
+                        tokenPoint = findCenter(board[i][j].getHexPoint());
                         board[i][j].getToken().setPosition(tokenPoint);
                         board[i][j].getToken().setPlaced(true);
                     }else{
                         if(board[i][j].getToken().getTokenValue()!=1){
                             movedToken = board[i][j].getToken();
+                            board[i][j].removeToken();
+                        }else{
                             board[i][j].removeToken();
                         }
                         robberPoint = board[i][j].getHexPoint();
@@ -301,7 +304,14 @@ public class GameBoard extends AnimatedGraphicsObject
                 }
 
             }
-        }else{
         }
+    }
+    
+    public Point findCenter(Point p){
+        Point tPoint = p;
+        tPoint.x = tPoint.x - ((TOKEN_SIZE/2));
+        tPoint.y = tPoint.y - ((TOKEN_SIZE/2));
+        
+        return tPoint;
     }
 }

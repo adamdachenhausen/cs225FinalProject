@@ -19,7 +19,7 @@ import javax.sound.sampled.*;
 public class Tokens extends AnimatedGraphicsObject{
     //1x"2" 2x"3" 2x"4" 2x"5" 2x"6" 2x"8" 2x"9" 2x"10" 2x"11" 1x"12"
 
-    final static protected int SIZE = 55;
+    final static protected int SIZE = 54;
 
     public static final int NUM_TWO = 2;
     public static final int NUM_THREE = 3;
@@ -179,7 +179,7 @@ public class Tokens extends AnimatedGraphicsObject{
         numberInfo = "" + tokenValue;
         x = (upperLeft.x + (SIZE - fm.stringWidth(numberInfo)) / 2);
         //y = (upperLeft.y + fm.getAscent()) + 5;
-        y = (upperLeft.y + SIZE/2) + (fm.getAscent()/2);
+        y = (upperLeft.y + SIZE/2) + (fm.getAscent()/3);
         //y = (upperLeft.y + (SIZE + fm.getAscent())/2) - fm.getAscent()/2;
         //y = (upperLeft.y + ((SIZE - fm.getAscent())/2));
         g.drawString(numberInfo, x, y);
