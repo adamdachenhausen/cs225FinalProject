@@ -45,11 +45,14 @@ public class GameBoard extends AnimatedGraphicsObject
     private Polygon sea;
 
     protected CityLocations c;
+    
+    protected Roads roads;
     public GameBoard(JComponent container, Point center){
         super(container);
         this.container = container;
         this.center = center;
         c = new CityLocations(container);
+        roads = new Roads(container);
         //panel = new JPanel();
         //panel.setBackground(SEA);
 
@@ -172,7 +175,7 @@ public class GameBoard extends AnimatedGraphicsObject
         board[4][2].createHexType();
         board[4][2].getToken().start();
 
-        findCityLocations();
+        findCitiesAndRoads();
         placeToken();
     }
 
@@ -212,6 +215,9 @@ public class GameBoard extends AnimatedGraphicsObject
         }
         if(c != null){
             c.paint(g);
+        }
+        if(roads != null){
+            roads.paint(g);
         }
     }
 
@@ -319,15 +325,18 @@ public class GameBoard extends AnimatedGraphicsObject
         }
     }
 
-    private void findCityLocations(){
+    private void findCitiesAndRoads(){
         for(int i=0; i<board.length;i++){
 
             for(int j=0; j<board[0].length;j++){
                 if(board[i][j]!= null){
-                    ArrayList<Point> temp = board[i][j].getCityLocations();
-
-                    for(int k = 0; k<temp.size();k++){
-                        c.addLocation(temp.get(k));
+                    ArrayList<Point> locs = board[i][j].getCityLocations();
+                    ArrayList<Point> rds = board[i][j].getRoads();
+                    for(int k = 0; k<locs.size();k++){
+                        c.addLocation(locs.get(k));
+                    }
+                    for(int k = 0; k<rds.size();k++){
+                        roads.addLocation(rds.get(k));
                     }
                 }
             }
