@@ -334,12 +334,12 @@ public class GameBoard extends AnimatedGraphicsObject
             for(int j=0; j<board[0].length;j++){
                 if(board[i][j]!= null){
                     ArrayList<Point> locs = board[i][j].getCityLocations();
-                    ArrayList<Point> rds = board[i][j].getRoads();
+                    ArrayList<Road> rds = board[i][j].getRoads();
                     for(int k = 0; k<locs.size();k++){
                         c.addLocation(locs.get(k));
                     }
                     for(int k = 0; k<rds.size();k++){
-                        roads.addLocation(rds.get(k));
+                        roads.addRoad(rds.get(k));
                     }
                 }
             }
