@@ -393,7 +393,7 @@ public class GameBoard extends AnimatedGraphicsObject
     /** Returns the robber object
      *  @return the roads
      */
-    public Roads getRoads(){
+    public Roads getRoadsList(){
         return roads;
     }
 

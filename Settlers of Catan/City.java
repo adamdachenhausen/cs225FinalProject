@@ -37,7 +37,7 @@ public class City extends AnimatedGraphicsObject implements ImageObserver
     public City(JComponent container, Point center){
         super(container);
         this.container = container;
-        
+
         this.x = center.x;
         this.y = center.y;
 
@@ -71,6 +71,12 @@ public class City extends AnimatedGraphicsObject implements ImageObserver
     @Override
     public void run(){
 
+    }
+
+    /** returns point
+     */
+    public Point getCityPoint(){
+        return new Point(x,y);
     }
 
     public boolean imageUpdate(Image img, int infoflags, int x, int y,

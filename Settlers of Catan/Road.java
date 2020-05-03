@@ -86,7 +86,16 @@ public class Road extends AnimatedGraphicsObject
     private Point midPoint(){
         return new Point((start.x + end.x)/2,(start.y + end.y)/2);
     }
-
+    /** returns point
+     */
+    public Point getRoadPoint1(){
+        return start;
+    }
+        /** returns point
+     */
+    public Point getRoadPoint2(){
+        return end;
+    }
     @Override
     public void run(){
 

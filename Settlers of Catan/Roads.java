@@ -29,7 +29,7 @@ public class Roads extends AnimatedGraphicsObject
             /** Adds a point to this
      *  @param p a city/settlement to add to this
      */
-    public List getLocations(){
+    public List getRoadList(){
         return roads;
     }
 

@@ -106,7 +106,12 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     protected boolean buildRoad = false;
     protected boolean moveRobber = false;
 
-    protected Point pressPoint;
+    protected Point cityPoint;
+
+    protected Point roadPoint1;
+    protected Point roadPoint2;
+
+    protected Point robberPoint;
 
     // main panel with buttons for the game
     protected JPanel mainPanel;
@@ -268,16 +273,20 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         //use boolean flags to determine if mouse listener is used to place
         //gamepieces. 
         if(buildSettlement){
-            pressPoint = e.getPoint();
+            cityPoint = e.getPoint();
 
         }else if(buildCity){
-            pressPoint = e.getPoint();
+            cityPoint = e.getPoint();
 
         }else if(buildRoad){
-            pressPoint = e.getPoint();
+            if(roadPoint1 == null){
+                roadPoint1 = e.getPoint();
+            }else{
+                roadPoint2 = e.getPoint();
+            }
 
         }else if(moveRobber){
-            pressPoint = e.getPoint();
+            robberPoint = e.getPoint();
 
         }else{
             //do nothing
@@ -819,10 +828,27 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      */
     public boolean checkHitbox(Point p, String type){
         boolean close = false;
+        
+        //Trying to find point within roads object
+        Roads rs = gameboard.getRoadsList();
+        java.util.List<Roads>rlist = rs.getRoadList();
+        
+        
+        int size = 20;
         if(type.equals("Road")){
-            for
-        }else{
+            for(int i = 0; i < rlist.size(); i++){
+
+                Roads checkRoads = rlist.get(i);
+                for(int j = 0; j < checkRoads
+                // Point checkPoint = 
+                // if(checkPoint.distance(p) <= size) {
+                    // close = true;
+                // }
             
+            
+            }
+        }else{
+
         }
         return close;
     }
@@ -843,7 +869,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         //place settlements and cities on the corner of a hex
         if(pieceType.equals("Settlement")){
             //run until the user clicks on a spot on the gameboard
-            while(pressPoint == null){
+            while(cityPoint == null){
 
             }
             for(int i = 0; i < player1Pieces.size(); i++){
@@ -854,16 +880,17 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
             }
 
             //reset pressPoint for reuse
-            pressPoint = null;
+            cityPoint = null;
         }else if(pieceType.equals("City")){
 
             //reset pressPoint for reuse
-            pressPoint = null;
+            cityPoint = null;
         }else if(pieceType.equals("Road")){
             //place road between two hexes (connected to the settlement); 
 
             //reset pressPoint for reuse
-            pressPoint = null;
+            roadPoint1 = null;
+            roadPoint2 = null;
         }
 
         panel.repaint();
