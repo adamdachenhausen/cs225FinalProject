@@ -149,10 +149,10 @@ public class Player
             colString = "Red";
         }else if(getColor().equals(Color.WHITE)){
             colString = "White";
-        }else if(getColor().equals(Color.ORANGE)){
-            colString = "Orange";
         }else if(getColor().equals(Color.BLUE)){
             colString = "Blue";
+        }else{
+            colString = "Orange";
         }
         return colString;
     }

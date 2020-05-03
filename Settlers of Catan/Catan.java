@@ -334,15 +334,15 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         //place first two settlements
         // turn = 1;
         // for(int i = 0; i < 2; i++){
-            // while(turn <= 4){
-                // if(turn == 1){
-                    // placeGamePiece("Settlement");
-                // }else{
-                    // autoPlacePiece("Settlement", turn);
-                // }
-                // turn++;
-            // }
-            // turn = 1;
+        // while(turn <= 4){
+        // if(turn == 1){
+        // placeGamePiece("Settlement");
+        // }else{
+        // autoPlacePiece("Settlement", turn);
+        // }
+        // turn++;
+        // }
+        // turn = 1;
         // }
 
         //Play game
@@ -445,7 +445,6 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         gameboard.start();
         gameboard.startBoard();
 
-
         //set board with 2 settlements per player
         //distributeGamepieces();
     }
@@ -460,11 +459,11 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         int choice = JOptionPane.showOptionDialog(null, "Pick a color!", "Color Selector",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
                 null, colors, colors[0]);
-        if(choice == 1){
+        if(choice == 0){
             p1Color = Color.RED;
-        }else if(choice ==2){
+        }else if(choice ==1){
             p1Color = Color.BLUE;
-        }else if(choice == 3){
+        }else if(choice == 2){
             p1Color = Color.WHITE;
         }else{
             p1Color = Color.ORANGE;
@@ -546,7 +545,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
             }
             i++;
         }
-
+        System.out.println("p1: "+ players.get(0).getColorToString() +"p2: "+ players.get(1).getColorToString() 
+            +"p3: "+ players.get(2).getColorToString() +"p4: "+ players.get(3).getColorToString());
     }
 
     /**
