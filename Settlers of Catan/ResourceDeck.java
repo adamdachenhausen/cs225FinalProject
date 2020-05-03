@@ -20,11 +20,10 @@ public class ResourceDeck extends AnimatedGraphicsObject{
     public static final int GRAIN = 19;
     public static final int BRICK = 19;
     public static final int ORE = 19;
-    
-    
+
     //temporary start point to draw the card
     private Point cardStartPoint = new Point(500,500);
-    
+
     /**
      * Constructor for objects of class ResourceDeck
      */
@@ -34,9 +33,37 @@ public class ResourceDeck extends AnimatedGraphicsObject{
     }
 
     public ArrayList getList(){
-    return resourceDeck;    
+        return resourceDeck;    
     }
     
+        public ResourceCard getCard(String rcType){
+        ResourceCard removed = new ResourceCard(container, Resource.WOOD, new Point(0,0));
+                boolean found = false;
+        int i = 0;
+        
+        while(i > resourceDeck.size() && !found){
+            if(rcType.equals(resourceDeck.get(i).getType())){
+                found = true;
+                removed =resourceDeck.get(i);
+            }
+            i++;
+        }
+            return removed;    
+    }
+
+    public boolean searchCards(String searchType){
+        boolean found = false;
+        int i = 0;
+        
+        while(i > resourceDeck.size() && !found){
+            if(searchType.equals(resourceDeck.get(i).getType())){
+                found = true;
+            }
+            i++;
+        }
+        return found;
+    }
+
     /** Populates the r stack with exact number of each development card
      *  Then shuffles the stack, so when items are popped, they are random
      */
@@ -63,7 +90,7 @@ public class ResourceDeck extends AnimatedGraphicsObject{
             resourceDeck.add(new ResourceCard(container, Resource.ORE, cardStartPoint));
         }
         Collections.shuffle(resourceDeck);
-        
+
     }
 
     @Override

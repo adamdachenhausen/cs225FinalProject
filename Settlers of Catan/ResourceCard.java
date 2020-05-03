@@ -26,6 +26,7 @@ public class ResourceCard extends AnimatedGraphicsObject implements ImageObserve
     private static Image lumber;
     private static Image wool;
 
+    private String type;
     private Resource cardType;
     /**
      * Constructor for objects of class ResourceCards
@@ -33,6 +34,7 @@ public class ResourceCard extends AnimatedGraphicsObject implements ImageObserve
     public ResourceCard(JComponent container, Resource r, Point upperLeft){
         super(container);
         cardType = r;
+
         this.upperLeft = upperLeft;
         visible = true;
     }
@@ -40,7 +42,10 @@ public class ResourceCard extends AnimatedGraphicsObject implements ImageObserve
     public void showCard(){
         visible = true;
     }
-
+    public String getType(){
+        return type;
+    }
+    
     public Resource getCardType(){
         return cardType;
     }
@@ -113,10 +118,9 @@ public class ResourceCard extends AnimatedGraphicsObject implements ImageObserve
             int x = 0;
             int y = 0;
 
-
             g.setColor(Color.WHITE);
             g.setFont(new Font("TimesRoman", Font.BOLD, 15));
-                        FontMetrics fm = g.getFontMetrics();
+            FontMetrics fm = g.getFontMetrics();
             switch(cardType){
                 case BRICKS:
                 cardString = "Brick";

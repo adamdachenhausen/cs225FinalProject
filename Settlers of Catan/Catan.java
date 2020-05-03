@@ -936,7 +936,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * @param 
      * @return 
      */
-    public void useDevelopmentCard(){
+    public void useDevelopmentCard(String dType){
         //card types
 
         //knight: move robber, don't discard the card
@@ -948,12 +948,12 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * @param 
      * @return 
      */
-    public void useResourceCard(){
-        //move the robber to a different hex
-
-        //if players have more than 7 resource cards must remove them
-
-        //
+    public void useResourceCard(String rType){
+        ResourceCard removed = new ResourceCard(panel, Resource.WOOD, new Point(0,0));
+        
+        for(int i = 0; i < resourceDeck.getList().size(); i++){
+            
+        }
     }
     /**
      * Players build to develop your empire
@@ -973,7 +973,10 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                 options,
                 options[1]);
         if(answer == 0){
-            useResourceCard();
+            //1 ore, 1 wool, 1 grain
+            useResourceCard("Ore");
+            useResourceCard("Grain");
+            useResourceCard("Wool");
             drawDevelopmentCard();
         }else if(answer == 1){
             developmentDialog();
