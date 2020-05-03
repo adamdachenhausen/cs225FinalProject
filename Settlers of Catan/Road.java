@@ -11,31 +11,54 @@ import java.awt.Polygon;
  */
 public class Road extends AnimatedGraphicsObject
 {
+    public static final int SHIFT = 3;
     protected Point start;
     protected Point end;
     protected Point midPoint;
-    public Road(JComponent container,Point start, Point end){
+    protected String type;
+    public Road(JComponent container,Point start, Point end, String type){
         super(container);
         this.start = start;
         this.end = end;
+        this.type = type;
     }
 
     @Override
     public void paint(Graphics g){
         //For returning g back to the original color
         Color cur = g.getColor();
-        
-        
+
         g.setColor(Color.ORANGE);
         Polygon p = new Polygon();
-        p.addPoint(start.x-3,start.y-3);
-        p.addPoint(start.x+3,start.y+3);
-        p.addPoint(end.x+3,end.y+3);
-        p.addPoint(end.x-3,end.y-3);
-        
+
+        if(type.equals("|")){
+            p.addPoint(start.x-SHIFT,start.y);
+            p.addPoint(start.x+SHIFT,start.y);
+            p.addPoint(end.x+SHIFT,end.y);
+            p.addPoint(end.x-SHIFT,end.y);
+        }
+        else if(type.equals("-")){
+            p.addPoint(start.x,start.y-SHIFT);
+            p.addPoint(start.x,start.y+SHIFT);
+            p.addPoint(end.x,end.y+SHIFT);
+            p.addPoint(end.x,end.y-SHIFT);
+        }
+        else if(type.equals("/")){
+            p.addPoint(start.x-SHIFT,start.y-SHIFT);
+            p.addPoint(start.x+SHIFT,start.y+SHIFT);
+            p.addPoint(end.x+SHIFT,end.y+SHIFT);
+            p.addPoint(end.x-SHIFT,end.y-SHIFT);
+        }
+        //Can't use "\" so !/ works
+        else if(type.equals("!/")){
+            p.addPoint(start.x-SHIFT,start.y+SHIFT);
+            p.addPoint(start.x+SHIFT,start.y-SHIFT);
+            p.addPoint(end.x+SHIFT,end.y-SHIFT);
+            p.addPoint(end.x-SHIFT,end.y+SHIFT);
+        }
         g.fillPolygon(p);
         //g.drawRect(start.x,start.y, end.x-start.x, end.y-start.y);
-        
+
         //Set g back to the original color
         g.setColor(cur);
     }
