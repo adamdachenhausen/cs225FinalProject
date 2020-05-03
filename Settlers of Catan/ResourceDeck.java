@@ -35,12 +35,17 @@ public class ResourceDeck extends AnimatedGraphicsObject{
     public ArrayList getList(){
         return resourceDeck;    
     }
-    
-        public ResourceCard getCard(String rcType){
-        ResourceCard removed = new ResourceCard(container, Resource.WOOD, new Point(0,0));
-                boolean found = false;
+
+    public void addCard(ResourceCard rc){
+        resourceDeck.add(rc);
+
+    }
+
+    public ResourceCard removeCard(String rcType){
+        ResourceCard removed = null;
+        boolean found = false;
         int i = 0;
-        
+
         while(i > resourceDeck.size() && !found){
             if(rcType.equals(resourceDeck.get(i).getType())){
                 found = true;
@@ -48,13 +53,28 @@ public class ResourceDeck extends AnimatedGraphicsObject{
             }
             i++;
         }
-            return removed;    
+        return removed;
+    }
+
+    public ResourceCard getCard(String rcType){
+        ResourceCard removed = null;
+        boolean found = false;
+        int i = 0;
+
+        while(i > resourceDeck.size() && !found){
+            if(rcType.equals(resourceDeck.get(i).getType())){
+                found = true;
+                removed =resourceDeck.get(i);
+            }
+            i++;
+        }
+        return removed;    
     }
 
     public boolean searchCards(String searchType){
         boolean found = false;
         int i = 0;
-        
+
         while(i > resourceDeck.size() && !found){
             if(searchType.equals(resourceDeck.get(i).getType())){
                 found = true;
