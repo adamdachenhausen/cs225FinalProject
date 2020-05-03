@@ -265,12 +265,16 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         //gamepieces. 
         if(buildSettlement){
             pressPoint = e.getPoint();
+            
         }else if(buildCity){
             pressPoint = e.getPoint();
+            
         }else if(buildRoad){
             pressPoint = e.getPoint();
+            
         }else if(moveRobber){
             pressPoint = e.getPoint();
+            
         }else{
             //do nothing
         }
