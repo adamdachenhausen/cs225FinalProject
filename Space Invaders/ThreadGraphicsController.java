@@ -238,7 +238,7 @@ public class ThreadGraphicsController implements Runnable {
                 synchronized (lock) {
                     while (i < lasers.size()) {
                         Laser l = lasers.get(i);
-                        if(checkAlienHit(l.getPosition())){
+                        if(checkAlienHit(l)){
                             Explosion explode = new Explosion(panel,l.getPosition(), "ALIEN");
                             explosions.add(explode);
 
@@ -410,7 +410,8 @@ public class ThreadGraphicsController implements Runnable {
      * Checks if a laser hit an alien.
      *
      */
-    public boolean checkAlienHit(Point p) {
+    public boolean checkAlienHit(Laser l) {
+        Point p = l.getPosition();
         int i = 0;
         boolean hit = false;
         while (i < aliens.size()) {
@@ -431,6 +432,7 @@ public class ThreadGraphicsController implements Runnable {
                 if(p.y <= bottom && p.y >= alienUpperLeft.y){
 
                     hit = true;
+                    l.dead = true;
                     int points = 0;
                     if(a.getSubType() == 1 || a.getSubType() == 2){
                         points = ALIEN1_PTS;
