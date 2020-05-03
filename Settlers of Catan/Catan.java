@@ -1173,9 +1173,36 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      *
      * if player has a city, gets two resource cards, else gets one card
      */
-    public void drawResourceCard(){
+    public void drawResourceCard(String rType){
+        ResourceCard rc = null;
+        boolean found = false;
+        int i = 0;
+
+        //add card removed from player hand to resource card deck
+        if(rc != null){
+            rc = resourceDeck.removeCard(rType);
+        }
+        //remove card from player's hand
+        if(turn == 1){
+            if(rc != null){
+                players.get(0).addResourceCard(rc);
+            }
+        }else if(turn == 2){
+            if(rc != null){
+                players.get(1).addResourceCard(rc);
+            }
+        }else if(turn == 3){
+            if(rc != null){
+                players.get(2).addResourceCard(rc);
+            }
+        }else{
+            if(rc != null){
+                players.get(3).addResourceCard(rc);
+            }
+        }
 
     }
+
     /**
      * Check victory points scored by each player.
      *
