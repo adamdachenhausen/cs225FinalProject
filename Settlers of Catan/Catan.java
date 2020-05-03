@@ -95,6 +95,10 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
     protected static int largestArmyAmt = 0;
 
+    protected static int longestRoadHolder = 0;
+
+    protected static int largestArmyHolder = 0;
+
     //These flags determine what action is selected
     //with mouse pointer
     protected boolean buildSettlement = false;
@@ -260,25 +264,25 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      */
     @Override
     public void mousePressed(MouseEvent e) {
-       
+
         //use boolean flags to determine if mouse listener is used to place
         //gamepieces. 
         if(buildSettlement){
             pressPoint = e.getPoint();
-            
+
         }else if(buildCity){
             pressPoint = e.getPoint();
-            
+
         }else if(buildRoad){
             pressPoint = e.getPoint();
-            
+
         }else if(moveRobber){
             pressPoint = e.getPoint();
-            
+
         }else{
             //do nothing
         }
-        
+
     }
 
     /**
@@ -300,7 +304,10 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      */
     @Override
     public void mouseReleased(MouseEvent e) {
-        pressPoint = e.getPoint();
+        //if building, create gamepiece on board
+
+        //if moving robber, change it's position appropriately
+
         panel.repaint();
     }
 
@@ -372,7 +379,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     }
 
     /**
-     * Sets up the game after start button pressed
+     * Resets the game (in TGC class)
      *
      */
     public void resetGame() {
@@ -380,7 +387,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     }
 
     /**
-     * Sets up the game after start button pressed
+     * Displays information about the game
      *
      */
     public int introDialog() {
@@ -395,13 +402,65 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     }
 
     /**
-     * Sets up the game after start button pressed
+     * Shows game instructions
      *
      */
     public void showInstructions() {
         JFrame instructionDialog = new JFrame("Catan Instructions");
         JOptionPane.showMessageDialog(instructionDialog, "Here is how to play!");
 
+    }
+
+    /**
+     * Displays building cost info on how you would build
+     * roads, cities, settlements, or purchase development cards.
+     *
+     */
+    public void displayBuildingCosts() {
+        //research on jtable: https://stackoverflow.com/questions/27832268/how-to-format-a-table-in-joptionpane
+        JLabel buildingTitle = new JLabel("Building Costs");
+        //JLabel buildingInfo = new JLabel("Below are the required components to build or acquire special cards as well as victory points associated with each item.");
+        Object[][] rows = {
+                {"Road", "0", "1 Brick & 1 Lumber"},
+                {"Settlement","1","1 Brick, 1 Lumber, 1 Grain & 1 Wool"},
+                {"City", "2","2 Grain and 3 Ore"},
+                {"Development card","?","1 Wool, 1 Grain & 1 Ore"},
+                {" "," "," "},
+                {"Special"," "," "},
+                {"Longest road", "2","At least 5 contiguous road pieces"},
+                {"Largest army","2","At least 3 knight cards"}};
+        Object[] cols = {"Item","Victory Points","Cost"};
+        JTable table = new JTable(rows, cols);
+        JOptionPane buildingCosts = new JOptionPane();
+        // buildingCosts.add(buildingInfo);
+
+        buildingCosts.setSize(new Dimension(880, 400));
+        // buildingCosts.setPreferredSize(new Dimension(680, buildingCosts.getPreferredSize().height));
+
+        buildingCosts.showMessageDialog(null,new JScrollPane(table), "BuildingCosts",JOptionPane.PLAIN_MESSAGE);
+        //JOptionPane.showMessageDialog(null,new JScrollPane(table));
+    }
+
+    /**
+     * Sets up the game after start button pressed
+     *
+     */
+    public Color selectColor() {
+        Color p1Color;
+        String[] colors = new String[] {"Red", "Blue", "White", "Orange"};
+        int choice = JOptionPane.showOptionDialog(null, "Pick a color!", "Color Selector",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
+                null, colors, colors[0]);
+        if(choice == 0){
+            p1Color = Color.RED;
+        }else if(choice ==1){
+            p1Color = Color.BLUE;
+        }else if(choice == 2){
+            p1Color = Color.WHITE;
+        }else{
+            p1Color = Color.ORANGE;
+        }
+        return p1Color;
     }
 
     /**
@@ -449,13 +508,6 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         gamePhase = "Setting Board";
         //draw gameboard
 
-        //Forest Hex (4x), Pasture Hex (4x), Fields Hex (4x), Hills Hex (3x)
-        //Mountain Hex(3x), Desert Hex(1x)
-        //panel.setBackground(GameBoard.BACKGROUND);
-
-        //ADD BACK WHEN SEA IS DONE
-        //sea = new Sea(panel, new Point(200, 5));
-
         //Draw the gameboard pieces, tokens and robber
         gameboard = new GameBoard(panel,new Point(350,350));
         gameboard.createBoard();
@@ -467,59 +519,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     }
 
     /**
-     * Sets up the game after start button pressed
-     *
-     */
-    public Color selectColor() {
-        Color p1Color;
-        String[] colors = new String[] {"Red", "Blue", "White", "Orange"};
-        int choice = JOptionPane.showOptionDialog(null, "Pick a color!", "Color Selector",
-                JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
-                null, colors, colors[0]);
-        if(choice == 0){
-            p1Color = Color.RED;
-        }else if(choice ==1){
-            p1Color = Color.BLUE;
-        }else if(choice == 2){
-            p1Color = Color.WHITE;
-        }else{
-            p1Color = Color.ORANGE;
-        }
-        return p1Color;
-    }
-
-    /**
-     * Displays building cost info on how you would build
-     * roads, cities, settlements, or purchase development cards.
-     *
-     */
-    public void displayBuildingCosts() {
-        //research on jtable: https://stackoverflow.com/questions/27832268/how-to-format-a-table-in-joptionpane
-        JLabel buildingTitle = new JLabel("Building Costs");
-        //JLabel buildingInfo = new JLabel("Below are the required components to build or acquire special cards as well as victory points associated with each item.");
-        Object[][] rows = {
-                {"Road", "0", "1 Brick & 1 Lumber"},
-                {"Settlement","1","1 Brick, 1 Lumber, 1 Grain & 1 Wool"},
-                {"City", "2","2 Grain and 3 Ore"},
-                {"Development card","?","1 Wool, 1 Grain & 1 Ore"},
-                {" "," "," "},
-                {"Special"," "," "},
-                {"Longest road", "2","At least 5 contiguous road pieces"},
-                {"Largest army","2","At least 3 knight cards"}};
-        Object[] cols = {"Item","Victory Points","Cost"};
-        JTable table = new JTable(rows, cols);
-        JOptionPane buildingCosts = new JOptionPane();
-        // buildingCosts.add(buildingInfo);
-
-        buildingCosts.setSize(new Dimension(880, 400));
-        // buildingCosts.setPreferredSize(new Dimension(680, buildingCosts.getPreferredSize().height));
-
-        buildingCosts.showMessageDialog(null,new JScrollPane(table), "BuildingCosts",JOptionPane.PLAIN_MESSAGE);
-        //JOptionPane.showMessageDialog(null,new JScrollPane(table));
-    }
-
-    /**
-     * Sets up the game after start button pressed
+     * Creates each player's color
      *
      */
     public void createPlayers(Color c) {
@@ -573,7 +573,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     public void playGame(){
 
         turn = PLAYER_1;
-        while(gameStart){
+        while(gameStart && !gameWon){
             //call player turn with correct player
             if(turn == PLAYER_1){
                 PlayerTurn();
@@ -1161,37 +1161,24 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     }
 
     /**
-     * Draw a card from the resource card bank.
+     * Draw a card from the development card bank.
      *
-     * @param 
-     * @return 
      */
     public void drawDevelopmentCard(){
 
-        // Add to player's hand
-
     }
 
     /**
      * Draw a card from the resource card bank.
      *
-     * @param 
-     * @return 
+     * if player has a city, gets two resource cards, else gets one card
      */
     public void drawResourceCard(){
 
-        //if player has a city, gets two resource cards
-
-        //else gets one card
-
-        // Add to player's hand
-
     }
-
     /**
-     * Draw a card from the resource card bank.
+     * Check victory points scored by each player.
      *
-     * @param 
      * @return winner if no one won yet, returns 0, else returns 
      * player number. 10 points wins the game.
      */
@@ -1205,6 +1192,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                 }
             }
         }
+        gameWon = true;
 
         return winner;
     }
@@ -1225,6 +1213,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                     if(players.get(i).getRoadLength()>=5){
                         longestRoad = true;
                         longestRoadAmt = players.get(i).getRoadLength();
+                        longestRoadHolder = players.get(i).getPlayerNumber(); 
                         players.get(i).setLongestRoad(true);
                     }
                 }
@@ -1235,6 +1224,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                 if(players.get(i) != null){
                     if(players.get(i).getRoadLength()>=longestRoadAmt){
                         longestRoadAmt = players.get(i).getRoadLength();
+                        //subtract 1 because array position is one less than playernumber
+                        players.get(longestRoadHolder - 1).setLongestRoad(false);
                         players.get(i).setLongestRoad(true);
                     }
                 }
@@ -1251,11 +1242,32 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * @return 
      */
     public void checkKnights(){
-
         //first player to get 3 knight development cards gets
         //largest army card.  
-
-        //player can steal card if they build longer road.
+        if(!largestArmy){
+            for(int i = 0; i < 4; i++){
+                if(players.get(i) != null){
+                    if(players.get(i).getKnights()>=3){
+                        largestArmy = true;
+                        largestArmyAmt = players.get(i).getKnights();
+                        largestArmyHolder = players.get(i).getPlayerNumber(); 
+                        players.get(i).setLargestArmy(true);
+                    }
+                }
+            }
+        }else{
+            //see if someone can steal largest army card
+            for(int i = 0; i < 4; i++){
+                if(players.get(i) != null){
+                    if(players.get(i).getKnights()>=largestArmyAmt){
+                        largestArmyAmt = players.get(i).getKnights();
+                        //subtract 1 because array position is one less than playernumber
+                        players.get(largestArmyHolder - 1).setLargestArmy(false);
+                        players.get(i).setLargestArmy(true);
+                    }
+                }
+            }
+        }
 
     }
 
