@@ -25,6 +25,13 @@ public class Roads extends AnimatedGraphicsObject
     public void addRoad(Road r){
         roads.add(r);
     }
+    
+            /** Adds a point to this
+     *  @param p a city/settlement to add to this
+     */
+    public List getLocations(){
+        return roads;
+    }
 
     @Override
     public void paint(Graphics g){
