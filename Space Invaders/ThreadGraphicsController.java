@@ -546,6 +546,10 @@ public class ThreadGraphicsController implements Runnable {
                             if(s.sections[j][k].hit(p)){
                                 s.sections[j][k].hurt();
                                 hit = true;
+                                
+                                if(s.sections[j][k].done == true){
+                                    s.sections[j][k] = null;
+                                }
                             }
                         }
                     }
