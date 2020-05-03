@@ -14,9 +14,15 @@ public class Explosion extends AnimatedGraphicsObject implements ImageObserver{
     private static Image shotExplosion;
     private static Image playerExplosion;
     private static Image ufoExplosion;
+    
+    public static final int EXPLOSION_WIDTH = 50;
+    public static final int EXPLOSION_HEIGHT = 39;
     public Explosion(JComponent container, Point upperLeft,String typeIn){
         super(container);
-        this.upperLeft = upperLeft;
+        
+        //We have to shift the upperLeft point to the center of the image
+        this.upperLeft = new Point(upperLeft.x-EXPLOSION_WIDTH/2,upperLeft.y-EXPLOSION_HEIGHT/2);
+        
         type = typeIn;
         done = false;
         dead = false;
