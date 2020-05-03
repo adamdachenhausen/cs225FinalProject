@@ -170,10 +170,16 @@ public class HexTiles extends AnimatedGraphicsObject{
         }
     }
 
+    /** Returns the center coordinate of this
+     *  @return the center of this
+     */
     public Point getHexPoint(){
         return center;
     }
 
+    /** Returns the type of this
+     *  @return the type of this
+     */
     public String getHexType(){
         return type;
     }
@@ -215,31 +221,51 @@ public class HexTiles extends AnimatedGraphicsObject{
 
     }
 
+    /** Returns the resource represented by this
+     *  @return the resource of this 
+     */
     public Resource getResource(){
         return r;
     }
 
+    /** Returns the token held by this
+     *  @return the token held by this
+     */
     public Tokens getToken(){
         return t;
     }
 
+    /** Puts a new token on this
+     *  @param newToken the token to replace this token with
+     */
     public void setToken(Tokens newToken){
         t = newToken;
     }
 
+    /** Removes the token from this
+     * 
+     */
     public void removeToken(){
         t = null;
     }
 
+    /** Returns true if a robber is on this
+     *  @return true if this contains a robber
+     */
     public boolean getHasRobber(){
         return hasRobber;
     }
 
+    /** Sets hasRobber
+     *  @param newHasRobber updates the hasRobber of this
+     */
     public void setRobber(boolean newHasRobber){
         hasRobber = newHasRobber;
     }
 
-    /**
+    /** Returns city locations of this, but only certain ones, so that the gameboard
+     *  does not have doubled, or very close city locations
+     * 
      *  @param type refers to where in the gameboard this is.
      *  Can be type: CORNER, MIDDLE, INBETWEEN, or left null for default
      *  @param subType refers to where this type is, for instance if this was the
@@ -295,6 +321,10 @@ public class HexTiles extends AnimatedGraphicsObject{
         return loc;
     }
 
+    /** Returns road locations of this, but only certain ones, so that the gameboard
+     *  does not have doubled, or very close road locations
+     *  @return an ArrayList of Road objects
+     */
     public ArrayList getRoads(){
         ArrayList<Road> roads = new ArrayList(6);
 
