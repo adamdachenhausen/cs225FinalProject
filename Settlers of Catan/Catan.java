@@ -949,12 +949,25 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * @return 
      */
     public void useResourceCard(String rType){
-        ResourceCard removed = new ResourceCard(panel, Resource.WOOD, new Point(0,0));
-        
+        ResourceCard rc = null;
+        if(turn == 1){
+            for(int i = 0; i < players.get(0).getResourceCards().size(); i++){
+                if(players.get(0).getResourceCards().get(i).getType().equals(rType)){
+                    rc = players.get(0).removeResourceCard(rType);
+                }
+            }
+        }else if(turn ==2){
+
+        }else if(turn == 3){
+
+        }else{
+
+        }
         for(int i = 0; i < resourceDeck.getList().size(); i++){
-            
+
         }
     }
+
     /**
      * Players build to develop your empire
      *
@@ -985,6 +998,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         }
         panel.repaint();
     }
+
     /**
      * Draw a card from the resource card bank.
      *

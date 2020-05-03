@@ -50,6 +50,7 @@ public class ResourceDeck extends AnimatedGraphicsObject{
             if(rcType.equals(resourceDeck.get(i).getType())){
                 found = true;
                 removed =resourceDeck.get(i);
+                resourceDeck.remove(i);
             }
             i++;
         }

@@ -69,7 +69,102 @@ public class Player
         settlements = 0;
         roads = 0;
     }
+        public void addResourceCard(ResourceCard rc){
+        resourceCards.add(rc);
 
+    }
+
+    public ResourceCard removeResourceCard(String rcType){
+        ResourceCard removed = null;
+        boolean found = false;
+        int i = 0;
+
+        while(i > resourceCards.size() && !found){
+            if(rcType.equals(resourceCards.get(i).getType())){
+                found = true;
+                removed =resourceCards.get(i);
+                resourceCards.remove(i);
+            }
+            i++;
+        }
+        return removed;
+    }
+
+    public ResourceCard getResourceCard(String rcType){
+        ResourceCard foundCard = null;
+        boolean found = false;
+        int i = 0;
+
+        while(i > resourceCards.size() && !found){
+            if(rcType.equals(resourceCards.get(i).getType())){
+                found = true;
+                foundCard =resourceCards.get(i);
+            }
+            i++;
+        }
+        return foundCard;    
+    }
+
+    public boolean searchResourceCards(String searchType){
+        boolean found = false;
+        int i = 0;
+
+        while(i > resourceCards.size() && !found){
+            if(searchType.equals(resourceCards.get(i).getType())){
+                found = true;
+            }
+            i++;
+        }
+        return found;
+    }
+    public DevelopmentCard getDevCard(String rcType){
+        DevelopmentCard foundCard = null;
+        boolean found = false;
+        int i = 0;
+
+        while(i > devCards.size() && !found){
+            if(rcType.equals(devCards.get(i).getType())){
+                found = true;
+                foundCard = devCards.get(i);
+            }
+            i++;
+        }
+        return foundCard;    
+    }
+
+    public boolean searchDevCards(String searchType){
+        boolean found = false;
+        int i = 0;
+
+        while(i > devCards.size() && !found){
+            if(searchType.equals(devCards.get(i).getType())){
+                found = true;
+            }
+            i++;
+        }
+        return found;
+    }
+    
+        public void addDevCard(DevelopmentCard dc){
+        devCards.add(dc);
+
+    }
+
+    public DevelopmentCard removeDevCard(String rcType){
+        DevelopmentCard removed = null;
+        boolean found = false;
+        int i = 0;
+
+        while(i > devCards.size() && !found){
+            if(rcType.equals(devCards.get(i).getType())){
+                found = true;
+                removed =devCards.get(i);
+                devCards.remove(i);
+            }
+            i++;
+        }
+        return removed;
+    }
     public int getPlayerNumber(){
 
         return playerNumber;
