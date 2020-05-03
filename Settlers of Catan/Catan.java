@@ -829,27 +829,49 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     public boolean checkHitbox(Point p, String type){
         boolean close = false;
         
-        //Trying to find point within roads object
-        Roads rs = gameboard.getRoadsList();
-        java.util.List<Roads>rlist = rs.getRoadList();
-        
-        
-        int size = 20;
-        if(type.equals("Road")){
-            for(int i = 0; i < rlist.size(); i++){
-
-                Roads checkRoads = rlist.get(i);
-                for(int j = 0; j < checkRoads
-                // Point checkPoint = 
+        // ArrayList<Point> checkPoints = gameboard.getAllPoints();
+                // int size = 20;
+        // if(type.equals("Road")){
+            // for(int i = 0; i < checkPoints.size(); i++){
+                // Point checkPoint = checkPoints.get(i);
                 // if(checkPoint.distance(p) <= size) {
                     // close = true;
                 // }
             
             
-            }
-        }else{
+            // }
+        // }else{
+            // for(int i = 0; i < checkPoints.size(); i++){
+                // Point checkPoint = checkPoints.get(i);
+                // if(checkPoint.distance(p) <= size) {
+                    // close = true;
+                // }
+            
+            
+            // }
+        // }
+        
+        // //Trying to find point within roads object
+        // Roads rs = gameboard.getRoadsList();
+        // java.util.List<Roads>rlist = rs.getRoadList();
+        
+        
+        // int size = 20;
+        // if(type.equals("Road")){
+            // for(int i = 0; i < rlist.size(); i++){
 
-        }
+                // Roads checkRoads = rlist.get(i);
+                // for(int j = 0; j < checkRoads
+                // // Point checkPoint = 
+                // // if(checkPoint.distance(p) <= size) {
+                    // // close = true;
+                // // }
+            
+            
+            // }
+        // }else{
+
+        // }
         return close;
     }
 

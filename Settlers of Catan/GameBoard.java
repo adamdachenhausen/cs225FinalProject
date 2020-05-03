@@ -47,6 +47,8 @@ public class GameBoard extends AnimatedGraphicsObject
     protected CityLocations c;
 
     protected Roads roads;
+
+    ArrayList<Point> locs;
     public GameBoard(JComponent container, Point center){
         super(container);
         this.container = container;
@@ -70,9 +72,7 @@ public class GameBoard extends AnimatedGraphicsObject
 
         sea = Sea.createSea(center);
 
-
     }
-
     /** Manually created board of hexTiles
      *  
      */
@@ -342,7 +342,7 @@ public class GameBoard extends AnimatedGraphicsObject
 
             for(int j=0; j<board[0].length;j++){
                 if(board[i][j]!= null){
-                    ArrayList<Point> locs = board[i][j].getCityLocations();
+                    locs = board[i][j].getCityLocations();
                     ArrayList<Road> rds = board[i][j].getRoads();
                     for(int k = 0; k<locs.size();k++){
                         c.addLocation(new City(container,locs.get(k)));
@@ -395,6 +395,13 @@ public class GameBoard extends AnimatedGraphicsObject
      */
     public Roads getRoadsList(){
         return roads;
+    }
+
+    /** Returns the robber object
+     *  @return the roads
+     */
+    public ArrayList<Point> getAllPoints(){
+        return locs;
     }
 
 }
