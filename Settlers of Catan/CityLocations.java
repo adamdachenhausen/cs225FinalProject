@@ -5,10 +5,10 @@ import java.awt.Point;
 import java.awt.Graphics;
 import java.awt.Color;
 /**
- * Write a description of class CityLocations here.
+ * A collection of points that represent city/settlements
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Adam Dachenhausen, Kate Nelligan, Lindsay Clark
+ * @version Spring 2020
  */
 public class CityLocations extends AnimatedGraphicsObject
 {
@@ -19,6 +19,9 @@ public class CityLocations extends AnimatedGraphicsObject
         this.container = container;
     }
 
+    /** Adds a point to this
+     *  @param p a city/settlement to add to this
+     */
     public void addLocation(Point p){
         locations.add(p);
     }
