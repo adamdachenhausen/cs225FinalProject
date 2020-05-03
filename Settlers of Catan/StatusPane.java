@@ -127,7 +127,6 @@ public class StatusPane extends AnimatedGraphicsObject implements ImageObserver{
         int y6 = (y5 + 20);
         g.drawString(p1pieces, x6, y6);
 
-
         //player2Info
         g.setFont(new Font("TimesRoman", Font.BOLD, 15));
         String p2Status = "Player 2 points" +"("+ p.get(1).getColorToString() +")" + " points: " + p.get(1).getVictoryPoints();
@@ -181,7 +180,7 @@ public class StatusPane extends AnimatedGraphicsObject implements ImageObserver{
         int y13 = (y12 + 35);
         g.drawString(p4Status, x13, y13);
 
-        //player1cards 
+        //player4cards 
         g.setFont(new Font("TimesRoman", Font.BOLD, 12));
         String p4cards;
         p4cards = p.get(0).getResourceToString();
@@ -189,7 +188,7 @@ public class StatusPane extends AnimatedGraphicsObject implements ImageObserver{
         int y14 = (y13 + 20);
         g.drawString(p4cards, x14, y14);
 
-        //player1cards 
+        //player4cards 
         g.setFont(new Font("TimesRoman", Font.BOLD, 12));
         String p4pieces;
         p4pieces = p.get(0).getPiecesToString();
@@ -197,6 +196,41 @@ public class StatusPane extends AnimatedGraphicsObject implements ImageObserver{
         int y15 = (y14 + 20);
         g.drawString(p4pieces, x15, y15);
 
+        //Largest army 
+        g.setFont(new Font("TimesRoman", Font.BOLD, 15));
+        int armyHolder = 0;
+        for(int i = 0; i < p.size(); i++){
+            if (p.get(i).getLargestArmy()){
+                armyHolder = p.get(i).getPlayerNumber();
+            }
+        }
+        String army ="";
+        if(armyHolder == 0){
+            army = "Largest Army card: not distributed";
+        }else{
+            army = "Largest Army card: Player " + armyHolder + " holds card";
+        }
+        int x16 = (upperLeft.x + 3);
+        int y16 = (y15 + 35);
+        g.drawString(army, x16, y16);
+        
+                //Longest Road
+        g.setFont(new Font("TimesRoman", Font.BOLD, 15));
+        int roadHolder = 0;
+        for(int i = 0; i < p.size(); i++){
+            if (p.get(i).getLongestRoad()){
+                roadHolder = p.get(i).getPlayerNumber();
+            }
+        }
+        String longestRoad = "";
+        if(armyHolder == 0){
+            longestRoad = "Longest Road card: not distributed";
+        }else{
+            longestRoad = "Longest Road card: Player " + roadHolder + " holds card";
+        }
+        int x17 = (upperLeft.x + 3);
+        int y17 = (y16 + 20);
+        g.drawString(longestRoad, x17, y17);
 
         container.repaint();
         //Player Instructions text
