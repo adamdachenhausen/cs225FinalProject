@@ -1040,7 +1040,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
             i=0;
             found = false;
             while(i < players.get(1).getDevelopmentCards().size() && !found){
-                if(players.get(0).getDevelopmentCards().get(i).getType().equals(dType)){
+                if(players.get(1).getDevelopmentCards().get(i).getType().equals(dType)){
                     dc = players.get(0).removeDevelopmentCard(dType);
                     found = true;
                 } 
@@ -1050,7 +1050,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
             i=0;
             found = false;
             while(i < players.get(2).getDevelopmentCards().size() && !found){
-                if(players.get(0).getDevelopmentCards().get(i).getType().equals(dType)){
+                if(players.get(2).getDevelopmentCards().get(i).getType().equals(dType)){
                     dc = players.get(0).removeDevelopmentCard(dType);
                     found = true;
                 } 
@@ -1060,7 +1060,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
             i=0;
             found = false;
             while(i < players.get(3).getDevelopmentCards().size() && !found){
-                if(players.get(0).getDevelopmentCards().get(i).getType().equals(dType)){
+                if(players.get(3).getDevelopmentCards().get(i).getType().equals(dType)){
                     dc = players.get(0).removeDevelopmentCard(dType);
                     found = true;
                 } 
@@ -1096,7 +1096,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
             i=0;
             found = false;
             while(i < players.get(1).getResourceCards().size() && !found){
-                if(players.get(0).getResourceCards().get(i).getType().equals(rType)){
+                if(players.get(1).getResourceCards().get(i).getType().equals(rType)){
                     rc = players.get(0).removeResourceCard(rType);
                     found = true;
                 } 
@@ -1106,7 +1106,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
             i=0;
             found = false;
             while(i < players.get(2).getResourceCards().size() && !found){
-                if(players.get(0).getResourceCards().get(i).getType().equals(rType)){
+                if(players.get(2).getResourceCards().get(i).getType().equals(rType)){
                     rc = players.get(0).removeResourceCard(rType);
                     found = true;
                 } 
@@ -1116,7 +1116,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
             i=0;
             found = false;
             while(i < players.get(3).getResourceCards().size() && !found){
-                if(players.get(0).getResourceCards().get(i).getType().equals(rType)){
+                if(players.get(3).getResourceCards().get(i).getType().equals(rType)){
                     rc = players.get(0).removeResourceCard(rType);
                     found = true;
                 } 
