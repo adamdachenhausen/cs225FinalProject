@@ -85,6 +85,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
     protected static boolean gameEnded = false;
 
+    protected boolean reset = false;
+
     protected static boolean longestRoad = false;
 
     protected static boolean largestArmy = false;
@@ -93,7 +95,18 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
     protected static int largestArmyAmt = 0;
 
-    protected boolean reset = false;
+    protected static int longestRoadHolder = 0;
+
+    protected static int largestArmyHolder = 0;
+
+    //These flags determine what action is selected
+    //with mouse pointer
+    protected boolean buildSettlement = false;
+    protected boolean buildCity = false;
+    protected boolean buildRoad = false;
+    protected boolean moveRobber = false;
+
+    protected Point pressPoint;
 
     // main panel with buttons for the game
     protected JPanel mainPanel;
@@ -252,7 +265,24 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     @Override
     public void mousePressed(MouseEvent e) {
 
-        panel.repaint();
+        //use boolean flags to determine if mouse listener is used to place
+        //gamepieces. 
+        if(buildSettlement){
+            pressPoint = e.getPoint();
+
+        }else if(buildCity){
+            pressPoint = e.getPoint();
+
+        }else if(buildRoad){
+            pressPoint = e.getPoint();
+
+        }else if(moveRobber){
+            pressPoint = e.getPoint();
+
+        }else{
+            //do nothing
+        }
+
     }
 
     /**
@@ -264,20 +294,19 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     @Override
     public void mouseDragged(MouseEvent e) {
 
-        // = e.getPoint();
-
-        panel.repaint();
     }
 
     /**
-    Mouse release event handler to create a new BouncingGravityBall
-    centered at the release point, initial velocities depending on 
-    distance from press point.
+    Mouse release event handler to create a new point to place a gamepiece
+    centered at the release point.
 
     @param e mouse event info
      */
     @Override
     public void mouseReleased(MouseEvent e) {
+        //if building, create gamepiece on board
+
+        //if moving robber, change it's position appropriately
 
         panel.repaint();
     }
@@ -350,7 +379,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     }
 
     /**
-     * Sets up the game after start button pressed
+     * Resets the game (in TGC class)
      *
      */
     public void resetGame() {
@@ -358,7 +387,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     }
 
     /**
-     * Sets up the game after start button pressed
+     * Displays information about the game
      *
      */
     public int introDialog() {
@@ -373,96 +402,13 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     }
 
     /**
-     * Sets up the game after start button pressed
+     * Shows game instructions
      *
      */
     public void showInstructions() {
         JFrame instructionDialog = new JFrame("Catan Instructions");
         JOptionPane.showMessageDialog(instructionDialog, "Here is how to play!");
 
-    }
-
-    /**
-     * Executes action each time button pressed.
-     *
-     *@param e ActionEvent that triggered this call
-     */
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-        if(e.getSource().equals(startButton)){
-            if(!gameStart){
-                startGame(); 
-            }
-        }
-        if(e.getSource().equals(resetButton)){
-            if(gameStart){
-                resetGame(); 
-            }
-        }
-        if(e.getSource().equals(instructionsButton)){
-            showInstructions();
-        }
-        if(e.getSource().equals(buildingCostsButton)){
-            displayBuildingCosts();
-        }
-        if(e.getSource().equals(continueButton)){
-            rollDialog();
-        }
-
-    }
-    //----------------------------------------------------------
-
-    //The following methods set up the game for playing
-
-    //---------------------------------------------------------- 
-    /**
-     * Sets the hex tiles that make up the island
-     *
-     * @param 
-     * @return 
-     */
-    public void setBoard(){
-        gamePhase = "Setting Board";
-        //draw gameboard
-
-        //Forest Hex (4x), Pasture Hex (4x), Fields Hex (4x), Hills Hex (3x)
-        //Mountain Hex(3x), Desert Hex(1x)
-        //panel.setBackground(GameBoard.BACKGROUND);
-
-        //ADD BACK WHEN SEA IS DONE
-        //sea = new Sea(panel, new Point(200, 5));
-
-        //Draw the gameboard pieces, tokens and robber
-        gameboard = new GameBoard(panel,new Point(350,350));
-        gameboard.createBoard();
-        gameboard.start();
-        gameboard.startBoard();
-
-        //set board with 2 settlements per player
-        //distributeGamepieces();
-    }
-
-    /**
-     * Sets up the game after start button pressed
-     *
-     */
-    public Color selectColor() {
-        Color p1Color;
-        String[] colors = new String[] {"Red", "Blue", "White", "Orange"};
-        int choice = JOptionPane.showOptionDialog(null, "Pick a color!", "Color Selector",
-                JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
-                null, colors, colors[0]);
-        if(choice == 0){
-            p1Color = Color.RED;
-        }else if(choice ==1){
-            p1Color = Color.BLUE;
-        }else if(choice == 2){
-            p1Color = Color.WHITE;
-        }else{
-            p1Color = Color.ORANGE;
-        }
-        return p1Color;
     }
 
     /**
@@ -497,6 +443,83 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
     /**
      * Sets up the game after start button pressed
+     *
+     */
+    public Color selectColor() {
+        Color p1Color;
+        String[] colors = new String[] {"Red", "Blue", "White", "Orange"};
+        int choice = JOptionPane.showOptionDialog(null, "Pick a color!", "Color Selector",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
+                null, colors, colors[0]);
+        if(choice == 0){
+            p1Color = Color.RED;
+        }else if(choice ==1){
+            p1Color = Color.BLUE;
+        }else if(choice == 2){
+            p1Color = Color.WHITE;
+        }else{
+            p1Color = Color.ORANGE;
+        }
+        return p1Color;
+    }
+
+    /**
+     * Executes action each time button pressed.
+     *
+     *@param e ActionEvent that triggered this call
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        if(e.getSource().equals(startButton)){
+            if(!gameStart){
+                startGame(); 
+            }
+        }
+        if(e.getSource().equals(resetButton)){
+            if(gameStart){
+                resetGame(); 
+            }
+        }
+        if(e.getSource().equals(instructionsButton)){
+            showInstructions();
+        }
+        if(e.getSource().equals(buildingCostsButton)){
+            displayBuildingCosts();
+        }
+        if(e.getSource().equals(continueButton)){
+            //rollDialog();
+            tradeResourcesDialog();
+        }
+
+    }
+    //----------------------------------------------------------
+
+    //The following methods set up the game for playing
+
+    //---------------------------------------------------------- 
+    /**
+     * Sets the hex tiles that make up the island
+     *
+     * @param 
+     * @return 
+     */
+    public void setBoard(){
+        gamePhase = "Setting Board";
+        //draw gameboard
+
+        //Draw the gameboard pieces, tokens and robber
+        gameboard = new GameBoard(panel,new Point(350,350));
+        gameboard.createBoard();
+        gameboard.start();
+        gameboard.startBoard();
+
+        //set board with 2 settlements per player
+        //distributeGamepieces();
+    }
+
+    /**
+     * Creates each player's color
      *
      */
     public void createPlayers(Color c) {
@@ -550,7 +573,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     public void playGame(){
 
         turn = PLAYER_1;
-        while(gameStart){
+        while(gameStart && !gameWon){
             //call player turn with correct player
             if(turn == PLAYER_1){
                 PlayerTurn();
@@ -593,12 +616,16 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
         //roll dice
         rollDialog();
+        if(roll == 7){
+            activateRobber();
+        }else{
+            //call distribute resource cards
+            //distribute resources *if not enough resources, none distributed
 
-        //whichever token/hex (the tokens number the hexes) is rolled
-        //any settlement on the border of that hex gets resources.
-        //Determine players with "activated hexes"
-
-        //distribute resources *if not enough resources, none distributed
+            //whichever token/hex (the tokens number the hexes) is rolled
+            //any settlement on the border of that hex gets resources.
+            //Determine players with "activated hexes"
+        }
 
         //offer trades
     }
@@ -768,7 +795,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * @param player2 Player trading with
      * @return 
      */
-    public void tradeResources(){
+    public void tradeResourcesDialog(){
         gamePhase = "Trading...";
         //trading can only happen with the active player on a turn
         String[] options = new String[]{"Yes","No"};
@@ -785,7 +812,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         }else if(answer == 1){
             buildDialog();
         }else{
-            tradeResources();
+            tradeResourcesDialog();
         }
         panel.repaint();
     }
@@ -799,6 +826,25 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      */
     public void swapCards(){
         //trading can only happen with the active player on a turn
+        gamePhase = "Trading...";
+        //trading can only happen with the active player on a turn
+        String[] options = new String[]{"Yes","No"};
+        int answer = JOptionPane.showOptionDialog(null,
+                "Which card would you like to trade?",
+                "Trade Selection interface",
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[1]);
+        if(answer == 0){
+            swapCards();
+        }else if(answer == 1){
+            buildDialog();
+        }else{
+            tradeResourcesDialog();
+        }
+        panel.repaint();
     }
 
     /**
@@ -823,7 +869,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         }else if(answer == 1){
             developmentDialog();
         }else{
-            tradeResources();
+            tradeResourcesDialog();
         }
         panel.repaint();
     }
@@ -899,14 +945,16 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     }
 
     /**
-     * Move the robber to a hex.
+     * Robber actions tree begins with several choices available for the player who
+     * rolled 7.
+     * 
      * Take action based on placement.
      *
      * @param a hex tile to move the robber to.
      * @return 
      */
-    public void activateRobber(HexTiles h){
-        //call method when dice roll = 7
+    public void activateRobber(){
+        moveRobberDialog();
 
         //anyone with more than 7 cards must discard extras to bank
 
@@ -925,9 +973,48 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * @param a hex tile to move the robber to.
      * @return 
      */
-    public void moveRobber(HexTiles h){
+    public void moveRobberDialog(){
         //move the robber to a different hex
+        String[] options = new String[]{"Yes","No"};
+        int answer = JOptionPane.showOptionDialog(null,
+                "Would you like to move the robber?",
+                "Building interface",
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[1]);
+        if(answer == 0){
+            moveRobber = true;
+            moveRobber();
+        }else if(answer == 1){
+            developmentDialog();
+        }else{
+            tradeResourcesDialog();
+        }
+        panel.repaint();
+    }
 
+    /**
+     * Move the robber to a hex.
+     * Take action based on placement.
+     *
+     * @param a hex tile to move the robber to.
+     * @return 
+     */
+    public void moveRobber(){
+        //move the robber to a different hex
+        String[] options = new String[]{"Ok"};
+        int answer = JOptionPane.showOptionDialog(null,
+                "Click on the hex tile where you want to move the robber.",
+                "Move robber interface",
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.OK_OPTION,
+                null,
+                options,
+                options[0]);
+
+        moveRobber = false;
     }
 
     /**
@@ -1068,43 +1155,30 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         }else if(answer == 1){
             developmentDialog();
         }else{
-            tradeResources();
+            tradeResourcesDialog();
         }
         panel.repaint();
     }
 
     /**
-     * Draw a card from the resource card bank.
+     * Draw a card from the development card bank.
      *
-     * @param 
-     * @return 
      */
     public void drawDevelopmentCard(){
 
-        // Add to player's hand
-
     }
 
     /**
      * Draw a card from the resource card bank.
      *
-     * @param 
-     * @return 
+     * if player has a city, gets two resource cards, else gets one card
      */
     public void drawResourceCard(){
 
-        //if player has a city, gets two resource cards
-
-        //else gets one card
-
-        // Add to player's hand
-
     }
-
     /**
-     * Draw a card from the resource card bank.
+     * Check victory points scored by each player.
      *
-     * @param 
      * @return winner if no one won yet, returns 0, else returns 
      * player number. 10 points wins the game.
      */
@@ -1118,6 +1192,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                 }
             }
         }
+        gameWon = true;
 
         return winner;
     }
@@ -1138,6 +1213,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                     if(players.get(i).getRoadLength()>=5){
                         longestRoad = true;
                         longestRoadAmt = players.get(i).getRoadLength();
+                        longestRoadHolder = players.get(i).getPlayerNumber(); 
                         players.get(i).setLongestRoad(true);
                     }
                 }
@@ -1148,6 +1224,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                 if(players.get(i) != null){
                     if(players.get(i).getRoadLength()>=longestRoadAmt){
                         longestRoadAmt = players.get(i).getRoadLength();
+                        //subtract 1 because array position is one less than playernumber
+                        players.get(longestRoadHolder - 1).setLongestRoad(false);
                         players.get(i).setLongestRoad(true);
                     }
                 }
@@ -1164,11 +1242,32 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * @return 
      */
     public void checkKnights(){
-
         //first player to get 3 knight development cards gets
         //largest army card.  
-
-        //player can steal card if they build longer road.
+        if(!largestArmy){
+            for(int i = 0; i < 4; i++){
+                if(players.get(i) != null){
+                    if(players.get(i).getKnights()>=3){
+                        largestArmy = true;
+                        largestArmyAmt = players.get(i).getKnights();
+                        largestArmyHolder = players.get(i).getPlayerNumber(); 
+                        players.get(i).setLargestArmy(true);
+                    }
+                }
+            }
+        }else{
+            //see if someone can steal largest army card
+            for(int i = 0; i < 4; i++){
+                if(players.get(i) != null){
+                    if(players.get(i).getKnights()>=largestArmyAmt){
+                        largestArmyAmt = players.get(i).getKnights();
+                        //subtract 1 because array position is one less than playernumber
+                        players.get(largestArmyHolder - 1).setLargestArmy(false);
+                        players.get(i).setLargestArmy(true);
+                    }
+                }
+            }
+        }
 
     }
 
