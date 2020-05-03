@@ -358,24 +358,26 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         panel.repaint();
 
         //display the player's gamepieces (roads, settlements and cities)
-        //distributeGamepieces();
+        distributeGamepieces();
 
-        //place first two settlements
-        // turn = 1;
-        // for(int i = 0; i < 2; i++){
-        // while(turn <= 4){
-        // if(turn == 1){
-        // placeGamePiece("Settlement");
-        // }else{
-        // autoPlacePiece("Settlement", turn);
-        // }
-        // turn++;
-        // }
-        // turn = 1;
-        // }
+        //Set turn to first player and place first two settlements
+        turn = 1;
+
+        while(turn <= 4){
+            for(int i = 0; i < 2; i++){
+                if(turn == 1){
+                    placeGamePiece("Settlement");
+                    placeGamePiece("Road");
+                }else{
+                    autoPlacePiece("Settlement", turn);
+                    autoPlacePiece("Road", turn);
+                }                
+            }
+            turn++;
+        }
 
         //Play game
-        //playGame();
+        playGame();
     }
 
     /**
@@ -576,9 +578,9 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         while(gameStart && !gameWon){
             //call player turn with correct player
             if(turn == PLAYER_1){
-                PlayerTurn();
+                playerTurn();
             }else{
-                NpcTurn();
+                npcTurn();
             }
             gamePhase = "Distributing Resources...";
 
@@ -611,7 +613,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * @param player2 Player trading with
      * @return 
      */
-    public void PlayerTurn(){
+    public void playerTurn(){
         boolean turnDone = false;
 
         //roll dice
@@ -638,7 +640,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
      * @return 
      */
-    public void NpcTurn(){
+    public void npcTurn(){
         boolean turnDone = false;
         //roll dice
         autoRoll();
