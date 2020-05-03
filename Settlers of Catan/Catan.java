@@ -1071,7 +1071,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * If no, returns to the turn (which ends this player's turn).
      */
     public void selectDevelopmentDialog(){
-        boolean devCardsExist = false;
+
         String[] options;
 
         if(turn == 1){
@@ -1080,7 +1080,20 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                 for(int i = 0; i < players.get(0).getDevelopmentHand().size(); i++){
                     options[i] = players.get(0).getDevelopmentHand().get(i);
                 }
-                devCardsExist = true;
+
+                int answer = JOptionPane.showOptionDialog(null,
+                        "Choose which card to use",
+                        "Use Development card interface",
+                        JOptionPane.YES_NO_CANCEL_OPTION,
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        options,
+                        options[1]);
+
+                //Choice is the answer in the array of the card to use
+                String choice = options[answer];
+
+                useDevelopmentCard(choice);
             }
         }else if(turn == 2){
             if(players.get(1).getDevelopmentHand().size()>0){
@@ -1088,7 +1101,20 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                 for(int i = 0; i < players.get(1).getDevelopmentHand().size(); i++){
                     options[i] = players.get(1).getDevelopmentHand().get(i);
                 }
-                devCardsExist = true;
+
+                int answer = JOptionPane.showOptionDialog(null,
+                        "Choose which card to use",
+                        "Use Development card interface",
+                        JOptionPane.YES_NO_CANCEL_OPTION,
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        options,
+                        options[1]);
+
+                //Choice is the answer in the array of the card to use
+                String choice = options[answer];
+
+                useDevelopmentCard(choice);
             }
         }else if(turn == 3){
             if(players.get(2).getDevelopmentHand().size()>0){
@@ -1096,36 +1122,43 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                 for(int i = 0; i < players.get(2).getDevelopmentHand().size(); i++){
                     options[i] = players.get(2).getDevelopmentHand().get(i);
                 }
-                devCardsExist = true;
+
+                int answer = JOptionPane.showOptionDialog(null,
+                        "Choose which card to use",
+                        "Use Development card interface",
+                        JOptionPane.YES_NO_CANCEL_OPTION,
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        options,
+                        options[1]);
+
+                //Choice is the answer in the array of the card to use
+                String choice = options[answer];
+
+                useDevelopmentCard(choice);
             }
-        }else{
+        }else if(turn == 4){
             if(players.get(3).getDevelopmentHand().size()>0){
                 options = new String[players.get(3).getDevelopmentHand().size()];
                 for(int i = 0; i < players.get(3).getDevelopmentHand().size(); i++){
                     options[i] = players.get(3).getDevelopmentHand().get(i);
                 }
-                devCardsExist = true;
-            } 
-        }
 
-        //if dev cards exist
-        if(devCardsExist){
-            //change options below
-            options = new String[]{"Yes","No"};
-            int answer = JOptionPane.showOptionDialog(null,
-                    "Would you like to use a development card?",
-                    "Use Development card interface",
-                    JOptionPane.YES_NO_CANCEL_OPTION,
-                    JOptionPane.QUESTION_MESSAGE,
-                    null,
-                    options,
-                    options[1]);
+                int answer = JOptionPane.showOptionDialog(null,
+                        "Choose which card to use",
+                        "Use Development card interface",
+                        JOptionPane.YES_NO_CANCEL_OPTION,
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        options,
+                        options[1]);
 
-            String choice = "";
-            if(answer == 0){
+                //Choice is the answer in the array of the card to use
+                String choice = options[answer];
 
                 useDevelopmentCard(choice);
-            }
+            } 
+
         }else{
             //Player has no development cards, show message.
             Object[] noCards = {"Ok"};
