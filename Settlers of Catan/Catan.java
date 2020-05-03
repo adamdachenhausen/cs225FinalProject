@@ -262,14 +262,13 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     }
 
     /**
-    Mouse press event handler to set up to create a new
-    BouncingGravityBall on subsequent release.
+    
 
     @param e mouse event info
      */
     @Override
     public void mousePressed(MouseEvent e) {
-
+        System.out.println(e.getPoint());
         //use boolean flags to determine if mouse listener is used to place
         //gamepieces. 
         if(buildSettlement){
