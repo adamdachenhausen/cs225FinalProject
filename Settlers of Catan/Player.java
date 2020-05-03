@@ -99,38 +99,41 @@ public class Player
                 sheep++;
             }
         }
-        s.append("Brick: " + brick + ", Lumber: " + lumber + ", Ore: " + ore+ ", Wheat: " + ", Wool: " + sheep);
+        s.append("Brick: " + brick + ", Lumber: " + lumber + ", Ore: " + ore+ ", Wheat: " +wheat+ ", Wool: " + sheep);
 
         resCards = s.toString();
         return resCards;
     }
 
-    public String getDevToString(){
+    public String getDevToString(String toStringType){
         StringBuilder s = new StringBuilder();
-        String devCards;
-        int brick = 0;
-        int lumber= 0;
-        int ore = 0;
-        int wheat = 0;
-        int sheep =0; 
+        String dCards;
+        int monopoly = 0;
+        int rb= 0;
+        int knight = 0;
+        int yop = 0;
+        int vp =0; 
 
-        for(int i = 0; i < resourceCards.size(); i++){
-            if(resourceCards.get(i).getCardType().equals("Brick")){
-                brick++;
-            }else if(resourceCards.get(i).getCardType().equals("Lumber")){
-                lumber++;
-            }else if(resourceCards.get(i).getCardType().equals("Ore")){
-                ore++;
-            }else if(resourceCards.get(i).getCardType().equals("Grain")){
-                wheat++;
-            }else if(resourceCards.get(i).getCardType().equals("Wool")){
-                sheep++;
+        for(int i = 0; i < devCards.size(); i++){
+            if(devCards.get(i).getCardType().equals("Monopoly")){
+                monopoly++;
+            }else if(devCards.get(i).getCardType().equals("Road Building")){
+                rb++;
+            }else if(devCards.get(i).getCardType().equals("Knight")){
+                knight++;
+            }else if(devCards.get(i).getCardType().equals("Year of Plenty")){
+                yop++;
+            }else if(devCards.get(i).getCardType().equals("Victory Point")){
+                vp++;
             }
         }
-        s.append("Brick: " + brick + ", Lumber: " + lumber + ", Ore: " + ore+ ", Wheat: " + ", Wool: " + sheep);
-
-        devCards = s.toString();
-        return devCards;
+        if(toStringType.equals("Full")){
+            s.append("Monopoly: " + monopoly + ", Road Building: " + rb + ", Knights: " + knight+ ", Year of Plenty: " + yop +", Victory Point: " + vp);
+        }else{
+            s.append("Knights: " +knight);
+        }
+        dCards = s.toString();
+        return dCards;
     }
 
     public ArrayList<ResourceCard> getResourceCards(){
