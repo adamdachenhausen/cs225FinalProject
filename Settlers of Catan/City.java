@@ -79,6 +79,18 @@ public class City extends AnimatedGraphicsObject implements ImageObserver
         return new Point(x,y);
     }
 
+    public void update(){
+        if(possible && !city){
+            placed = true;
+            city = true;
+            possible = false;
+        }
+        else if(placed && city){
+            settlement = true;
+            possible = false;
+        }
+    }
+    
     public boolean imageUpdate(Image img, int infoflags, int x, int y,
     int width, int height) {
 
