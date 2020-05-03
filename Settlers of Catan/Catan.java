@@ -85,6 +85,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
     protected static boolean gameEnded = false;
 
+    protected boolean reset = false;
+
     protected static boolean longestRoad = false;
 
     protected static boolean largestArmy = false;
@@ -93,7 +95,14 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
     protected static int largestArmyAmt = 0;
 
-    protected boolean reset = false;
+    //These flags determine what action is selected
+    //with mouse pointer
+    protected boolean buildSettlement = false;
+    protected boolean buildCity = false;
+    protected boolean buildRoad = false;
+    protected boolean moveRobber = false;
+
+    protected Point pressPoint;
 
     // main panel with buttons for the game
     protected JPanel mainPanel;
@@ -251,8 +260,21 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      */
     @Override
     public void mousePressed(MouseEvent e) {
-
-        panel.repaint();
+       
+        //use boolean flags to determine if mouse listener is used to place
+        //gamepieces. 
+        if(buildSettlement){
+            pressPoint = e.getPoint();
+        }else if(buildCity){
+            pressPoint = e.getPoint();
+        }else if(buildRoad){
+            pressPoint = e.getPoint();
+        }else if(moveRobber){
+            pressPoint = e.getPoint();
+        }else{
+            //do nothing
+        }
+        
     }
 
     /**
@@ -264,21 +286,17 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     @Override
     public void mouseDragged(MouseEvent e) {
 
-        // = e.getPoint();
-
-        panel.repaint();
     }
 
     /**
-    Mouse release event handler to create a new BouncingGravityBall
-    centered at the release point, initial velocities depending on 
-    distance from press point.
+    Mouse release event handler to create a new point to place a gamepiece
+    centered at the release point.
 
     @param e mouse event info
      */
     @Override
     public void mouseReleased(MouseEvent e) {
-
+        pressPoint = e.getPoint();
         panel.repaint();
     }
 
@@ -407,7 +425,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
             displayBuildingCosts();
         }
         if(e.getSource().equals(continueButton)){
-            rollDialog();
+            //rollDialog();
+            tradeResourcesDialog();
         }
 
     }
@@ -593,12 +612,16 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
         //roll dice
         rollDialog();
+        if(roll == 7){
+            activateRobber();
+        }else{
+            //call distribute resource cards
+            //distribute resources *if not enough resources, none distributed
 
-        //whichever token/hex (the tokens number the hexes) is rolled
-        //any settlement on the border of that hex gets resources.
-        //Determine players with "activated hexes"
-
-        //distribute resources *if not enough resources, none distributed
+            //whichever token/hex (the tokens number the hexes) is rolled
+            //any settlement on the border of that hex gets resources.
+            //Determine players with "activated hexes"
+        }
 
         //offer trades
     }
@@ -768,7 +791,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * @param player2 Player trading with
      * @return 
      */
-    public void tradeResources(){
+    public void tradeResourcesDialog(){
         gamePhase = "Trading...";
         //trading can only happen with the active player on a turn
         String[] options = new String[]{"Yes","No"};
@@ -785,7 +808,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         }else if(answer == 1){
             buildDialog();
         }else{
-            tradeResources();
+            tradeResourcesDialog();
         }
         panel.repaint();
     }
@@ -799,6 +822,25 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      */
     public void swapCards(){
         //trading can only happen with the active player on a turn
+        gamePhase = "Trading...";
+        //trading can only happen with the active player on a turn
+        String[] options = new String[]{"Yes","No"};
+        int answer = JOptionPane.showOptionDialog(null,
+                "Which card would you like to trade?",
+                "Trade Selection interface",
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[1]);
+        if(answer == 0){
+            swapCards();
+        }else if(answer == 1){
+            buildDialog();
+        }else{
+            tradeResourcesDialog();
+        }
+        panel.repaint();
     }
 
     /**
@@ -823,7 +865,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         }else if(answer == 1){
             developmentDialog();
         }else{
-            tradeResources();
+            tradeResourcesDialog();
         }
         panel.repaint();
     }
@@ -899,14 +941,16 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     }
 
     /**
-     * Move the robber to a hex.
+     * Robber actions tree begins with several choices available for the player who
+     * rolled 7.
+     * 
      * Take action based on placement.
      *
      * @param a hex tile to move the robber to.
      * @return 
      */
-    public void activateRobber(HexTiles h){
-        //call method when dice roll = 7
+    public void activateRobber(){
+        moveRobberDialog();
 
         //anyone with more than 7 cards must discard extras to bank
 
@@ -925,9 +969,48 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * @param a hex tile to move the robber to.
      * @return 
      */
-    public void moveRobber(HexTiles h){
+    public void moveRobberDialog(){
         //move the robber to a different hex
+        String[] options = new String[]{"Yes","No"};
+        int answer = JOptionPane.showOptionDialog(null,
+                "Would you like to move the robber?",
+                "Building interface",
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[1]);
+        if(answer == 0){
+            moveRobber = true;
+            moveRobber();
+        }else if(answer == 1){
+            developmentDialog();
+        }else{
+            tradeResourcesDialog();
+        }
+        panel.repaint();
+    }
 
+    /**
+     * Move the robber to a hex.
+     * Take action based on placement.
+     *
+     * @param a hex tile to move the robber to.
+     * @return 
+     */
+    public void moveRobber(){
+        //move the robber to a different hex
+        String[] options = new String[]{"Ok"};
+        int answer = JOptionPane.showOptionDialog(null,
+                "Click on the hex tile where you want to move the robber.",
+                "Move robber interface",
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.OK_OPTION,
+                null,
+                options,
+                options[0]);
+
+        moveRobber = false;
     }
 
     /**
@@ -1068,7 +1151,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         }else if(answer == 1){
             developmentDialog();
         }else{
-            tradeResources();
+            tradeResourcesDialog();
         }
         panel.repaint();
     }
