@@ -12,15 +12,15 @@ import java.awt.Color;
  */
 public class Roads extends AnimatedGraphicsObject
 {
-    List<Point> roads;
+    List<Road> roads;
     public Roads(JComponent container){
         super(container);
-        roads = new ArrayList<Point>();
+        roads = new ArrayList<Road>();
         this.container = container;
     }
 
-    public void addLocation(Point p){
-        roads.add(p);
+    public void addRoad(Road r){
+        roads.add(r);
     }
 
     @Override
@@ -30,8 +30,8 @@ public class Roads extends AnimatedGraphicsObject
 
         g.setColor(Color.ORANGE);
 
-        for(Point l : roads){
-            g.fillOval(l.x,l.y,5,5);
+        for(Road r : roads){
+            r.paint(g);
         }
         //Set g back to the original color
         g.setColor(cur);
