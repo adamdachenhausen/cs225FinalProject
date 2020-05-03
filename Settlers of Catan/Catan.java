@@ -366,7 +366,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         buildSettlement = true;
         placeGamePiece("Road");
         buildRoad = true;
-        
+
         // while(turn <= 4){
         // for(int i = 0; i < 2; i++){
         // if(turn == 1){
@@ -809,6 +809,25 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     }
 
     /**
+     * Points for cities and roads are already defined. If a point is within 20 pixels
+     * of a predefined point, it counts for that point.
+     * 
+     *
+     * @param p a point to check if it is close enough to a defined point
+     * @param type of point to check against
+     * @return true if close, false otherwise
+     */
+    public boolean checkHitbox(Point p, String type){
+        boolean close = false;
+        if(type.equals("Road")){
+            for
+        }else{
+            
+        }
+        return close;
+    }
+
+    /**
      * Each player puts down a road and a settlement.
      * 
      * Continues in reverse order until every player puts down two 
@@ -820,12 +839,20 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * @return 
      */
     public void placeGamePiece(String pieceType){
-
+        GamePiece newPlacedPiece = null;
         //place settlements and cities on the corner of a hex
         if(pieceType.equals("Settlement")){
+            //run until the user clicks on a spot on the gameboard
             while(pressPoint == null){
-                
+
             }
+            for(int i = 0; i < player1Pieces.size(); i++){
+                if(player1Pieces.get(i).getType().equals(pieceType)){
+                    newPlacedPiece = player1Pieces.get(i);
+                    player1Pieces.get(i).setPlaced(true);
+                }
+            }
+
             //reset pressPoint for reuse
             pressPoint = null;
         }else if(pieceType.equals("City")){
@@ -834,7 +861,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
             pressPoint = null;
         }else if(pieceType.equals("Road")){
             //place road between two hexes (connected to the settlement); 
-            
+
             //reset pressPoint for reuse
             pressPoint = null;
         }

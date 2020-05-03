@@ -27,6 +27,7 @@ public class GamePiece  extends AnimatedGraphicsObject implements ImageObserver{
     Color c;
     Pieces p;
     boolean placed;
+    Point upperLeft;
     /**
      * Constructor for objects of class GamePieces
      */
@@ -38,6 +39,7 @@ public class GamePiece  extends AnimatedGraphicsObject implements ImageObserver{
         this.c = c;
         setPiece(type);
         placed = false;
+        upperLeft = new Point(0,0);
     }
 
     public void showGamePiece(){
@@ -47,10 +49,17 @@ public class GamePiece  extends AnimatedGraphicsObject implements ImageObserver{
     public boolean getPlaced(){
         return placed;
     }
-
-    public void setPlaced(boolean newPlaced){
+    
+        public void setPlaced(boolean newPlaced){
         placed = newPlaced;
     }
+    
+        public String getType(){
+        return type;
+    }
+    
+
+
 
     @Override
     public void paint(Graphics g){

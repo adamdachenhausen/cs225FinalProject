@@ -45,7 +45,7 @@ public class GameBoard extends AnimatedGraphicsObject
     private Polygon sea;
 
     protected CityLocations c;
-    
+
     protected Roads roads;
     public GameBoard(JComponent container, Point center){
         super(container);
@@ -70,7 +70,6 @@ public class GameBoard extends AnimatedGraphicsObject
 
         sea = Sea.createSea(center);
 
-        
 
     }
 
@@ -382,6 +381,20 @@ public class GameBoard extends AnimatedGraphicsObject
      */
     public Robber getRobber(){
         return robber;
+    }
+
+    /** Returns the robber object
+     *  @return the city locations
+     */
+    public CityLocations getCities(){
+        return c;
+    }
+
+    /** Returns the robber object
+     *  @return the roads
+     */
+    public Roads getRoads(){
+        return roads;
     }
 
 }
