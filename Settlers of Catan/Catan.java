@@ -823,11 +823,20 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
         //place settlements and cities on the corner of a hex
         if(pieceType.equals("Settlement")){
-            Se
+            while(pressPoint == null){
+                
+            }
+            //reset pressPoint for reuse
+            pressPoint = null;
         }else if(pieceType.equals("City")){
 
+            //reset pressPoint for reuse
+            pressPoint = null;
         }else if(pieceType.equals("Road")){
             //place road between two hexes (connected to the settlement); 
+            
+            //reset pressPoint for reuse
+            pressPoint = null;
         }
 
         panel.repaint();
