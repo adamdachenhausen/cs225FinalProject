@@ -296,23 +296,24 @@ public class HexTiles extends AnimatedGraphicsObject{
     }
 
     public ArrayList getRoads(){
-        ArrayList<Point> roads = new ArrayList(6);
+        ArrayList<Road> roads = new ArrayList(6);
         
-        roads.add(midPoint(pts[3],pts[4]));
-        roads.add(midPoint(pts[3],pts[2]));
+        //Add in type for each road
+        roads.add(new Road(container, pts[3],pts[4]));
+        roads.add(new Road(container, pts[3],pts[2]));
         
         
         if(locationType!=null && subType!=null){
             if(locationType.equals("CORNER")){
                 if(subType.equals("TOP")){
-                    roads.add(midPoint(pts[4],pts[5]));
-                    roads.add(midPoint(pts[1],pts[2]));
+                    roads.add(new Road(container, pts[4],pts[5]));
+                    roads.add(new Road(container, pts[1],pts[2]));
                 }
                 else if(subType.equals("BOTTOM")){
-                    roads.add(midPoint(pts[4],pts[5]));
-                    roads.add(midPoint(pts[5],pts[0]));
-                    roads.add(midPoint(pts[0],pts[1]));
-                    roads.add(midPoint(pts[1],pts[2]));
+                    roads.add(new Road(container, pts[4],pts[5]));
+                    roads.add(new Road(container, pts[5],pts[0]));
+                    roads.add(new Road(container, pts[0],pts[1]));
+                    roads.add(new Road(container, pts[1],pts[2]));
                 }
             }
         
