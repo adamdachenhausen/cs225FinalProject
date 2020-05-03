@@ -52,6 +52,8 @@ public class Player
     //arraylists to store cards
     protected ArrayList<DevelopmentCard> devCards;
     protected ArrayList<ResourceCard> resourceCards;
+    protected ArrayList<String> devHand;
+    protected ArrayList<String> resourceHand;
     /**
      * An example of a method - replace this comment with your own
      *
@@ -65,13 +67,21 @@ public class Player
         victoryPoints = 0;
         devCards = new ArrayList<DevelopmentCard>();
         resourceCards = new ArrayList<ResourceCard>();
+        resourceHand = new ArrayList<String>();
+        devHand = new ArrayList<String>();
         cities = 0;
         settlements = 0;
         roads = 0;
     }
-        public void addResourceCard(ResourceCard rc){
-        resourceCards.add(rc);
 
+    public void addResourceCard(ResourceCard rc){
+        String rcType = rc.getType();
+
+        //adds resource card to hand
+        resourceCards.add(rc);
+        if(!resourceHand.contains(rcType)){
+            resourceHand.add(rcType);
+        }
     }
 
     public ResourceCard removeResourceCard(String rcType){
@@ -87,6 +97,14 @@ public class Player
             }
             i++;
         }
+
+        //remove the card from rescource card options if it is no longer there.
+        if(removed != null){
+            if(!resourceHand.contains(rcType)){
+                resourceHand.remove(rcType);
+            }
+        }
+
         return removed;
     }
 
@@ -117,6 +135,7 @@ public class Player
         }
         return found;
     }
+
     public DevelopmentCard getDevelopmentCard(String rcType){
         DevelopmentCard foundCard = null;
         boolean found = false;
@@ -144,27 +163,55 @@ public class Player
         }
         return found;
     }
-    
-        public void addDevelopmentCard(DevelopmentCard dc){
+
+    public void addDevelopmentCard(DevelopmentCard dc){
+        String dcType = dc.getType();
+
+        //adds development card to hand
+        devCards.add(dc);
+
+        if(!devHand.contains(dcType)){
+            devHand.add(dcType);
+        }
+
         devCards.add(dc);
 
     }
 
-    public DevelopmentCard removeDevelopmentCard(String rcType){
+    public DevelopmentCard removeDevelopmentCard(String dcType){
         DevelopmentCard removed = null;
         boolean found = false;
         int i = 0;
+        //get type to check card types held by player
 
         while(i > devCards.size() && !found){
-            if(rcType.equals(devCards.get(i).getType())){
+            if(dcType.equals(devCards.get(i).getType())){
                 found = true;
                 removed =devCards.get(i);
                 devCards.remove(i);
             }
             i++;
         }
+
+        //remove the card from dev card options if it is no longer there.
+        if(removed != null){
+            if(!devHand.contains(dcType)){
+                devHand.remove(dcType);
+            }
+        }
         return removed;
     }
+
+    public ArrayList<String> getDevelopmentHand(){
+
+        return devHand;
+    }
+
+    public ArrayList<String> getRescourceHand(){
+
+        return resourceHand;
+    }
+
     public int getPlayerNumber(){
 
         return playerNumber;

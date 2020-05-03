@@ -625,6 +625,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
             //whichever token/hex (the tokens number the hexes) is rolled
             //any settlement on the border of that hex gets resources.
             //Determine players with "activated hexes"
+            tradeResourcesDialog();
         }
 
         //offer trades
@@ -695,6 +696,55 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         roll = die1.rollDice();
         roll += die2.rollDice();
 
+    }
+
+    /**
+     * Robber actions tree begins with several choices available for the player who
+     * rolled 7.
+     * 
+     * Take action based on placement.
+     *
+     * @param a hex tile to move the robber to.
+     * @return 
+     */
+    public void activateRobber(){
+        moveRobberDialog();
+
+        //anyone with more than 7 cards must discard extras to bank
+
+        //move robber to different hex (call method)
+
+        //can steal one card from player with a settlement touching 
+        //hex robber was placed on
+
+        //no resources are distributed from hex robber is touching
+    }
+
+    /**
+     * Move the robber to a hex.
+     * Take action based on placement.
+     *
+     * @param a hex tile to move the robber to.
+     * @return 
+     */
+    public void moveRobberDialog(){
+        //move the robber to a different hex
+        String[] options = new String[]{"Yes","No"};
+        int answer = JOptionPane.showOptionDialog(null,
+                "Would you like to move the robber?",
+                "Building interface",
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[1]);
+        if(answer == 0){
+            moveRobber = true;
+            moveRobber();
+        }else if(answer == 1){
+            tradeResourcesDialog();
+        }
+        panel.repaint();
     }
 
     /**
@@ -867,7 +917,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         if(answer == 0){
             swapCards();
         }else if(answer == 1){
-            developmentDialog();
+            buyDevelopmentDialog();
         }else{
             tradeResourcesDialog();
         }
@@ -944,56 +994,6 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
     }
 
-    /**
-     * Robber actions tree begins with several choices available for the player who
-     * rolled 7.
-     * 
-     * Take action based on placement.
-     *
-     * @param a hex tile to move the robber to.
-     * @return 
-     */
-    public void activateRobber(){
-        moveRobberDialog();
-
-        //anyone with more than 7 cards must discard extras to bank
-
-        //move robber to different hex (call method)
-
-        //can steal one card from player with a settlement touching 
-        //hex robber was placed on
-
-        //no resources are distributed from hex robber is touching
-    }
-
-    /**
-     * Move the robber to a hex.
-     * Take action based on placement.
-     *
-     * @param a hex tile to move the robber to.
-     * @return 
-     */
-    public void moveRobberDialog(){
-        //move the robber to a different hex
-        String[] options = new String[]{"Yes","No"};
-        int answer = JOptionPane.showOptionDialog(null,
-                "Would you like to move the robber?",
-                "Building interface",
-                JOptionPane.YES_NO_CANCEL_OPTION,
-                JOptionPane.QUESTION_MESSAGE,
-                null,
-                options,
-                options[1]);
-        if(answer == 0){
-            moveRobber = true;
-            moveRobber();
-        }else if(answer == 1){
-            developmentDialog();
-        }else{
-            tradeResourcesDialog();
-        }
-        panel.repaint();
-    }
 
     /**
      * Move the robber to a hex.
@@ -1016,6 +1016,49 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
         moveRobber = false;
     }
+
+    /**
+     * Asks player if they would like to use a development card.
+     * If no, returns to the turn (which ends this player's turn).
+     */
+    public void useDevelopmentDialog(){
+        String[] options = new String[]{"Yes","No"};
+        int answer = JOptionPane.showOptionDialog(null,
+                "Would you like to use a development card?",
+                "Use Development card interface",
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[1]);
+        if(answer == 0){
+            selectDevelopmentDialog();
+        }
+        panel.repaint();
+    }
+
+    /**
+     * Asks player if they would like to use a development card.
+     * If no, returns to the turn (which ends this player's turn).
+     */
+    public void selectDevelopmentDialog(){
+        String[] options = new String[]{"Yes","No"};
+        int answer = JOptionPane.showOptionDialog(null,
+                "Would you like to use a development card?",
+                "Use Development card interface",
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[1]);
+
+        String choice = "";
+        if(answer == 0){
+            useDevelopmentCard(choice);
+        }
+        panel.repaint();
+    }
+
 
     /**
      * Removes card for circulation and apply card benefit.
@@ -1067,10 +1110,10 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                 i++;
             }
         }
-        //add card removed from player hand to resource card deck
-        if(dc != null){
-            developmentDeck.addCard(dc);
-        }
+        //card is not added back to development deck
+        // if(dc != null){
+        // developmentDeck.addCard(dc);
+        // }
     }
 
     /**
@@ -1136,7 +1179,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * @param player2 Player trading with
      * @return 
      */
-    public void developmentDialog(){
+    public void buyDevelopmentDialog(){
         String[] options = new String[]{"Yes","No"};
         int answer = JOptionPane.showOptionDialog(null,
                 "Would you like to buy a development card?",
@@ -1153,12 +1196,13 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
             useResourceCard("Wool");
             drawDevelopmentCard();
         }else if(answer == 1){
-            developmentDialog();
-        }else{
-            tradeResourcesDialog();
+            useDevelopmentDialog();
         }
         panel.repaint();
     }
+
+
+
 
     /**
      * Draw a card from the development card bank.
