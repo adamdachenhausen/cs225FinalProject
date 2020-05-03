@@ -104,6 +104,12 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
     //The delay in between shots in ms, so the user can't spam
     public static int SHOT_DELAY = 750;
 
+    protected boolean leftDown;
+
+    protected boolean rightDown;
+
+    protected boolean spaceDown;
+
     /**
      * Constructor, which simply calls the superclass constructor
      * with an appropriate window label and dimensions.
@@ -113,6 +119,10 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         super("Space Invaders", FRAME_WIDTH, FRAME_HEIGHT);
         lastShotTime = System.currentTimeMillis();
         //alienShip = new AlienShip(panel, start);
+
+        leftDown = false;
+        rightDown = false;
+        spaceDown = false;
     }
 
     /**
@@ -479,7 +489,24 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
     @param e KeyEvent for this key released
      */
     @Override
-    public void keyReleased(KeyEvent e) { }
+    public void keyReleased(KeyEvent e) {
+        if(gameStart){
+            if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A) {
+                leftDown = false;
+            }
+            else if (e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D) {
+                rightDown = false;
+            }else if(e.getKeyCode() == KeyEvent.VK_SPACE){
+                spaceDown = false;
+            }
+            else{
+                e.consume();
+            }
+        }else{
+            e.consume();   
+        }
+
+    }
 
     /**
      * Handle the arrow key press, which results in motion of the ball.
@@ -487,55 +514,54 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
      * @param e the KeyEvent to determine direction
      */
     public void keyPressed(KeyEvent e) {
-        new Thread(new Runnable()
-            {
-                public void run(){
-                    //Source for consume(): https://docs.oracle.com/javase/7/docs/api/java/awt/event/InputEvent.html#consume()
-                    if(gameStart){
-                        if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A) {
-                            if(player.getPosition().x >= 10) {
-                                player.getPosition().translate(-MOVE_BY, 0);
-                                // if(aliens.size() == 0 && alienShips.size() == 0){
-                                // gameEnded = true;
-                                // }
-                            }
-                            //move ship
-                        }
-                        else if (e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D) {
-                            int pos = player.getPosition().x;
-                            if(pos <= WIDTH_MAX - SHIP_SIZE){
-                                player.getPosition().translate(MOVE_BY, 0);
 
-                            }
-                            // if(aliens.size() == 0 && alienShips.size() == 0){
-                            // gameEnded = true;
-                            // }
-                            //move ship
-                        }else if(e.getKeyCode() == KeyEvent.VK_SPACE){
-                            if(System.currentTimeMillis() > lastShotTime + SHOT_DELAY){
-                                lastShotTime = System.currentTimeMillis();
-                                //fire cannon code (call method)
-                                playSound("shoot.wav");
-                                Point p = player.getPosition();
-                                int x = (p.x + 48/2) - (4/2);
-                                int y = p.y - (4 + 6);
-                                Laser laser = new Laser(panel, new Point(x,y), "PLAYER");
-                                lasers.add(laser);
-                                laser.start();
-                                // if(aliens.size() == 0 && alienShips.size() == 0){
-                                // gameEnded = true;
-                                // }
-                            }
-                        }
-                        else{
-                            e.consume();
-                        }
-                    }else{
-                        e.consume();   
-                    }
-                    // trigger paint so we can see the ship in its new location
-                    panel.repaint();
-                }}).start();
+        //Source for consume(): https://docs.oracle.com/javase/7/docs/api/java/awt/event/InputEvent.html#consume()
+        if(gameStart){
+            if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A) {
+                leftDown = true;
+                playerMoveFire();
+            }
+            else if (e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D) {
+                rightDown = true;
+                playerMoveFire();
+            }else if(e.getKeyCode() == KeyEvent.VK_SPACE){
+                spaceDown = true;
+                playerMoveFire();
+            }
+            else{
+                e.consume();
+            }
+        }else{
+            e.consume();   
+        }
+        // trigger paint so we can see the ship in its new location
+        panel.repaint();
+    }
+
+    protected void playerMoveFire(){
+        if(leftDown){
+            if(player.getPosition().x >= 10) {
+                player.getPosition().translate(-MOVE_BY, 0);
+            }
+        }
+        if(rightDown){
+            int pos = player.getPosition().x;
+            if(pos <= WIDTH_MAX - SHIP_SIZE){
+                player.getPosition().translate(MOVE_BY, 0);
+            }
+        }
+        if(spaceDown){
+            if(System.currentTimeMillis() > lastShotTime + SHOT_DELAY){
+                lastShotTime = System.currentTimeMillis();
+                playSound("shoot.wav");
+                Point p = player.getPosition();
+                int x = (p.x + 48/2) - (4/2);
+                int y = p.y - (4 + 6);
+                Laser laser = new Laser(panel, new Point(x,y), "PLAYER");
+                lasers.add(laser);
+                laser.start();
+            }
+        }
     }
 
     /**
