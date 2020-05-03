@@ -26,6 +26,7 @@ public class ResourceCard extends AnimatedGraphicsObject implements ImageObserve
     private static Image lumber;
     private static Image wool;
 
+    private String type;
     private Resource cardType;
     /**
      * Constructor for objects of class ResourceCards
@@ -33,12 +34,18 @@ public class ResourceCard extends AnimatedGraphicsObject implements ImageObserve
     public ResourceCard(JComponent container, Resource r, Point upperLeft){
         super(container);
         cardType = r;
+
         this.upperLeft = upperLeft;
         visible = true;
+        type = setCardType();
     }
 
     public void showCard(){
         visible = true;
+    }
+
+    public String getType(){
+        return type;
     }
 
     public Resource getCardType(){
@@ -113,10 +120,9 @@ public class ResourceCard extends AnimatedGraphicsObject implements ImageObserve
             int x = 0;
             int y = 0;
 
-
             g.setColor(Color.WHITE);
             g.setFont(new Font("TimesRoman", Font.BOLD, 15));
-                        FontMetrics fm = g.getFontMetrics();
+            FontMetrics fm = g.getFontMetrics();
             switch(cardType){
                 case BRICKS:
                 cardString = "Brick";
@@ -154,6 +160,38 @@ public class ResourceCard extends AnimatedGraphicsObject implements ImageObserve
                 break;
             }
         }
+    }
+
+    public String setCardType(){
+        String cardString;
+        switch(cardType){
+            case BRICKS:
+            cardString = "Brick";
+            type = cardString;
+
+            break;
+
+            case WOOD:
+            cardString = "Lumber";
+            type = cardString;
+            break;
+
+            case ORE:
+            cardString = "Ore";
+            type = cardString;
+            break;
+
+            case WHEAT:
+            cardString = "Grain";
+            type = cardString;
+            break;
+
+            case WOOL:
+            cardString = "Wool";
+            type = cardString;
+            break;
+        }
+        return type;
     }
 
     public boolean imageUpdate(Image img, int infoflags, int x, int y,

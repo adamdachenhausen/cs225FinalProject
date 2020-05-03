@@ -936,25 +936,112 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * @param 
      * @return 
      */
-    public void useDevelopmentCard(){
-        //card types
-
-        //knight: move robber, don't discard the card
+    public void useDevelopmentCard(String dType){
+        DevelopmentCard dc = null;
+        boolean found = false;
+        int i = 0;
+        //remove card from player's hand
+        if(turn == 1){
+            while(i < players.get(0).getDevelopmentCards().size() && !found){
+                if(players.get(0).getDevelopmentCards().get(i).getType().equals(dType)){
+                    dc = players.get(0).removeDevelopmentCard(dType);
+                    found = true;
+                } 
+                i++;
+            }
+        }else if(turn == 2){
+            i=0;
+            found = false;
+            while(i < players.get(1).getDevelopmentCards().size() && !found){
+                if(players.get(0).getDevelopmentCards().get(i).getType().equals(dType)){
+                    dc = players.get(0).removeDevelopmentCard(dType);
+                    found = true;
+                } 
+                i++;
+            }
+        }else if(turn == 3){
+            i=0;
+            found = false;
+            while(i < players.get(2).getDevelopmentCards().size() && !found){
+                if(players.get(0).getDevelopmentCards().get(i).getType().equals(dType)){
+                    dc = players.get(0).removeDevelopmentCard(dType);
+                    found = true;
+                } 
+                i++;
+            }
+        }else{
+            i=0;
+            found = false;
+            while(i < players.get(3).getDevelopmentCards().size() && !found){
+                if(players.get(0).getDevelopmentCards().get(i).getType().equals(dType)){
+                    dc = players.get(0).removeDevelopmentCard(dType);
+                    found = true;
+                } 
+                i++;
+            }
+        }
+        //add card removed from player hand to resource card deck
+        if(dc != null){
+            developmentDeck.addCard(dc);
+        }
     }
 
     /**
-     * Use card to build.
+     * Use resource card
      *
      * @param 
      * @return 
      */
-    public void useResourceCard(){
-        //move the robber to a different hex
-
-        //if players have more than 7 resource cards must remove them
-
-        //
+    public void useResourceCard(String rType){
+        ResourceCard rc = null;
+        boolean found = false;
+        int i = 0;
+        //remove card from player's hand
+        if(turn == 1){
+            while(i < players.get(0).getResourceCards().size() && !found){
+                if(players.get(0).getResourceCards().get(i).getType().equals(rType)){
+                    rc = players.get(0).removeResourceCard(rType);
+                    found = true;
+                } 
+                i++;
+            }
+        }else if(turn == 2){
+            i=0;
+            found = false;
+            while(i < players.get(1).getResourceCards().size() && !found){
+                if(players.get(0).getResourceCards().get(i).getType().equals(rType)){
+                    rc = players.get(0).removeResourceCard(rType);
+                    found = true;
+                } 
+                i++;
+            }
+        }else if(turn == 3){
+            i=0;
+            found = false;
+            while(i < players.get(2).getResourceCards().size() && !found){
+                if(players.get(0).getResourceCards().get(i).getType().equals(rType)){
+                    rc = players.get(0).removeResourceCard(rType);
+                    found = true;
+                } 
+                i++;
+            }
+        }else{
+            i=0;
+            found = false;
+            while(i < players.get(3).getResourceCards().size() && !found){
+                if(players.get(0).getResourceCards().get(i).getType().equals(rType)){
+                    rc = players.get(0).removeResourceCard(rType);
+                    found = true;
+                } 
+                i++;
+            }
+        }
+        //add card removed from player hand to resource card deck
+        if(rc != null){
+            resourceDeck.addCard(rc);
+        }
     }
+
     /**
      * Players build to develop your empire
      *
@@ -973,7 +1060,10 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                 options,
                 options[1]);
         if(answer == 0){
-            useResourceCard();
+            //1 ore, 1 wool, 1 grain
+            useResourceCard("Ore");
+            useResourceCard("Grain");
+            useResourceCard("Wool");
             drawDevelopmentCard();
         }else if(answer == 1){
             developmentDialog();
@@ -982,6 +1072,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         }
         panel.repaint();
     }
+
     /**
      * Draw a card from the resource card bank.
      *

@@ -23,8 +23,8 @@ public class DevelopmentDeck extends AnimatedGraphicsObject{
     public static final int YEAR_PLENTY = 2;
     public static final int MONOPOLY = 2;
     public static final int VICTORY_PT_CARD = 5;
-    
-        //temporary start point to draw the card
+
+    //temporary start point to draw the card
     private Point cardStartPoint = new Point(500,500);
 
     /**
@@ -37,6 +37,55 @@ public class DevelopmentDeck extends AnimatedGraphicsObject{
 
     public ArrayList getList(){
         return developmentDeck;    
+    }
+
+    public void addCard(DevelopmentCard dc){
+        developmentDeck.add(dc);
+
+    }
+
+    public DevelopmentCard removeCard(String dcType){
+        DevelopmentCard removed = null;
+        boolean found = false;
+        int i = 0;
+
+        while(i > developmentDeck.size() && !found){
+            if(dcType.equals(developmentDeck.get(i).getType())){
+                found = true;
+                removed =developmentDeck.get(i);
+                developmentDeck.remove(i);
+            }
+            i++;
+        }
+        return removed;
+    }
+
+    public DevelopmentCard getCard(String rcType){
+        DevelopmentCard removed = null;
+        boolean found = false;
+        int i = 0;
+
+        while(i > developmentDeck.size() && !found){
+            if(rcType.equals(developmentDeck.get(i).getType())){
+                found = true;
+                removed =developmentDeck.get(i);
+            }
+            i++;
+        }
+        return removed;    
+    }
+
+    public boolean searchCards(String searchType){
+        boolean found = false;
+        int i = 0;
+
+        while(i > developmentDeck.size() && !found){
+            if(searchType.equals(developmentDeck.get(i).getType())){
+                found = true;
+            }
+            i++;
+        }
+        return found;
     }
 
     @Override
