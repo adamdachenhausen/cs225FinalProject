@@ -31,6 +31,10 @@ public class GameBoard extends AnimatedGraphicsObject
     //This is the polygon that constructs the hexagon sea
     public static final int SEA_SIDE_LENGTH = OFFSET * BOARD_WIDTH;
 
+    //The amount of error that the user can be off of an object's 
+    //exact point and still place that object
+    public static final int USER_ERROR_TOL = 5;
+    
     private JPanel panel;
     protected HexTiles[][] board;
     private Stack<Resource> r;
@@ -73,6 +77,7 @@ public class GameBoard extends AnimatedGraphicsObject
         sea = Sea.createSea(center);
 
     }
+
     /** Manually created board of hexTiles
      *  
      */
@@ -404,4 +409,29 @@ public class GameBoard extends AnimatedGraphicsObject
         return locs;
     }
 
+    /** Event handler for when a user clicks on the panel
+     *  Since road midpoints and city locations have to be farther than
+     *  USER_ERROR_TOL, running through an extra loop yields nothing
+     * 
+     *  @param p The point of click
+     */
+    public void handleClick(Point p){
+        List<City> citiesList = c.getLocations();
+        List<Road> roadsList = roads.getRoadList();
+
+        for(City c : citiesList){
+            if(p.distance(c.getCityPoint())<=USER_ERROR_TOL){
+                c.update();
+                this.c.removeLocation(c);
+                break;
+            }
+        }
+        for(Road r : roadsList){
+            if(p.distance(r.midPoint())<=USER_ERROR_TOL){
+                r.update();
+                this.roads.removeRoad(r);
+                break;
+            }
+        }
+    }
 }
