@@ -1040,7 +1040,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
             i=0;
             found = false;
             while(i < players.get(1).getDevelopmentCards().size() && !found){
-                if(players.get(0).getDevelopmentCards().get(i).getType().equals(dType)){
+                if(players.get(1).getDevelopmentCards().get(i).getType().equals(dType)){
                     dc = players.get(0).removeDevelopmentCard(dType);
                     found = true;
                 } 
@@ -1050,7 +1050,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
             i=0;
             found = false;
             while(i < players.get(2).getDevelopmentCards().size() && !found){
-                if(players.get(0).getDevelopmentCards().get(i).getType().equals(dType)){
+                if(players.get(2).getDevelopmentCards().get(i).getType().equals(dType)){
                     dc = players.get(0).removeDevelopmentCard(dType);
                     found = true;
                 } 
@@ -1060,7 +1060,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
             i=0;
             found = false;
             while(i < players.get(3).getDevelopmentCards().size() && !found){
-                if(players.get(0).getDevelopmentCards().get(i).getType().equals(dType)){
+                if(players.get(3).getDevelopmentCards().get(i).getType().equals(dType)){
                     dc = players.get(0).removeDevelopmentCard(dType);
                     found = true;
                 } 
@@ -1096,7 +1096,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
             i=0;
             found = false;
             while(i < players.get(1).getResourceCards().size() && !found){
-                if(players.get(0).getResourceCards().get(i).getType().equals(rType)){
+                if(players.get(1).getResourceCards().get(i).getType().equals(rType)){
                     rc = players.get(0).removeResourceCard(rType);
                     found = true;
                 } 
@@ -1106,7 +1106,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
             i=0;
             found = false;
             while(i < players.get(2).getResourceCards().size() && !found){
-                if(players.get(0).getResourceCards().get(i).getType().equals(rType)){
+                if(players.get(2).getResourceCards().get(i).getType().equals(rType)){
                     rc = players.get(0).removeResourceCard(rType);
                     found = true;
                 } 
@@ -1116,7 +1116,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
             i=0;
             found = false;
             while(i < players.get(3).getResourceCards().size() && !found){
-                if(players.get(0).getResourceCards().get(i).getType().equals(rType)){
+                if(players.get(3).getResourceCards().get(i).getType().equals(rType)){
                     rc = players.get(0).removeResourceCard(rType);
                     found = true;
                 } 
@@ -1173,9 +1173,36 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      *
      * if player has a city, gets two resource cards, else gets one card
      */
-    public void drawResourceCard(){
+    public void drawResourceCard(String rType){
+        ResourceCard rc = null;
+        boolean found = false;
+        int i = 0;
+
+        //add card removed from player hand to resource card deck
+        if(rc != null){
+            rc = resourceDeck.removeCard(rType);
+        }
+        //remove card from player's hand
+        if(turn == 1){
+            if(rc != null){
+                players.get(0).addResourceCard(rc);
+            }
+        }else if(turn == 2){
+            if(rc != null){
+                players.get(1).addResourceCard(rc);
+            }
+        }else if(turn == 3){
+            if(rc != null){
+                players.get(2).addResourceCard(rc);
+            }
+        }else{
+            if(rc != null){
+                players.get(3).addResourceCard(rc);
+            }
+        }
 
     }
+
     /**
      * Check victory points scored by each player.
      *
