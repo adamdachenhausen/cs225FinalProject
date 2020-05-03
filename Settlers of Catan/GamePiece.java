@@ -100,6 +100,12 @@ public class GamePiece  extends AnimatedGraphicsObject implements ImageObserver{
 
     }
 
+        public String getPieceType(){
+        return type;
+    }
+    
+    
+    
     @Override
     public void run(){
 
