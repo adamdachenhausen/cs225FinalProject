@@ -8,7 +8,8 @@ import javax.swing.*;
 import javax.swing.event.*;
 import java.util.Random;
 /**
- * Write a description of class tokenList here.
+ * Represents a stack of tokens, so that they can be randomized and easily handed
+ * out.
  *
  * @author Kate Nelligan, Lindsay Clark, Adam Dachenhausen
  * @version Spring 2020
@@ -40,7 +41,7 @@ public class TokenStack extends AnimatedGraphicsObject{
         //upperleft will change with call for placeToken();
         upperLeft = new Point(500,500);
     }
-    
+
     /**
      * Constructor for objects of class tokenList
      */
@@ -51,11 +52,13 @@ public class TokenStack extends AnimatedGraphicsObject{
         this.upperLeft = upperLeft;
     }
 
+    /** Returns the stack of tokens
+     *  @return the stack of tokens
+     */
     public Stack getList(){
         return tokenList;    
     }
 
-    
     /** Populates the r stack with exact number of each development card
      *  Then shuffles the stack, so when items are popped, they are random
      */
@@ -63,7 +66,6 @@ public class TokenStack extends AnimatedGraphicsObject{
         //Add everything to tokens
         //1 and 12 only get one token
         int tokenValue = 1;
-
 
         //need to fix upperleft call a place token method here
         //place token takes hex upperleft as input to place each token
@@ -73,11 +75,11 @@ public class TokenStack extends AnimatedGraphicsObject{
                 tokenList.push(t);
             }else if(tokenValue == 7){
                 //do nothing (maybe create robber here?)
-                
+
             }else{
                 for(int i = 0; i < 2; i++){
-                  Tokens t = new Tokens(container, upperLeft, tokenValue);  
-                  tokenList.push(t);
+                    Tokens t = new Tokens(container, upperLeft, tokenValue);  
+                    tokenList.push(t);
                 }
             }
 
@@ -86,8 +88,8 @@ public class TokenStack extends AnimatedGraphicsObject{
 
         Collections.shuffle(tokenList);
     }
-    
-        public void startTokens(){
+
+    public void startTokens(){
         for(Tokens t: tokenList){
             t.start();
         }
