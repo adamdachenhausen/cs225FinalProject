@@ -35,9 +35,9 @@ public class Player
     protected boolean turn;
 
     // Gamepices for game
-    protected int cities = 0;
-    protected int settlements = 0;
-    protected int roads = 0;
+    protected int cities;
+    protected int settlements;
+    protected int roads;
 
     //variables based on development cards
     protected int victoryPoints;
@@ -65,6 +65,9 @@ public class Player
         victoryPoints = 0;
         devCards = new ArrayList<DevelopmentCard>();
         resourceCards = new ArrayList<ResourceCard>();
+        cities = 0;
+        settlements = 0;
+        roads = 0;
     }
 
     public int getPlayerNumber(){
@@ -136,8 +139,25 @@ public class Player
         return dCards;
     }
 
-    public ArrayList<ResourceCard> getResourceCards(){
+    public String getPiecesToString(){
+        return ("Settlements: " + settlements + ", Cities: " + cities + ", Roads: " + roads);
+    }
 
+    public String getColorToString(){
+        String colString = "";
+        if(getColor().equals(Color.RED)){
+            colString = "Red";
+        }else if(getColor().equals(Color.WHITE)){
+            colString = "White";
+        }else if(getColor().equals(Color.ORANGE)){
+            colString = "Orange";
+        }else if(getColor().equals(Color.BLUE)){
+            colString = "Blue";
+        }
+        return colString;
+    }
+
+    public ArrayList<ResourceCard> getResourceCards(){
         return resourceCards;
     }
 

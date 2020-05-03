@@ -106,10 +106,9 @@ public class StatusPane extends AnimatedGraphicsObject implements ImageObserver{
         g.drawString(currentRoll, x3, y3);
 
         //player1Info
-        String p1Status = "Player 1 " +"("+ p.get(0).getColor() +")" + " points: " + p.get(0).getVictoryPoints();
-        //String p1Status = "Brick9: , Lumber9: , Ore9: , Wheat9: , Sheep9: " + p.get(0).getVictoryPoints();
+        String p1Status = "Player 1 " +"("+ p.get(0).getColorToString() +")" + " points: " + p.get(0).getVictoryPoints();
         int x4 = (upperLeft.x + 3);
-        int y4 = (y3 + 20);
+        int y4 = (y3 + 35);
         g.drawString(p1Status, x4, y4);
 
         //player1cards 
@@ -117,39 +116,88 @@ public class StatusPane extends AnimatedGraphicsObject implements ImageObserver{
         String p1cards;
         p1cards = p.get(0).getResourceToString();
         int x5 = (upperLeft.x + 3);
-        int y5 = (y3 + 20);
+        int y5 = (y4 + 20);
         g.drawString(p1cards, x5, y5);
 
-        //player1pieces
+        //player1cards 
         g.setFont(new Font("TimesRoman", Font.BOLD, 12));
         String p1pieces;
-        p1cards = p.get(0).getResourceToString();
-        //int x5 = (upperLeft.x + 3);
-        //int y5 = (y3 + 20);
-        g.drawString(p1cards, x5, y5);
+        p1pieces = p.get(0).getPiecesToString();
+        int x6 = (upperLeft.x + 3);
+        int y6 = (y5 + 20);
+        g.drawString(p1pieces, x6, y6);
+
 
         //player2Info
         g.setFont(new Font("TimesRoman", Font.BOLD, 15));
-        String p2Status = "Player 2 points: " + p.get(1).getVictoryPoints();
-        int x6 = (upperLeft.x + 3);
-        int y6 = (y4 + 20);
-        g.drawString(p2Status, x6, y6);
+        String p2Status = "Player 2 points" +"("+ p.get(1).getColorToString() +")" + " points: " + p.get(1).getVictoryPoints();
+        int x7 = (upperLeft.x + 3);
+        int y7 = (y6 + 35);
+        g.drawString(p2Status, x7, y7);
+
+        //player2cards 
+        g.setFont(new Font("TimesRoman", Font.BOLD, 12));
+        String p2cards;
+        p1cards = p.get(0).getResourceToString();
+        int x8 = (upperLeft.x + 3);
+        int y8 = (y7 + 20);
+        g.drawString(p1cards, x8, y8);
+
+        //player2pieces
+        g.setFont(new Font("TimesRoman", Font.BOLD, 12));
+        String p2pieces;
+        p2pieces = p.get(0).getPiecesToString();
+        int x9 = (upperLeft.x + 3);
+        int y9 = (y8 + 20);
+        g.drawString(p2pieces, x9, y9);
 
         //player3Info 
         g.setFont(new Font("TimesRoman", Font.BOLD, 15));
-        String p3Status = "Player 3 points: " + p.get(2).getVictoryPoints();
-        //int x6 = (upperLeft.x + 3);
-        //int y6 = (y5 + 20);
-        g.drawString(p3Status, x6, y6);
+        String p3Status = "Player 3 points" +"("+ p.get(2).getColorToString() +")" + " points: " + p.get(2).getVictoryPoints();
+        int x10 = (upperLeft.x + 3);
+        int y10 = (y9 + 35);
+        g.drawString(p3Status, x10, y10);
+
+        //player3cards 
+        g.setFont(new Font("TimesRoman", Font.BOLD, 12));
+        String p3cards;
+        p3cards = p.get(0).getResourceToString();
+        int x11 = (upperLeft.x + 3);
+        int y11 = (y10 + 20);
+        g.drawString(p3cards, x11, y11);
+
+        //player3pieces
+        g.setFont(new Font("TimesRoman", Font.BOLD, 12));
+        String p3pieces;
+        p3pieces = p.get(0).getPiecesToString();
+        int x12 = (upperLeft.x + 3);
+        int y12 = (y11 + 20);
+        g.drawString(p3pieces, x12, y12);
 
         //player4Info 
         g.setFont(new Font("TimesRoman", Font.BOLD, 15));
-        String p4Status = "Player 4 points: " + p.get(3).getVictoryPoints();
-        int x7 = (upperLeft.x + 3);
-        int y7 = (y6 + 20);
-        g.drawString(p4Status, x7, y7);
+        String p4Status = "Player 4 points" +"("+ p.get(3).getColorToString() +")" + " points: " + p.get(3).getVictoryPoints();
+        int x13 = (upperLeft.x + 3);
+        int y13 = (y12 + 35);
+        g.drawString(p4Status, x13, y13);
 
+        //player1cards 
         g.setFont(new Font("TimesRoman", Font.BOLD, 12));
+        String p4cards;
+        p4cards = p.get(0).getResourceToString();
+        int x14 = (upperLeft.x + 3);
+        int y14 = (y13 + 20);
+        g.drawString(p4cards, x14, y14);
+
+        //player1cards 
+        g.setFont(new Font("TimesRoman", Font.BOLD, 12));
+        String p4pieces;
+        p4pieces = p.get(0).getPiecesToString();
+        int x15 = (upperLeft.x + 3);
+        int y15 = (y14 + 20);
+        g.drawString(p4pieces, x15, y15);
+
+
         container.repaint();
         //Player Instructions text
     }
