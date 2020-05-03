@@ -26,6 +26,7 @@ public class GamePiece  extends AnimatedGraphicsObject implements ImageObserver{
     boolean visible;
     Color c;
     Pieces p;
+    boolean placed;
     /**
      * Constructor for objects of class GamePieces
      */
@@ -36,10 +37,19 @@ public class GamePiece  extends AnimatedGraphicsObject implements ImageObserver{
         visible = false;
         this.c = c;
         setPiece(type);
+        placed = false;
     }
 
     public void showGamePiece(){
         visible = true;
+    }
+
+    public boolean getPlaced(){
+        return placed;
+    }
+
+    public void setPlaced(boolean newPlaced){
+        placed = newPlaced;
     }
 
     @Override
@@ -66,8 +76,8 @@ public class GamePiece  extends AnimatedGraphicsObject implements ImageObserver{
         // }
         // //paint text that describes card type
     }
-    
-        /** Populates the r stack with exact number of each development card
+
+    /** Populates the r stack with exact number of each development card
      *  Then shuffles the stack, so when items are popped, they are random
      */
     public void setPiece(String s){
@@ -100,11 +110,10 @@ public class GamePiece  extends AnimatedGraphicsObject implements ImageObserver{
 
     }
 
-        public String getPieceType(){
+    public String getPieceType(){
         return type;
     }
-    
-    
+
     
     @Override
     public void run(){

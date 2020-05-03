@@ -362,19 +362,23 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
         //Set turn to first player and place first two settlements
         turn = 1;
-
-        while(turn <= 4){
-            for(int i = 0; i < 2; i++){
-                if(turn == 1){
-                    placeGamePiece("Settlement");
-                    placeGamePiece("Road");
-                }else{
-                    autoPlacePiece("Settlement", turn);
-                    autoPlacePiece("Road", turn);
-                }                
-            }
-            turn++;
-        }
+        placeGamePiece("Settlement");
+        buildSettlement = true;
+        placeGamePiece("Road");
+        buildRoad = true;
+        
+        // while(turn <= 4){
+        // for(int i = 0; i < 2; i++){
+        // if(turn == 1){
+        // placeGamePiece("Settlement");
+        // placeGamePiece("Road");
+        // }else{
+        // autoPlacePiece("Settlement", turn);
+        // autoPlacePiece("Road", turn);
+        // }                
+        // }
+        // turn++;
+        // }
 
         //Play game
         playGame();
@@ -819,13 +823,12 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
         //place settlements and cities on the corner of a hex
         if(pieceType.equals("Settlement")){
-            
+            Se
         }else if(pieceType.equals("City")){
-            
-        }else if(pieceType.equals("Road")){
-                  //place road between two hexes (connected to the settlement); 
-        }
 
+        }else if(pieceType.equals("Road")){
+            //place road between two hexes (connected to the settlement); 
+        }
 
         panel.repaint();
     }

@@ -54,6 +54,9 @@ public class Player
     protected ArrayList<ResourceCard> resourceCards;
     protected ArrayList<String> devHand;
     protected ArrayList<String> resourceHand;
+
+    protected ArrayList<GamePiece> placedPieces;
+
     /**
      * An example of a method - replace this comment with your own
      *
@@ -69,6 +72,7 @@ public class Player
         resourceCards = new ArrayList<ResourceCard>();
         resourceHand = new ArrayList<String>();
         devHand = new ArrayList<String>();
+        placedPieces = new ArrayList<GamePiece>();
         cities = 0;
         settlements = 0;
         roads = 0;
