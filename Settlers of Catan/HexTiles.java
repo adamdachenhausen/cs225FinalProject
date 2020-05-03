@@ -50,7 +50,7 @@ public class HexTiles extends AnimatedGraphicsObject{
     protected Point[] pts;
 
     protected String locationType;
-    
+
     protected String subType;
 
     private boolean hasRobber;
@@ -247,7 +247,7 @@ public class HexTiles extends AnimatedGraphicsObject{
      *  
      */
     public ArrayList getCityLocations(){
-        
+
         ArrayList<Point> loc = new ArrayList(6);
 
         //We always need the northernmost and southernmost points, aka tips
@@ -297,31 +297,55 @@ public class HexTiles extends AnimatedGraphicsObject{
 
     public ArrayList getRoads(){
         ArrayList<Road> roads = new ArrayList(6);
-        
-        //Add in type for each road
-        roads.add(new Road(container, pts[3],pts[4]));
-        roads.add(new Road(container, pts[3],pts[2]));
-        
-        
+
+        roads.add(new Road(container, pts[3],pts[4],"/"));
+        roads.add(new Road(container, pts[3],pts[2],"!/"));
+        roads.add(new Road(container, pts[1],pts[2],"|"));
+
         if(locationType!=null && subType!=null){
             if(locationType.equals("CORNER")){
-                if(subType.equals("TOP")){
-                    roads.add(new Road(container, pts[4],pts[5]));
-                    roads.add(new Road(container, pts[1],pts[2]));
-                }
-                else if(subType.equals("BOTTOM")){
-                    roads.add(new Road(container, pts[4],pts[5]));
-                    roads.add(new Road(container, pts[5],pts[0]));
-                    roads.add(new Road(container, pts[0],pts[1]));
-                    roads.add(new Road(container, pts[1],pts[2]));
+
+                roads.add(new Road(container, pts[4],pts[5],"|"));
+
+                if(subType.equals("BOTTOM")){
+                    roads.add(new Road(container, pts[5],pts[0],"!/"));
+                    roads.add(new Road(container, pts[0],pts[1],"/"));
+
                 }
             }
-        
+            else if(locationType.equals("INBETWEEN")){
+                if(subType.equals("TOPLEFT")){
+                    roads.add(new Road(container, pts[4],pts[5],"|"));
+                }
+                else if(subType.equals("TOPRIGHT")){
+                    //Do nothing
+                }
+                else if(subType.equals("BOTTOMLEFT")){
+                    roads.add(new Road(container, pts[4],pts[5],"|"));
+                    roads.add(new Road(container, pts[5],pts[0],"!/"));
+                }
+                else if(subType.equals("BOTTOMRIGHT")){
+                    roads.add(new Road(container, pts[0],pts[1],"/"));
+                }
+            }
+            else if(locationType.equals("MIDDLE")){
+                if(subType.equals("LEFT")){
+                    roads.add(new Road(container, pts[4],pts[5],"|"));
+                    roads.add(new Road(container, pts[5],pts[0],"!/"));
+                }
+                else if(subType.equals("RIGHT")){
+                    roads.add(new Road(container, pts[0],pts[1],"/"));
+                }
+            }
+            else if(locationType.equals("SPECIAL")){
+                roads.add(new Road(container, pts[5],pts[0],"!/"));
+                roads.add(new Road(container, pts[0],pts[1],"/"));
+            }
         }
-        
+
         return roads;
     }
-    
+
     /** Given two points, returns the midpoint
      *  @param p1 The first point of the line to calculate midpoint
      *  @param p2 The second point of the line to calculate midpoint
@@ -329,7 +353,7 @@ public class HexTiles extends AnimatedGraphicsObject{
     private Point midPoint(Point p1, Point p2){
         return new Point((p1.x + p2.x)/2,(p1.y + p2.y)/2);
     }
-    
+
     @Override
     public void run(){
 
