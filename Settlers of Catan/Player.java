@@ -67,13 +67,78 @@ public class Player
         resourceCards = new ArrayList<ResourceCard>();
     }
 
-        public int getPlayerNumber(){
+    public int getPlayerNumber(){
 
         return playerNumber;
     }
-    
-    public Color getColor(){
 
+    public ArrayList<DevelopmentCard> getDevCards(){
+
+        return devCards;
+    }
+
+    public String getResourceToString(){
+        StringBuilder s = new StringBuilder();
+        String resCards;
+        int brick = 0;
+        int lumber= 0;
+        int ore = 0;
+        int wheat = 0;
+        int sheep =0; 
+
+        for(int i = 0; i < resourceCards.size(); i++){
+            if(resourceCards.get(i).getCardType().equals("Brick")){
+                brick++;
+            }else if(resourceCards.get(i).getCardType().equals("Lumber")){
+                lumber++;
+            }else if(resourceCards.get(i).getCardType().equals("Ore")){
+                ore++;
+            }else if(resourceCards.get(i).getCardType().equals("Grain")){
+                wheat++;
+            }else if(resourceCards.get(i).getCardType().equals("Wool")){
+                sheep++;
+            }
+        }
+        s.append("Brick: " + brick + ", Lumber: " + lumber + ", Ore: " + ore+ ", Wheat: " + ", Wool: " + sheep);
+
+        resCards = s.toString();
+        return resCards;
+    }
+
+    public String getDevToString(){
+        StringBuilder s = new StringBuilder();
+        String devCards;
+        int brick = 0;
+        int lumber= 0;
+        int ore = 0;
+        int wheat = 0;
+        int sheep =0; 
+
+        for(int i = 0; i < resourceCards.size(); i++){
+            if(resourceCards.get(i).getCardType().equals("Brick")){
+                brick++;
+            }else if(resourceCards.get(i).getCardType().equals("Lumber")){
+                lumber++;
+            }else if(resourceCards.get(i).getCardType().equals("Ore")){
+                ore++;
+            }else if(resourceCards.get(i).getCardType().equals("Grain")){
+                wheat++;
+            }else if(resourceCards.get(i).getCardType().equals("Wool")){
+                sheep++;
+            }
+        }
+        s.append("Brick: " + brick + ", Lumber: " + lumber + ", Ore: " + ore+ ", Wheat: " + ", Wool: " + sheep);
+
+        devCards = s.toString();
+        return devCards;
+    }
+
+    public ArrayList<ResourceCard> getResourceCards(){
+
+        return resourceCards;
+    }
+
+    public Color getColor(){
         return c;
     }
 
@@ -173,53 +238,8 @@ public class Player
         longestRoad = lr;
     }
 
-
     public void setRoadLength(int newRoadLength){
-
-         roadLength = newRoadLength;
+        roadLength = newRoadLength;
     }
 
-
-
-    public void getCities(int newcities){
-
-        cities = newcities;
-    }
-
-    public void getSettlements(int newsettle){
-
-        settlements = newsettle;
-    }
-
-    public void getRoads(int newroads){
-
-        roads = newroads;
-    }
-
-    public void getVictoryPoints(int vp){
-
-        victoryPoints = vp;
-    }
-
-    public void getVictoryPointCards(int vpc){
-
-        victoryPointCards = vpc;
-    }
-
-    public void getKnights(int newknights){
-        knights = newknights;
-    }
-
-    public void getRoadlength(int rl){
-        roadLength = rl;
-    }
-
-    public void getLargestArmy(boolean la){
-        largestArmy = la;
-    }
-
-    public void getLongestRoad(boolean lr){
-
-        longestRoad = lr;
-    }
 }

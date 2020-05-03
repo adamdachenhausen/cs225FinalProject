@@ -115,7 +115,7 @@ public class DevelopmentCard extends AnimatedGraphicsObject implements ImageObse
                 break;
 
                 case VICTORY:
-                cardString = "Vitory Point";
+                cardString = "Victory Point";
                 x = (upperLeft.x + (CARD_WIDTH - fm.stringWidth(cardString)) / 2);
                 y = (upperLeft.y + CARD_HEIGHT - fm.getAscent());
                 g.drawString(cardString, x, y);

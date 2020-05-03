@@ -89,9 +89,9 @@ public class StatusPane extends AnimatedGraphicsObject implements ImageObserver{
         //Turn status
         String currentTurn;
         if(turn == 0){
-           currentTurn = "Game has not started.";
+            currentTurn = "Game has not started.";
         }else{
-         currentTurn = "Player " + turn + "'s turn."; 
+            currentTurn = "Player " + turn + "'s turn."; 
         }
         g.setFont(new Font("TimesRoman", Font.BOLD, 15));
         int x2 = (upperLeft.x + 3);
@@ -104,31 +104,52 @@ public class StatusPane extends AnimatedGraphicsObject implements ImageObserver{
         int x3 = (upperLeft.x + 3);
         int y3 = (y2 + 20);
         g.drawString(currentRoll, x3, y3);
-        
-        //player1Info = "PLAYER: " + turn;
-        String p1Status = "Player 1 points: " + p.get(0).getVictoryPoints();
+
+        //player1Info
+        String p1Status = "Player 1 " +"("+ p.get(0).getColor() +")" + " points: " + p.get(0).getVictoryPoints();
+        //String p1Status = "Brick9: , Lumber9: , Ore9: , Wheat9: , Sheep9: " + p.get(0).getVictoryPoints();
         int x4 = (upperLeft.x + 3);
         int y4 = (y3 + 20);
         g.drawString(p1Status, x4, y4);
 
-        //player2Info = "PLAYER: " + turn;
-        String p2Status = "Player 2 points: " + p.get(1).getVictoryPoints();
+        //player1cards 
+        g.setFont(new Font("TimesRoman", Font.BOLD, 12));
+        String p1cards;
+        p1cards = p.get(0).getResourceToString();
         int x5 = (upperLeft.x + 3);
-        int y5 = (y4 + 20);
-        g.drawString(p2Status, x5, y5);
+        int y5 = (y3 + 20);
+        g.drawString(p1cards, x5, y5);
 
-        //player3Info = "PLAYER: " + turn;
-        String p3Status = "Player 3 points: " + p.get(2).getVictoryPoints();
+        //player1pieces
+        g.setFont(new Font("TimesRoman", Font.BOLD, 12));
+        String p1pieces;
+        p1cards = p.get(0).getResourceToString();
+        //int x5 = (upperLeft.x + 3);
+        //int y5 = (y3 + 20);
+        g.drawString(p1cards, x5, y5);
+
+        //player2Info
+        g.setFont(new Font("TimesRoman", Font.BOLD, 15));
+        String p2Status = "Player 2 points: " + p.get(1).getVictoryPoints();
         int x6 = (upperLeft.x + 3);
-        int y6 = (y5 + 20);
+        int y6 = (y4 + 20);
+        g.drawString(p2Status, x6, y6);
+
+        //player3Info 
+        g.setFont(new Font("TimesRoman", Font.BOLD, 15));
+        String p3Status = "Player 3 points: " + p.get(2).getVictoryPoints();
+        //int x6 = (upperLeft.x + 3);
+        //int y6 = (y5 + 20);
         g.drawString(p3Status, x6, y6);
-        
-                //player4Info = "PLAYER: " + turn;
+
+        //player4Info 
+        g.setFont(new Font("TimesRoman", Font.BOLD, 15));
         String p4Status = "Player 4 points: " + p.get(3).getVictoryPoints();
         int x7 = (upperLeft.x + 3);
         int y7 = (y6 + 20);
         g.drawString(p4Status, x7, y7);
 
+        g.setFont(new Font("TimesRoman", Font.BOLD, 12));
         container.repaint();
         //Player Instructions text
     }
