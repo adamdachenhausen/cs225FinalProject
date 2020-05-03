@@ -621,7 +621,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
         //distribute resources *if not enough resources, none distributed
         distributeResources(roll);
-        
+
         //offer trades
     }
 
@@ -632,6 +632,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * @return 
      */
     public void rollDialog(){
+        gamePhase = "Rolling dice...";
         // roll dice: highest roll chooses first player to play
         //Custom button text
         String[] options = new String[]{"Roll Dice","Cancel"};
@@ -750,6 +751,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * 
      */
     public void distributeResources(int tokenVal){
+        gamePhase = "Distributing resources...";
         //call method from hextiles or gameboard to determine how many of each
         //get resource cards based on the hex tiles that are 
         //adjacent to your settlement
@@ -766,8 +768,26 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * @param player2 Player trading with
      * @return 
      */
-    public void tradeResources(Player player1, Player player2){
+    public void tradeResources(){
+        gamePhase = "Trading...";
         //trading can only happen with the active player on a turn
+        String[] options = new String[]{"Yes","No"};
+        int answer = JOptionPane.showOptionDialog(null,
+                "Would you like to trade?",
+                "Trading interface",
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[1]);
+        if(answer == 0){
+            swapCards();
+        }else if(answer == 1){
+            buildDialog();
+        }else{
+            tradeResources();
+        }
+        panel.repaint();
     }
 
     /**
@@ -777,8 +797,35 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * @param player2 Player trading with
      * @return 
      */
-    public void swapCards(Player player1, Player player2){
+    public void swapCards(){
         //trading can only happen with the active player on a turn
+    }
+
+    /**
+     * Players build to develop your empire
+     *
+     * @param player1 Player initiating trade
+     * @param player2 Player trading with
+     * @return 
+     */
+    public void buildDialog(){
+        String[] options = new String[]{"Yes","No"};
+        int answer = JOptionPane.showOptionDialog(null,
+                "Would you like to build?",
+                "Building interface",
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[1]);
+        if(answer == 0){
+            swapCards();
+        }else if(answer == 1){
+            developmentDialog();
+        }else{
+            tradeResources();
+        }
+        panel.repaint();
     }
 
     /**
@@ -908,7 +955,33 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
         //
     }
-
+    /**
+     * Players build to develop your empire
+     *
+     * @param player1 Player initiating trade
+     * @param player2 Player trading with
+     * @return 
+     */
+    public void developmentDialog(){
+        String[] options = new String[]{"Yes","No"};
+        int answer = JOptionPane.showOptionDialog(null,
+                "Would you like to buy a development card?",
+                "Development card interface",
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[1]);
+        if(answer == 0){
+            useResourceCard();
+            drawDevelopmentCard();
+        }else if(answer == 1){
+            developmentDialog();
+        }else{
+            tradeResources();
+        }
+        panel.repaint();
+    }
     /**
      * Draw a card from the resource card bank.
      *
