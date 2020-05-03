@@ -26,6 +26,13 @@ public class Roads extends AnimatedGraphicsObject
         roads.add(r);
     }
     
+    /** Removes a Road from roads
+     *  @param r the Road to be removed from the internal roads
+     */
+    public void removeRoad(Road r){
+        roads.remove(r);
+    }
+    
             /** Adds a point to this
      *  @param p a city/settlement to add to this
      */
