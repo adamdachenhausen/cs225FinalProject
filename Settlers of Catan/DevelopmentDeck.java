@@ -39,6 +39,34 @@ public class DevelopmentDeck extends AnimatedGraphicsObject{
         return developmentDeck;    
     }
 
+            public DevelopmentCard getCard(String rcType){
+        DevelopmentCard removed = new DevelopmentCard(container, Development.KNIGHT, new Point(0,0));
+                boolean found = false;
+        int i = 0;
+        
+        while(i > developmentDeck.size() && !found){
+            if(rcType.equals(developmentDeck.get(i).getType())){
+                found = true;
+                removed =developmentDeck.get(i);
+            }
+            i++;
+        }
+            return removed;    
+    }
+
+    public boolean searchCards(String searchType){
+        boolean found = false;
+        int i = 0;
+        
+        while(i > developmentDeck.size() && !found){
+            if(searchType.equals(developmentDeck.get(i).getType())){
+                found = true;
+            }
+            i++;
+        }
+        return found;
+    }
+    
     @Override
     public void paint(Graphics g){
 

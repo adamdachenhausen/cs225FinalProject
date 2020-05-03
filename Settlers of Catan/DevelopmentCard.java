@@ -42,7 +42,11 @@ public class DevelopmentCard extends AnimatedGraphicsObject implements ImageObse
     public void showCard(){
         visible = true;
     }
-
+    
+    public String getType(){
+        return type;
+    }
+    
     @Override
     public void paint(Graphics g){
 

@@ -37,15 +37,17 @@ public class ResourceCard extends AnimatedGraphicsObject implements ImageObserve
 
         this.upperLeft = upperLeft;
         visible = true;
+        type = setCardType();
     }
 
     public void showCard(){
         visible = true;
     }
+
     public String getType(){
         return type;
     }
-    
+
     public Resource getCardType(){
         return cardType;
     }
@@ -158,6 +160,38 @@ public class ResourceCard extends AnimatedGraphicsObject implements ImageObserve
                 break;
             }
         }
+    }
+
+    public String setCardType(){
+        String cardString;
+        switch(cardType){
+            case BRICKS:
+            cardString = "Brick";
+            type = cardString;
+
+            break;
+
+            case WOOD:
+            cardString = "Lumber";
+            type = cardString;
+            break;
+
+            case ORE:
+            cardString = "Ore";
+            type = cardString;
+            break;
+
+            case WHEAT:
+            cardString = "Grain";
+            type = cardString;
+            break;
+
+            case WOOL:
+            cardString = "Wool";
+            type = cardString;
+            break;
+        }
+        return type;
     }
 
     public boolean imageUpdate(Image img, int infoflags, int x, int y,
