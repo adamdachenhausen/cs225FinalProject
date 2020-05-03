@@ -143,9 +143,11 @@ public class ThreadGraphicsController implements Runnable {
                 // lock access in case any other code tries to
                 // access the list
                 if(gameboard != null && players != null && checkForWinner() > 0){
-                    displayWinScreen();
+                    int winner = checkForWinner();
+                    displayWinScreen(g, winner);
                 }else if(!Catan.gameStart) {
-                    displayWinScreen();
+                    introScreen(g);
+                    
                 }
 
                 if(gameboard != null){
@@ -182,7 +184,7 @@ public class ThreadGraphicsController implements Runnable {
 
                 i = 0;
                 synchronized (lock) {
-                    while (i < player1Pieces.size()) {
+                    while (player1Pieces != null && i < player1Pieces.size()) {
                         GamePiece gp1 = player1Pieces.get(i);
                         if (gp1.done()) {
                             player1Pieces.remove(i);
@@ -198,7 +200,7 @@ public class ThreadGraphicsController implements Runnable {
 
                 i = 0;
                 synchronized (lock) {
-                    while (i < player2Pieces.size()) {
+                    while (player2Pieces != null && i < player2Pieces.size()) {
                         GamePiece gp2 = player2Pieces.get(i);
                         if (gp2.done()) {
                             player2Pieces.remove(i);
@@ -214,7 +216,7 @@ public class ThreadGraphicsController implements Runnable {
 
                 i = 0;
                 synchronized (lock) {
-                    while (i < player3Pieces.size()) {
+                    while (player3Pieces != null && i < player3Pieces.size()) {
                         GamePiece gp3 = player3Pieces.get(i);
                         if (gp3.done()) {
                             player1Pieces.remove(i);
@@ -230,7 +232,7 @@ public class ThreadGraphicsController implements Runnable {
 
                 i = 0;
                 synchronized (lock) {
-                    while (i < player4Pieces.size()) {
+                    while (player4Pieces != null && i < player4Pieces.size()) {
                         GamePiece gp4 = player4Pieces.get(i);
                         if (gp4.done()) {
                             player1Pieces.remove(i);
@@ -297,8 +299,27 @@ public class ThreadGraphicsController implements Runnable {
      * @param 
      * @return 
      */
-    public void displayWinScreen(){
+    public void displayWinScreen(Graphics g, int winner){
+        g.setColor(new Color(182, 30, 44));
+        g.fillRect(0,0,FRAME_WIDTH,FRAME_HEIGHT);
 
+        g.setColor(new Color(250, 210, 24));
+        String catan = "PLAYER " + winner+ " WON!";
+        g.setFont(new Font("TimesRoman", Font.BOLD, 150));
+        FontMetrics fm = g.getFontMetrics();
+        int x = ((panel.getWidth() - fm.stringWidth(catan)) / 2);
+
+        int y = ((panel.getHeight() - fm.getHeight()) / 2) + fm.getAscent();
+        g.drawString(catan, x, y);
+
+        String instruction = "Press start to play again.";
+        g.setFont(new Font("TimesRoman", Font.BOLD, 20));
+        fm = g.getFontMetrics();
+        int x2 = (panel.getWidth() - fm.stringWidth(instruction)) / 2;
+        int y2 = (y + fm.getAscent() + 20);
+
+        g.drawString(instruction, x2, y2);
+        panel.repaint();
     }
 
     /**
