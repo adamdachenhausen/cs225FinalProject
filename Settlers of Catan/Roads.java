@@ -5,20 +5,23 @@ import java.awt.Point;
 import java.awt.Graphics;
 import java.awt.Color;
 /**
- * Write a description of class Roads here.
+ * A collection of Road objects
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Kate Nelligan, Lindsay Clark, Adam Dachenhausen
+ * @version Spring 2020
  */
 public class Roads extends AnimatedGraphicsObject
 {
-    List<Road> roads;
+    protected List<Road> roads;
     public Roads(JComponent container){
         super(container);
         roads = new ArrayList<Road>();
         this.container = container;
     }
 
+    /** Adds a Road to roads
+     *  @param r the Road to be added to the internal roads
+     */
     public void addRoad(Road r){
         roads.add(r);
     }
