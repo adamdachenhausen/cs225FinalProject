@@ -83,19 +83,28 @@ public class Road extends AnimatedGraphicsObject
      *  @param p1 The first point of the line to calculate midpoint
      *  @param p2 The second point of the line to calculate midpoint
      */
-    private Point midPoint(){
+    public Point midPoint(){
         return new Point((start.x + end.x)/2,(start.y + end.y)/2);
     }
+
     /** returns point
      */
     public Point getRoadPoint1(){
         return start;
     }
-        /** returns point
+
+    /** returns point
      */
     public Point getRoadPoint2(){
         return end;
     }
+
+    public void update(){
+        if(possible){
+            placed = true;
+        }
+    }
+    
     @Override
     public void run(){
 
