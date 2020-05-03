@@ -817,9 +817,15 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      */
     public void placeGamePiece(String pieceType){
 
-        //place settlement between two hexes
+        //place settlements and cities on the corner of a hex
+        if(pieceType.equals("Settlement")){
+            
+        }else if(pieceType.equals("City")){
+            
+        }else if(pieceType.equals("Road")){
+                  //place road between two hexes (connected to the settlement); 
+        }
 
-        //place road between two hexes
 
         panel.repaint();
     }
