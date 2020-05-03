@@ -538,6 +538,9 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         panel.repaint();
     }
 
+    /** Method that allows multiple keystrokes to be registered at the same time
+     * 
+     */
     protected void playerMoveFire(){
         if(leftDown){
             if(player.getPosition().x >= 10) {
