@@ -950,21 +950,51 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      */
     public void useResourceCard(String rType){
         ResourceCard rc = null;
+        boolean found = false;
+        int i = 0;
+        //remove card from player's hand
         if(turn == 1){
-            for(int i = 0; i < players.get(0).getResourceCards().size(); i++){
+            while(i < players.get(0).getResourceCards().size() && !found){
                 if(players.get(0).getResourceCards().get(i).getType().equals(rType)){
                     rc = players.get(0).removeResourceCard(rType);
-                }
+                    found = true;
+                } 
+                i++;
             }
-        }else if(turn ==2){
-
+        }else if(turn == 2){
+            i=0;
+            found = false;
+            while(i < players.get(1).getResourceCards().size() && !found){
+                if(players.get(0).getResourceCards().get(i).getType().equals(rType)){
+                    rc = players.get(0).removeResourceCard(rType);
+                    found = true;
+                } 
+                i++;
+            }
         }else if(turn == 3){
-
+            i=0;
+            found = false;
+            while(i < players.get(2).getResourceCards().size() && !found){
+                if(players.get(0).getResourceCards().get(i).getType().equals(rType)){
+                    rc = players.get(0).removeResourceCard(rType);
+                    found = true;
+                } 
+                i++;
+            }
         }else{
-
+            i=0;
+            found = false;
+            while(i < players.get(3).getResourceCards().size() && !found){
+                if(players.get(0).getResourceCards().get(i).getType().equals(rType)){
+                    rc = players.get(0).removeResourceCard(rType);
+                    found = true;
+                } 
+                i++;
+            }
         }
-        for(int i = 0; i < resourceDeck.getList().size(); i++){
-
+        //add card removed from player hand to resource card deck
+        if(rc != null){
+            resourceDeck.addResourceCard(rc)
         }
     }
 
