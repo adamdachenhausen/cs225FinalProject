@@ -167,7 +167,7 @@ public class GameBoard extends AnimatedGraphicsObject
         board[4][0].getToken().start();
 
         //Create middle hexagon
-        board[4][1] = new HexTiles(panel,center, r.pop(),t.pop(),0,(int)HexTiles.SIDE_LENGTH*3+2,null,null);
+        board[4][1] = new HexTiles(panel,center, r.pop(),t.pop(),0,(int)HexTiles.SIDE_LENGTH*3+2,"SPECIAL","");
         board[4][1].createHexType();
         board[4][1].getToken().start();
 
