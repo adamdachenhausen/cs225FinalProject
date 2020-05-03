@@ -68,6 +68,8 @@ public class ThreadGraphicsController implements Runnable {
     public static final int ALIEN4_PTS = 20;
     public static final int UFO_PTS = 100;
 
+    public static final int ALIEN_SHOT_RANDOM = 875;
+    protected int multiplier;
     /**
     Constructor, which needs to take the size and name of the
     window to create.
@@ -80,6 +82,9 @@ public class ThreadGraphicsController implements Runnable {
         windowLabel = label;
         windowSize = new Dimension(width, height);
         thisTGC = this;
+        
+        //Initialize this for "normal" mode, user might be able to change this setting
+        multiplier = 7;
     }
 
     /**
@@ -204,7 +209,7 @@ public class ThreadGraphicsController implements Runnable {
 
                         Random rand = new Random();
                         boolean attack = false;
-                        int randomShot = rand.nextInt(875);
+                        int randomShot = rand.nextInt(ALIEN_SHOT_RANDOM * multiplier);
 
                         if(randomShot == 1){
                             attack = true; 
