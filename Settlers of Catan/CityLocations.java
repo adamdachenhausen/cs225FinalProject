@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.awt.Point;
 import java.awt.Graphics;
 import java.awt.Color;
+import java.awt.image.ImageObserver;
+import java.awt.Image;
+import java.awt.Toolkit;
 /**
  * A collection of points that represent city/settlements
  *
@@ -12,18 +15,19 @@ import java.awt.Color;
  */
 public class CityLocations extends AnimatedGraphicsObject
 {
-    List<Point> locations;
+    private List<City> locations;
+
     public CityLocations(JComponent container){
         super(container);
-        locations = new ArrayList<Point>();
+        locations = new ArrayList<City>();
         this.container = container;
     }
 
     /** Adds a point to this
      *  @param p a city/settlement to add to this
      */
-    public void addLocation(Point p){
-        locations.add(p);
+    public void addLocation(City c){
+        locations.add(c);
     }
 
     @Override
@@ -31,11 +35,6 @@ public class CityLocations extends AnimatedGraphicsObject
         //For returning g back to the original color
         Color cur = g.getColor();
 
-        g.setColor(Color.BLACK);
-
-        for(Point l : locations){
-            g.fillOval(l.x,l.y,5,5);
-        }
         //Set g back to the original color
         g.setColor(cur);
     }
@@ -44,4 +43,5 @@ public class CityLocations extends AnimatedGraphicsObject
     public void run(){
 
     }
+
 }
