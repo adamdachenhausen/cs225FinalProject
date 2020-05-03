@@ -74,7 +74,7 @@ public class GameBoard extends AnimatedGraphicsObject
 
     }
 
-    /**
+    /** Manually created board of hexTiles
      *  
      */
     protected void createBoard(){
@@ -272,10 +272,16 @@ public class GameBoard extends AnimatedGraphicsObject
         return hexPt;
     }
 
+    /**
+     *  @return the gameboard represented as a double array
+     */
     public HexTiles[][] getTiles(){
         return board;
     }
 
+    /**
+     * 
+     */
     public void placeToken(){
 
         Point tokenPoint = new Point(0,0);
@@ -328,6 +334,10 @@ public class GameBoard extends AnimatedGraphicsObject
         }
     }
 
+    /** Loops through the board, and for each calls their respective
+     *  getCityLocations() and getRoads()
+     * 
+     */
     private void findCitiesAndRoads(){
         for(int i=0; i<board.length;i++){
 
@@ -348,7 +358,12 @@ public class GameBoard extends AnimatedGraphicsObject
         //System.out.println();
     }
 
-    public Point findCenter(Point p, boolean isRobber){
+    /** Given a p and boolean, determines the center of a token
+     *  @param p the point of the token
+     *  @param isRobber a boolean flag if the token is a robber
+     *  @return the center of this token
+     */
+    private Point findCenter(Point p, boolean isRobber){
         Point tPoint = p;
         if(!isRobber){
 
@@ -362,6 +377,9 @@ public class GameBoard extends AnimatedGraphicsObject
         return tPoint;
     }
 
+    /** Returns the robber object
+     *  @return the robber
+     */
     public Robber getRobber(){
         return robber;
     }
