@@ -117,7 +117,7 @@ public class Player
         }
         return found;
     }
-    public DevelopmentCard getDevCard(String rcType){
+    public DevelopmentCard getDevelopmentCard(String rcType){
         DevelopmentCard foundCard = null;
         boolean found = false;
         int i = 0;
@@ -145,12 +145,12 @@ public class Player
         return found;
     }
     
-        public void addDevCard(DevelopmentCard dc){
+        public void addDevelopmentCard(DevelopmentCard dc){
         devCards.add(dc);
 
     }
 
-    public DevelopmentCard removeDevCard(String rcType){
+    public DevelopmentCard removeDevelopmentCard(String rcType){
         DevelopmentCard removed = null;
         boolean found = false;
         int i = 0;
@@ -170,7 +170,7 @@ public class Player
         return playerNumber;
     }
 
-    public ArrayList<DevelopmentCard> getDevCards(){
+    public ArrayList<DevelopmentCard> getDevelopmentCards(){
 
         return devCards;
     }

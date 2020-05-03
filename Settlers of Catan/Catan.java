@@ -937,13 +937,57 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * @return 
      */
     public void useDevelopmentCard(String dType){
-        //card types
-
-        //knight: move robber, don't discard the card
+        DevelopmentCard dc = null;
+        boolean found = false;
+        int i = 0;
+        //remove card from player's hand
+        if(turn == 1){
+            while(i < players.get(0).getDevelopmentCards().size() && !found){
+                if(players.get(0).getDevelopmentCards().get(i).getType().equals(dType)){
+                    dc = players.get(0).removeDevelopmentCard(dType);
+                    found = true;
+                } 
+                i++;
+            }
+        }else if(turn == 2){
+            i=0;
+            found = false;
+            while(i < players.get(1).getDevelopmentCards().size() && !found){
+                if(players.get(0).getDevelopmentCards().get(i).getType().equals(dType)){
+                    dc = players.get(0).removeDevelopmentCard(dType);
+                    found = true;
+                } 
+                i++;
+            }
+        }else if(turn == 3){
+            i=0;
+            found = false;
+            while(i < players.get(2).getDevelopmentCards().size() && !found){
+                if(players.get(0).getDevelopmentCards().get(i).getType().equals(dType)){
+                    dc = players.get(0).removeDevelopmentCard(dType);
+                    found = true;
+                } 
+                i++;
+            }
+        }else{
+            i=0;
+            found = false;
+            while(i < players.get(3).getDevelopmentCards().size() && !found){
+                if(players.get(0).getDevelopmentCards().get(i).getType().equals(dType)){
+                    dc = players.get(0).removeDevelopmentCard(dType);
+                    found = true;
+                } 
+                i++;
+            }
+        }
+        //add card removed from player hand to resource card deck
+        if(dc != null){
+            developmentDeck.addCard(dc);
+        }
     }
 
     /**
-     * Use card to build.
+     * Use resource card
      *
      * @param 
      * @return 
@@ -994,7 +1038,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         }
         //add card removed from player hand to resource card deck
         if(rc != null){
-            resourceDeck.addResourceCard(rc)
+            resourceDeck.addCard(rc);
         }
     }
 
