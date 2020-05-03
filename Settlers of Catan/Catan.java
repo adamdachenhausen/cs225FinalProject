@@ -373,15 +373,6 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     }
 
     /**
-     * Players trade resource cards
-     *
-     * @return 
-     */
-    public void updateStatusPane(){
-
-    }
-
-    /**
      * Sets up the game after start button pressed
      *
      */
@@ -414,6 +405,9 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         }
         if(e.getSource().equals(buildingCostsButton)){
             displayBuildingCosts();
+        }
+        if(e.getSource().equals(continueButton)){
+            rollDialog();
         }
 
     }
@@ -626,7 +620,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         //Determine players with "activated hexes"
 
         //distribute resources *if not enough resources, none distributed
-
+        distributeResources(roll);
+        
         //offer trades
     }
 
@@ -639,16 +634,15 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     public void rollDialog(){
         // roll dice: highest roll chooses first player to play
         //Custom button text
-        Object[] options = {"Roll Dice",
-                "Cancel"};
-        int answer = JOptionPane.showOptionDialog(frame,
+        String[] options = new String[]{"Roll Dice","Cancel"};
+        int answer = JOptionPane.showOptionDialog(null,
                 "Roll the dice or cancel.",
                 "Roll the Dice",
                 JOptionPane.YES_NO_CANCEL_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
                 null,
                 options,
-                options[2]);
+                options[1]);
         if(answer == 0){
             roll = 0;
             roll = die1.rollDice();
@@ -657,6 +651,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         }else{
             rollDialog();
         }
+        panel.repaint();
 
     }
 
@@ -756,9 +751,12 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      */
     public void distributeResources(int tokenVal){
         //call method from hextiles or gameboard to determine how many of each
-
         //get resource cards based on the hex tiles that are 
         //adjacent to your settlement
+        for(int i = 0; i < players.size(); i++){
+
+        }
+
     }
 
     /**
