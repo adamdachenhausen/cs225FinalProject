@@ -58,23 +58,23 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     // button that displays building costs for the game;
     protected JButton buildingCostsButton;
 
-    // // button that draws resource card
-    // protected JButton drawResourceButton;
+    // button that draws resource card
+    protected JButton drawResourceButton;
 
-    // // button that draws development card
-    // protected JButton drawDevelopmentButton;
+    // button that draws development card
+    protected JButton drawDevelopmentButton;
 
     // button that makes game continue to next phase
     protected JButton continueButton;
 
-    // // button that draws development card
-    // protected JButton useDevCardButton;
+    // button that draws development card
+    protected JButton useDevCardButton;
 
-    // // button that draws development card
-    // protected JButton buildButton;
+    // button that draws development card
+    protected JButton buildButton;
 
-    // // button that displays opens trade panel;
-    // protected JButton tradeButton;
+    // button that displays opens trade panel;
+    protected JButton tradeButton;
 
     // // button that rolls dice;
     // protected JButton rollDiceButton;
@@ -201,20 +201,20 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         continueButton = new JButton("Continue");
         continueButton.setToolTipText("Continues to the next phase of the game");
 
-        // drawResourceButton = new JButton("Draw Resource");
-        // drawResourceButton.setToolTipText("Draws a resource card");
+        drawResourceButton = new JButton("Draw Resource");
+        drawResourceButton.setToolTipText("Draws a resource card");
 
-        // drawDevelopmentButton = new JButton("Draw Development");
-        // drawDevelopmentButton.setToolTipText("Draws a development card");
+        drawDevelopmentButton = new JButton("Draw Development");
+        drawDevelopmentButton.setToolTipText("Draws a development card");
 
-        // useDevCardButton = new JButton("Use Development");
-        // useDevCardButton.setToolTipText("Uses a development card");
+        useDevCardButton = new JButton("Use Development");
+        useDevCardButton.setToolTipText("Uses a development card");
 
-        // buildButton = new JButton("Build");
-        // buildButton.setToolTipText("Build using resources");
+        buildButton = new JButton("Build");
+        buildButton.setToolTipText("Build using resources");
 
-        // tradeButton = new JButton("Trade Resource");
-        // tradeButton.setToolTipText("Trade with another player");
+        tradeButton = new JButton("Trade Resource");
+        tradeButton.setToolTipText("Trade with another player");
 
         // rollDiceButton = new JButton("Roll Dice");
         // rollDiceButton.setToolTipText("Rolls the dice");
@@ -224,13 +224,16 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         buttonPanel.add(resetButton);
         buttonPanel.add(instructionsButton);
         buttonPanel.add(buildingCostsButton);
-        buttonPanel.add(continueButton);
 
-        // buttonPanel.add(drawResourceButton);
-        // buttonPanel.add(drawDevelopmentButton);
-        // buttonPanel.add(useDevCardButton);
-        // buttonPanel.add(buildButton);
-        // buttonPanel.add(tradeButton);
+
+                buttonPanel.add(tradeButton);
+                        buttonPanel.add(buildButton);
+        buttonPanel.add(drawResourceButton);
+        buttonPanel.add(drawDevelopmentButton);
+        buttonPanel.add(useDevCardButton);
+                buttonPanel.add(continueButton);
+
+
         // buttonPanel.add(rollDiceButton);
 
     }
@@ -286,7 +289,9 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
             p.updateRoads();
             p.updatePoints();
         }
-        if(players.get(3).getCities() >= 2 && players.get(3).getRoads() >= 2){
+        //if the 4th player placed both cities and roads
+        //gameboard setup is over.
+        if(!gameboardSet && players.get(3).getCities() >= 2 && players.get(3).getRoads() >= 2){
             gameboardSet = true;
             turn = PLAYER_1;
             distributeResources();
@@ -505,6 +510,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
             statusPane.setTurn(turn);
             if(gameboardSet){
                 playerTurn();
+            }else if(turnsStarted){
+                playerTurn();
             }
         }
         //panel.requestFocus(true);
@@ -625,7 +632,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         rollDialog();
 
         if(roll == 7){
-            activateRobber();
+            //activateRobber();
         }else{
             //call distribute resource cards
             //distribute resources *if not enough resources, none distributed
@@ -637,6 +644,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
         }
         tradeResourcesDialog();
+        
+        buildDialog();
 
         checkPoints();
         //offer trades
@@ -722,9 +731,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         if(answer == 0){
             moveRobber = true;
             moveRobber();
-        }else if(answer == 1){
-            tradeResourcesDialog();
-        }
+        }else
+        
         panel.repaint();
     }
 
@@ -825,8 +833,6 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         if(answer == 0){
             swapCards();
             buildDialog();
-        }else if(answer == 1){
-            buildDialog();
         }
         panel.repaint();
     }
@@ -840,7 +846,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      */
     public void swapCards(){
         //trading can only happen with the active player on a turn
-        gamePhase = "Trading...";
+                gamePhase = "Trading...";
+        statusPane.setPhase(gamePhase);
         //trading can only happen with the active player on a turn
         String[] options = new String[]{"Yes","No"};
         int answer = JOptionPane.showOptionDialog(null,
@@ -854,10 +861,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         if(answer == 0){
             swapCards();
             buildDialog();
-        }else if(answer == 1){
-            buildDialog();
         }
-
         panel.repaint();
     }
 
@@ -881,8 +885,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                 options,
                 options[1]);
         if(answer == 0){
-            swapCards();
-            buyDevelopmentDialog();
+
         }else if(answer == 1){
             buyDevelopmentDialog();
         }
