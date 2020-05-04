@@ -20,10 +20,12 @@ import java.io.*;
  * @version Spring 2020
  */
 public class Catan extends ThreadGraphicsController implements MouseListener, MouseMotionListener, ActionListener{
+    //Players in the game
     public static final int PLAYER_1 = 1;
     public static final int PLAYER_2 = 2;
     public static final int PLAYER_3 = 3;
     public static final int PLAYER_4 = 4;
+    
     public static final int WINNING_POINTS = 10;
 
     final static protected int CITIES = 4; 
@@ -227,11 +229,11 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         buttonPanel.add(instructionsButton);
         buttonPanel.add(buildingCostsButton);
 
-        buttonPanel.add(tradeButton);
-        buttonPanel.add(buildButton);
-        buttonPanel.add(drawResourceButton);
-        buttonPanel.add(drawDevelopmentButton);
-        buttonPanel.add(useDevCardButton);
+        // buttonPanel.add(tradeButton);
+        // buttonPanel.add(buildButton);
+        // buttonPanel.add(drawResourceButton);
+        // buttonPanel.add(drawDevelopmentButton);
+        // buttonPanel.add(useDevCardButton);
         buttonPanel.add(continueButton);
 
         // buttonPanel.add(rollDiceButton);
@@ -291,11 +293,16 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         //if the 4th player placed both cities and roads
         //gameboard setup is over.
         if(!gameboardSet && players.get(3).getCities() >= 2 && players.get(3).getRoads() >= 2){
+            System.out.println("turn before");
             gameboardSet = true;
             turn = PLAYER_1;
+            System.out.println("turn before");
             distributeResources();
+            playerTurn();
         }
-
+        if(buildStart){
+            developmentTurn();
+        }
     }
 
     /**
@@ -355,8 +362,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         setBoard();
 
         //create dice
-        die1 = new Dice(panel, new Point(700,300));
-        die2 = new Dice(panel, new Point(700,375));
+        die1 = new Dice(panel, new Point(770,100));
+        die2 = new Dice(panel, new Point(770,175));
 
         //intro dialog
         int answer = introDialog();
@@ -394,7 +401,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     }
 
     /**
-     * Displays information about the game
+     * Displays information about the game before it starts
      *
      */
     public int introDialog() {
@@ -415,7 +422,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     public void showInstructions() {
         JFrame instructionDialog = new JFrame("Catan Instructions");
         JOptionPane.showMessageDialog(instructionDialog, "For official rules, please see:\nhttps://www.catan.com/service/game-rules");
-
+        JOptionPane.showMessageDialog(null, "To move to the next player's turn, click continue.");
     }
 
     /**
@@ -495,12 +502,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
             displayBuildingCosts();
         }
         if(e.getSource().equals(continueButton)){
-            //rollDialog();
-            //tradeResourcesDialog();
-            //placeGamePiece("Settlement");
-            //buildSettlement = true;
-            //placeGamePiece("Road");
-            //buildRoad = true;
+
             if(turn < PLAYER_4){
                 turn++;
             }else{
@@ -523,12 +525,9 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     /**
      * Sets the hex tiles that make up the island
      *
-     * @param 
-     * @return 
      */
     public void setBoard(){
         gamePhase = "Setting Board";
-        //draw gameboard
 
         //Draw the gameboard pieces, tokens and robber
         gameboard = new GameBoard(panel,new Point(350,350));
@@ -586,46 +585,19 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         gameboard.updatePlayers(player1,player2,player3,player4);
     }
 
-    // /**
-    // * Controls the gameplay as long as someone doesn't have 10 Victory Points, the game continues.
-    // *
-    // */
-    // public void playGame(){
-
-    // while(gameStart && !gameWon){
-    // //call player turn with correct player
-
-    // //whichever token/hex (the tokens number the hexes) is rolled
-    // //any settlement on the border of that hex gets resources.
-    // //Determine players with "activated hexes"
-
-    // //distribute resources *if not enough resources, none distributed
-    // distributeResources(roll);
-    // panel.repaint();
-
-    // //offer trades
-    // panel.repaint();
-
-    // //update player turn
-    // turn++;
-    // if(turn > PLAYER_4){
-    // turn = PLAYER_1;
-    // }
-
-    // //check if anyone has 10 victory points
-    // checkPoints();
-    // }
-    // }
-
     /**
-     * The turn for the person playing the game
+     * Player's full turn up to the building process.
+     * Having a break here allows for a pause in the dialog tree
+     * that guides the flow of the game.
+     * 
+     * The next method called either way is the use of development
+     * cards.
      *
      * @param player1 Player initiating trade
      * @param player2 Player trading with
      * @return 
      */
     public void playerTurn(){
-        boolean turnDone = false;
 
         //roll dice
         rollDialog();
@@ -646,13 +618,22 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
         buildDialog();
 
-        checkPoints();
-        //offer trades
+    }
 
+    /**
+     * The turn for the person playing the game
+     *
+     * @param player1 Player initiating trade
+     * @param player2 Player trading with
+     * @return 
+     */
+    public void developmentTurn(){
+        buildStart = false;
         buyDevelopmentDialog();
 
         useDevelopmentDialog();
 
+        checkPoints();
     }
 
     /**
@@ -845,24 +826,151 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      *
      * @param player1 Player initiating trade
      * @param player2 Player trading with
-     * @return 
+     * @return player's choice
      */
-    public void swapCards(){
+    public String swapCards(){
         //trading can only happen with the active player on a turn
         gamePhase = "Trading...";
         statusPane.setPhase(gamePhase);
-        //trading can only happen with the active player on a turn
-        String[] options = new String[]{"Yes","No"};
-        int answer = JOptionPane.showOptionDialog(null,
-                "Which card would you like to trade?",
-                "Trade Selection interface",
+
+        String[] options;
+        String choice = "";
+        if(turn == 1){
+            if(players.get(0).getResourceHand().size()>0){
+                options = new String[players.get(0).getResourceHand().size()];
+                for(int i = 0; i < players.get(0).getResourceHand().size(); i++){
+                    options[i] = players.get(0).getResourceHand().get(i);
+                }
+
+                int answer = JOptionPane.showOptionDialog(null,
+                        "Choose which card to trade",
+                        "Trading interface",
+                        JOptionPane.YES_NO_CANCEL_OPTION,
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        options,
+                        options[1]);
+
+                //Choice is the answer in the array of the card to use
+                choice = options[answer];
+
+                //useResourceCard(choice);
+            }
+        }else if(turn == 2){
+            if(players.get(1).getDevelopmentHand().size()>0){
+                options = new String[players.get(1).getDevelopmentHand().size()];
+                for(int i = 0; i < players.get(1).getDevelopmentHand().size(); i++){
+                    options[i] = players.get(1).getDevelopmentHand().get(i);
+                }
+
+                int answer = JOptionPane.showOptionDialog(null,
+                        "Choose which card to trade",
+                        "Trading interface",
+                        JOptionPane.YES_NO_CANCEL_OPTION,
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        options,
+                        options[1]);
+
+                //Choice is the answer in the array of the card to use
+                choice = options[answer];
+
+                //useDevelopmentCard(choice);
+            }
+        }else if(turn == 3){
+            if(players.get(2).getDevelopmentHand().size()>0){
+                options = new String[players.get(2).getDevelopmentHand().size()];
+                for(int i = 0; i < players.get(2).getDevelopmentHand().size(); i++){
+                    options[i] = players.get(2).getDevelopmentHand().get(i);
+                }
+
+                int answer = JOptionPane.showOptionDialog(null,
+                        "Choose which card to trade",
+                        "Trading interface",
+                        JOptionPane.YES_NO_CANCEL_OPTION,
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        options,
+                        options[1]);
+
+                //Choice is the answer in the array of the card to use
+                choice = options[answer];
+
+                //useDevelopmentCard(choice);
+            }
+        }else if(turn == 4){
+            if(players.get(3).getDevelopmentHand().size()>0){
+                options = new String[players.get(3).getDevelopmentHand().size()];
+                for(int i = 0; i < players.get(3).getDevelopmentHand().size(); i++){
+                    options[i] = players.get(3).getDevelopmentHand().get(i);
+                }
+
+                int answer = JOptionPane.showOptionDialog(null,
+                        "Choose which card to trade",
+                        "Trading  interface",
+                        JOptionPane.YES_NO_CANCEL_OPTION,
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        options,
+                        options[1]);
+
+                //Choice is the answer in the array of the card to use
+                choice = options[answer];
+
+                //useDevelopmentCard(choice);
+            } 
+
+        }else{
+            //Player has no development cards, show message.
+            Object[] noCards = {"Ok"};
+            int answer = JOptionPane.showOptionDialog(frame, "You have no development cards.","Catan",
+                    JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,
+                    icon,noCards,noCards[0]);
+        }
+        if(choice != ""){
+            selectPlayerTrade(choice);
+        }
+        panel.repaint();
+        return choice;
+    }
+
+    /**
+     * Player selected which card to trade in a previous dialog
+     * Find a player to trade with (if a player has a card, 
+     * it is assumed they will trade for simplicity's sake);
+     * 
+     * @param player1 Player initiating trade
+     * @param player2 Player trading with
+     * @return 
+     */
+    public void selectPlayerTrade(String choice){
+        gamePhase = "Trading...";
+        statusPane.setPhase(gamePhase);
+        int i = 0;
+        boolean traded = false;
+        int answer=-1;
+        while(i < players.size() && !traded){
+            String[] options = new String[]{"Player 1","Player 2", "Player 3", "Player 4"};
+            answer = JOptionPane.showOptionDialog(null,
+                "Which player do you want to trade with?",
+                "Trading interface",
                 JOptionPane.YES_NO_CANCEL_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
                 null,
                 options,
-                options[1]);
+                options[3]);
+            if(players.get(answer).searchResourceCards(choice)){
+                ResourceCard rc =players.get(answer).removeResourceCard(choice);
+                players.get(turn + 1).addResourceCard(rc);
+                traded = true;
+                JOptionPane.showMessageDialog(null, "You traded the card!");
+            }
+            i++;
+        }
         if(answer == 0){
-            swapCards();
+            buildStart = true;
+        }else{
+            developmentTurn();
         }
         panel.repaint();
     }
@@ -887,15 +995,9 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                 options,
                 options[1]);
         if(answer == 0){
-            String[] newoption = new String[]{"Ok"};
-            int answer2 = JOptionPane.showOptionDialog(null,
-                    "Click on the gameboard to build.",
-                    "Building interface",
-                    JOptionPane.YES_NO_CANCEL_OPTION,
-                    JOptionPane.QUESTION_MESSAGE,
-                    null,
-                    options,
-                    options[0]);
+            buildStart = true;
+        }else{
+            developmentTurn();
         }
         panel.repaint();
     }
@@ -930,76 +1032,6 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
             useDevelopmentDialog();
         }
         panel.repaint();
-    }
-
-    /**
-     * Players build to develop your empire
-     *
-     * @param player1 Player initiating trade
-     * @param player2 Player trading with
-     * @return 
-     */
-    public void build(Player p, int choice){
-        //called every turn after dice are rolled
-
-        //build: roads, settlements, cities, development cards
-        switch(choice){
-            case 0:
-            buildRoad();
-            break;
-
-            case 1:
-            buildSettlement();
-            break;
-
-            case 2:
-            buildCity();
-            break;
-        }
-        //need to provide info on what is required to build each
-
-        //player selects what to build
-
-        //building is placed on gameboard
-
-        //if building settlement, can only build in place
-        //connecting to existing roads
-
-        //if building city need to pay resources and replace
-        //existing settlement with a city piece
-    }
-
-    /**
-     * Move the robber to a hex.
-     * Take action based on placement.
-     *
-     * @param a hex tile to move the robber to.
-     * @return 
-     */
-    public void buildRoad(){
-
-    }
-
-    /**
-     * Move the robber to a hex.
-     * Take action based on placement.
-     *
-     * @param a hex tile to move the robber to.
-     * @return 
-     */
-    public void buildSettlement(){
-
-    }
-
-    /**
-     * Move the robber to a hex.
-     * Take action based on placement.
-     *
-     * @param a hex tile to move the robber to.
-     * @return 
-     */
-    public void buildCity(){
-
     }
 
     /**

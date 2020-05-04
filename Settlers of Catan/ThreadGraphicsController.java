@@ -39,10 +39,7 @@ public class ThreadGraphicsController implements Runnable {
     public static final int PANEL_HEIGHT = 150;
 
     /** list of animated graphics objects currently on the screen */
-    protected ArrayList<GamePiece> player1Pieces;
-    protected ArrayList<GamePiece> player2Pieces;
-    protected ArrayList<GamePiece> player3Pieces;
-    protected ArrayList<GamePiece> player4Pieces;
+
 
     protected ResourceDeck resourceDeck;
     protected DevelopmentDeck developmentDeck;
@@ -183,68 +180,7 @@ public class ThreadGraphicsController implements Runnable {
                 // rc.paint(g);
 
                 i = 0;
-                synchronized (lock) {
-                    while (player1Pieces != null && i < player1Pieces.size()) {
-                        GamePiece gp1 = player1Pieces.get(i);
-                        if (gp1.done()) {
-                            player1Pieces.remove(i);
-                        }
-                        else {
-                            if(gp1.getVisible()){
-                                gp1.paint(g);
-                                i++;
-                            }
-                        }
-                    }
-                }
 
-                i = 0;
-                synchronized (lock) {
-                    while (player2Pieces != null && i < player2Pieces.size()) {
-                        GamePiece gp2 = player2Pieces.get(i);
-                        if (gp2.done()) {
-                            player2Pieces.remove(i);
-                        }
-                        else {
-                            if(gp2.getVisible()){
-                                gp2.paint(g);
-                                i++;
-                            }
-                        }
-                    }
-                }
-
-                i = 0;
-                synchronized (lock) {
-                    while (player3Pieces != null && i < player3Pieces.size()) {
-                        GamePiece gp3 = player3Pieces.get(i);
-                        if (gp3.done()) {
-                            player1Pieces.remove(i);
-                        }
-                        else {
-                            if(gp3.getVisible()){
-                                gp3.paint(g);
-                                i++;
-                            }
-                        }
-                    }
-                }
-
-                i = 0;
-                synchronized (lock) {
-                    while (player4Pieces != null && i < player4Pieces.size()) {
-                        GamePiece gp4 = player4Pieces.get(i);
-                        if (gp4.done()) {
-                            player1Pieces.remove(i);
-                        }
-                        else {
-                            if(gp4.getVisible()){
-                                gp4.paint(g);
-                                i++;
-                            }
-                        }
-                    }
-                }
 
             }
         };
@@ -267,10 +203,6 @@ public class ThreadGraphicsController implements Runnable {
         //hexTilesList = new ArrayList<HexTiles>();
         resourceDeck = new ResourceDeck(panel);
         developmentDeck = new DevelopmentDeck(panel);
-        player1Pieces = new ArrayList<GamePiece>();
-        player2Pieces = new ArrayList<GamePiece>();
-        player3Pieces = new ArrayList<GamePiece>();
-        player4Pieces = new ArrayList<GamePiece>();
 
         // display the window we've created
         frame.pack();
@@ -368,10 +300,7 @@ public class ThreadGraphicsController implements Runnable {
         die2 = null; 
 
         table = null; 
-        player1Pieces = null; 
-        player2Pieces = null; 
-        player3Pieces = null; 
-        player4Pieces = null; 
+
     }
 
     /**

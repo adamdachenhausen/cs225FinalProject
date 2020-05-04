@@ -57,7 +57,7 @@ public class Player
     protected ArrayList<String> devHand;
     protected ArrayList<String> resourceHand;
 
-    protected ArrayList<GamePiece> placedPieces;
+
     protected ArrayList<Road> myRoads;
     protected ArrayList<City> myCities;
 
@@ -76,7 +76,6 @@ public class Player
         resourceCards = new ArrayList<ResourceCard>();
         resourceHand = new ArrayList<String>();
         devHand = new ArrayList<String>();
-        placedPieces = new ArrayList<GamePiece>();
         cities = 0;
         settlements = 0;
         roads = 0;
@@ -100,7 +99,7 @@ public class Player
         boolean found = false;
         int i = 0;
 
-        while(i > resourceCards.size() && !found){
+        while(i < resourceCards.size() && !found){
             if(rcType.equals(resourceCards.get(i).getType())){
                 found = true;
                 removed =resourceCards.get(i);
@@ -124,7 +123,7 @@ public class Player
         boolean found = false;
         int i = 0;
 
-        while(i > resourceCards.size() && !found){
+        while(i < resourceCards.size() && !found){
             if(rcType.equals(resourceCards.get(i).getType())){
                 found = true;
                 foundCard =resourceCards.get(i);
@@ -138,7 +137,7 @@ public class Player
         boolean found = false;
         int i = 0;
 
-        while(i > resourceCards.size() && !found){
+        while(i < resourceCards.size() && !found){
             if(searchType.equals(resourceCards.get(i).getType())){
                 found = true;
             }
@@ -152,7 +151,7 @@ public class Player
         boolean found = false;
         int i = 0;
 
-        while(i > devCards.size() && !found){
+        while(i < devCards.size() && !found){
             if(rcType.equals(devCards.get(i).getType())){
                 found = true;
                 foundCard = devCards.get(i);
@@ -166,7 +165,7 @@ public class Player
         boolean found = false;
         int i = 0;
 
-        while(i > devCards.size() && !found){
+        while(i < devCards.size() && !found){
             if(searchType.equals(devCards.get(i).getType())){
                 found = true;
             }
@@ -195,7 +194,7 @@ public class Player
         int i = 0;
         //get type to check card types held by player
 
-        while(i > devCards.size() && !found){
+        while(i < devCards.size() && !found){
             if(dcType.equals(devCards.get(i).getType())){
                 found = true;
                 removed =devCards.get(i);
@@ -218,7 +217,7 @@ public class Player
         return devHand;
     }
 
-    public ArrayList<String> getRescourceHand(){
+    public ArrayList<String> getResourceHand(){
 
         return resourceHand;
     }
