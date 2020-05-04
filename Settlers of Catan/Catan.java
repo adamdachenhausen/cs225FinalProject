@@ -291,9 +291,10 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         //if the 4th player placed both cities and roads
         //gameboard setup is over.
         if(!gameboardSet && players.get(3).getCities() >= 2 && players.get(3).getRoads() >= 2){
+            System.out.println("turn before");
             gameboardSet = true;
             turn = PLAYER_1;
-
+            System.out.println("turn before");
             distributeResources();
             playerTurn();
         }
@@ -398,7 +399,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     }
 
     /**
-     * Displays information about the game
+     * Displays information about the game before it starts
      *
      */
     public int introDialog() {
@@ -419,7 +420,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     public void showInstructions() {
         JFrame instructionDialog = new JFrame("Catan Instructions");
         JOptionPane.showMessageDialog(instructionDialog, "For official rules, please see:\nhttps://www.catan.com/service/game-rules");
-
+        JOptionPane.showMessageDialog(null, "To move to the next player's turn, click continue.");
     }
 
     /**
@@ -522,12 +523,9 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     /**
      * Sets the hex tiles that make up the island
      *
-     * @param 
-     * @return 
      */
     public void setBoard(){
         gamePhase = "Setting Board";
-        //draw gameboard
 
         //Draw the gameboard pieces, tokens and robber
         gameboard = new GameBoard(panel,new Point(350,350));
@@ -586,7 +584,12 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     }
 
     /**
-     * The turn for the person playing the game
+     * Player's full turn up to the building process.
+     * Having a break here allows for a pause in the dialog tree
+     * that guides the flow of the game.
+     * 
+     * The next method called either way is the use of development
+     * cards.
      *
      * @param player1 Player initiating trade
      * @param player2 Player trading with
