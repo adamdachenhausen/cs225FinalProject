@@ -17,6 +17,11 @@ public class Explosion extends AnimatedGraphicsObject implements ImageObserver{
     
     public static final int EXPLOSION_WIDTH = 50;
     public static final int EXPLOSION_HEIGHT = 39;
+    /** Constructor for Explosion
+     *  @param container the container to draw this in
+     *  @param upperLeft where to draw this
+     *  @param typeIn the type of Explosion this should be
+     */
     public Explosion(JComponent container, Point upperLeft,String typeIn){
         super(container);
         
@@ -70,6 +75,9 @@ public class Explosion extends AnimatedGraphicsObject implements ImageObserver{
 
     }
 
+    /** Loads the image to draw
+     * 
+     */
     protected static void loadPic(){
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         explosion = toolkit.getImage("explode.png");
