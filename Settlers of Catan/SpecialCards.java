@@ -9,39 +9,41 @@ import javax.swing.event.*;
 import java.util.Random;
 
 /**
- * Write a description of class SpecialObjects here.
+ * Constructs special cards--each are worth 2 victory points.
+ * 
+ * The longest road card is set after 3 road segments are used aligned by a player
+ * The largest army card is set after 3 knight cards are drawn by one player
  *
  * @author Kate Nelligan, Lindsay Clark, Adam Dachenhausen
  * @version Spring 2020
  */
 public class SpecialCards extends AnimatedGraphicsObject implements ImageObserver{
-
-
-    //Knight card (x14)- lets the player move the robber    
-    //Road Building (x2)- player can place 2 roads as if they just built them
-    //Year of Plenty (x2)- the player can draw 2 resource cards of their choice from the bank
-    //Monopoly (x2)- player can claim all resource cards of a specific declared type
-    //Victory Point card (x5)- 1 additional Victory Point is added to the owners total and doesn't need to be played to win.
-
     // Constants for card numbers in deck
-
+    public static final int CARD_WIDTH = 80;
+    public static final int CARD_HEIGHT = 125;
 
     //Special card constants
     public static final int LONGEST_ROAD = 1;
     public static final int LARGEST_ARMY = 1;
-
-
+    //image for the card
     private static Image road;    
     private static Image army;
+    //type of the card
+    private String type;
+    //owner of the card
+    private String owner;
 
     /**
-     * Constructor for objects of class DevelopmentCards
+     * Constructor for objects of class Special Cards
      * @param container what should I be drawn in?
      */
-    public SpecialCards(JComponent container)
+    public SpecialCards(JComponent container, Point upperLeft, String type)
     {
         super(container);
-        visible = false;
+
+        this.type = type;
+        this.upperLeft = upperLeft;
+        visible = true;
     }
 
     /** Sets visible to true
@@ -51,19 +53,47 @@ public class SpecialCards extends AnimatedGraphicsObject implements ImageObserve
         visible = true;
     }
 
+    /** Sets visible to true
+     * 
+     */
+    public void getOwner(){
+        visible = true;
+    }
+
+    /** Sets visible to true
+     * 
+     */
+    public void setOwner(String newOwner){
+        owner = newOwner;
+    }
+
+    /** Paints the objects
+     * 
+     */
     @Override
     public void paint(Graphics g){
-        // //draw colored rectangle
 
-        // //paint image of card type icon
-        // if(!done){
-        // //draw image of card
-        // if(value == 1){
-        // g.drawImage(dice1, upperLeft.x , upperLeft.y, this);
-        // }else if(value == 2){
-        // g.drawImage(dice2, upperLeft.x , upperLeft.y, this);
-     
-        // //paint text that describes card type
+        if(visible){
+            // //draw colored rectangle
+            g.setColor(Color.YELLOW);
+
+            g.fillRect(upperLeft.x,upperLeft.y, CARD_WIDTH, CARD_HEIGHT);
+            // g.setColor(Color.BLACK);
+            // g.drawRect(upperLeft.x,upperLeft.y, CARD_WIDTH, CARD_HEIGHT);
+
+            Point picturePoint = new Point(upperLeft.x + 5, upperLeft.y + 15);
+            // //paint image of card type icon
+            switch(type){
+                case MONOPOLY:
+                g.drawImage(monopoly, picturePoint.x , picturePoint.y, this);
+                break;
+
+                case ROADBUILD:
+                g.drawImage(road, picturePoint.x , picturePoint.y, this);
+                break;
+
+            }
+        }
     }
 
     public boolean imageUpdate(Image img, int infoflags, int x, int y,
