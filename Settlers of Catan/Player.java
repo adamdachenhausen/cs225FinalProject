@@ -316,6 +316,22 @@ public class Player
             }
         }
     }
+    
+    public void paint(Graphics g){
+        Color cur = g.getColor();
+        
+        g.setColor(this.c);
+        
+        for(Road r : myRoads){
+            r.paint(g);
+        }
+        for(City city : myCities){
+            city.paint(g);
+        }
+        
+        
+        g.setColor(cur);
+    }
 
     public void addLocation(City c){
         myCities.add(c);
