@@ -684,6 +684,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * @return 
      */
     public void activateRobber(){
+                gamePhase = "Activating robber...";
+        statusPane.setPhase(gamePhase);
         moveRobberDialog();
 
         //anyone with more than 7 cards must discard extras to bank
@@ -704,6 +706,9 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * @return 
      */
     public void moveRobberDialog(){
+                gamePhase = "Moving robber...";
+        statusPane.setPhase(gamePhase);
+        
         //move the robber to a different hex
         String[] options = new String[]{"Yes","No"};
         int answer = JOptionPane.showOptionDialog(null,
@@ -732,6 +737,9 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      */
     public void moveRobber(){
         //move the robber to a different hex
+        
+                gamePhase = "Moving robber...";
+        statusPane.setPhase(gamePhase);
         String[] options = new String[]{"Ok"};
         int answer = JOptionPane.showOptionDialog(null,
                 "Click on the hex tile where you want to move the robber.",
@@ -745,52 +753,6 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         moveRobber = false;
     }
 
-    /**
-     * Each player puts down a road and a settlement.
-     * 
-     * Continues in reverse order until every player puts down two 
-     * settlements and two roads.
-     * 
-     * Direction: 1st round clockwise/2nd round counterclockwise 
-     *
-     * @param pieceType either a settlement, city or road
-     * @return 
-     */
-    public void placeGamePiece(String pieceType){
-        GamePiece newPlacedPiece = null;
-        //place settlements and cities on the corner of a hex
-        if(pieceType.equals("Settlement")){
-            //run until the user clicks on a spot on the gameboard
-            // while(!clicked){
-            // panel.repaint();
-            // }
-            for(int i = 0; i < player1Pieces.size(); i++){
-                if(player1Pieces.get(i).getType().equals(pieceType)){
-                    newPlacedPiece = player1Pieces.get(i);
-
-                    //HERE WE NEED TO ADD THE POINT TO THE SELECTED GAMEPIECE
-                    //Or, we just need to set the one gamepiece as visible here.
-
-                    player1Pieces.get(i).setPlaced(true);
-                }
-            }
-
-            //reset pressPoint for reuse
-            cityPoint = null;
-        }else if(pieceType.equals("City")){
-
-            //reset pressPoint for reuse
-            cityPoint = null;
-        }else if(pieceType.equals("Road")){
-            //place road between two hexes (connected to the settlement); 
-
-            //reset pressPoint for reuse
-            roadPoint1 = null;
-            roadPoint2 = null;
-        }
-
-        panel.repaint();
-    }
 
     /**
      * Distributes resource cards to each player based on the roll of the player in control's dice.
