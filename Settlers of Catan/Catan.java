@@ -269,11 +269,12 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
             checkGamePiece ="";
             gameboardSet = true;
             turn = PLAYER_1;
-            System.out.println("turn before");
+
             distributeResources();
             playerTurn();
         }
-        if(buildStart && checkGamePiece != ""){
+        //buildStart && checkGamePiece != ""
+        if(buildStart){
             checkGamePiece ="";
             developmentTurn();
         }
@@ -1005,7 +1006,6 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                 useResourceCard("Wool");
                 drawDevelopmentCard();
                 JOptionPane.showMessageDialog(null, "You spent an ore, grain & wood card!");
-                JOptionPane.showMessageDialog(null, "You drew a development card!");
             }
         }else if(answer == 1){
             useDevelopmentDialog();
