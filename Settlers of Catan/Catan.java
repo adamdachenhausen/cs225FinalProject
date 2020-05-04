@@ -359,8 +359,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         setBoard();
 
         //create dice
-        die1 = new Dice(panel, new Point(700,300));
-        die2 = new Dice(panel, new Point(700,375));
+        die1 = new Dice(panel, new Point(770,100));
+        die2 = new Dice(panel, new Point(770,175));
 
         //intro dialog
         int answer = introDialog();
@@ -963,6 +963,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                 ResourceCard rc =players.get(answer).removeResourceCard(choice);
                 players.get(turn + 1).addResourceCard(rc);
                 traded = true;
+                JOptionPane.showMessageDialog(null, "You traded the card!");
             }
             i++;
         }
