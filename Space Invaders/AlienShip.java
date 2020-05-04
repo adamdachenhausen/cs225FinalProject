@@ -24,6 +24,9 @@ public class AlienShip extends AnimatedGraphicsObject implements ImageObserver{
     private static Image explodeImage; 
     /**
      * Constructor for objects of class alienShip
+     * 
+     * @param container what should I be drawn in?
+     * @param upperLeft where should I be drawn?
      */
     public AlienShip(JComponent container, Point upperLeft)
     {
@@ -100,6 +103,9 @@ public class AlienShip extends AnimatedGraphicsObject implements ImageObserver{
         explodeImage = toolkit.getImage("explode.png");
     }
 
+    /** Returns the status of dead
+     *  @return dead
+     */
     protected boolean isDead(){
         return dead;
     }
