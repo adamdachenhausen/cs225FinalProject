@@ -72,13 +72,13 @@ public class HexTiles extends AnimatedGraphicsObject{
         this.pts = new Point[6];
         this.locationType=locationType;
         this.subType=subType;
+        
         //Outsource completing the polygon to make it a hexagon
         completeHex();
-        //type = createHexType();
+        
         createHexType();
-        //Creates a string value of the type of hex it is
-        //ex. brick resource is a "hill"
-        //type = createHexType();
+        
+        
         hasRobber = false;
 
     }
@@ -237,7 +237,7 @@ public class HexTiles extends AnimatedGraphicsObject{
             resourceType = hextype;
             break;
         }
-        
+
     }
 
     /** Returns the resource represented by this

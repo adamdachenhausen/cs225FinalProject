@@ -71,8 +71,7 @@ public class GameBoard extends AnimatedGraphicsObject
         robber = new Robber(container, new Point(0,0));
         c = new CityLocations(container);
         roads = new Roads(container);
-        //panel = new JPanel();
-        //panel.setBackground(SEA);
+        
 
         board=new HexTiles[BOARD_WIDTH][BOARD_WIDTH];
         r = Resources.populateR();

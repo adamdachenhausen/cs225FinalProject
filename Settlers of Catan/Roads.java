@@ -48,7 +48,6 @@ public class Roads extends AnimatedGraphicsObject
         //For returning g back to the original color
         Color cur = g.getColor();
 
-        //g.setColor(Color.ORANGE);
 
         for(Road r : roads){
             r.paint(g);
