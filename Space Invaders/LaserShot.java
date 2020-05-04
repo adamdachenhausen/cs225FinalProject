@@ -13,14 +13,20 @@ public class LaserShot extends AnimatedGraphicsObject
 {
     //Standard unit to base a square off of
     public static final int STD = 1;
-
+    /** Constructor for LaserShot
+     *  @param container the container to draw this in
+     *  @param upperLeft where should this be?
+     *  @param typeIn the type of laserShot this should be
+     */
     public LaserShot(JComponent container, Point upperLeft,String typeIn){
         super(container);
         this.upperLeft = upperLeft;
         type=typeIn;
-
     }
 
+    /** Updates upperLeft
+     *  @param upperLeftIn the new value of upperLeft
+     */
     protected void updateUpperLeft(Point upperLeftIn){
         upperLeft = upperLeftIn;
     }
