@@ -269,12 +269,11 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      */
     @Override
     public void mousePressed(MouseEvent e) {
-<<<<<<< HEAD
-        System.out.println("mousepressed");
+
         clicked = true;
-=======
+
         System.out.println(e.getPoint());
->>>>>>> bfd7226b7d068284befa0526084de9f7180865e5
+
         //use boolean flags to determine if mouse listener is used to place
         //gamepieces. 
         if(buildSettlement){
