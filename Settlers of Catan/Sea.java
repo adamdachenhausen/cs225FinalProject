@@ -14,6 +14,15 @@ public class Sea{
     //This is the polygon that constructs the hexagon sea
     public static final int SEA_SIDE_LENGTH = 340;
     public static final int APOTHEM = 294;
+    /** Given a center point creates a hexagon in the shape
+     * 
+     *        _
+     *       / \ 
+     *       \ /
+     *        -
+     *        
+     *  @param center the center of the sea
+     */
     public static Polygon createSea(Point center){
         Polygon p = new Polygon();
         //Create the polygon "sea"
