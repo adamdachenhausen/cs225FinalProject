@@ -25,7 +25,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     public static final int PLAYER_2 = 2;
     public static final int PLAYER_3 = 3;
     public static final int PLAYER_4 = 4;
-    
+
     public static final int WINNING_POINTS = 10;
 
     final static protected int CITIES = 4; 
@@ -208,16 +208,13 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         tradeButton = new JButton("Trade Resource");
         tradeButton.setToolTipText("Trade with another player");
 
-
         //Add buttons
         buttonPanel.add(startButton);
         buttonPanel.add(resetButton);
         buttonPanel.add(instructionsButton);
         buttonPanel.add(buildingCostsButton);
 
-
         buttonPanel.add(continueButton);
-
 
     }
 
@@ -307,7 +304,6 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     @Override
     public void mouseReleased(MouseEvent e) {
 
-
         panel.repaint();
     }
 
@@ -354,7 +350,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
             answer = introDialog(); 
         }
         turn = 1;
-        
+
         //draw status pane
         statusPane = new StatusPane(panel, gamePhase, turn, roll, players);
         statusPane.start();
@@ -985,6 +981,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     public void buyDevelopmentDialog(){
         gamePhase = "Buying development card...";
         statusPane.setPhase(gamePhase);
+
+        boolean cardsExist = false;
         String[] options = new String[]{"Yes","No"};
         int answer = JOptionPane.showOptionDialog(null,
                 "Would you like to buy a development card?",
@@ -995,12 +993,21 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                 options,
                 options[1]);
         if(answer == 0){
-            //1 ore, 1 wool, 1 grain
-            useResourceCard("Ore");
-            useResourceCard("Grain");
-            useResourceCard("Wool");
-            drawDevelopmentCard();
+            int i = 0;
+            while(i < players.size() && !cardsExist){
 
+                i++;
+            }
+            if(cardsExist){
+
+                //1 ore, 1 wool, 1 grain
+                useResourceCard("Ore");
+                useResourceCard("Grain");
+                useResourceCard("Wool");
+                drawDevelopmentCard();
+                JOptionPane.showMessageDialog(null, "You spent an ore, grain & wood card!");
+                JOptionPane.showMessageDialog(null, "You drew a development card!");
+            }
         }else if(answer == 1){
             useDevelopmentDialog();
         }
@@ -1247,6 +1254,33 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      *
      */
     public void drawDevelopmentCard(){
+        gamePhase = "Drawing development card...";
+        statusPane.setPhase(gamePhase);
+        DevelopmentCard dc = developmentDeck.removeCard();
+        String cardtype = dc.getType();
+
+        //remove card from player's hand
+        if(turn == 1){
+            if(dc != null){
+                players.get(0).addDevelopmentCard(dc);
+                JOptionPane.showMessageDialog(null, "You got a " +cardtype+ " card!");
+            }
+        }else if(turn == 2){
+            if(dc != null){
+                players.get(1).addDevelopmentCard(dc);
+                JOptionPane.showMessageDialog(null, "You got a " +cardtype+ " card!");
+            }
+        }else if(turn == 3){
+            if(dc != null){
+                players.get(2).addDevelopmentCard(dc);
+                JOptionPane.showMessageDialog(null, "You got a " +cardtype+ " card!");
+            }
+        }else{
+            if(dc != null){
+                players.get(3).addDevelopmentCard(dc);
+                JOptionPane.showMessageDialog(null, "You got a " +cardtype+ " card!");
+            }
+        }
 
     }
 
