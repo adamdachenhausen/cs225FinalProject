@@ -20,10 +20,12 @@ import java.io.*;
  * @version Spring 2020
  */
 public class Catan extends ThreadGraphicsController implements MouseListener, MouseMotionListener, ActionListener{
+    //Players in the game
     public static final int PLAYER_1 = 1;
     public static final int PLAYER_2 = 2;
     public static final int PLAYER_3 = 3;
     public static final int PLAYER_4 = 4;
+    
     public static final int WINNING_POINTS = 10;
 
     final static protected int CITIES = 4; 

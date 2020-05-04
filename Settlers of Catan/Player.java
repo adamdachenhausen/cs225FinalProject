@@ -57,7 +57,7 @@ public class Player
     protected ArrayList<String> devHand;
     protected ArrayList<String> resourceHand;
 
-    protected ArrayList<GamePiece> placedPieces;
+
     protected ArrayList<Road> myRoads;
     protected ArrayList<City> myCities;
 
@@ -76,7 +76,6 @@ public class Player
         resourceCards = new ArrayList<ResourceCard>();
         resourceHand = new ArrayList<String>();
         devHand = new ArrayList<String>();
-        placedPieces = new ArrayList<GamePiece>();
         cities = 0;
         settlements = 0;
         roads = 0;
