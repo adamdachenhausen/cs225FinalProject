@@ -20,6 +20,14 @@ public class Road extends AnimatedGraphicsObject
     protected String type;
     protected boolean placed;
     protected boolean possible;
+    
+    /** Constructor for Road
+     * 
+     *  @param container what should I be drawn in?
+     *  @param start where should I start?
+     *  @param end where should I end?
+     *  @param type what type should I be?
+     */
     public Road(JComponent container,Point start, Point end, String type){
         super(container);
         this.start = start;
@@ -87,18 +95,23 @@ public class Road extends AnimatedGraphicsObject
         return new Point((start.x + end.x)/2,(start.y + end.y)/2);
     }
 
-    /** returns point
+    /** returns start
+     *  @return start
      */
     public Point getRoadPoint1(){
         return start;
     }
 
-    /** returns point
+    /** returns end
+     * @return end
      */
     public Point getRoadPoint2(){
         return end;
     }
 
+    /** Updates this so that it will draw a polygon, not just a circle
+     * 
+     */
     public void update(){
         if(possible){
             placed = true;
