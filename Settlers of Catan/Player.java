@@ -56,6 +56,8 @@ public class Player
     protected ArrayList<String> resourceHand;
 
     protected ArrayList<GamePiece> placedPieces;
+    protected ArrayList<Road> myRoads;
+    protected ArrayList<City> myCities;
 
     /**
      * An example of a method - replace this comment with your own
@@ -76,6 +78,9 @@ public class Player
         cities = 0;
         settlements = 0;
         roads = 0;
+
+        myRoads = new ArrayList(MAX_ROADS);
+        myCities = new ArrayList(MAX_CITIES + MAX_SETTLEMENTS);
     }
 
     public void addResourceCard(ResourceCard rc){
@@ -303,6 +308,39 @@ public class Player
         return colString;
     }
 
+    protected void checkCitiesForUpdates(Point p){
+        for(City c : myCities){
+            if(p.distance(c.getCityPoint())<=GameBoard.USER_ERROR_TOL){
+                c.update();
+                break;
+            }
+        }
+    }
+    
+    public void paint(Graphics g){
+        Color cur = g.getColor();
+        
+        g.setColor(this.c);
+        
+        for(Road r : myRoads){
+            r.paint(g);
+        }
+        for(City city : myCities){
+            city.paint(g);
+        }
+        
+        
+        g.setColor(cur);
+    }
+
+    public void addLocation(City c){
+        myCities.add(c);
+    }
+    
+    public void addRoad(Road r){
+        myRoads.add(r);
+    }
+    
     public ArrayList<ResourceCard> getResourceCards(){
         return resourceCards;
     }

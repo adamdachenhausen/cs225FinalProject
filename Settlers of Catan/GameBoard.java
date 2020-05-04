@@ -34,7 +34,7 @@ public class GameBoard extends AnimatedGraphicsObject
     //The amount of error that the user can be off of an object's 
     //exact point and still place that object
     public static final int USER_ERROR_TOL = 5;
-    
+
     private JPanel panel;
     protected HexTiles[][] board;
     private Stack<Resource> r;
@@ -52,7 +52,13 @@ public class GameBoard extends AnimatedGraphicsObject
 
     protected Roads roads;
 
-    ArrayList<Point> locs;
+    protected ArrayList<Point> locs;
+
+    protected Player curPlayer;
+    protected Player player1;
+    protected Player player2;
+    protected Player player3;
+    protected Player player4;
     public GameBoard(JComponent container, Point center){
         super(container);
         this.container = container;
@@ -76,6 +82,13 @@ public class GameBoard extends AnimatedGraphicsObject
 
         sea = Sea.createSea(center);
 
+    }
+    
+    public void updatePlayers(Player p1, Player p2, Player p3, Player p4){
+        player1 = p1;
+        player2 = p2;
+        player3 = p3;
+        player4 = p4;
     }
 
     /** Manually created board of hexTiles
@@ -184,6 +197,10 @@ public class GameBoard extends AnimatedGraphicsObject
         placeToken();
     }
 
+    public void updateCurPlayer(Player p){
+        curPlayer = p;
+    }
+
     /**
      *  Just loops through each item in board and calls its paint method
      */
@@ -225,6 +242,19 @@ public class GameBoard extends AnimatedGraphicsObject
         }
         if(roads != null){
             roads.paint(g);
+        }
+        
+        if(player1!=null){
+            player1.paint(g);
+        }
+        if(player2!=null){
+            player2.paint(g);
+        }
+        if(player3!=null){
+            player3.paint(g);
+        }
+        if(player4!=null){
+            player4.paint(g);
         }
     }
 
@@ -419,9 +449,12 @@ public class GameBoard extends AnimatedGraphicsObject
         List<City> citiesList = c.getLocations();
         List<Road> roadsList = roads.getRoadList();
 
+        //These two check the lists to see if the user clicked on a city or road, not
+        //currently on the board
         for(City c : citiesList){
             if(p.distance(c.getCityPoint())<=USER_ERROR_TOL){
                 c.update();
+                curPlayer.addLocation(c);
                 this.c.removeLocation(c);
                 break;
             }
@@ -429,9 +462,14 @@ public class GameBoard extends AnimatedGraphicsObject
         for(Road r : roadsList){
             if(p.distance(r.midPoint())<=USER_ERROR_TOL){
                 r.update();
+                curPlayer.addRoad(r);
                 this.roads.removeRoad(r);
                 break;
             }
         }
+
+        //But we still need to check if they wanted to upgrade their city to a settlement
+        curPlayer.checkCitiesForUpdates(p);
     }
+
 }

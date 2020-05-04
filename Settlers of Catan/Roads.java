@@ -25,15 +25,15 @@ public class Roads extends AnimatedGraphicsObject
     public void addRoad(Road r){
         roads.add(r);
     }
-    
+
     /** Removes a Road from roads
      *  @param r the Road to be removed from the internal roads
      */
     public void removeRoad(Road r){
         roads.remove(r);
     }
-    
-            /** Adds a point to this
+
+    /** Adds a point to this
      *  @param p a city/settlement to add to this
      */
     public List getRoadList(){
@@ -45,7 +45,7 @@ public class Roads extends AnimatedGraphicsObject
         //For returning g back to the original color
         Color cur = g.getColor();
 
-        g.setColor(Color.ORANGE);
+        //g.setColor(Color.ORANGE);
 
         for(Road r : roads){
             r.paint(g);

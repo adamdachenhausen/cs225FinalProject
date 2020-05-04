@@ -26,7 +26,7 @@ public class Road extends AnimatedGraphicsObject
         this.end = end;
         this.type = type;
         this.placed = false;
-        this.possible = false;
+        this.possible = true;
     }
 
     @Override
@@ -35,7 +35,7 @@ public class Road extends AnimatedGraphicsObject
         Color cur = g.getColor();
 
         if(placed){
-            g.setColor(Color.ORANGE);
+            //g.setColor(Color.ORANGE);
             Polygon p = new Polygon();
 
             if(type.equals("|")){
