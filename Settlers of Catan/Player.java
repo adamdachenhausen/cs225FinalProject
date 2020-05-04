@@ -280,30 +280,31 @@ public class Player
         return resourceHand;
     }
 
-        /**
-     * Returns the resource card hand 
+    /**
+     * Returns player number
      *
-     * @returns  resourceHand the arraylist of resource card types
+     * @returns  the player number
      */
     public int getPlayerNumber(){
 
         return playerNumber;
     }
 
-        /**
-     * Returns the resource card hand 
+    /**
+     * Returns the development cards held by the player 
+     * (all cards not just types)
      *
-     * @returns  resourceHand the arraylist of resource card types
+     * @returns  devCards arraylist
      */
     public ArrayList<DevelopmentCard> getDevelopmentCards(){
 
         return devCards;
     }
 
-        /**
-     * Returns the resource card hand 
+    /**
+     * Returns the tostring of the cards held
      *
-     * @returns  resourceHand the arraylist of resource card types
+     * @returns  the String value of the cards.
      */
     public String getResourceToString(){
         StringBuilder s = new StringBuilder();
@@ -333,10 +334,10 @@ public class Player
         return resCards;
     }
 
-        /**
-     * Returns the resource card hand 
+    /**
+     * Returns the development card to string
      *
-     * @returns  resourceHand the arraylist of resource card types
+     * @returns  the toString of the dev cards
      */
     public String getDevToString(String toStringType){
         StringBuilder s = new StringBuilder();
@@ -369,17 +370,16 @@ public class Player
         return dCards;
     }
 
-        /**
-     * Returns the resource card hand 
+    /**
+     * Returns the game piece toString
      *
-     * @returns  resourceHand the arraylist of resource card types
+     * @returns the string value for the gamepieces
      */
     public String getPiecesToString(){
-        return ("Settlements: " + settlements + ", Cities: " + cities + ", Roads: " + roads);
+        return ("Cities: " + cities + ", Roads: " + roads);
     }
 
-    
-        /**
+    /**
      * Returns the resource card hand 
      *
      * @returns  resourceHand the arraylist of resource card types
@@ -398,8 +398,7 @@ public class Player
         return colString;
     }
 
-    
-        /**
+    /**
      * Returns the resource card hand 
      *
      * @returns  resourceHand the arraylist of resource card types
@@ -413,8 +412,7 @@ public class Player
         }
     }
 
-    
-        /**
+    /**
      * Returns the resource card hand 
      *
      * @returns  resourceHand the arraylist of resource card types
@@ -434,8 +432,7 @@ public class Player
         g.setColor(cur);
     }
 
-    
-        /**
+    /**
      * Returns the resource card hand 
      *
      * @returns  resourceHand the arraylist of resource card types
@@ -444,8 +441,7 @@ public class Player
         myCities.add(c);
     }
 
-    
-        /**
+    /**
      * Returns the resource card hand 
      *
      * @returns  resourceHand the arraylist of resource card types
@@ -454,8 +450,7 @@ public class Player
         myRoads.add(r);
     }
 
-    
-        /**
+    /**
      * Returns the resource card hand 
      *
      * @returns  resourceHand the arraylist of resource card types
@@ -464,8 +459,7 @@ public class Player
         return resourceCards;
     }
 
-    
-        /**
+    /**
      * Returns the resource card hand 
      *
      * @returns  resourceHand the arraylist of resource card types
@@ -474,8 +468,7 @@ public class Player
         return c;
     }
 
-    
-        /**
+    /**
      * Returns the resource card hand 
      *
      * @returns  resourceHand the arraylist of resource card types
@@ -485,8 +478,7 @@ public class Player
         return turn;
     }
 
-    
-        /**
+    /**
      * Returns the resource card hand 
      *
      * @returns  resourceHand the arraylist of resource card types
@@ -496,8 +488,7 @@ public class Player
         return cities;
     }
 
-    
-        /**
+    /**
      * Returns the resource card hand 
      *
      * @returns  resourceHand the arraylist of resource card types
@@ -507,8 +498,7 @@ public class Player
         return myCities;
     }
 
-    
-        /**
+    /**
      * Returns the resource card hand 
      *
      * @returns  resourceHand the arraylist of resource card types
@@ -517,8 +507,7 @@ public class Player
         return settlements;
     }
 
-    
-        /**
+    /**
      * Returns the resource card hand 
      *
      * @returns  resourceHand the arraylist of resource card types
@@ -528,8 +517,7 @@ public class Player
         return roads;
     }
 
-    
-        /**
+    /**
      * Returns the resource card hand 
      *
      * @returns  resourceHand the arraylist of resource card types
@@ -539,8 +527,7 @@ public class Player
         return myRoads;
     }
 
-    
-        /**
+    /**
      * Returns the resource card hand 
      *
      * @returns  resourceHand the arraylist of resource card types
@@ -550,8 +537,7 @@ public class Player
         return victoryPoints;
     }
 
-    
-        /**
+    /**
      * Returns the resource card hand 
      *
      * @returns  resourceHand the arraylist of resource card types
@@ -561,8 +547,7 @@ public class Player
         return victoryPointCards;
     }
 
-    
-        /**
+    /**
      * Returns the resource card hand 
      *
      * @returns  resourceHand the arraylist of resource card types
@@ -572,8 +557,7 @@ public class Player
         return knights;
     }
 
-    
-        /**
+    /**
      * Returns the resource card hand 
      *
      * @returns  resourceHand the arraylist of resource card types
@@ -583,8 +567,7 @@ public class Player
         return roadLength;
     }
 
-    
-        /**
+    /**
      * Returns the resource card hand 
      *
      * @returns  resourceHand the arraylist of resource card types
@@ -594,8 +577,7 @@ public class Player
         return largestArmy;
     }
 
-    
-        /**
+    /**
      * Returns the resource card hand 
      *
      * @returns  resourceHand the arraylist of resource card types
@@ -605,8 +587,7 @@ public class Player
         return longestRoad;
     }
 
-    
-        /**
+    /**
      * Returns the resource card hand 
      *
      * @returns  resourceHand the arraylist of resource card types
@@ -620,8 +601,7 @@ public class Player
         cities = newcities;
     }
 
-    
-        /**
+    /**
      * Returns the resource card hand 
      *
      * @returns  resourceHand the arraylist of resource card types
@@ -631,8 +611,7 @@ public class Player
         settlements = newsettle;
     }
 
-    
-        /**
+    /**
      * Returns the resource card hand 
      *
      * @returns  resourceHand the arraylist of resource card types
@@ -642,8 +621,7 @@ public class Player
         roads = newroads;
     }
 
-    
-        /**
+    /**
      * Returns the resource card hand 
      *
      * @returns  resourceHand the arraylist of resource card types
@@ -653,8 +631,7 @@ public class Player
         cities++;
     }
 
-    
-        /**
+    /**
      * Returns the resource card hand 
      *
      * @returns  resourceHand the arraylist of resource card types
@@ -664,8 +641,7 @@ public class Player
         settlements++;
     }
 
-    
-        /**
+    /**
      * Returns the resource card hand 
      *
      * @returns  resourceHand the arraylist of resource card types
@@ -675,8 +651,7 @@ public class Player
         roads++;
     }
 
-    
-        /**
+    /**
      * Returns the resource card hand 
      *
      * @returns  resourceHand the arraylist of resource card types
@@ -686,8 +661,7 @@ public class Player
         victoryPoints = vp;
     }
 
-    
-        /**
+    /**
      * Returns the resource card hand 
      *
      * @returns  resourceHand the arraylist of resource card types
@@ -697,7 +671,7 @@ public class Player
         victoryPointCards = vpc;
     }
 
-        /**
+    /**
      * Returns the resource card hand 
      *
      * @returns  resourceHand the arraylist of resource card types
@@ -706,7 +680,7 @@ public class Player
         knights = newknights;
     }
 
-        /**
+    /**
      * Returns the resource card hand 
      *
      * @returns  resourceHand the arraylist of resource card types
@@ -715,7 +689,7 @@ public class Player
         roadLength = rl;
     }
 
-        /**
+    /**
      * Returns the resource card hand 
      *
      * @returns  resourceHand the arraylist of resource card types
@@ -725,7 +699,7 @@ public class Player
         largestArmy = la;
     }
 
-        /**
+    /**
      * Returns the resource card hand 
      *
      * @returns  resourceHand the arraylist of resource card types
@@ -735,7 +709,7 @@ public class Player
         longestRoad = lr;
     }
 
-        /**
+    /**
      * Returns the resource card hand 
      *
      * @returns  resourceHand the arraylist of resource card types
@@ -744,7 +718,7 @@ public class Player
         roadLength = newRoadLength;
     }
 
-        /**
+    /**
      * Returns the resource card hand 
      *
      * @returns  resourceHand the arraylist of resource card types
@@ -753,7 +727,7 @@ public class Player
         cities = myCities.size();;
     }
 
-        /**
+    /**
      * Returns the resource card hand 
      *
      * @returns  resourceHand the arraylist of resource card types
@@ -762,7 +736,7 @@ public class Player
         roads = myRoads.size();;
     }
 
-        /**
+    /**
      * Returns the resource card hand 
      *
      * @returns  resourceHand the arraylist of resource card types
