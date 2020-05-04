@@ -527,9 +527,9 @@ public class Player
     }
 
     /**
-     * Returns the resource card hand 
+     * Returns the victory points of the player
      *
-     * @returns  resourceHand the arraylist of resource card types
+     * @returns the victory points total of the player
      */
     public int getVictoryPoints(){
 
@@ -537,9 +537,9 @@ public class Player
     }
 
     /**
-     * Returns the resource card hand 
+     * Returns if the user holds a victory points card
      *
-     * @returns  resourceHand the arraylist of resource card types
+     * @returns the number of vp cards the player holds
      */
     public int getVictoryPointCards(){
 
@@ -547,9 +547,9 @@ public class Player
     }
 
     /**
-     * Returns the resource card hand 
+     * Returns the number of knights cards the player holds
      *
-     * @returns  resourceHand the arraylist of resource card types
+     * @returns the number of knights the player holds
      */
     public int getKnights(){
 
