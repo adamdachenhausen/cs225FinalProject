@@ -853,7 +853,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                 //Choice is the answer in the array of the card to use
                 String choice = options[answer];
 
-                useResourceCard(choice);
+                //useResourceCard(choice);
             }
         }else if(turn == 2){
             if(players.get(1).getDevelopmentHand().size()>0){
@@ -874,7 +874,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                 //Choice is the answer in the array of the card to use
                 String choice = options[answer];
 
-                useDevelopmentCard(choice);
+                //useDevelopmentCard(choice);
             }
         }else if(turn == 3){
             if(players.get(2).getDevelopmentHand().size()>0){
@@ -895,7 +895,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                 //Choice is the answer in the array of the card to use
                 String choice = options[answer];
 
-                useDevelopmentCard(choice);
+                //useDevelopmentCard(choice);
             }
         }else if(turn == 4){
             if(players.get(3).getDevelopmentHand().size()>0){
@@ -916,7 +916,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                 //Choice is the answer in the array of the card to use
                 String choice = options[answer];
 
-                useDevelopmentCard(choice);
+                //useDevelopmentCard(choice);
             } 
 
         }else{
@@ -927,22 +927,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                     icon,noCards,noCards[0]);
         }
 
-        
-        
-        
-        // //trading can only happen with the active player on a turn
-        // String[] options = new String[]{"Yes","No"};
-        // int answer = JOptionPane.showOptionDialog(null,
-        // "Which card would you like to trade?",
-        // "Trade Selection interface",
-        // JOptionPane.YES_NO_CANCEL_OPTION,
-        // JOptionPane.QUESTION_MESSAGE,
-        // null,
-        // options,
-        // options[1]);
-        // if(answer == 0){
-        // swapCards();
-        // }
+
         panel.repaint();
     }
 
