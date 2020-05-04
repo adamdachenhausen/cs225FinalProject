@@ -59,6 +59,11 @@ public class GameBoard extends AnimatedGraphicsObject
     protected Player player2;
     protected Player player3;
     protected Player player4;
+
+    /** Constructor for GameBoard
+     * @param container what should I be drawn in?
+     * @param center where should I be drawn?
+     */
     public GameBoard(JComponent container, Point center){
         super(container);
         this.container = container;
@@ -84,6 +89,12 @@ public class GameBoard extends AnimatedGraphicsObject
 
     }
 
+    /** Given four players, updates the locally saved ones
+     *  @param p1 player1 
+     *  @param p2 player2 
+     *  @param p3 player3 
+     *  @param p4 player4 
+     */
     public void updatePlayers(Player p1, Player p2, Player p3, Player p4){
         player1 = p1;
         player2 = p2;
@@ -197,6 +208,9 @@ public class GameBoard extends AnimatedGraphicsObject
         placeToken();
     }
 
+    /** Given a player, updates the current player to p
+     * @param p the player whose turn it is 
+     */
     public void updateCurPlayer(Player p){
         curPlayer = p;
     }
@@ -263,6 +277,9 @@ public class GameBoard extends AnimatedGraphicsObject
 
     }
 
+    /**
+     *  Loops through the double array and starts each hexTile if possible
+     */
     public void startBoard(){
         //starts each hex run method
         for(int i=0; i<board.length;i++){
@@ -285,11 +302,18 @@ public class GameBoard extends AnimatedGraphicsObject
         return center;
     }
 
+    /** Returns the size of a hexTile
+     *  @return HEX_SIZE
+     */
     public int getHexSize(){
 
         return HEX_SIZE;
     }
 
+    /** Given a type, finds a hexTile of that type
+     *  @param hexType the type of a hex to search for
+     *  @return the point of a hex that matches hexType
+     */
     public Point findHex(String hexType){
         Point hexPt = upperLeft;
         for(int i=0; i<board.length;i++){
@@ -306,6 +330,11 @@ public class GameBoard extends AnimatedGraphicsObject
         return hexPt;
     }
 
+    /** Given a specific tokenValue, searches for a hex and returns its resource value
+     *  @param tokenValue the token value to search hexes for
+     *  @return the resourceType of a hex with this token value
+     * 
+     */
     public String getHexResourceValue(int tokenValue){
         String hexResourceType = "";
         for(int i=0; i<board.length;i++){
@@ -338,7 +367,7 @@ public class GameBoard extends AnimatedGraphicsObject
         return curPlayer;
     }
 
-    /**
+    /** Places tokens on the hexTiles
      * 
      */
     public void placeToken(){
@@ -444,22 +473,22 @@ public class GameBoard extends AnimatedGraphicsObject
         return robber;
     }
 
-    /** Returns the robber object
+    /** Returns the cityLocations
      *  @return the city locations
      */
     public CityLocations getCities(){
         return c;
     }
 
-    /** Returns the robber object
+    /** Returns the roads List
      *  @return the roads
      */
     public Roads getRoadsList(){
         return roads;
     }
 
-    /** Returns the robber object
-     *  @return the roads
+    /** Returns the locations of cities
+     *  @return the locs
      */
     public ArrayList<Point> getAllPoints(){
         return locs;
@@ -470,6 +499,7 @@ public class GameBoard extends AnimatedGraphicsObject
      *  USER_ERROR_TOL, running through an extra loop yields nothing
      * 
      *  @param p The point of click
+     *  @param playerNum the current player's number
      */
     public String handleClick(Point p, int playerNum){
         List<City> citiesList = c.getLocations();
