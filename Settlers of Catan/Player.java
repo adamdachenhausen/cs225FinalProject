@@ -498,18 +498,18 @@ public class Player
     }
 
     /**
-     * Returns the resource card hand 
+     * Returns the settlements of the player
      *
-     * @returns  resourceHand the arraylist of resource card types
+     * @returns settlements
      */
     public int getSettlements(){
         return settlements;
     }
 
     /**
-     * Returns the resource card hand 
+     * Returns the roads of the player
      *
-     * @returns  resourceHand the arraylist of resource card types
+     * @returns roads
      */
     public int getRoads(){
 
@@ -517,9 +517,9 @@ public class Player
     }
 
     /**
-     * Returns the resource card hand 
+     * Returns the roads list of the player
      *
-     * @returns  resourceHand the arraylist of resource card types
+     * @returns the roads list arraylist of the player
      */
     public ArrayList<Road> getMyRoads(){
 
