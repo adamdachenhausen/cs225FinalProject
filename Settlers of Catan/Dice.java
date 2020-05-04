@@ -28,6 +28,8 @@ public class Dice extends AnimatedGraphicsObject implements ImageObserver{
 
     /**
      * Constructor for objects of class Dice
+     * @param container what should I be drawn in?
+     * @param upperLeft where should I be drawn?
      */
     public Dice(JComponent container, Point ul){
         super(container);
@@ -55,12 +57,18 @@ public class Dice extends AnimatedGraphicsObject implements ImageObserver{
         }
     }
 
+    /** Simulates the roll of dice
+     * 
+     */
     public int rollDice(){
         Random r = new Random();
         value = r.nextInt(5) + 1;
         return value;
     }
 
+    /** Allows dice to be seen
+     * 
+     */
     public void showDice(){
         visible = true;
     }
