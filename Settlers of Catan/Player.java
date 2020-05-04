@@ -557,9 +557,9 @@ public class Player
     }
 
     /**
-     * Returns the resource card hand 
+     * Returns the number of connected road lengths.
      *
-     * @returns  resourceHand the arraylist of resource card types
+     * @returns  the number of connected road segments
      */
     public int getRoadLength(){
 
@@ -567,9 +567,9 @@ public class Player
     }
 
     /**
-     * Returns the resource card hand 
+     * Returns true if the user holds the largest army card.
      *
-     * @returns  resourceHand the arraylist of resource card types
+     * @returns the largest army card if it exists
      */
     public boolean getLargestArmy(){
 
@@ -577,9 +577,9 @@ public class Player
     }
 
     /**
-     * Returns the resource card hand 
+     * Returns true if the user holds the longest road card.
      *
-     * @returns  resourceHand the arraylist of resource card types
+     * @returns  true if the user holds the card.
      */
     public boolean getLongestRoad(){
 
@@ -587,14 +587,17 @@ public class Player
     }
 
     /**
-     * Returns the resource card hand 
-     *
-     * @returns  resourceHand the arraylist of resource card types
+     * Sets the turn to a new boolean value 
+     * @param turnflag the new boolean value
      */
     public void setTurn(boolean turnflag){
         turn = turnflag;
     }
 
+    /**
+     * Sets the cities value to a new amount
+     * @param newcities the new city value
+     */
     public void setCities(int newcities){
 
         cities = newcities;
