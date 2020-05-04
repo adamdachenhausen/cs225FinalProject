@@ -49,6 +49,10 @@ public class CityLocations extends AnimatedGraphicsObject
         //For returning g back to the original color
         Color cur = g.getColor();
 
+        for(City c : locations){
+            c.paint(g);
+        }
+        
         //Set g back to the original color
         g.setColor(cur);
     }
