@@ -380,9 +380,9 @@ public class Player
     }
 
     /**
-     * Returns the resource card hand 
+     * Returns the color value of the player
      *
-     * @returns  resourceHand the arraylist of resource card types
+     * @returns  a string value of the color of the player pieces
      */
     public String getColorToString(){
         String colString = "";
@@ -399,9 +399,9 @@ public class Player
     }
 
     /**
-     * Returns the resource card hand 
+     * Checks the cities if they got upgraded
      *
-     * @returns  resourceHand the arraylist of resource card types
+     * 
      */
     protected void checkCitiesForUpdates(Point p){
         for(City c : myCities){
@@ -413,7 +413,7 @@ public class Player
     }
 
     /**
-     * Returns the resource card hand 
+     * The required paint method to draw pieces.
      *
      * @returns  resourceHand the arraylist of resource card types
      */
@@ -433,45 +433,44 @@ public class Player
     }
 
     /**
-     * Returns the resource card hand 
+     * Added the location of the city to myCities (player gamepiece)
      *
-     * @returns  resourceHand the arraylist of resource card types
      */
     public void addLocation(City c){
         myCities.add(c);
     }
 
     /**
-     * Returns the resource card hand 
+     * Adds a road to myRoads (player gamepiece)
      *
-     * @returns  resourceHand the arraylist of resource card types
      */
     public void addRoad(Road r){
         myRoads.add(r);
     }
 
     /**
-     * Returns the resource card hand 
+     * Returns the arraylist of ResourceCards
      *
-     * @returns  resourceHand the arraylist of resource card types
+     * @returns the ArrayList of resource cards
      */
     public ArrayList<ResourceCard> getResourceCards(){
         return resourceCards;
     }
 
     /**
-     * Returns the resource card hand 
+     * Returns the color value of the player
      *
-     * @returns  resourceHand the arraylist of resource card types
+     * @returns  Color value of the player
      */
     public Color getColor(){
         return c;
     }
 
     /**
-     * Returns the resource card hand 
+     * Returns true if it is someone's turn
      *
-     * @returns  resourceHand the arraylist of resource card types
+     * @returns  determines whose turn it is, returns 
+     * true if it is player turn
      */
     public boolean getTurn(){
 
@@ -479,9 +478,9 @@ public class Player
     }
 
     /**
-     * Returns the resource card hand 
+     * Returns the cities of the player
      *
-     * @returns  resourceHand the arraylist of resource card types
+     * @returns  cities variable for cities owned by player
      */
     public int getCities(){
 
@@ -489,9 +488,9 @@ public class Player
     }
 
     /**
-     * Returns the resource card hand 
+     * Returns the arraylist of myCities
      *
-     * @returns  resourceHand the arraylist of resource card types
+     * @returns  the arraylist myCities
      */
     public ArrayList<City> getMyCities(){
 
