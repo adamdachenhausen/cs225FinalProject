@@ -417,6 +417,21 @@ public class Player
 
         roads = newroads;
     }
+    
+        public void addCities(){
+
+        cities++;
+    }
+
+    public void addSettlements(){
+
+        settlements++;
+    }
+
+    public void addRoads(){
+
+        roads++;
+    }
 
     public void setVictoryPoints(int vp){
 

@@ -382,7 +382,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         //distributeGamepieces();
 
         //Set turn to first player and place first two settlements
-        turn = 1;
+        turn = PLAYER_1;
         // placeGamePiece("Settlement");
         // buildSettlement = true;
         // placeGamePiece("Road");
@@ -402,7 +402,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         // }
 
         //Play game
-        playGame();
+        //playGame();
     }
 
     /**
@@ -517,8 +517,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         if(e.getSource().equals(continueButton)){
             //rollDialog();
             //tradeResourcesDialog();
-            placeGamePiece("Settlement");
-            buildSettlement = true;
+            //placeGamePiece("Settlement");
+            //buildSettlement = true;
             //placeGamePiece("Road");
             //buildRoad = true;
         }

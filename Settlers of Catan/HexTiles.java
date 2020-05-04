@@ -46,6 +46,7 @@ public class HexTiles extends AnimatedGraphicsObject{
     protected Polygon p;
 
     protected Tokens t;
+    
 
     protected Point[] pts;
 
@@ -74,6 +75,7 @@ public class HexTiles extends AnimatedGraphicsObject{
         //ex. brick resource is a "hill"
         //type = createHexType();
         hasRobber = false;
+
     }
 
     /**

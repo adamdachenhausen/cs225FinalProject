@@ -31,6 +31,8 @@ public class City extends AnimatedGraphicsObject implements ImageObserver
 
     //Am a possible placement, but not yet placed?
     protected boolean possible;
+    
+    protected String owner;
 
     private static Image cityImage;
     private static Image settlementImage;
@@ -45,6 +47,7 @@ public class City extends AnimatedGraphicsObject implements ImageObserver
         placed = false;
         city = true;
         settlement = false;
+        owner = "";
     }
 
     @Override
@@ -106,5 +109,21 @@ public class City extends AnimatedGraphicsObject implements ImageObserver
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         cityImage = toolkit.getImage("city.png");
         settlementImage = toolkit.getImage("settlement.png");
+    }
+    
+    protected String getOwner(){
+        return owner;
+    }
+    
+        protected void setOwner(int playerNumber){
+        if(playerNumber == 1){
+          owner = "Player 1";  
+        }else if(playerNumber == 2){
+           owner = "Player 2"; 
+        }else if(playerNumber == 3){
+            owner = "Player 3";
+        }else{
+            owner = "Player 4";
+        }
     }
 }
