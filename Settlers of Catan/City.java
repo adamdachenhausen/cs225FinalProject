@@ -31,12 +31,13 @@ public class City extends AnimatedGraphicsObject implements ImageObserver
 
     //Am a possible placement, but not yet placed?
     protected boolean possible;
-    
+
     protected String owner;
+    protected int tokenValue;
 
     private static Image cityImage;
     private static Image settlementImage;
-    public City(JComponent container, Point center){
+    public City(JComponent container, Point center, int tokenValue){
         super(container);
         this.container = container;
 
@@ -48,6 +49,7 @@ public class City extends AnimatedGraphicsObject implements ImageObserver
         city = true;
         settlement = false;
         owner = "";
+        this.tokenValue = tokenValue;
     }
 
     @Override
@@ -110,16 +112,20 @@ public class City extends AnimatedGraphicsObject implements ImageObserver
         cityImage = toolkit.getImage("city.png");
         settlementImage = toolkit.getImage("settlement.png");
     }
-    
+
     protected String getOwner(){
         return owner;
     }
     
-        protected void setOwner(int playerNumber){
+        protected int getTokenValue(){
+        return tokenValue;
+    }
+
+    protected void setOwner(int playerNumber){
         if(playerNumber == 1){
-          owner = "Player 1";  
+            owner = "Player 1";  
         }else if(playerNumber == 2){
-           owner = "Player 2"; 
+            owner = "Player 2"; 
         }else if(playerNumber == 3){
             owner = "Player 3";
         }else{

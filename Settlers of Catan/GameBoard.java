@@ -378,9 +378,10 @@ public class GameBoard extends AnimatedGraphicsObject
             for(int j=0; j<board[0].length;j++){
                 if(board[i][j]!= null){
                     locs = board[i][j].getCityLocations();
+                    int tokenValue = board[i][j].getToken().getTokenValue();
                     ArrayList<Road> rds = board[i][j].getRoads();
                     for(int k = 0; k<locs.size();k++){
-                        c.addLocation(new City(container,locs.get(k)));
+                        c.addLocation(new City(container,locs.get(k), tokenValue));
                     }
                     for(int k = 0; k<rds.size();k++){
                         roads.addRoad(rds.get(k));
