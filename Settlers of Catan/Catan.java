@@ -980,9 +980,6 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
             buildStart = true;
             JOptionPane.showMessageDialog(null,"Press space to end building");
             //Wait for user to build
-            while(!doneBuilding){
-
-            }
         }else{
             developmentTurn();
         }
@@ -1029,8 +1026,6 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                 drawDevelopmentCard();
                 JOptionPane.showMessageDialog(null, "You spent an ore, grain & wood card!");
             }
-        }else if(answer == 1){
-            useDevelopmentDialog();
         }
         panel.repaint();
     }
