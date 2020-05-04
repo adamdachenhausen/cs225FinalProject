@@ -188,27 +188,27 @@ public class HexTiles extends AnimatedGraphicsObject{
         String hextype = "";
         switch(r){
             case BRICKS:
-            hextype = "Hill";
+            hextype = "Brick";
             resourceType = hextype;
             break;
 
             case WOOD:
-            hextype = "Forest";
+            hextype = "Lumber";
             resourceType = hextype;
             break;
 
             case ORE:
-            hextype = "Mountain";
+            hextype = "Ore";
             resourceType = hextype;
             break;
 
             case WHEAT:
-            hextype = "Field";
+            hextype = "Grain";
             resourceType = hextype;
             break;
 
             case WOOL:
-            hextype = "Pasture";
+            hextype = "Wool";
             resourceType = hextype;
             break;
 

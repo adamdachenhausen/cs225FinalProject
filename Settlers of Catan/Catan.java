@@ -288,6 +288,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         }
         if(players.get(3).getCities() >= 2 && players.get(3).getRoads() >= 2){
             gameboardSet = true;
+            turn = PLAYER_1;
             distributeResources();
         }
 
@@ -810,15 +811,18 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                 //search list of player-owned cities
                 for(int j = 0; j < c.size(); j++){
                     //if city token value == roll value
-                    if(c.get(j).getTokenValue() == roll){
-                        int tokVal = c.get(j).getTokenValue();
 
-                        //get hex resource type to distribute;
-                        rType = gameboard.getHexResourceValue(tokVal);
-                        drawResourceCard(rType);
-                    }
+                    int tokVal = c.get(j).getTokenValue();
+
+                    //get hex resource type to distribute;
+                    rType = gameboard.getHexResourceValue(tokVal);
+                    drawResourceCard(rType);
+
                 }
+
             }
+            gameboardSet = false;
+            turnsStarted = true;
         }else{
             for(int i = 0; i < players.size(); i++){
                 ArrayList<City> c = players.get(i).getMyCities();
@@ -844,6 +848,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      */
     public void tradeResourcesDialog(){
         gamePhase = "Trading...";
+
+        statusPane.setPhase(gamePhase);
         //trading can only happen with the active player on a turn
         String[] options = new String[]{"Yes","No"};
         int answer = JOptionPane.showOptionDialog(null,
@@ -901,6 +907,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * @return 
      */
     public void buildDialog(){
+        gamePhase = "Building...";
+        statusPane.setPhase(gamePhase);
         String[] options = new String[]{"Yes","No"};
         int answer = JOptionPane.showOptionDialog(null,
                 "Would you like to build?",
@@ -927,6 +935,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * @return 
      */
     public void buyDevelopmentDialog(){
+        gamePhase = "Buying development card...";
+        statusPane.setPhase(gamePhase);
         String[] options = new String[]{"Yes","No"};
         int answer = JOptionPane.showOptionDialog(null,
                 "Would you like to buy a development card?",
@@ -1270,12 +1280,10 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * if player has a city, gets two resource cards, else gets one card
      */
     public void drawResourceCard(String rType){
+        gamePhase = "Drawing resource card...";
+        statusPane.setPhase(gamePhase);
         ResourceCard rc = resourceDeck.removeCard(rType);
 
-        //add card removed from player hand to resource card deck
-        if(rc != null){
-            rc = resourceDeck.removeCard(rType);
-        }
         //remove card from player's hand
         if(turn == 1){
             if(rc != null){

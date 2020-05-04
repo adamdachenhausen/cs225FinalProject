@@ -30,6 +30,7 @@ public class ResourceDeck extends AnimatedGraphicsObject{
     public ResourceDeck(JComponent container){
         super(container);
         deck = new ArrayList<ResourceCard>();
+        populateDeck();
     }
 
     public ArrayList getList(){
@@ -46,7 +47,7 @@ public class ResourceDeck extends AnimatedGraphicsObject{
         boolean found = false;
         int i = 0;
 
-        while(i > deck.size() && !found){
+        while(i < deck.size() && !found){
             if(rcType.equals(deck.get(i).getType())){
                 found = true;
                 removed =deck.get(i);

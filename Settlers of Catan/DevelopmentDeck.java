@@ -33,6 +33,7 @@ public class DevelopmentDeck extends AnimatedGraphicsObject{
     public DevelopmentDeck(JComponent container){
         super(container);
         developmentDeck = new ArrayList<DevelopmentCard>();
+        populateDeck();
     }
 
     public ArrayList getList(){
