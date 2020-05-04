@@ -19,6 +19,7 @@ public class Table  extends AnimatedGraphicsObject implements ImageObserver{
 
     /**
      * Constructor for objects of class GamePieces
+     * @param container what should I be drawn in?
      */
     public Table(JComponent container)
     {
