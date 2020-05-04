@@ -45,18 +45,13 @@ public class DevelopmentDeck extends AnimatedGraphicsObject{
 
     }
 
-    public DevelopmentCard removeCard(String dcType){
+    public DevelopmentCard removeCard(){
         DevelopmentCard removed = null;
         boolean found = false;
         int i = 0;
 
-        while(i > developmentDeck.size() && !found){
-            if(dcType.equals(developmentDeck.get(i).getType())){
-                found = true;
-                removed =developmentDeck.get(i);
-                developmentDeck.remove(i);
-            }
-            i++;
+        if(i > developmentDeck.size()){
+            removed = developmentDeck.remove(0);
         }
         return removed;
     }

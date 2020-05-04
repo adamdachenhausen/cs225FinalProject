@@ -222,8 +222,8 @@ public class Player
     }
 
     /**
-     * adds resource cards to the player's hand and to the 
-     * types of resource cards the player is holding
+     * adds development cards to the player's hand and to the 
+     * types of deveopment cards the player is holding
      * (resourceHand is used to create an array used to populate the 
      * dialog box with trade options)
      *
