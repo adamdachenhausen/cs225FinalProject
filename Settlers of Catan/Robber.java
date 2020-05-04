@@ -25,6 +25,9 @@ public class Robber  extends AnimatedGraphicsObject implements ImageObserver{
 
     /**
      * Constructor for objects of class GamePieces
+     * 
+     * @param container what should I be drawn in?
+     * @param upperLeft where should I be drawn?
      */
     public Robber(JComponent container, Point upperLeft)
     {
@@ -33,6 +36,9 @@ public class Robber  extends AnimatedGraphicsObject implements ImageObserver{
         this.upperLeft = upperLeft;
     }
 
+    /** Sets visible to true, when called
+     * 
+     */
     public void showRobber(){
         visible = true;
     }
@@ -69,7 +75,9 @@ public class Robber  extends AnimatedGraphicsObject implements ImageObserver{
 
     }
 
-    @Override    
+    /** Sets upperLeft to p
+     *  @param p the point to save in upperLeft
+     */
     public void setPosition(Point p){
         upperLeft = p;
     }
