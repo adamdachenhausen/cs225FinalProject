@@ -28,6 +28,8 @@ public class Resources
     
     /** Populates the r stack with exact number of each resource
      *  Then shuffles the stack, so when items are popped, they are random
+     *  
+     *  @return a shuffled stack of resources
      */
     public static Stack populateR(){
         Stack<Resource> r = new Stack<Resource>();
