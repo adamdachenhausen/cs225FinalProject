@@ -109,6 +109,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     protected boolean buildCity = false;
     protected boolean buildRoad = false;
     protected boolean moveRobber = false;
+    protected boolean buildStart = false;
+    protected boolean buildEnd = false;
 
     protected Point cityPoint;
 
@@ -225,17 +227,14 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         buttonPanel.add(instructionsButton);
         buttonPanel.add(buildingCostsButton);
 
-
-                buttonPanel.add(tradeButton);
-                        buttonPanel.add(buildButton);
+        buttonPanel.add(tradeButton);
+        buttonPanel.add(buildButton);
         buttonPanel.add(drawResourceButton);
         buttonPanel.add(drawDevelopmentButton);
         buttonPanel.add(useDevCardButton);
-                buttonPanel.add(continueButton);
-
+        buttonPanel.add(continueButton);
 
         // buttonPanel.add(rollDiceButton);
-
     }
 
     /**
@@ -644,11 +643,16 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
         }
         tradeResourcesDialog();
-        
+
         buildDialog();
 
         checkPoints();
         //offer trades
+
+        buyDevelopmentDialog();
+
+        useDevelopmentDialog();
+
     }
 
     /**
@@ -693,7 +697,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * @return 
      */
     public void activateRobber(){
-                gamePhase = "Activating robber...";
+        gamePhase = "Activating robber...";
         statusPane.setPhase(gamePhase);
         moveRobberDialog();
 
@@ -715,9 +719,9 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * @return 
      */
     public void moveRobberDialog(){
-                gamePhase = "Moving robber...";
+        gamePhase = "Moving robber...";
         statusPane.setPhase(gamePhase);
-        
+
         //move the robber to a different hex
         String[] options = new String[]{"Yes","No"};
         int answer = JOptionPane.showOptionDialog(null,
@@ -732,8 +736,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
             moveRobber = true;
             moveRobber();
         }else
-        
-        panel.repaint();
+
+            panel.repaint();
     }
 
     /**
@@ -745,8 +749,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      */
     public void moveRobber(){
         //move the robber to a different hex
-        
-                gamePhase = "Moving robber...";
+
+        gamePhase = "Moving robber...";
         statusPane.setPhase(gamePhase);
         String[] options = new String[]{"Ok"};
         int answer = JOptionPane.showOptionDialog(null,
@@ -760,7 +764,6 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
         moveRobber = false;
     }
-
 
     /**
      * Distributes resource cards to each player based on the roll of the player in control's dice.
@@ -820,6 +823,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         gamePhase = "Trading...";
 
         statusPane.setPhase(gamePhase);
+
         //trading can only happen with the active player on a turn
         String[] options = new String[]{"Yes","No"};
         int answer = JOptionPane.showOptionDialog(null,
@@ -832,7 +836,6 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                 options[1]);
         if(answer == 0){
             swapCards();
-            buildDialog();
         }
         panel.repaint();
     }
@@ -846,7 +849,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      */
     public void swapCards(){
         //trading can only happen with the active player on a turn
-                gamePhase = "Trading...";
+        gamePhase = "Trading...";
         statusPane.setPhase(gamePhase);
         //trading can only happen with the active player on a turn
         String[] options = new String[]{"Yes","No"};
@@ -860,7 +863,6 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                 options[1]);
         if(answer == 0){
             swapCards();
-            buildDialog();
         }
         panel.repaint();
     }
@@ -885,9 +887,15 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                 options,
                 options[1]);
         if(answer == 0){
-
-        }else if(answer == 1){
-            buyDevelopmentDialog();
+            String[] newoption = new String[]{"Ok"};
+            int answer2 = JOptionPane.showOptionDialog(null,
+                    "Click on the gameboard to build.",
+                    "Building interface",
+                    JOptionPane.YES_NO_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    options,
+                    options[0]);
         }
         panel.repaint();
     }
@@ -918,8 +926,6 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
             useResourceCard("Wool");
             drawDevelopmentCard();
 
-            //proceed to next branch of dialog tree
-            useDevelopmentDialog();
         }else if(answer == 1){
             useDevelopmentDialog();
         }
