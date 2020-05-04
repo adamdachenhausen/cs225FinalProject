@@ -168,16 +168,7 @@ public class ThreadGraphicsController implements Runnable {
                     clearScreen();
                 }
 
-                // ResourceCard rc;
-
-                // rc = new ResourceCard(panel, Resource.WOOD, new Point(500,500));
-
-                //rc = new  ResourceCard(panel, Resource.WOOL, new Point(500,500));
-                //rc = new  ResourceCard(panel, Resource.ORE, new Point(500,500));
-                //rc = new  ResourceCard(panel, Resource.BRICKS, new Point(500,500));
-                //rc = new  ResourceCard(panel, Resource.WHEAT, new Point(500,500));
-                // rc.start();
-                // rc.paint(g);
+                
 
                 i = 0;
 
@@ -192,7 +183,7 @@ public class ThreadGraphicsController implements Runnable {
         // below
         buildGUI(frame, panel);
 
-        //panel.setBackground(SEA);
+        
 
         // we don't know here what mouse, keyboard, or other listeners
         // a derived class might want to add, so derived classes that
@@ -212,8 +203,8 @@ public class ThreadGraphicsController implements Runnable {
     /**
      * Checks if someone won the game.
      *
-     * @param 
-     * @return 
+     * 
+     * @return true if a player has over 10 points
      */
     public int checkForWinner(){
         int winner = 0;
@@ -228,8 +219,9 @@ public class ThreadGraphicsController implements Runnable {
     /**
      * Shows a screen displaying game win info
      *
-     * @param 
-     * @return 
+     * @param g Graphics
+     * @param winner the number of the player who won
+     * 
      */
     public void displayWinScreen(Graphics g, int winner){
         g.setColor(new Color(182, 30, 44));
@@ -255,10 +247,10 @@ public class ThreadGraphicsController implements Runnable {
     }
 
     /**
-     * Shows a screen displaying game win info
+     * Shows a screen displaying intro
      *
-     * @param 
-     * @return 
+     * @param g Graphics
+     * 
      */
     public void introScreen(Graphics g){
         g.setColor(new Color(182, 30, 44));
@@ -284,7 +276,7 @@ public class ThreadGraphicsController implements Runnable {
     }
 
     /**
-     * Shows a screen displaying game win info
+     * Clears the screen
      *
      * @param 
      * @return 
@@ -292,10 +284,10 @@ public class ThreadGraphicsController implements Runnable {
     public void clearScreen(){
         resourceDeck = null;
         developmentDeck = null;
-        //tokens = null;
+        
         players = null;
         gameboard = null;
-        //robber = null;
+        
         die1 = null;
         die2 = null; 
 
