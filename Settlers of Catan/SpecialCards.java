@@ -36,6 +36,7 @@ public class SpecialCards extends AnimatedGraphicsObject implements ImageObserve
 
     /**
      * Constructor for objects of class DevelopmentCards
+     * @param container what should I be drawn in?
      */
     public SpecialCards(JComponent container)
     {
@@ -43,6 +44,9 @@ public class SpecialCards extends AnimatedGraphicsObject implements ImageObserve
         visible = false;
     }
 
+    /** Sets visible to true
+     * 
+     */
     public void showCard(){
         visible = true;
     }
