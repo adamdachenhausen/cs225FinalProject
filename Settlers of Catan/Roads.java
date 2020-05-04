@@ -13,6 +13,9 @@ import java.awt.Color;
 public class Roads extends AnimatedGraphicsObject
 {
     protected List<Road> roads;
+    /** Constructor for Roads
+     * @param container what should I be drawn in?
+     */
     public Roads(JComponent container){
         super(container);
         roads = new ArrayList<Road>();
@@ -34,7 +37,7 @@ public class Roads extends AnimatedGraphicsObject
     }
 
     /** Adds a point to this
-     *  @param p a city/settlement to add to this
+     *  @return the roads List
      */
     public List getRoadList(){
         return roads;
