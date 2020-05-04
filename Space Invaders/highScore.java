@@ -1,5 +1,9 @@
 /**
- * Represents a high Score in skiBall
+ * Represents a high Score
+ * Reused from Skiball bonus
+ * 
+ * @author Adam Dachenhausen, Kate Nelligan, Lindsay Clark
+ * @version Spring 2020
  *
  */
 public class highScore implements Comparable<highScore>

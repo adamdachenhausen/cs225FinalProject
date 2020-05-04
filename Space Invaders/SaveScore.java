@@ -1,26 +1,3 @@
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import java.awt.Color;
-import javax.swing.JComponent;
-import java.awt.Dimension;
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
-import javax.swing.JButton;
-import javax.swing.BorderFactory;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.event.MouseMotionListener;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Random;
-import java.awt.Point;
-import java.awt.Graphics;
-import javax.swing.SwingConstants;
-import javax.swing.BoxLayout;
 import java.awt.Component;
 import java.io.File;
 import java.io.IOException;
@@ -31,10 +8,11 @@ import java.util.Iterator;
 import javax.swing.JOptionPane;
 import java.awt.Container;
 /**
- * Modified from SkiBallBonus
+ * Modified from SkiBallBonus, saves score to a local file
+ * 
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Adam Dachenhausen, Kate Nelligan, Lindsay Clark
+ * @version Spring 2020
  */
 public class SaveScore
 {
@@ -45,6 +23,11 @@ public class SaveScore
     File highScores;
     highScore highestScore;
     boolean newHigh;
+    /** Constructor for SaveScore
+     * 
+     *  @param frame the container to put the popup window over
+     *  @param score the score that the player achieved.
+     */
     public SaveScore(Container frame,int score){
         this.frame=frame;
         this.score=score;
@@ -52,7 +35,8 @@ public class SaveScore
     }
 
     /** Converts a string to a highScore obj
-     * 
+     *  @param input a String in the form "Name: <username> <score>"
+     *  @return a highScore object that represents input
      */
     public static highScore toHighScore(String input){
         Scanner scnr = new Scanner(input);

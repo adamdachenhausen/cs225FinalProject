@@ -4,10 +4,17 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Iterator;
 /**
- * Write a description of class ScoreReceiver here.
- *  SRC:https://www.codejava.net/java-se/networking/java-socket-server-examples-tcp-ip
- * @author (your name)
- * @version (a version number or a date)
+ * A constantly running program that opens a ServerSocket and listens on port
+ * 225. Any incoming data is accepted and given its own thread. This then will
+ * verify that the data is coming from a ScoreSender. The next part is recieved
+ * and translated to a highScore object, and added to the leaderboard. The top
+ * 10 leaderboard positions are found, and sent back to the ScoreSender. This then
+ * sends a temination message
+ *  
+ * SRC:https://www.codejava.net/java-se/networking/java-socket-server-examples-tcp-ip
+ * 
+ * @author Adam Dachenhausen, Kate Nelligan, Lindsay Clark
+ * @version Spring 2020
  */
 public class ScoreReceiver extends Thread
 {
@@ -16,6 +23,11 @@ public class ScoreReceiver extends Thread
         newHighest = false;
     }
 
+    /** Starts a ServerSocket on port 225, and listens for incoming data.
+     *  Once received, verifies it, adds it to the leaderboard, and sends the
+     *  top 10 scores back. Finally terminates by sending a termination message.
+     * 
+     */
     public void receiveScore(){
         int port = 225;
 
@@ -59,17 +71,17 @@ public class ScoreReceiver extends Thread
                                     w.println("PONG");
 
                                     ArrayList topTen = new ArrayList<highScore>();
-                                    
+
                                     playerScore = toHighScore(r.readLine());
 
                                     synchronized(lock){
                                         topTen = leaderBoardAdd(playerScore);
                                         w.println(newHighest);
                                     }
-                                    
+
                                     //Let the client know that top 10 scores are coming
                                     w.println("High Scores");
-                                    
+
                                     //Send the top ten scores
                                     for(int i=0; i<=9; i++){
                                         w.println(topTen.toString());
@@ -100,7 +112,8 @@ public class ScoreReceiver extends Thread
     }
 
     /** Converts a string to a highScore obj
-     * 
+     *  @param input a String in the form "Name: <username> <score>"
+     *  @return a highScore object that represents input
      */
     public static highScore toHighScore(String input){
         Scanner scnr = new Scanner(input);
@@ -122,6 +135,12 @@ public class ScoreReceiver extends Thread
         return output;
     }
 
+    /** Given a highScore, will try to add the Score to "HighScores.txt".
+     *  It first creates an ArrayList, then reads in the text file, and 
+     *  adds in current (if possible) then rewrites the data to HighScores.txt
+     * 
+     *  @param current the highScore to be added to the leaderBoard
+     */
     private ArrayList leaderBoardAdd(highScore current){
         //Storage that will mirror the data in the file
         ArrayList output = new ArrayList<highScore>();
@@ -150,10 +169,10 @@ public class ScoreReceiver extends Thread
 
                     //Get the initials
                     String name = s.next();
-                    
+
                     //Throw out "Score"
                     s.next();
-                    
+
                     //Get the score
                     int score = s.nextInt();
 
