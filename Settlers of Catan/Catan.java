@@ -227,11 +227,11 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         buttonPanel.add(instructionsButton);
         buttonPanel.add(buildingCostsButton);
 
-        buttonPanel.add(tradeButton);
-        buttonPanel.add(buildButton);
-        buttonPanel.add(drawResourceButton);
-        buttonPanel.add(drawDevelopmentButton);
-        buttonPanel.add(useDevCardButton);
+        // buttonPanel.add(tradeButton);
+        // buttonPanel.add(buildButton);
+        // buttonPanel.add(drawResourceButton);
+        // buttonPanel.add(drawDevelopmentButton);
+        // buttonPanel.add(useDevCardButton);
         buttonPanel.add(continueButton);
 
         // buttonPanel.add(rollDiceButton);
@@ -586,37 +586,6 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
         gameboard.updatePlayers(player1,player2,player3,player4);
     }
-
-    // /**
-    // * Controls the gameplay as long as someone doesn't have 10 Victory Points, the game continues.
-    // *
-    // */
-    // public void playGame(){
-
-    // while(gameStart && !gameWon){
-    // //call player turn with correct player
-
-    // //whichever token/hex (the tokens number the hexes) is rolled
-    // //any settlement on the border of that hex gets resources.
-    // //Determine players with "activated hexes"
-
-    // //distribute resources *if not enough resources, none distributed
-    // distributeResources(roll);
-    // panel.repaint();
-
-    // //offer trades
-    // panel.repaint();
-
-    // //update player turn
-    // turn++;
-    // if(turn > PLAYER_4){
-    // turn = PLAYER_1;
-    // }
-
-    // //check if anyone has 10 victory points
-    // checkPoints();
-    // }
-    // }
 
     /**
      * The turn for the person playing the game
