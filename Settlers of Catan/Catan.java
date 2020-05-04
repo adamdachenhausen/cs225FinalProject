@@ -236,13 +236,6 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         resetButton.addActionListener(this);
 
         continueButton.addActionListener(this);
-        // drawResourceButton.addActionListener(this);
-        // drawDevelopmentButton.addActionListener(this);
-        // useDevCardButton.addActionListener(this);
-        // rollDiceButton.addActionListener(this);
-        // tradeButton.addActionListener(this);
-
-        // buildButton.addActionListener(this);
 
         panel.addMouseListener(this);
         panel.addMouseMotionListener(this);
@@ -993,11 +986,15 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                 options,
                 options[1]);
         if(answer == 0){
-            int i = 0;
-            while(i < players.size() && !cardsExist){
-
-                i++;
+            //search for each type of card before purchase
+            if(!players.get(turn+1).searchResourceCards("Ore")){
+                if(!players.get(turn+1).searchResourceCards("Grain")){
+                    if(!players.get(turn+1).searchResourceCards("Wool")){
+                        cardsExist = true;
+                    }
+                }
             }
+
             if(cardsExist){
 
                 //1 ore, 1 wool, 1 grain
