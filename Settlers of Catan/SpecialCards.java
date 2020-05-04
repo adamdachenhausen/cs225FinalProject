@@ -40,30 +40,30 @@ public class SpecialCards extends AnimatedGraphicsObject implements ImageObserve
     public SpecialCards(JComponent container, Point upperLeft, String type)
     {
         super(container);
-
+        owner = "";
         this.type = type;
         this.upperLeft = upperLeft;
         visible = true;
     }
 
-    /** Sets visible to true
+    /** Sets visible to true so card can be drawn
      * 
      */
     public void showCard(){
         visible = true;
     }
 
-    /** Sets visible to true
+    /** Returns the owner variable
      * 
      */
-    public void getOwner(){
-        visible = true;
+    protected String getOwner(){
+        return owner;
     }
 
-    /** Sets visible to true
+    /** Sets the owner to a new owner of the card
      * 
      */
-    public void setOwner(String newOwner){
+    protected void setOwner(String newOwner){
         owner = newOwner;
     }
 
@@ -84,12 +84,12 @@ public class SpecialCards extends AnimatedGraphicsObject implements ImageObserve
             Point picturePoint = new Point(upperLeft.x + 5, upperLeft.y + 15);
             // //paint image of card type icon
             switch(type){
-                case MONOPOLY:
-                g.drawImage(monopoly, picturePoint.x , picturePoint.y, this);
+                case "Longest Road":
+                g.drawImage(road, picturePoint.x , picturePoint.y, this);
                 break;
 
-                case ROADBUILD:
-                g.drawImage(road, picturePoint.x , picturePoint.y, this);
+                case "Largest Army":
+                g.drawImage(army, picturePoint.x , picturePoint.y, this);
                 break;
 
             }
