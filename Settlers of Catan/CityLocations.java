@@ -29,14 +29,20 @@ public class CityLocations extends AnimatedGraphicsObject
     public void addLocation(City c){
         locations.add(c);
     }
+
+    /** Removes a point from this
+     *  @param p a city/settlement to remove from this
+     */
+    public void removeLocation(City c){
+        locations.remove(c);
+    }
     
-        /** Adds a point to this
+    /** Adds a point to this
      *  @param p a city/settlement to add to this
      */
     public List<City> getLocations(){
         return locations;
     }
-
 
     @Override
     public void paint(Graphics g){
