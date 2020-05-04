@@ -142,12 +142,10 @@ public class ThreadGraphicsController implements Runnable {
                 }else if(!ArcadeMachine.gameStart && ArcadeMachine.gameEnded && !ArcadeMachine.gameWon){
                     clearScreen();
                     gameOverScreen(g);
-                    //ArcadeMachine.beatLevel();
                 }else if(!ArcadeMachine.gameStart && ArcadeMachine.gameWon && !ArcadeMachine.gameEnded){
                     clearScreen();
                     gameWonScreen(g);
 
-                    //ArcadeMachine.beatLevel();
                 }else{
 
                     displayLives(g);   
@@ -163,7 +161,6 @@ public class ThreadGraphicsController implements Runnable {
                         gameOverScreen(g);
 
                         clearScreen();
-                        //ArcadeMachine.beatLevel();
                         panel.repaint();
 
                     }else{
@@ -277,9 +274,9 @@ public class ThreadGraphicsController implements Runnable {
                         if(aliens.size() < 1 && alienShips.size() < 1){
                             ArcadeMachine.gameWon = true;
                             ArcadeMachine.gameEnded = false;
-                            //ArcadeMachine.beatLevel();
+                            
                             gameWonScreen(g);
-                            //panel.repaint();
+                            
                         }
                     }
                 }
@@ -334,7 +331,6 @@ public class ThreadGraphicsController implements Runnable {
                             ArcadeMachine.gameEnded = true;
 
                             ArcadeMachine.gameWon = false;
-                            //ArcadeMachine.beatLevel();
                         }
                     }
 
@@ -371,7 +367,6 @@ public class ThreadGraphicsController implements Runnable {
 
                     clearScreen();
                     gameWonScreen(g);
-                    //ArcadeMachine.beatLevel();
                     panel.repaint();
 
                 }else{
@@ -393,13 +388,6 @@ public class ThreadGraphicsController implements Runnable {
 
         addListeners(panel, frame);
 
-        // // construct the list of AnimatedGraphicsObject
-        // aliens = new ArrayList<Alien>();
-        // shields = new ArrayList<Shields>();
-        // lasers = new ArrayList<Laser>();
-        // alienLasers = new ArrayList<Laser>();
-        // explosions = new ArrayList<Explosion>();
-        // alienShips = new ArrayList<AlienShip>();
 
         // display the window we've created
         frame.pack();
@@ -408,7 +396,8 @@ public class ThreadGraphicsController implements Runnable {
 
     /**
      * Checks if a laser hit an alien.
-     *
+     * @param laser the laser to check against the alien fleet
+     *  @return true if an alien is hit
      */
     public boolean checkAlienHit(Laser l) {
         Point p = l.getPosition();
@@ -417,12 +406,11 @@ public class ThreadGraphicsController implements Runnable {
         while (i < aliens.size()) {
             Alien a = aliens.get(i);
             Point alienUpperLeft = a.getPosition();
-            //int alienWidth = 50;
+            
             int alienWidth = a.getAlienWidth(a.getSubType());
-            //int alienHeight= 50;
+           
             int alienHeight = a.getAlienHeight();
 
-            //Point alienCenter = new Point(alienUpperLeft.x + alienWidth/2, alienUpperLeft.y + alienHeight/2);
             int leftPt = alienUpperLeft.x;
             int rightPt = alienUpperLeft.x + alienWidth;
             int bottom = alienUpperLeft.y + alienHeight;
@@ -463,8 +451,10 @@ public class ThreadGraphicsController implements Runnable {
     }
 
     /**
-     * Checks if a laser hit an alien.
-     *
+     * Checks if a laser hit a player.
+     * @param p the point of the laser
+     * @param laser the index of the laser
+     *  @reutrn true if the player was hit
      */
     public boolean checkPlayerHit(Point p, int laser) {
         int i = 0;
@@ -494,7 +484,9 @@ public class ThreadGraphicsController implements Runnable {
     }
 
     /**
-     * Checks if a laser hit an alien.
+     * Checks if a laser hit the red ship.
+     * @param p the point of the laser
+     * @return true if a ufo was hit
      *
      */
     public boolean checkUfoHit(Point p) {
@@ -526,7 +518,9 @@ public class ThreadGraphicsController implements Runnable {
     }
 
     /**
-     * Checks if a laser hit an alien.
+     * Checks if a laser hit a shield.
+     * @param p the point of the laser
+     * @return true if a shield was hit
      *
      */
     public boolean checkShieldHit(Point p) {
@@ -561,8 +555,9 @@ public class ThreadGraphicsController implements Runnable {
     }
 
     /**
-     * Checks if a laser hit an alien.
-     *
+     *  Checks if a laser hit a shieldSecion.
+     *  @param p the point of the laser
+     *  @return if a section was hit
      */
     public boolean checkSectionHit(Point p) {
         boolean hit = false;
@@ -570,8 +565,8 @@ public class ThreadGraphicsController implements Runnable {
     }
 
     /**
-     * Checks if a laser hit an alien.
-     *
+     * Displays the intro screen
+     * 
      */
     public void introScreen(Graphics g ) {
         g.setColor(Color.GREEN);
@@ -595,7 +590,7 @@ public class ThreadGraphicsController implements Runnable {
     }
 
     /**
-     * Checks if a laser hit an alien.
+     * Displays the game won screen
      *
      */
     public void gameWonScreen(Graphics g ) {
@@ -620,7 +615,7 @@ public class ThreadGraphicsController implements Runnable {
     }
 
     /**
-     * Checks if a laser hit an alien.
+     * Displays the game over screen
      *
      */
     public void gameOverScreen(Graphics g ) {
@@ -645,7 +640,7 @@ public class ThreadGraphicsController implements Runnable {
     }
 
     /**
-     * Checks if a laser hit an alien.
+     * Displays the amount of lives that the player has left
      *
      */
     public void displayLives(Graphics g ) {
@@ -679,7 +674,7 @@ public class ThreadGraphicsController implements Runnable {
     }
 
     /**
-     * Checks if a laser hit an alien.
+     * Clears the screen
      *
      */
     public void clearScreen( ) {
