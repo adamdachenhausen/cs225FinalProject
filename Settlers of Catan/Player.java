@@ -604,9 +604,8 @@ public class Player
     }
 
     /**
-     * Returns the resource card hand 
-     *
-     * @returns  resourceHand the arraylist of resource card types
+     * Sets the settlements value to a new amount
+     * @param newsettle the new settlement value
      */
     public void setSettlements(int newsettle){
 
@@ -614,9 +613,8 @@ public class Player
     }
 
     /**
-     * Returns the resource card hand 
-     *
-     * @returns  resourceHand the arraylist of resource card types
+     * Sets the roads value to a new amount
+     * @param newroads the new roads value
      */
     public void setRoads(int newroads){
 
@@ -624,9 +622,7 @@ public class Player
     }
 
     /**
-     * Returns the resource card hand 
-     *
-     * @returns  resourceHand the arraylist of resource card types
+     * Increments the city value
      */
     public void addCities(){
 
@@ -634,9 +630,7 @@ public class Player
     }
 
     /**
-     * Returns the resource card hand 
-     *
-     * @returns  resourceHand the arraylist of resource card types
+     * Increments the settlement value
      */
     public void addSettlements(){
 
@@ -644,9 +638,7 @@ public class Player
     }
 
     /**
-     * Returns the resource card hand 
-     *
-     * @returns  resourceHand the arraylist of resource card types
+     * increments the roads value
      */
     public void addRoads(){
 
@@ -654,9 +646,8 @@ public class Player
     }
 
     /**
-     * Returns the resource card hand 
-     *
-     * @returns  resourceHand the arraylist of resource card types
+     * Sets the victory points to a new value
+     * @param vp the new points value
      */
     public void setVictoryPoints(int vp){
 
