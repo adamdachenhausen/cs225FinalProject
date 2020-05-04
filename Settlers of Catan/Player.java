@@ -697,36 +697,76 @@ public class Player
         victoryPointCards = vpc;
     }
 
+        /**
+     * Returns the resource card hand 
+     *
+     * @returns  resourceHand the arraylist of resource card types
+     */
     public void setKnights(int newknights){
         knights = newknights;
     }
 
+        /**
+     * Returns the resource card hand 
+     *
+     * @returns  resourceHand the arraylist of resource card types
+     */
     public void setRoadlength(int rl){
         roadLength = rl;
     }
 
+        /**
+     * Returns the resource card hand 
+     *
+     * @returns  resourceHand the arraylist of resource card types
+     */
     public void setLargestArmy(boolean la){
         armyPoints = 2;
         largestArmy = la;
     }
 
+        /**
+     * Returns the resource card hand 
+     *
+     * @returns  resourceHand the arraylist of resource card types
+     */
     public void setLongestRoad(boolean lr){
         roadPoints = 2;
         longestRoad = lr;
     }
 
+        /**
+     * Returns the resource card hand 
+     *
+     * @returns  resourceHand the arraylist of resource card types
+     */
     public void setRoadLength(int newRoadLength){
         roadLength = newRoadLength;
     }
 
+        /**
+     * Returns the resource card hand 
+     *
+     * @returns  resourceHand the arraylist of resource card types
+     */
     public void updateCities(){
         cities = myCities.size();;
     }
 
+        /**
+     * Returns the resource card hand 
+     *
+     * @returns  resourceHand the arraylist of resource card types
+     */
     public void updateRoads(){
         roads = myRoads.size();;
     }
 
+        /**
+     * Returns the resource card hand 
+     *
+     * @returns  resourceHand the arraylist of resource card types
+     */
     public void updatePoints(){
 
         victoryPoints = cities + settlements +armyPoints + roadPoints;
