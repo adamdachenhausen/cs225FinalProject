@@ -39,14 +39,23 @@ public class DevelopmentCard extends AnimatedGraphicsObject implements ImageObse
         setCardType();
     }
 
+        /**
+     * Constructor for objects of class DevelopmentCards
+     */
     public void showCard(){
         visible = true;
     }
     
+        /**
+     * Constructor for objects of class DevelopmentCards
+     */
     public String getType(){
         return type;
     }
     
+        /**
+     * Constructor for objects of class DevelopmentCards
+     */
     @Override
     public void paint(Graphics g){
 
