@@ -54,6 +54,13 @@ public class HexTiles extends AnimatedGraphicsObject{
     protected String resourceType;
     /**
      * Constructor for objects of class Tiles
+     * 
+     * @param container what should I be drawn in?
+     * @param center where should I be drawn?
+     * @param r the Resource value of this
+     * @param t the Tokens value of this
+     * @param locationType where in the gameBoard this is
+     * @param subType further specifics of locationType
      */
     public HexTiles(JComponent container, Point center, Resource r,Tokens t, String locationType, String subType){
         super(container);
@@ -78,6 +85,16 @@ public class HexTiles extends AnimatedGraphicsObject{
 
     /**
      * Constructor for objects of class Tiles, but with added translate center functionality
+     * 
+     * @param container what should I be drawn in?
+     * @param center where should I be drawn?
+     * @param r the Resource value of this
+     * @param t the Tokens value of this
+     * @param dx the amount to move this in the x direction
+     * @parm dy the amound to move this in the y direction
+     * @param locationType where in the gameBoard this is
+     * @param subType further specifics of locationType
+     *
      */
     public HexTiles(JComponent container, Point center, Resource r,Tokens t,int dx, int dy, String locationType, String subType){
         super(container);
@@ -184,6 +201,9 @@ public class HexTiles extends AnimatedGraphicsObject{
         return type;
     }
 
+    /** Sets the hexType of this
+     * 
+     */
     public void createHexType(){
         String hextype = "";
         switch(r){
@@ -217,17 +237,16 @@ public class HexTiles extends AnimatedGraphicsObject{
             resourceType = hextype;
             break;
         }
-        //return hextype;
-
+        
     }
 
-        /** Returns the resource represented by this
+    /** Returns the resource represented by this
      *  @return the resource of this 
      */
     public String getResourceType(){
         return resourceType;
     }
-    
+
     /** Returns the resource represented by this
      *  @return the resource of this 
      */
@@ -386,6 +405,7 @@ public class HexTiles extends AnimatedGraphicsObject{
     /** Given two points, returns the midpoint
      *  @param p1 The first point of the line to calculate midpoint
      *  @param p2 The second point of the line to calculate midpoint
+     *  @return the midpoint beween p1 and p2
      */
     private Point midPoint(Point p1, Point p2){
         return new Point((p1.x + p2.x)/2,(p1.y + p2.y)/2);
