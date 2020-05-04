@@ -473,5 +473,13 @@ public class Player
     public void setRoadLength(int newRoadLength){
         roadLength = newRoadLength;
     }
+    
+        public void updateCities(){
+        cities = myCities.size();;
+    }
+    
+            public void updateRoads(){
+        roads = myRoads.size();;
+    }
 
 }

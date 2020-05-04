@@ -117,6 +117,10 @@ public class City extends AnimatedGraphicsObject implements ImageObserver
         return owner;
     }
     
+        protected void setPlaced(boolean newPlaced){
+         placed = newPlaced;
+    }
+    
         protected int getTokenValue(){
         return tokenValue;
     }

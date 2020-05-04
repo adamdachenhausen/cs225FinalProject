@@ -467,6 +467,7 @@ public class GameBoard extends AnimatedGraphicsObject
                 c.update();
                 curPlayer.addLocation(c);
                 c.setOwner(playerNum);
+                c.setPlaced(true);
                 //return value to update player city count
                 added = "City";
                 this.c.removeLocation(c);

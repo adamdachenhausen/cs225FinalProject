@@ -275,7 +275,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         else if (turn == 2){curPlayer = player2;}
         else if(turn == 3) {curPlayer = player3;}
         else{curPlayer = player4;}
-
+        
+        
         gameboard.updateCurPlayer(curPlayer);
         String checkGamePiece = gameboard.handleClick(e.getPoint(), turn);
 
@@ -1479,6 +1480,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         DevelopmentCard.loadPic();
         Robber.loadPic();
         Table.loadPic();
+        City.loadPic();
+        //Road.loadPic();
 
         //launch main thread that will manage the GUI
         javax.swing.SwingUtilities.invokeLater(new Catan());
