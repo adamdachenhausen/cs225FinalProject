@@ -100,7 +100,7 @@ public class Player
         boolean found = false;
         int i = 0;
 
-        while(i > resourceCards.size() && !found){
+        while(i < resourceCards.size() && !found){
             if(rcType.equals(resourceCards.get(i).getType())){
                 found = true;
                 removed =resourceCards.get(i);
@@ -124,7 +124,7 @@ public class Player
         boolean found = false;
         int i = 0;
 
-        while(i > resourceCards.size() && !found){
+        while(i < resourceCards.size() && !found){
             if(rcType.equals(resourceCards.get(i).getType())){
                 found = true;
                 foundCard =resourceCards.get(i);
@@ -138,7 +138,7 @@ public class Player
         boolean found = false;
         int i = 0;
 
-        while(i > resourceCards.size() && !found){
+        while(i < resourceCards.size() && !found){
             if(searchType.equals(resourceCards.get(i).getType())){
                 found = true;
             }
@@ -152,7 +152,7 @@ public class Player
         boolean found = false;
         int i = 0;
 
-        while(i > devCards.size() && !found){
+        while(i < devCards.size() && !found){
             if(rcType.equals(devCards.get(i).getType())){
                 found = true;
                 foundCard = devCards.get(i);
@@ -166,7 +166,7 @@ public class Player
         boolean found = false;
         int i = 0;
 
-        while(i > devCards.size() && !found){
+        while(i < devCards.size() && !found){
             if(searchType.equals(devCards.get(i).getType())){
                 found = true;
             }
@@ -195,7 +195,7 @@ public class Player
         int i = 0;
         //get type to check card types held by player
 
-        while(i > devCards.size() && !found){
+        while(i < devCards.size() && !found){
             if(dcType.equals(devCards.get(i).getType())){
                 found = true;
                 removed =devCards.get(i);

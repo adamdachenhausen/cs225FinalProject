@@ -843,8 +843,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                 }
 
                 int answer = JOptionPane.showOptionDialog(null,
-                        "Choose which card to use",
-                        "Use Development card interface",
+                        "Choose which card to trade",
+                        "Trading interface",
                         JOptionPane.YES_NO_CANCEL_OPTION,
                         JOptionPane.QUESTION_MESSAGE,
                         null,
@@ -864,8 +864,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                 }
 
                 int answer = JOptionPane.showOptionDialog(null,
-                        "Choose which card to use",
-                        "Use Development card interface",
+                        "Choose which card to trade",
+                        "Trading interface",
                         JOptionPane.YES_NO_CANCEL_OPTION,
                         JOptionPane.QUESTION_MESSAGE,
                         null,
@@ -885,8 +885,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                 }
 
                 int answer = JOptionPane.showOptionDialog(null,
-                        "Choose which card to use",
-                        "Use Development card interface",
+                        "Choose which card to trade",
+                        "Trading interface",
                         JOptionPane.YES_NO_CANCEL_OPTION,
                         JOptionPane.QUESTION_MESSAGE,
                         null,
@@ -906,8 +906,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                 }
 
                 int answer = JOptionPane.showOptionDialog(null,
-                        "Choose which card to use",
-                        "Use Development card interface",
+                        "Choose which card to trade",
+                        "Trading  interface",
                         JOptionPane.YES_NO_CANCEL_OPTION,
                         JOptionPane.QUESTION_MESSAGE,
                         null,
@@ -927,7 +927,9 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                     JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,
                     icon,noCards,noCards[0]);
         }
-
+        if(choice != ""){
+            selectPlayerTrade(choice);
+        }
         panel.repaint();
         return choice;
     }
