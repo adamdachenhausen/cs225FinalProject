@@ -268,6 +268,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      */
     @Override
     public void mousePressed(MouseEvent e) {
+
         Player curPlayer;
 
         if(turn == 1){curPlayer = player1;}
@@ -277,6 +278,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
         gameboard.updateCurPlayer(curPlayer);
         gameboard.handleClick(e.getPoint());
+        clicked=true;
 
         //use boolean flags to determine if mouse listener is used to place
         //gamepieces. 
