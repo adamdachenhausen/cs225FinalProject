@@ -118,7 +118,6 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
 
         super("Space Invaders", FRAME_WIDTH, FRAME_HEIGHT);
         lastShotTime = System.currentTimeMillis();
-        //alienShip = new AlienShip(panel, start);
 
         leftDown = false;
         rightDown = false;
@@ -145,11 +144,9 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
     protected void buildGUI(JFrame frame, JPanel panel) {
         //main panel
         JPanel mainPanel = new JPanel();
-        //mainPanel.setBackground(Color.black);
         mainPanel.setLayout(new BorderLayout());
         frame.add(mainPanel);
         frame.setResizable(false);
-        //frame.requestFocus();
 
         //add graphics panel to main panel
         mainPanel.add(panel);
@@ -206,8 +203,10 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
      *   Add the mouse listeners to the panel.  Here, we need methods
      *   from both MouseListener and MouseMotionListener.
      * 
-     *   @param p the JPanel to which the mouse listeners will be
+     *   @param panel the JPanel to which the mouse listeners will be
      *   attached
+     *   
+     *   @param frame the JFrame to which the keyListener is attached
      */
     @Override
     protected void addListeners(JPanel panel, JFrame frame) {
@@ -240,7 +239,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
             resetGame();
         }
         if(e.getSource().equals(instructionsButton)){
-            //SoundEffect.CLICK.play();
+            
             playSound("buttonclick.wav");
             showInstructions();
         }
@@ -268,6 +267,9 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         }
     }
 
+    /**
+     *  Creates a timer
+     */
     public void createTimer() {
         Random r = new Random();
         int timeForUFO1 = r.nextInt(5000) + 3000;
@@ -279,9 +281,16 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         timer2 = new UfoTimer(timeForUFO2);
 
     }
+    /**
+     *  A timer to trigger the red ship's actions
+     */
     public class UfoTimer{
         protected Timer timer;
         protected UfoTask ufoTimer;
+        /**
+         * Creates a new Timer object and schedules a new task at ms
+         * @param ms the milliSeconds to schedule a task
+         */
         public UfoTimer(int ms){
             timer = new Timer();
 
@@ -291,13 +300,22 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
 
         }
 
+        /** Returns the ufoTimer
+         *  @return ufoTimer
+         */
         public UfoTask getTask(){
             return ufoTimer;
         }
 
+        /** Sets ufoTimer to a new UfoTask
+         *  @param ut the new UfoTask to set ufoTimer to
+         */
         public void setTask(UfoTask ut){
             ufoTimer = ut;
         }
+        /** 
+         *  A special type of TimerTask that activates the red ship
+         */
         class UfoTask extends TimerTask{
             public void run(){
                 Random r = new Random();
@@ -326,7 +344,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
                     timer.purge();
                 }else{
                     alienShip = new AlienShip(panel, start);
-                    //ships.add(alienShip);
+                    
                     alienShip.start();
                     playSound("ufo_lowpitch.wav");
                 }
@@ -334,6 +352,9 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
             }
         }
     }
+    /** Creates a new player at the start point, and start it
+     * 
+     */
     public void createPlayer() {
         //starting point for player ship
 
@@ -343,6 +364,9 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         panel.repaint();
     }
 
+    /**
+     *  Creates the array of Alien ships
+     */
     public void createAliens() {
         Alien alien;
 
@@ -386,6 +410,9 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
 
     }
 
+    /**
+     *  Creates the array of shield objects
+     */
     public void createShields() {
         //Create shield object
         int x = 125;
@@ -399,6 +426,8 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
             }
             x += 175;
         }
+        
+        //Start each shield and its sections
         for(Shields i: shields){
             i.start();  
         }
@@ -406,14 +435,6 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         for(Shields i: shields){
             i.startSections();  
         }
-
-        // for(int i = 0; i < shields.size(); i++){
-        // for(int j=0; j<shields.get(i).sections.length;j++){
-        // for(int k=0; k<shields.get(i).sections[0].length;k++){   
-        // shields.get(i).sections[i][j].start();
-        // }
-        // }
-        // }
 
         panel.repaint();
     }
@@ -440,10 +461,6 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
 
             score=0;
             scoreLabel.setText("Score: " + score);
-
-            //introTextLabel.setVisible(true);
-
-            //pressStartLabel.setVisible(true);
         }
     }
 
@@ -456,13 +473,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         gameEnded = false;
         gameWon = true;
 
-        //player.setStatus("dead");
-        //aliens.clear();
-        //shields.clear();
-        //alienShip.setStatus("dead");
-        //edit more instance variables here, this is a stub
         new ScoreSender(score);
-
     }
 
     /**
@@ -567,76 +578,33 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
         }
     }
 
-    /**
-     * Returns the current status of a alien 
-     *
-     * @return status the status of the alien
+    /** Returns the score
+     *  @return score
      */
-    public void alienAttack(){
-        // playSound("shoot.wav");
-        // //Point p = alien.getPosition();
-        // int x = (p.x + 48/2) - (4/2);
-        // int y = p.y - (4 + 6);
-        // Laser alienLaser = new Laser(panel, new Point(x,y), "ALIEN");
-        // alienLasers.add(alienLaser);
-        // alienLaser.start();
-    }
-
-    public class AttackTimer{
-        protected Timer timer;
-        AttackTask attack;
-        public AttackTimer(int ms){
-            timer = new Timer();
-            attack = new AttackTask();
-            timer.schedule(attack, ms);
-
-        }
-
-        public AttackTask getTask(){
-            return attack;
-        }
-
-        public void setTask(AttackTask nt){
-            attack = nt;
-        }
-        class AttackTask extends TimerTask{
-            public void run(){
-
-                Random r = new Random();
-                int direction = r.nextInt(2);
-                Point start;
-                if(direction > 0){
-                    start = new Point(0,50);
-                }else{
-                    start = new Point(800,50); 
-                }
-
-                AlienShip alienShip = new AlienShip(panel, start);
-                alienShips.add(alienShip);
-
-                //ships.add(alienShip);
-                alienShip.start();
-                playSound("ufo_lowpitch.wav");
-
-            }
-        }
-    }
-
     public int getScore(){
         return score;
 
     }
 
+    /** Returns the highScore
+     *  @return highScore
+     */
     public int getHighScore(){
         return highScore;
 
     }
 
+    /** Sets score to newScore
+     *  @param newScore the new value of score
+     */
     public void setScore(int newScore){
         score = newScore;
 
     }
 
+    /** Sets score to newHighScore
+     *  @param newHighScore the new value of highScore
+     */
     public void setHighScore(int newHighScore){
         highScore = newHighScore;
 
