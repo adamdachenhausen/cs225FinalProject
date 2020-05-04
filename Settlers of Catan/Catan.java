@@ -293,7 +293,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         if(!gameboardSet && players.get(3).getCities() >= 2 && players.get(3).getRoads() >= 2){
             gameboardSet = true;
             turn = PLAYER_1;
-            
+
             distributeResources();
             playerTurn();
         }
@@ -619,6 +619,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         buildDialog();
 
     }
+
     /**
      * The turn for the person playing the game
      *
@@ -825,15 +826,15 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      *
      * @param player1 Player initiating trade
      * @param player2 Player trading with
-     * @return 
+     * @return player's choice
      */
-    public void swapCards(){
+    public String swapCards(){
         //trading can only happen with the active player on a turn
         gamePhase = "Trading...";
         statusPane.setPhase(gamePhase);
 
         String[] options;
-
+        String choice = "";
         if(turn == 1){
             if(players.get(0).getResourceHand().size()>0){
                 options = new String[players.get(0).getResourceHand().size()];
@@ -851,7 +852,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                         options[1]);
 
                 //Choice is the answer in the array of the card to use
-                String choice = options[answer];
+                choice = options[answer];
 
                 //useResourceCard(choice);
             }
@@ -872,7 +873,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                         options[1]);
 
                 //Choice is the answer in the array of the card to use
-                String choice = options[answer];
+                choice = options[answer];
 
                 //useDevelopmentCard(choice);
             }
@@ -893,7 +894,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                         options[1]);
 
                 //Choice is the answer in the array of the card to use
-                String choice = options[answer];
+                choice = options[answer];
 
                 //useDevelopmentCard(choice);
             }
@@ -914,7 +915,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                         options[1]);
 
                 //Choice is the answer in the array of the card to use
-                String choice = options[answer];
+                choice = options[answer];
 
                 //useDevelopmentCard(choice);
             } 
@@ -927,7 +928,47 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                     icon,noCards,noCards[0]);
         }
 
+        panel.repaint();
+        return choice;
+    }
 
+    /**
+     * Player selected which card to trade in a previous dialog
+     * Find a player to trade with (if a player has a card, 
+     * it is assumed they will trade for simplicity's sake);
+     * 
+     * @param player1 Player initiating trade
+     * @param player2 Player trading with
+     * @return 
+     */
+    public void selectPlayerTrade(String choice){
+        gamePhase = "Trading...";
+        statusPane.setPhase(gamePhase);
+        int i = 0;
+        boolean traded = false;
+        int answer=-1;
+        while(i < players.size() && !traded){
+            String[] options = new String[]{"Player 1","Player 2", "Player 3", "Player 4"};
+            answer = JOptionPane.showOptionDialog(null,
+                "Which player do you want to trade with?",
+                "Trading interface",
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[3]);
+            if(players.get(answer).searchResourceCards(choice)){
+                ResourceCard rc =players.get(answer).removeResourceCard(choice);
+                players.get(turn + 1).addResourceCard(rc);
+                traded = true;
+            }
+            i++;
+        }
+        if(answer == 0){
+            buildStart = true;
+        }else{
+            developmentTurn();
+        }
         panel.repaint();
     }
 
