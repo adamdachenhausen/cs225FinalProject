@@ -499,12 +499,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
             displayBuildingCosts();
         }
         if(e.getSource().equals(continueButton)){
-            //rollDialog();
-            //tradeResourcesDialog();
-            //placeGamePiece("Settlement");
-            //buildSettlement = true;
-            //placeGamePiece("Road");
-            //buildRoad = true;
+
             if(turn < PLAYER_4){
                 turn++;
             }else{
