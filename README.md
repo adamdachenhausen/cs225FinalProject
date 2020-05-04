@@ -1,6 +1,6 @@
 # CSIS 225 Final Project
 
-Space invaders game and Catan board game simulation
+Space invaders & Settlers of Catan board game simulation
 
 ## Team members
 
