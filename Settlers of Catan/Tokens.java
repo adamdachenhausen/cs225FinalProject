@@ -43,7 +43,9 @@ public class Tokens extends AnimatedGraphicsObject{
 
     /**
      * Constructor for objects of class Tokens
+     * @param container what should I be drawn in?
      * @param Point p a point to use to draw the circle for the token
+     * @param val the value of this
      */
     public Tokens(JComponent container, Point p, int val){
         super(container);
@@ -58,11 +60,17 @@ public class Tokens extends AnimatedGraphicsObject{
         placed = false;
     }
 
+    /** Returns tokenValue
+     *  @return tokenValue
+     */
     public int getTokenValue(){
 
         return tokenValue;
     }
 
+    /** Searchs for a specific tokenValue and sets it to t
+     * 
+     */
     public void getToken(int tokenValue){
         switch(tokenValue){
             case NUM_TWO:
@@ -167,6 +175,9 @@ public class Tokens extends AnimatedGraphicsObject{
 
     }
 
+    /** Sets the text on this token
+     * 
+     */
     public void getNumberText(Graphics g){
         String numberInfo;
         int x = 0;
@@ -178,10 +189,9 @@ public class Tokens extends AnimatedGraphicsObject{
 
         numberInfo = "" + tokenValue;
         x = (upperLeft.x + (SIZE - fm.stringWidth(numberInfo)) / 2);
-        //y = (upperLeft.y + fm.getAscent()) + 5;
+
         y = (upperLeft.y + SIZE/2) + (fm.getAscent()/3);
-        //y = (upperLeft.y + (SIZE + fm.getAscent())/2) - fm.getAscent()/2;
-        //y = (upperLeft.y + ((SIZE - fm.getAscent())/2));
+
         g.drawString(numberInfo, x, y);
     }
 
@@ -190,10 +200,16 @@ public class Tokens extends AnimatedGraphicsObject{
         container.repaint();
     }
 
+    /** Returns placed
+     * @return placed
+     */
     public boolean getPlaced(){
         return placed;
     }
 
+    /** Sets placed to newPlaced
+     * @param newPlaced the value to save in placed
+     */
     public void setPlaced(boolean newPlaced){
         placed = newPlaced;
     }
