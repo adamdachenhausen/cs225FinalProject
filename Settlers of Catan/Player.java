@@ -57,6 +57,7 @@ public class Player
     protected ArrayList<String> devHand;
     protected ArrayList<String> resourceHand;
 
+    //The players roads and cities
     protected ArrayList<Road> myRoads;
     protected ArrayList<City> myCities;
 
@@ -193,12 +194,9 @@ public class Player
     }
 
     /**
-     * adds resource cards to the player's hand and to the 
-     * types of resource cards the player is holding
-     * (resourceHand is used to create an array used to populate the 
-     * dialog box with trade options)
+     * Loops through the deck to find the appropriate dev card.
      *
-     * @param  rc a Resource card to add
+     * @param  String searchtype to search the cards with
      */
     public boolean searchDevCards(String searchType){
         boolean found = false;
@@ -214,12 +212,9 @@ public class Player
     }
 
     /**
-     * adds development cards to the player's hand and to the 
-     * types of deveopment cards the player is holding
-     * (resourceHand is used to create an array used to populate the 
-     * dialog box with trade options)
+     * Adds a development card to the players hand
      *
-     * @param  rc a Resource card to add
+     * @param  dc a Development card to add
      */
     public void addDevelopmentCard(DevelopmentCard dc){
         String dcType = dc.getType();
@@ -236,12 +231,9 @@ public class Player
     }
 
     /**
-     * adds resource cards to the player's hand and to the 
-     * types of resource cards the player is holding
-     * (resourceHand is used to create an array used to populate the 
-     * dialog box with trade options)
+     * Removes a development card from the user's hand.
      *
-     * @param  rc a Resource card to add
+     * @param  dc a Development card to remove
      */
     public DevelopmentCard removeDevelopmentCard(String dcType){
         DevelopmentCard removed = null;
@@ -268,9 +260,10 @@ public class Player
     }
 
     /**
-     * Returns the development deck hand.
+     * Returns the development deck hand. Used to populate joption
+     * panes that guide the player through the game (for trading)
      *
-     * @param  rc a Resource card to add
+     * @returns  devHand the arraylist of dev card types
      */
     public ArrayList<String> getDevelopmentHand(){
 
@@ -278,28 +271,40 @@ public class Player
     }
 
     /**
-     * adds resource cards to the player's hand and to the 
-     * types of resource cards the player is holding
-     * (resourceHand is used to create an array used to populate the 
-     * dialog box with trade options)
+     * Returns the resource card hand 
      *
-     * @param  rc a Resource card to add
+     * @returns  resourceHand the arraylist of resource card types
      */
     public ArrayList<String> getResourceHand(){
 
         return resourceHand;
     }
 
+        /**
+     * Returns the resource card hand 
+     *
+     * @returns  resourceHand the arraylist of resource card types
+     */
     public int getPlayerNumber(){
 
         return playerNumber;
     }
 
+        /**
+     * Returns the resource card hand 
+     *
+     * @returns  resourceHand the arraylist of resource card types
+     */
     public ArrayList<DevelopmentCard> getDevelopmentCards(){
 
         return devCards;
     }
 
+        /**
+     * Returns the resource card hand 
+     *
+     * @returns  resourceHand the arraylist of resource card types
+     */
     public String getResourceToString(){
         StringBuilder s = new StringBuilder();
         String resCards;
@@ -328,6 +333,11 @@ public class Player
         return resCards;
     }
 
+        /**
+     * Returns the resource card hand 
+     *
+     * @returns  resourceHand the arraylist of resource card types
+     */
     public String getDevToString(String toStringType){
         StringBuilder s = new StringBuilder();
         String dCards;
@@ -359,10 +369,21 @@ public class Player
         return dCards;
     }
 
+        /**
+     * Returns the resource card hand 
+     *
+     * @returns  resourceHand the arraylist of resource card types
+     */
     public String getPiecesToString(){
         return ("Settlements: " + settlements + ", Cities: " + cities + ", Roads: " + roads);
     }
 
+    
+        /**
+     * Returns the resource card hand 
+     *
+     * @returns  resourceHand the arraylist of resource card types
+     */
     public String getColorToString(){
         String colString = "";
         if(getColor().equals(Color.RED)){
@@ -377,6 +398,12 @@ public class Player
         return colString;
     }
 
+    
+        /**
+     * Returns the resource card hand 
+     *
+     * @returns  resourceHand the arraylist of resource card types
+     */
     protected void checkCitiesForUpdates(Point p){
         for(City c : myCities){
             if(p.distance(c.getCityPoint())<=GameBoard.USER_ERROR_TOL){
@@ -386,6 +413,12 @@ public class Player
         }
     }
 
+    
+        /**
+     * Returns the resource card hand 
+     *
+     * @returns  resourceHand the arraylist of resource card types
+     */
     public void paint(Graphics g){
         Color cur = g.getColor();
 
@@ -401,81 +434,183 @@ public class Player
         g.setColor(cur);
     }
 
+    
+        /**
+     * Returns the resource card hand 
+     *
+     * @returns  resourceHand the arraylist of resource card types
+     */
     public void addLocation(City c){
         myCities.add(c);
     }
 
+    
+        /**
+     * Returns the resource card hand 
+     *
+     * @returns  resourceHand the arraylist of resource card types
+     */
     public void addRoad(Road r){
         myRoads.add(r);
     }
 
+    
+        /**
+     * Returns the resource card hand 
+     *
+     * @returns  resourceHand the arraylist of resource card types
+     */
     public ArrayList<ResourceCard> getResourceCards(){
         return resourceCards;
     }
 
+    
+        /**
+     * Returns the resource card hand 
+     *
+     * @returns  resourceHand the arraylist of resource card types
+     */
     public Color getColor(){
         return c;
     }
 
+    
+        /**
+     * Returns the resource card hand 
+     *
+     * @returns  resourceHand the arraylist of resource card types
+     */
     public boolean getTurn(){
 
         return turn;
     }
 
+    
+        /**
+     * Returns the resource card hand 
+     *
+     * @returns  resourceHand the arraylist of resource card types
+     */
     public int getCities(){
 
         return cities;
     }
 
+    
+        /**
+     * Returns the resource card hand 
+     *
+     * @returns  resourceHand the arraylist of resource card types
+     */
     public ArrayList<City> getMyCities(){
 
         return myCities;
     }
 
+    
+        /**
+     * Returns the resource card hand 
+     *
+     * @returns  resourceHand the arraylist of resource card types
+     */
     public int getSettlements(){
         return settlements;
     }
 
+    
+        /**
+     * Returns the resource card hand 
+     *
+     * @returns  resourceHand the arraylist of resource card types
+     */
     public int getRoads(){
 
         return roads;
     }
 
+    
+        /**
+     * Returns the resource card hand 
+     *
+     * @returns  resourceHand the arraylist of resource card types
+     */
     public ArrayList<Road> getMyRoads(){
 
         return myRoads;
     }
 
+    
+        /**
+     * Returns the resource card hand 
+     *
+     * @returns  resourceHand the arraylist of resource card types
+     */
     public int getVictoryPoints(){
 
         return victoryPoints;
     }
 
+    
+        /**
+     * Returns the resource card hand 
+     *
+     * @returns  resourceHand the arraylist of resource card types
+     */
     public int getVictoryPointCards(){
 
         return victoryPointCards;
     }
 
+    
+        /**
+     * Returns the resource card hand 
+     *
+     * @returns  resourceHand the arraylist of resource card types
+     */
     public int getKnights(){
 
         return knights;
     }
 
+    
+        /**
+     * Returns the resource card hand 
+     *
+     * @returns  resourceHand the arraylist of resource card types
+     */
     public int getRoadLength(){
 
         return roadLength;
     }
 
+    
+        /**
+     * Returns the resource card hand 
+     *
+     * @returns  resourceHand the arraylist of resource card types
+     */
     public boolean getLargestArmy(){
 
         return largestArmy;
     }
 
+    
+        /**
+     * Returns the resource card hand 
+     *
+     * @returns  resourceHand the arraylist of resource card types
+     */
     public boolean getLongestRoad(){
 
         return longestRoad;
     }
 
+    
+        /**
+     * Returns the resource card hand 
+     *
+     * @returns  resourceHand the arraylist of resource card types
+     */
     public void setTurn(boolean turnflag){
         turn = turnflag;
     }
@@ -485,36 +620,78 @@ public class Player
         cities = newcities;
     }
 
+    
+        /**
+     * Returns the resource card hand 
+     *
+     * @returns  resourceHand the arraylist of resource card types
+     */
     public void setSettlements(int newsettle){
 
         settlements = newsettle;
     }
 
+    
+        /**
+     * Returns the resource card hand 
+     *
+     * @returns  resourceHand the arraylist of resource card types
+     */
     public void setRoads(int newroads){
 
         roads = newroads;
     }
 
+    
+        /**
+     * Returns the resource card hand 
+     *
+     * @returns  resourceHand the arraylist of resource card types
+     */
     public void addCities(){
 
         cities++;
     }
 
+    
+        /**
+     * Returns the resource card hand 
+     *
+     * @returns  resourceHand the arraylist of resource card types
+     */
     public void addSettlements(){
 
         settlements++;
     }
 
+    
+        /**
+     * Returns the resource card hand 
+     *
+     * @returns  resourceHand the arraylist of resource card types
+     */
     public void addRoads(){
 
         roads++;
     }
 
+    
+        /**
+     * Returns the resource card hand 
+     *
+     * @returns  resourceHand the arraylist of resource card types
+     */
     public void setVictoryPoints(int vp){
 
         victoryPoints = vp;
     }
 
+    
+        /**
+     * Returns the resource card hand 
+     *
+     * @returns  resourceHand the arraylist of resource card types
+     */
     public void setVictoryPointCards(int vpc){
 
         victoryPointCards = vpc;
