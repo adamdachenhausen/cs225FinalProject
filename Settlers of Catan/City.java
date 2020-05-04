@@ -41,10 +41,10 @@ public class City extends AnimatedGraphicsObject implements ImageObserver
         this.x = center.x;
         this.y = center.y;
 
-        possible = false;
+        possible = true;
         placed = false;
         city = true;
-        settlement = true;
+        settlement = false;
     }
 
     @Override
@@ -54,10 +54,10 @@ public class City extends AnimatedGraphicsObject implements ImageObserver
 
         if(placed){
             if(settlement){
-                g.drawImage(settlementImage,100,100,this);
+                g.drawImage(settlementImage,x,y,this);
             }
             else if(city){
-                g.drawImage(cityImage,100,100,this);
+                g.drawImage(cityImage,x,y,this);
             }
         }
         else{
@@ -90,7 +90,7 @@ public class City extends AnimatedGraphicsObject implements ImageObserver
             possible = false;
         }
     }
-    
+
     public boolean imageUpdate(Image img, int infoflags, int x, int y,
     int width, int height) {
 
