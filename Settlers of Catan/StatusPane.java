@@ -43,6 +43,7 @@ public class StatusPane extends AnimatedGraphicsObject implements ImageObserver{
         this.turn = turn;
         this.roll = roll;
         this.p = p;
+        
     }
 
     @Override
@@ -275,6 +276,13 @@ public class StatusPane extends AnimatedGraphicsObject implements ImageObserver{
      */
     public void setTurn(int newTurn){
         turn = newTurn;
+    }
+
+    /** Sets new players to update values
+     *  @param newTurn the value to set turn
+     */
+    public void setPlayers(ArrayList<Player> p2){
+        p = p2;
     }
 
     /** Sets gamePhase to newPhase

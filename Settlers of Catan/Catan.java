@@ -698,9 +698,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         if(answer == 0){
             moveRobber = true;
             moveRobber();
-        }else
-
-            panel.repaint();
+        }
+        panel.repaint();
     }
 
     /**
@@ -753,6 +752,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                     //get hex resource type to distribute;
                     rType = gameboard.getHexResourceValue(tokVal);
                     drawResourceCard(rType);
+                    statusPane.setPlayers(players);
 
                 }
 
@@ -769,6 +769,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                         //get hex resource type to distribute;
                         rType = gameboard.getHexResourceValue(roll);
                         drawResourceCard(rType);
+                        statusPane.setPlayers(players);
                     }
                 }
             }
@@ -800,6 +801,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         if(answer == 0){
             swapCards();
         }
+        statusPane.setPlayers(players);
         panel.repaint();
     }
 
@@ -912,6 +914,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         if(choice != ""){
             selectPlayerTrade(choice);
         }
+        statusPane.setPlayers(players);
         panel.repaint();
         return choice;
     }
@@ -954,6 +957,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         }else{
             developmentTurn();
         }
+        statusPane.setPlayers(players);
         panel.repaint();
     }
 
@@ -1027,7 +1031,9 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                 JOptionPane.showMessageDialog(null, "You spent an ore, grain & wood card!");
             }
         }
+        statusPane.setPlayers(players);
         panel.repaint();
+
     }
 
     /**
