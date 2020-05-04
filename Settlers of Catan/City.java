@@ -48,7 +48,7 @@ public class City extends AnimatedGraphicsObject implements ImageObserver
         placed = false;
         city = true;
         settlement = false;
-        owner = "";
+        owner = "Player ";
         this.tokenValue = tokenValue;
     }
 

@@ -83,7 +83,7 @@ public class GameBoard extends AnimatedGraphicsObject
         sea = Sea.createSea(center);
 
     }
-    
+
     public void updatePlayers(Player p1, Player p2, Player p3, Player p4){
         player1 = p1;
         player2 = p2;
@@ -243,7 +243,7 @@ public class GameBoard extends AnimatedGraphicsObject
         if(roads != null){
             roads.paint(g);
         }
-        
+
         if(player1!=null){
             player1.paint(g);
         }
@@ -311,6 +311,13 @@ public class GameBoard extends AnimatedGraphicsObject
      */
     public HexTiles[][] getTiles(){
         return board;
+    }
+    
+        /**
+     *  @return the gameboard represented as a double array
+     */
+    public Player getCurPlayer(){
+        return curPlayer;
     }
 
     /**
@@ -446,24 +453,34 @@ public class GameBoard extends AnimatedGraphicsObject
      * 
      *  @param p The point of click
      */
-    public void handleClick(Point p){
+    public String handleClick(Point p, int playerNum){
         List<City> citiesList = c.getLocations();
         List<Road> roadsList = roads.getRoadList();
+
+        String added = "";
 
         //These two check the lists to see if the user clicked on a city or road, not
         //currently on the board
         for(City c : citiesList){
+
             if(p.distance(c.getCityPoint())<=USER_ERROR_TOL){
                 c.update();
                 curPlayer.addLocation(c);
+                c.setOwner(playerNum);
+                //return value to update player city count
+                added = "City";
                 this.c.removeLocation(c);
                 break;
             }
+
         }
         for(Road r : roadsList){
             if(p.distance(r.midPoint())<=USER_ERROR_TOL){
                 r.update();
                 curPlayer.addRoad(r);
+
+                //return value to update player road count
+                added = "Road";
                 this.roads.removeRoad(r);
                 break;
             }
@@ -471,6 +488,7 @@ public class GameBoard extends AnimatedGraphicsObject
 
         //But we still need to check if they wanted to upgrade their city to a settlement
         curPlayer.checkCitiesForUpdates(p);
+        return added;
     }
 
 }
