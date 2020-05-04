@@ -33,6 +33,7 @@ public class TokenStack extends AnimatedGraphicsObject{
 
     /**
      * Constructor for objects of class tokenList
+     * @param container what should I be drawn in?
      */
     public TokenStack(JComponent container){
         super(container);
@@ -44,6 +45,8 @@ public class TokenStack extends AnimatedGraphicsObject{
 
     /**
      * Constructor for objects of class tokenList
+     * @param container what should I be drawn in?
+     * @param upperLeft where should I be drawn?
      */
     public TokenStack(JComponent container,Point upperLeft){
         super(container);
@@ -89,6 +92,9 @@ public class TokenStack extends AnimatedGraphicsObject{
         Collections.shuffle(tokenList);
     }
 
+    /**
+     * Loops through the list and starts each token
+     */
     public void startTokens(){
         for(Tokens t: tokenList){
             t.start();
