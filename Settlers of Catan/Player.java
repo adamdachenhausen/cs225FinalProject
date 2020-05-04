@@ -218,7 +218,7 @@ public class Player
         return devHand;
     }
 
-    public ArrayList<String> getRescourceHand(){
+    public ArrayList<String> getResourceHand(){
 
         return resourceHand;
     }

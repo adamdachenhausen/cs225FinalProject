@@ -293,12 +293,15 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         if(!gameboardSet && players.get(3).getCities() >= 2 && players.get(3).getRoads() >= 2){
             gameboardSet = true;
             turn = PLAYER_1;
+            
             distributeResources();
+            playerTurn();
         }
         if(buildStart){
             developmentTurn();
         }
     }
+
     /**
     Mouse drag event handler to create remember the current point
     for sling line drawing.
@@ -615,9 +618,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
         buildDialog();
 
-
     }
-
     /**
      * The turn for the person playing the game
      *
@@ -830,20 +831,118 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         //trading can only happen with the active player on a turn
         gamePhase = "Trading...";
         statusPane.setPhase(gamePhase);
-        
-        //trading can only happen with the active player on a turn
-        String[] options = new String[]{"Yes","No"};
-        int answer = JOptionPane.showOptionDialog(null,
-                "Which card would you like to trade?",
-                "Trade Selection interface",
-                JOptionPane.YES_NO_CANCEL_OPTION,
-                JOptionPane.QUESTION_MESSAGE,
-                null,
-                options,
-                options[1]);
-        if(answer == 0){
-            swapCards();
+
+        String[] options;
+
+        if(turn == 1){
+            if(players.get(0).getResourceHand().size()>0){
+                options = new String[players.get(0).getResourceHand().size()];
+                for(int i = 0; i < players.get(0).getResourceHand().size(); i++){
+                    options[i] = players.get(0).getResourceHand().get(i);
+                }
+
+                int answer = JOptionPane.showOptionDialog(null,
+                        "Choose which card to use",
+                        "Use Development card interface",
+                        JOptionPane.YES_NO_CANCEL_OPTION,
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        options,
+                        options[1]);
+
+                //Choice is the answer in the array of the card to use
+                String choice = options[answer];
+
+                useResourceCard(choice);
+            }
+        }else if(turn == 2){
+            if(players.get(1).getDevelopmentHand().size()>0){
+                options = new String[players.get(1).getDevelopmentHand().size()];
+                for(int i = 0; i < players.get(1).getDevelopmentHand().size(); i++){
+                    options[i] = players.get(1).getDevelopmentHand().get(i);
+                }
+
+                int answer = JOptionPane.showOptionDialog(null,
+                        "Choose which card to use",
+                        "Use Development card interface",
+                        JOptionPane.YES_NO_CANCEL_OPTION,
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        options,
+                        options[1]);
+
+                //Choice is the answer in the array of the card to use
+                String choice = options[answer];
+
+                useDevelopmentCard(choice);
+            }
+        }else if(turn == 3){
+            if(players.get(2).getDevelopmentHand().size()>0){
+                options = new String[players.get(2).getDevelopmentHand().size()];
+                for(int i = 0; i < players.get(2).getDevelopmentHand().size(); i++){
+                    options[i] = players.get(2).getDevelopmentHand().get(i);
+                }
+
+                int answer = JOptionPane.showOptionDialog(null,
+                        "Choose which card to use",
+                        "Use Development card interface",
+                        JOptionPane.YES_NO_CANCEL_OPTION,
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        options,
+                        options[1]);
+
+                //Choice is the answer in the array of the card to use
+                String choice = options[answer];
+
+                useDevelopmentCard(choice);
+            }
+        }else if(turn == 4){
+            if(players.get(3).getDevelopmentHand().size()>0){
+                options = new String[players.get(3).getDevelopmentHand().size()];
+                for(int i = 0; i < players.get(3).getDevelopmentHand().size(); i++){
+                    options[i] = players.get(3).getDevelopmentHand().get(i);
+                }
+
+                int answer = JOptionPane.showOptionDialog(null,
+                        "Choose which card to use",
+                        "Use Development card interface",
+                        JOptionPane.YES_NO_CANCEL_OPTION,
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        options,
+                        options[1]);
+
+                //Choice is the answer in the array of the card to use
+                String choice = options[answer];
+
+                useDevelopmentCard(choice);
+            } 
+
+        }else{
+            //Player has no development cards, show message.
+            Object[] noCards = {"Ok"};
+            int answer = JOptionPane.showOptionDialog(frame, "You have no development cards.","Catan",
+                    JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,
+                    icon,noCards,noCards[0]);
         }
+
+        
+        
+        
+        // //trading can only happen with the active player on a turn
+        // String[] options = new String[]{"Yes","No"};
+        // int answer = JOptionPane.showOptionDialog(null,
+        // "Which card would you like to trade?",
+        // "Trade Selection interface",
+        // JOptionPane.YES_NO_CANCEL_OPTION,
+        // JOptionPane.QUESTION_MESSAGE,
+        // null,
+        // options,
+        // options[1]);
+        // if(answer == 0){
+        // swapCards();
+        // }
         panel.repaint();
     }
 
@@ -905,7 +1004,6 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         }
         panel.repaint();
     }
-
 
     /**
      * Asks player if they would like to use a development card.
