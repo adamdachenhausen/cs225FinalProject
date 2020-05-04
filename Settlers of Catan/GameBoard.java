@@ -34,7 +34,7 @@ public class GameBoard extends AnimatedGraphicsObject
     //The amount of error that the user can be off of an object's 
     //exact point and still place that object
     public static final int USER_ERROR_TOL = 5;
-    
+
     private JPanel panel;
     protected HexTiles[][] board;
     private Stack<Resource> r;
@@ -415,13 +415,16 @@ public class GameBoard extends AnimatedGraphicsObject
      * 
      *  @param p The point of click
      */
-    public void handleClick(Point p){
+    public void handleClick(Point p,Player curPlayer){
         List<City> citiesList = c.getLocations();
         List<Road> roadsList = roads.getRoadList();
 
+        //These two check the lists to see if the user clicked on a city or road, not
+        //currently on the board
         for(City c : citiesList){
             if(p.distance(c.getCityPoint())<=USER_ERROR_TOL){
                 c.update();
+                curPlayer.addLocation(c);
                 this.c.removeLocation(c);
                 break;
             }
@@ -429,9 +432,13 @@ public class GameBoard extends AnimatedGraphicsObject
         for(Road r : roadsList){
             if(p.distance(r.midPoint())<=USER_ERROR_TOL){
                 r.update();
+                curPlayer.addRoad(r);
                 this.roads.removeRoad(r);
                 break;
             }
         }
+
+        //But we still need to check if they wanted to upgrade their city to a settlement
+        curPlayer.checkCitiesForUpdates(p);
     }
 }
