@@ -31,6 +31,11 @@ public class StatusPane extends AnimatedGraphicsObject implements ImageObserver{
     private ArrayList<Player> p ;
     /**
      * Constructor for objects of class Dice
+     * @param container what should I be drawn in?
+     * @param phase what phase am I in?
+     * @param turn who's turn is it?
+     * @param roll the current value of the dice
+     * @param p an ArrayList of players
      */
     public StatusPane(JComponent container, String phase, int turn, int roll, ArrayList<Player>p){
         super(container);
@@ -50,25 +55,12 @@ public class StatusPane extends AnimatedGraphicsObject implements ImageObserver{
         g.fillRect(upperLeft.x,upperLeft.y, PANE_WIDTH, 35);  
 
         updateText(g);
-        // if(!done){
-        // //draw image of explosion
-        // if(value == 1){
-        // g.drawImage(dice1, upperLeft.x , upperLeft.y, this);
-        // }else if(value == 2){
-        // g.drawImage(dice2, upperLeft.x , upperLeft.y, this);
-        // }else if(value == 3){
-        // g.drawImage(dice3, upperLeft.x , upperLeft.y, this);
-        // }else if(value == 4){
-        // g.drawImage(dice4, upperLeft.x , upperLeft.y, this);
-        // }else if(value == 5){
-        // g.drawImage(dice5, upperLeft.x , upperLeft.y, this);
-        // }else{
-        // //If alien
-        // g.drawImage(dice6, upperLeft.x , upperLeft.y, this);
-        // }
-        // }
+
     }
 
+    /**
+     * Updates the text on the pane
+     */
     public void updateText(Graphics g){
         //Variables to paint text
         String statusTitle;
@@ -231,15 +223,15 @@ public class StatusPane extends AnimatedGraphicsObject implements ImageObserver{
         int x17 = (upperLeft.x + 3);
         int y17 = (y16 + 20);
         g.drawString(longestRoad, x17, y17);
-        
-                //Instructions
+
+        //Instructions
         g.setFont(new Font("TimesRoman", Font.BOLD, 15));
         String instr = "Instructions: ";
         int x18 = (upperLeft.x + 3);
         int y18 = (y17 + 35);
         g.drawString(instr, x18, y18);
-        
-                g.setFont(new Font("TimesRoman", Font.BOLD, 12));
+
+        g.setFont(new Font("TimesRoman", Font.BOLD, 12));
         String instDet = gamePhase;
         int x19 = (upperLeft.x + 3);
         int y19 = (y18 + 20);
@@ -253,9 +245,6 @@ public class StatusPane extends AnimatedGraphicsObject implements ImageObserver{
     public void run(){
 
         container.repaint();
-        // sleepWithCatch(DELAY_TIME);
-        // container.repaint();
-
     }
 
     public boolean imageUpdate(Image img, int infoflags, int x, int y,
@@ -274,14 +263,23 @@ public class StatusPane extends AnimatedGraphicsObject implements ImageObserver{
 
     }
 
+    /** Sets roll to newRoll
+     *  @param newRoll the value to set roll to
+     */
     public void setRoll(int newRoll){
         roll = newRoll;
     }
 
+    /** Sets turn to newTurn
+     *  @param newTurn the value to set turn
+     */
     public void setTurn(int newTurn){
         turn = newTurn;
     }
 
+    /** Sets gamePhase to newPhase
+     *  @param newPhase the value to set gamePhase to
+     */
     public void setPhase(String newPhase){
         gamePhase = newPhase;
     }
