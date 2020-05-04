@@ -15,9 +15,6 @@ import javax.sound.sampled.*;
  * @version Spring 2020
  */
 public class PlayerShip extends AnimatedGraphicsObject{
-    // pixels to move each frame
-    //protected static final int SPEED = 4;
-
     protected int lives;
 
     // delay between each frame
@@ -49,6 +46,8 @@ public class PlayerShip extends AnimatedGraphicsObject{
 
     /**
      * Constructor for objects of class playerShip
+     * @param upperLeft where to draw this
+     * @param container what container to draw in
      */
     public PlayerShip(Point upperLeft, JComponent container){
         super(container);
@@ -61,20 +60,6 @@ public class PlayerShip extends AnimatedGraphicsObject{
         lives = 3;
     }
 
-    // /**
-     // * Constructor for objects of class playerShip
-     // */
-    // public PlayerShip(Point upperLeft, JComponent container, int resurrect){
-        // super(container);
-        // this.upperLeft = upperLeft;
-        // status = "alive";
-        // width = container.getWidth();
-        // height = container.getHeight();
-        // type = "ship";
-        // done = false;
-        // lives = resurrect;
-    // }
-
     /**
      * Draw the cannon/ship at its current location.
      * 
@@ -82,7 +67,6 @@ public class PlayerShip extends AnimatedGraphicsObject{
      */
     @Override
     public void paint(Graphics g) {
-        //(x, y, width, height)
         if(lives >= 3){
             g.setColor(Color.GREEN);
             g.fillRect(upperLeft.x, upperLeft.y,lgWidth, lgHeight);
