@@ -295,9 +295,10 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
             turn = PLAYER_1;
             distributeResources();
         }
-
+        if(buildStart){
+            developmentTurn();
+        }
     }
-
     /**
     Mouse drag event handler to create remember the current point
     for sling line drawing.
@@ -625,7 +626,6 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * @return 
      */
     public void playerTurn(){
-        boolean turnDone = false;
 
         //roll dice
         rollDialog();
@@ -646,13 +646,23 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
         buildDialog();
 
-        checkPoints();
-        //offer trades
 
+    }
+
+    /**
+     * The turn for the person playing the game
+     *
+     * @param player1 Player initiating trade
+     * @param player2 Player trading with
+     * @return 
+     */
+    public void developmentTurn(){
+        buildStart = false;
         buyDevelopmentDialog();
 
         useDevelopmentDialog();
 
+        checkPoints();
     }
 
     /**
@@ -887,15 +897,9 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                 options,
                 options[1]);
         if(answer == 0){
-            String[] newoption = new String[]{"Ok"};
-            int answer2 = JOptionPane.showOptionDialog(null,
-                    "Click on the gameboard to build.",
-                    "Building interface",
-                    JOptionPane.YES_NO_CANCEL_OPTION,
-                    JOptionPane.QUESTION_MESSAGE,
-                    null,
-                    options,
-                    options[0]);
+            buildStart = true;
+        }else{
+            developmentTurn();
         }
         panel.repaint();
     }
