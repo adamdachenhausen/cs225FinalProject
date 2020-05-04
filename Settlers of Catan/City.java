@@ -38,6 +38,13 @@ public class City extends AnimatedGraphicsObject implements ImageObserver
 
     private static Image cityImage;
     private static Image settlementImage;
+
+    /** Constructor for City
+     *  @param container what should I be drawn in?
+     *  @param upperLeft where should I be drawn?
+     *  @param tokenValue the token value of this
+     *  
+     */
     public City(JComponent container, Point center, int tokenValue){
         super(container);
         this.container = container;
@@ -57,7 +64,7 @@ public class City extends AnimatedGraphicsObject implements ImageObserver
     public void paint(Graphics g){
         //For returning g back to the original color
         Color cur = g.getColor();
-        
+
         if(placed){
             Point newPoint = findCenter(new Point(x,y));
             if(settlement){
@@ -87,6 +94,9 @@ public class City extends AnimatedGraphicsObject implements ImageObserver
         return new Point(x,y);
     }
 
+    /** Updates status of city to make it a settlement if called
+     * 
+     */
     public void update(){
         if(possible && !city){
             placed = true;
@@ -116,14 +126,23 @@ public class City extends AnimatedGraphicsObject implements ImageObserver
         settlementImage = toolkit.getImage("settlement.png");
     }
 
+    /** Returns the owner of this
+     *  @return owner
+     */
     protected String getOwner(){
         return owner;
     }
 
+    /** Sets placed to newPlaced
+     *  @param newPlaced the value to store in placed
+     */
     protected void setPlaced(boolean newPlaced){
         placed = newPlaced;
     }
 
+    /** Returns the tokenValue of this
+     *  @return tokenValue
+     */
     protected int getTokenValue(){
         return tokenValue;
     }
@@ -142,6 +161,9 @@ public class City extends AnimatedGraphicsObject implements ImageObserver
         return cPoint;
     }
 
+    /** Given a playerNumber, sets the owner
+     *  @param playerNumber the new owner of this
+     */
     protected void setOwner(int playerNumber){
         if(playerNumber == 1){
             owner = "Player 1";  
