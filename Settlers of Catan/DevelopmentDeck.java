@@ -10,8 +10,8 @@ import java.util.Random;
 /**
  * Write a description of class DevelopmentDeck here.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Kate Nelligan, Lindsay Clark, Adam Dachenhausen
+ * @version Spring 2020
  */
 public class DevelopmentDeck extends AnimatedGraphicsObject{
     // Stores the cards

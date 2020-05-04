@@ -84,7 +84,7 @@ public class Player
     }
 
     /**
-     * adds resource cards to the player's hand and to the 
+     * Adds resource cards to the player's hand and to the 
      * types of resource cards the player is holding
      * (resourceHand is used to create an array used to populate the 
      * dialog box with trade options)
@@ -102,10 +102,8 @@ public class Player
     }
 
     /**
-     * adds resource cards to the player's hand and to the 
+     * Removes resource cards to the player's hand and to the 
      * types of resource cards the player is holding
-     * (resourceHand is used to create an array used to populate the 
-     * dialog box with trade options)
      *
      * @param  rc a Resource card to add
      */
@@ -134,12 +132,10 @@ public class Player
     }
 
     /**
-     * adds resource cards to the player's hand and to the 
-     * types of resource cards the player is holding
-     * (resourceHand is used to create an array used to populate the 
-     * dialog box with trade options)
+     * Returns a resource card after searching through the deck.
      *
      * @param  rc a Resource card to add
+     * @return foundCard the resource card if it is found
      */
     public ResourceCard getResourceCard(String rcType){
         ResourceCard foundCard = null;
@@ -157,12 +153,11 @@ public class Player
     }
 
     /**
-     * adds resource cards to the player's hand and to the 
-     * types of resource cards the player is holding
-     * (resourceHand is used to create an array used to populate the 
-     * dialog box with trade options)
+     * Searches the cards to see if the parameter value string contains
+     * the same type of card in the deck.
      *
-     * @param  rc a Resource card to add
+     * @param  searchType the String used to search the cards
+     * @return true if found, false otherwise
      */
     public boolean searchResourceCards(String searchType){
         boolean found = false;
@@ -178,12 +173,9 @@ public class Player
     }
 
     /**
-     * adds resource cards to the player's hand and to the 
-     * types of resource cards the player is holding
-     * (resourceHand is used to create an array used to populate the 
-     * dialog box with trade options)
+     * Gets a development card if it is in the players possession.
      *
-     * @param  rc a Resource card to add
+     * @param  rcType the type of
      */
     public DevelopmentCard getDevelopmentCard(String rcType){
         DevelopmentCard foundCard = null;
