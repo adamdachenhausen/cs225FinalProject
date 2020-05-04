@@ -409,7 +409,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      */
     public void showInstructions() {
         JFrame instructionDialog = new JFrame("Catan Instructions");
-        JOptionPane.showMessageDialog(instructionDialog, "Here is how to play!");
+        JOptionPane.showMessageDialog(instructionDialog, "For official rules, please see:\nhttps://www.catan.com/service/game-rules");
 
     }
 
