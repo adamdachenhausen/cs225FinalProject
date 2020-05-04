@@ -102,7 +102,7 @@ public class ArcadeMachine extends ThreadGraphicsController implements ActionLis
     protected long lastShotTime;
 
     //The delay in between shots in ms, so the user can't spam
-    public static int SHOT_DELAY = 750;
+    public static int SHOT_DELAY = 500;
 
     protected boolean leftDown;
 
