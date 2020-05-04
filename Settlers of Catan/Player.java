@@ -44,6 +44,8 @@ public class Player
     protected int victoryPointCards = 0;
     protected int knights = 0;
     protected int roadLength = 0;
+    protected int armyPoints = 0;
+    protected int roadPoints = 0;
 
     //variables based on special victory point cards (worth 2 victory points)
     protected boolean largestArmy = false;
@@ -298,8 +300,8 @@ public class Player
         String colString = "";
         if(getColor().equals(Color.RED)){
             colString = "Red";
-        }else if(getColor().equals(Color.WHITE)){
-            colString = "White";
+        }else if(getColor().equals(Color.BLACK)){
+            colString = "Black";
         }else if(getColor().equals(Color.BLUE)){
             colString = "Blue";
         }else{
@@ -362,10 +364,8 @@ public class Player
 
         return myCities;
     }
-    
 
     public int getSettlements(){
-
         return settlements;
     }
 
@@ -462,24 +462,32 @@ public class Player
     }
 
     public void setLargestArmy(boolean la){
+        armyPoints = 2;
         largestArmy = la;
     }
 
     public void setLongestRoad(boolean lr){
-
+roadPoints = 2;
         longestRoad = lr;
     }
 
     public void setRoadLength(int newRoadLength){
         roadLength = newRoadLength;
     }
-    
-        public void updateCities(){
+
+    public void updateCities(){
         cities = myCities.size();;
     }
-    
-            public void updateRoads(){
+
+    public void updateRoads(){
         roads = myRoads.size();;
+    }
+
+    public void updatePoints(){
+
+
+        victoryPoints = cities + settlements +armyPoints + roadPoints;
+
     }
 
 }

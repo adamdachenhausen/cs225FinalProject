@@ -17,6 +17,7 @@ public class City extends AnimatedGraphicsObject implements ImageObserver
 {
     public static final int SIZE = 6;
     public static final int SHIFT = 3;
+    public static final int PLACED_SIZE = 50;
     protected int x;
     protected int y;
 
@@ -56,13 +57,15 @@ public class City extends AnimatedGraphicsObject implements ImageObserver
     public void paint(Graphics g){
         //For returning g back to the original color
         Color cur = g.getColor();
-
+        
         if(placed){
+            Point newPoint = findCenter(new Point(x,y));
             if(settlement){
-                g.drawImage(settlementImage,x,y,this);
+                g.fillOval(newPoint.x,newPoint.y, PLACED_SIZE,PLACED_SIZE);
+                g.drawImage(settlementImage,newPoint.x+5,newPoint.y+5,this);
             }
             else if(city){
-                g.drawImage(cityImage,x,y,this);
+                g.drawImage(cityImage,newPoint.x,newPoint.y,this);
             }
         }
         else{
@@ -116,13 +119,27 @@ public class City extends AnimatedGraphicsObject implements ImageObserver
     protected String getOwner(){
         return owner;
     }
-    
-        protected void setPlaced(boolean newPlaced){
-         placed = newPlaced;
+
+    protected void setPlaced(boolean newPlaced){
+        placed = newPlaced;
     }
-    
-        protected int getTokenValue(){
+
+    protected int getTokenValue(){
         return tokenValue;
+    }
+
+    /** Given a p and boolean, determines the center of a token
+     *  @param p the point of the token
+     *  @param isRobber a boolean flag if the token is a robber
+     *  @return the center of this token
+     */
+    private Point findCenter(Point p){
+        Point cPoint = p;
+
+        cPoint.x = cPoint.x - ((PLACED_SIZE/2));
+        cPoint.y = cPoint.y -((PLACED_SIZE/2));
+
+        return cPoint;
     }
 
     protected void setOwner(int playerNumber){

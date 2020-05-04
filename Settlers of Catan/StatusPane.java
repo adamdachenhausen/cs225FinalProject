@@ -137,7 +137,7 @@ public class StatusPane extends AnimatedGraphicsObject implements ImageObserver{
         //player2cards 
         g.setFont(new Font("TimesRoman", Font.BOLD, 12));
         String p2cards;
-        p1cards = p.get(0).getResourceToString();
+        p1cards = p.get(1).getResourceToString();
         int x8 = (upperLeft.x + 3);
         int y8 = (y7 + 20);
         g.drawString(p1cards, x8, y8);
@@ -145,7 +145,7 @@ public class StatusPane extends AnimatedGraphicsObject implements ImageObserver{
         //player2pieces
         g.setFont(new Font("TimesRoman", Font.BOLD, 12));
         String p2pieces;
-        p2pieces = p.get(0).getPiecesToString();
+        p2pieces = p.get(1).getPiecesToString();
         int x9 = (upperLeft.x + 3);
         int y9 = (y8 + 20);
         g.drawString(p2pieces, x9, y9);
@@ -160,7 +160,7 @@ public class StatusPane extends AnimatedGraphicsObject implements ImageObserver{
         //player3cards 
         g.setFont(new Font("TimesRoman", Font.BOLD, 12));
         String p3cards;
-        p3cards = p.get(0).getResourceToString();
+        p3cards = p.get(2).getResourceToString();
         int x11 = (upperLeft.x + 3);
         int y11 = (y10 + 20);
         g.drawString(p3cards, x11, y11);
@@ -168,7 +168,7 @@ public class StatusPane extends AnimatedGraphicsObject implements ImageObserver{
         //player3pieces
         g.setFont(new Font("TimesRoman", Font.BOLD, 12));
         String p3pieces;
-        p3pieces = p.get(0).getPiecesToString();
+        p3pieces = p.get(2).getPiecesToString();
         int x12 = (upperLeft.x + 3);
         int y12 = (y11 + 20);
         g.drawString(p3pieces, x12, y12);
@@ -183,7 +183,7 @@ public class StatusPane extends AnimatedGraphicsObject implements ImageObserver{
         //player4cards 
         g.setFont(new Font("TimesRoman", Font.BOLD, 12));
         String p4cards;
-        p4cards = p.get(0).getResourceToString();
+        p4cards = p.get(3).getResourceToString();
         int x14 = (upperLeft.x + 3);
         int y14 = (y13 + 20);
         g.drawString(p4cards, x14, y14);
@@ -191,7 +191,7 @@ public class StatusPane extends AnimatedGraphicsObject implements ImageObserver{
         //player4cards 
         g.setFont(new Font("TimesRoman", Font.BOLD, 12));
         String p4pieces;
-        p4pieces = p.get(0).getPiecesToString();
+        p4pieces = p.get(3).getPiecesToString();
         int x15 = (upperLeft.x + 3);
         int y15 = (y14 + 20);
         g.drawString(p4pieces, x15, y15);
@@ -213,8 +213,8 @@ public class StatusPane extends AnimatedGraphicsObject implements ImageObserver{
         int x16 = (upperLeft.x + 3);
         int y16 = (y15 + 35);
         g.drawString(army, x16, y16);
-        
-                //Longest Road
+
+        //Longest Road
         g.setFont(new Font("TimesRoman", Font.BOLD, 15));
         int roadHolder = 0;
         for(int i = 0; i < p.size(); i++){
@@ -259,5 +259,17 @@ public class StatusPane extends AnimatedGraphicsObject implements ImageObserver{
     protected static void loadPic(){
         Toolkit toolkit = Toolkit.getDefaultToolkit();
 
+    }
+
+    public void setRoll(int newRoll){
+        roll = newRoll;
+    }
+
+    public void setTurn(int newTurn){
+        turn = newTurn;
+    }
+
+    public void setPhase(String newPhase){
+        gamePhase = newPhase;
     }
 }
