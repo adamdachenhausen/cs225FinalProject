@@ -273,7 +273,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
             distributeResources();
             playerTurn();
         }
-        if(buildStart && checkGamePiece != ""){
+        //buildStart && checkGamePiece != ""
+        if(buildStart){
             checkGamePiece ="";
             developmentTurn();
         }
