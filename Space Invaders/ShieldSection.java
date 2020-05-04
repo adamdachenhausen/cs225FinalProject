@@ -34,6 +34,11 @@ public class ShieldSection extends AnimatedGraphicsObject
 
     //The black squares to color in to show damage (damage indicated by a true value)
     private boolean[][] damagePoints;
+    /** Constructor for ShieldSection
+     *  @param upperLeft where should I be?
+     *  @param container what should I be drawn in?
+     * 
+     */
     public ShieldSection(Point upperLeft, JComponent container){
         super(container);
         this.upperLeft = upperLeft;
@@ -42,8 +47,6 @@ public class ShieldSection extends AnimatedGraphicsObject
         maxDamage = 5;
         damagePoints = new boolean[SIZE/5][SIZE/5];
 
-        //Calculate the damage on init
-        //hurt();
     }
 
     @Override
@@ -81,6 +84,9 @@ public class ShieldSection extends AnimatedGraphicsObject
         }
     }
 
+    /** Updates the look of a shieldSection by introducing random black squares
+     * 
+     */
     protected void hurt(){
         Random rand = new Random();
 
