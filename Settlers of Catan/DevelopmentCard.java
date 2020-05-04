@@ -29,6 +29,9 @@ public class DevelopmentCard extends AnimatedGraphicsObject implements ImageObse
     private Development cardType;
     /**
      * Constructor for objects of class DevelopmentCards
+     * @param container what should I be drawn in?
+     * @param d the type of card I am.
+     * @param upperLeft where should I be drawn?
      */
     public DevelopmentCard(JComponent container, Development d, Point upperLeft){
         super(container);
@@ -39,23 +42,38 @@ public class DevelopmentCard extends AnimatedGraphicsObject implements ImageObse
         setCardType();
     }
 
+<<<<<<< HEAD
         /**
      * Constructor for objects of class DevelopmentCards
+=======
+    /** Sets visible to true, when called
+     * 
+>>>>>>> 7f80b43a4dbe7f1f723f5b107fada028d3aca89c
      */
     public void showCard(){
         visible = true;
     }
+<<<<<<< HEAD
     
         /**
      * Constructor for objects of class DevelopmentCards
+=======
+
+    /** Returns type
+     *  @return type
+>>>>>>> 7f80b43a4dbe7f1f723f5b107fada028d3aca89c
      */
     public String getType(){
         return type;
     }
+<<<<<<< HEAD
     
         /**
      * Constructor for objects of class DevelopmentCards
      */
+=======
+
+>>>>>>> 7f80b43a4dbe7f1f723f5b107fada028d3aca89c
     @Override
     public void paint(Graphics g){
 
@@ -64,11 +82,9 @@ public class DevelopmentCard extends AnimatedGraphicsObject implements ImageObse
             g.setColor(Color.RED);
 
             g.fillRect(upperLeft.x,upperLeft.y, CARD_WIDTH, CARD_HEIGHT);
-            // g.setColor(Color.BLACK);
-            // g.drawRect(upperLeft.x,upperLeft.y, CARD_WIDTH, CARD_HEIGHT);
 
             Point picturePoint = new Point(upperLeft.x + 5, upperLeft.y + 15);
-            // //paint image of card type icon
+            //paint image of card type icon
             switch(cardType){
                 case MONOPOLY:
                 g.drawImage(monopoly, picturePoint.x , picturePoint.y, this);
@@ -143,6 +159,10 @@ public class DevelopmentCard extends AnimatedGraphicsObject implements ImageObse
         }
     }
 
+    /** Sets the cardType of this
+     * @return the type of card this is
+     * 
+     */
     public String setCardType(){
         String cardString;
         switch(cardType){
@@ -179,6 +199,9 @@ public class DevelopmentCard extends AnimatedGraphicsObject implements ImageObse
         return type;
     }
 
+    /** Returns the type of card this is
+     *  @return the type of card this is
+     */
     public String getCardType(){
         return type;
     }
