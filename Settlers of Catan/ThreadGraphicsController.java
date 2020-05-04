@@ -39,10 +39,10 @@ public class ThreadGraphicsController implements Runnable {
     public static final int PANEL_HEIGHT = 150;
 
     /** list of animated graphics objects currently on the screen */
-    protected java.util.List<GamePiece> player1Pieces;
-    protected java.util.List<GamePiece> player2Pieces;
-    protected java.util.List<GamePiece> player3Pieces;
-    protected java.util.List<GamePiece> player4Pieces;
+    protected ArrayList<GamePiece> player1Pieces;
+    protected ArrayList<GamePiece> player2Pieces;
+    protected ArrayList<GamePiece> player3Pieces;
+    protected ArrayList<GamePiece> player4Pieces;
 
     protected ResourceDeck resourceDeck;
     protected DevelopmentDeck developmentDeck;

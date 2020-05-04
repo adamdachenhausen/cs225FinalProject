@@ -101,6 +101,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
     //These flags determine what action is selected
     //with mouse pointer
+    protected boolean clicked = false;
     protected boolean buildSettlement = false;
     protected boolean buildCity = false;
     protected boolean buildRoad = false;
@@ -269,7 +270,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      */
     @Override
     public void mousePressed(MouseEvent e) {
-
+        System.out.println("mousepressed");
+        clicked = true;
         //use boolean flags to determine if mouse listener is used to place
         //gamepieces. 
         if(buildSettlement){
@@ -291,7 +293,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         }else{
             //do nothing
         }
-
+        
     }
 
     /**
@@ -325,7 +327,9 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     // now needs to extend the abstract class
     public void mouseMoved(MouseEvent e) {}
 
-    public void mouseEntered(MouseEvent e) {}
+    public void mouseEntered(MouseEvent e) {
+        //panel.setRequestFocusEnabled(true);
+    }
 
     public void mouseExited(MouseEvent e) {}
 
@@ -367,14 +371,14 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         panel.repaint();
 
         //display the player's gamepieces (roads, settlements and cities)
-        distributeGamepieces();
+        //distributeGamepieces();
 
         //Set turn to first player and place first two settlements
         turn = 1;
-        placeGamePiece("Settlement");
-        buildSettlement = true;
-        placeGamePiece("Road");
-        buildRoad = true;
+        // placeGamePiece("Settlement");
+        // buildSettlement = true;
+        // placeGamePiece("Road");
+        // buildRoad = true;
 
         // while(turn <= 4){
         // for(int i = 0; i < 2; i++){
@@ -390,7 +394,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         // }
 
         //Play game
-        playGame();
+        //playGame();
     }
 
     /**
@@ -504,9 +508,13 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         }
         if(e.getSource().equals(continueButton)){
             //rollDialog();
-            tradeResourcesDialog();
+            //tradeResourcesDialog();
+                    placeGamePiece("Settlement");
+        buildSettlement = true;
+        //placeGamePiece("Road");
+        //buildRoad = true;
         }
-
+        //panel.requestFocus(true);
     }
     //----------------------------------------------------------
 
@@ -630,7 +638,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         boolean turnDone = false;
 
         //roll dice
-        rollDialog();
+        //rollDialog();
         if(roll == 7){
             activateRobber();
         }else{
@@ -656,7 +664,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     public void npcTurn(){
         boolean turnDone = false;
         //roll dice
-        autoRoll();
+        //autoRoll();
 
         //whichever token/hex (the tokens number the hexes) is rolled
         //any settlement on the border of that hex gets resources.
@@ -815,6 +823,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
             player4Pieces.add(new GamePiece(panel, "Road", players.get(3).getColor()));
 
         }
+        System.out.println("piecesmade");
     }
 
     /**
@@ -828,47 +837,43 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      */
     public boolean checkHitbox(Point p, String type){
         boolean close = false;
-        
+
         // ArrayList<Point> checkPoints = gameboard.getAllPoints();
-                // int size = 20;
+        // int size = 20;
         // if(type.equals("Road")){
-            // for(int i = 0; i < checkPoints.size(); i++){
-                // Point checkPoint = checkPoints.get(i);
-                // if(checkPoint.distance(p) <= size) {
-                    // close = true;
-                // }
-            
-            
-            // }
-        // }else{
-            // for(int i = 0; i < checkPoints.size(); i++){
-                // Point checkPoint = checkPoints.get(i);
-                // if(checkPoint.distance(p) <= size) {
-                    // close = true;
-                // }
-            
-            
-            // }
+        // for(int i = 0; i < checkPoints.size(); i++){
+        // Point checkPoint = checkPoints.get(i);
+        // if(checkPoint.distance(p) <= size) {
+        // close = true;
         // }
-        
+
+        // }
+        // }else{
+        // for(int i = 0; i < checkPoints.size(); i++){
+        // Point checkPoint = checkPoints.get(i);
+        // if(checkPoint.distance(p) <= size) {
+        // close = true;
+        // }
+
+        // }
+        // }
+
         // //Trying to find point within roads object
         // Roads rs = gameboard.getRoadsList();
         // java.util.List<Roads>rlist = rs.getRoadList();
-        
-        
+
         // int size = 20;
         // if(type.equals("Road")){
-            // for(int i = 0; i < rlist.size(); i++){
+        // for(int i = 0; i < rlist.size(); i++){
 
-                // Roads checkRoads = rlist.get(i);
-                // for(int j = 0; j < checkRoads
-                // // Point checkPoint = 
-                // // if(checkPoint.distance(p) <= size) {
-                    // // close = true;
-                // // }
-            
-            
-            // }
+        // Roads checkRoads = rlist.get(i);
+        // for(int j = 0; j < checkRoads
+        // // Point checkPoint = 
+        // // if(checkPoint.distance(p) <= size) {
+        // // close = true;
+        // // }
+
+        // }
         // }else{
 
         // }
@@ -891,12 +896,16 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         //place settlements and cities on the corner of a hex
         if(pieceType.equals("Settlement")){
             //run until the user clicks on a spot on the gameboard
-            while(cityPoint == null){
-
-            }
+            // while(!clicked){
+                // panel.repaint();
+            // }
             for(int i = 0; i < player1Pieces.size(); i++){
                 if(player1Pieces.get(i).getType().equals(pieceType)){
                     newPlacedPiece = player1Pieces.get(i);
+
+                    //HERE WE NEED TO ADD THE POINT TO THE SELECTED GAMEPIECE
+                    //Or, we just need to set the one gamepiece as visible here.
+
                     player1Pieces.get(i).setPlaced(true);
                 }
             }
@@ -1513,6 +1522,26 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
             }
         }
 
+    }
+
+    //Found here: http://www.java2s.com/Code/Java/Event/ActionMouseFocus.htm
+    class ActionFocusMover implements ActionListener {
+        public void actionPerformed(ActionEvent actionEvent) {
+            Object source = actionEvent.getSource();
+            if (source instanceof Component) {
+                Component component = (Component) source;
+                component.transferFocus();
+            }
+        }
+    }
+
+    class MouseEnterFocusMover extends MouseAdapter {
+        public void mouseEntered(MouseEvent mouseEvent) {
+            Component component = mouseEvent.getComponent();
+            if (!component.hasFocus()) {
+                component.requestFocus();
+            }
+        }
     }
 
     //----------------------------------------------------------
