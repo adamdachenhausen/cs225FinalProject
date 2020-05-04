@@ -17,7 +17,7 @@ import java.util.Random;
 import java.io.*;
 import javax.sound.sampled.*;
 /**
- * Abstract class Player - write a description of the class here
+ * Creates a player object
  *
  * @author Kate Nelligan, Lindsay Clark, Adam Dachenhausen
  * @version Spring 2020
@@ -57,15 +57,14 @@ public class Player
     protected ArrayList<String> devHand;
     protected ArrayList<String> resourceHand;
 
-
     protected ArrayList<Road> myRoads;
     protected ArrayList<City> myCities;
 
     /**
-     * An example of a method - replace this comment with your own
+     * Player constructor
      *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
+     * @param  playNum the player's number
+     * @param  color the player's color
      */
     public Player(int playNum, Color color){
         playerNumber = playNum;
@@ -84,6 +83,14 @@ public class Player
         myCities = new ArrayList(MAX_CITIES + MAX_SETTLEMENTS);
     }
 
+    /**
+     * adds resource cards to the player's hand and to the 
+     * types of resource cards the player is holding
+     * (resourceHand is used to create an array used to populate the 
+     * dialog box with trade options)
+     *
+     * @param  rc a Resource card to add
+     */
     public void addResourceCard(ResourceCard rc){
         String rcType = rc.getType();
 
@@ -94,6 +101,14 @@ public class Player
         }
     }
 
+    /**
+     * adds resource cards to the player's hand and to the 
+     * types of resource cards the player is holding
+     * (resourceHand is used to create an array used to populate the 
+     * dialog box with trade options)
+     *
+     * @param  rc a Resource card to add
+     */
     public ResourceCard removeResourceCard(String rcType){
         ResourceCard removed = null;
         boolean found = false;
@@ -118,6 +133,14 @@ public class Player
         return removed;
     }
 
+    /**
+     * adds resource cards to the player's hand and to the 
+     * types of resource cards the player is holding
+     * (resourceHand is used to create an array used to populate the 
+     * dialog box with trade options)
+     *
+     * @param  rc a Resource card to add
+     */
     public ResourceCard getResourceCard(String rcType){
         ResourceCard foundCard = null;
         boolean found = false;
@@ -133,6 +156,14 @@ public class Player
         return foundCard;    
     }
 
+    /**
+     * adds resource cards to the player's hand and to the 
+     * types of resource cards the player is holding
+     * (resourceHand is used to create an array used to populate the 
+     * dialog box with trade options)
+     *
+     * @param  rc a Resource card to add
+     */
     public boolean searchResourceCards(String searchType){
         boolean found = false;
         int i = 0;
@@ -146,6 +177,14 @@ public class Player
         return found;
     }
 
+    /**
+     * adds resource cards to the player's hand and to the 
+     * types of resource cards the player is holding
+     * (resourceHand is used to create an array used to populate the 
+     * dialog box with trade options)
+     *
+     * @param  rc a Resource card to add
+     */
     public DevelopmentCard getDevelopmentCard(String rcType){
         DevelopmentCard foundCard = null;
         boolean found = false;
@@ -161,6 +200,14 @@ public class Player
         return foundCard;    
     }
 
+    /**
+     * adds resource cards to the player's hand and to the 
+     * types of resource cards the player is holding
+     * (resourceHand is used to create an array used to populate the 
+     * dialog box with trade options)
+     *
+     * @param  rc a Resource card to add
+     */
     public boolean searchDevCards(String searchType){
         boolean found = false;
         int i = 0;
@@ -174,6 +221,14 @@ public class Player
         return found;
     }
 
+    /**
+     * adds resource cards to the player's hand and to the 
+     * types of resource cards the player is holding
+     * (resourceHand is used to create an array used to populate the 
+     * dialog box with trade options)
+     *
+     * @param  rc a Resource card to add
+     */
     public void addDevelopmentCard(DevelopmentCard dc){
         String dcType = dc.getType();
 
@@ -188,6 +243,14 @@ public class Player
 
     }
 
+    /**
+     * adds resource cards to the player's hand and to the 
+     * types of resource cards the player is holding
+     * (resourceHand is used to create an array used to populate the 
+     * dialog box with trade options)
+     *
+     * @param  rc a Resource card to add
+     */
     public DevelopmentCard removeDevelopmentCard(String dcType){
         DevelopmentCard removed = null;
         boolean found = false;
@@ -212,11 +275,24 @@ public class Player
         return removed;
     }
 
+    /**
+     * Returns the development deck hand.
+     *
+     * @param  rc a Resource card to add
+     */
     public ArrayList<String> getDevelopmentHand(){
 
         return devHand;
     }
 
+    /**
+     * adds resource cards to the player's hand and to the 
+     * types of resource cards the player is holding
+     * (resourceHand is used to create an array used to populate the 
+     * dialog box with trade options)
+     *
+     * @param  rc a Resource card to add
+     */
     public ArrayList<String> getResourceHand(){
 
         return resourceHand;
@@ -466,7 +542,7 @@ public class Player
     }
 
     public void setLongestRoad(boolean lr){
-roadPoints = 2;
+        roadPoints = 2;
         longestRoad = lr;
     }
 
@@ -484,9 +560,6 @@ roadPoints = 2;
 
     public void updatePoints(){
 
-
         victoryPoints = cities + settlements +armyPoints + roadPoints;
-
     }
-
 }

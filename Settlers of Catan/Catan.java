@@ -14,7 +14,7 @@ import javax.swing.border.LineBorder;
 import java.util.Random;
 import java.io.*;
 /**
- * Write a description of class Catan here.
+ * Creates the game Catan.
  *
  * @author Kate Nelligan, Lindsay Clark, Adam Dachenhausen
  * @version Spring 2020
@@ -114,13 +114,6 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     protected boolean buildStart = false;
     protected boolean buildEnd = false;
 
-    protected Point cityPoint;
-
-    protected Point roadPoint1;
-    protected Point roadPoint2;
-
-    protected Point robberPoint;
-
     // main panel with buttons for the game
     protected JPanel mainPanel;
 
@@ -184,11 +177,6 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         JPanel scorePanel = new JPanel();
         bottomPanel.add(scorePanel);
 
-        // JLabel buttonInstructions = new JLabel("Click 'Start' to play the game!");
-        // buttonInstructions.setFont(buttonInstructions.getFont().deriveFont(Font.BOLD,15));
-        // buttonInstructions.setBorder(new EmptyBorder(5,330,10,330));
-        // buttonPanel.add(buttonInstructions);
-
         //Construct buttons
         startButton = new JButton("Start");
         startButton.setToolTipText("Press to begin the game");
@@ -220,8 +208,6 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         tradeButton = new JButton("Trade Resource");
         tradeButton.setToolTipText("Trade with another player");
 
-        // rollDiceButton = new JButton("Roll Dice");
-        // rollDiceButton.setToolTipText("Rolls the dice");
 
         //Add buttons
         buttonPanel.add(startButton);
@@ -229,14 +215,10 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         buttonPanel.add(instructionsButton);
         buttonPanel.add(buildingCostsButton);
 
-        // buttonPanel.add(tradeButton);
-        // buttonPanel.add(buildButton);
-        // buttonPanel.add(drawResourceButton);
-        // buttonPanel.add(drawDevelopmentButton);
-        // buttonPanel.add(useDevCardButton);
+
         buttonPanel.add(continueButton);
 
-        // buttonPanel.add(rollDiceButton);
+
     }
 
     /**
@@ -324,9 +306,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      */
     @Override
     public void mouseReleased(MouseEvent e) {
-        //if building, create gamepiece on board
 
-        //if moving robber, change it's position appropriately
 
         panel.repaint();
     }
@@ -374,22 +354,15 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
             answer = introDialog(); 
         }
         turn = 1;
+        
         //draw status pane
         statusPane = new StatusPane(panel, gamePhase, turn, roll, players);
         statusPane.start();
         panel.repaint();
 
-        //display the player's gamepieces (roads, settlements and cities)
-        //distributeGamepieces();
-
         gamePhase = "Place 2 roads and 2 Settlements";
         statusPane.setPhase(gamePhase);
 
-        //distribute intial resources
-        //distributeResources();
-
-        //Set turn to first player and place first two settlements
-        //rollDialog();
     }
 
     /**
