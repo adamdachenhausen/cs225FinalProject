@@ -8,23 +8,31 @@ import javax.swing.*;
 import javax.swing.event.*;
 import java.util.Random;
 /**
- * Write a description of class DevelopmentCards here.
- *
+ * Constructs development cards for the game.  These cards are used to
+ * develop your settlements faster by giving "power ups" to the user.
+ * 
+ * A knight moves the robber, steal 1 card from blocked player
+ * a Year of plenty card yields  - gain two free resources
+ * Monopoly  - choose one type of resource to take all from the other players
+ * Road Building - build 2 free roads
+ * Victory point cards - Gives the player 1 victory point
+
  * @author Kate Nelligan, Lindsay Clark, Adam Dachenhausen
  * @version Spring 2020
  */
 public class DevelopmentCard extends AnimatedGraphicsObject implements ImageObserver{
     // Constants for card numbers in deck
-
     public static final int CARD_WIDTH = 80;
     public static final int CARD_HEIGHT = 125;
 
+    //types of images for cards
     private static Image knight;    
     private static Image monopoly;
     private static Image plenty;
     private static Image victoryPoint;
     private static Image road;    
 
+    //variables to describe the type of card
     private String type;
     private Development cardType;
     /**
@@ -61,7 +69,6 @@ public class DevelopmentCard extends AnimatedGraphicsObject implements ImageObse
     /**
      * Paints the graphics to the graphics pane.
      */
-
     @Override
     public void paint(Graphics g){
 
@@ -147,8 +154,9 @@ public class DevelopmentCard extends AnimatedGraphicsObject implements ImageObse
         }
     }
 
-    /** Sets the cardType of this
-     * @return the type of card this is
+    /** 
+     * Sets the cardType of this card
+     * @return the String type value of the card
      * 
      */
     public String setCardType(){
@@ -187,13 +195,22 @@ public class DevelopmentCard extends AnimatedGraphicsObject implements ImageObse
         return type;
     }
 
-    /** Returns the type of card this is
+    /**
+     * Returns the type of card this is
      *  @return the type of card this is
      */
     public String getCardType(){
         return type;
     }
 
+    /**
+     * Required method for the imageObserver interface
+     * @param img image
+     * @param int infoflags
+     * @param int x a position
+     * @param int y a position
+     * @returns true if it updates
+     */
     public boolean imageUpdate(Image img, int infoflags, int x, int y,
     int width, int height) {
 
@@ -205,6 +222,10 @@ public class DevelopmentCard extends AnimatedGraphicsObject implements ImageObse
 
     }
 
+    /**
+     * Loads the picture ahead of time so it loads properly in the panel
+     * 
+     */
     protected static void loadPic(){
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         knight = toolkit.getImage("knight.png");    
@@ -214,6 +235,10 @@ public class DevelopmentCard extends AnimatedGraphicsObject implements ImageObse
         road = toolkit.getImage("road.png");
     }
 
+    /**
+     * The required run method 
+     * 
+     */
     @Override
     public void run(){
 
