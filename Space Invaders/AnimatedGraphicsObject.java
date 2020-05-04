@@ -100,18 +100,18 @@ public abstract class AnimatedGraphicsObject extends Thread {
     }
 
     /**
-     * Returns the current status of a bubble (start, grow, float, empty, pop)
+     * Returns the current status
      *
-     * @return status the status of the bubble
+     * @return status the status
      */
     public String getStatus(){
         return status;
     }
 
     /**
-     * Sets the status of the bubble (start, grow, float, empty, pop)
+     * Sets the status of this
      *
-     * @param newStatus the new status to set the bubble to
+     * @param newStatus the new status
      */
     public void setStatus(String newStatus){
         status = newStatus;
@@ -120,7 +120,7 @@ public abstract class AnimatedGraphicsObject extends Thread {
     /**
      * Returns the current position 
      *
-     * @return status the position of the bubble
+     * @return status the position
      */
     public Point getPosition(){
         return upperLeft;
