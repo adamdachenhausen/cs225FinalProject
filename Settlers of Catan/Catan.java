@@ -1006,7 +1006,6 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                 useResourceCard("Wool");
                 drawDevelopmentCard();
                 JOptionPane.showMessageDialog(null, "You spent an ore, grain & wood card!");
-                JOptionPane.showMessageDialog(null, "You drew a development card!");
             }
         }else if(answer == 1){
             useDevelopmentDialog();
