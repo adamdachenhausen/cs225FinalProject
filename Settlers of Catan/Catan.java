@@ -19,7 +19,7 @@ import java.io.*;
  * @author Kate Nelligan, Lindsay Clark, Adam Dachenhausen
  * @version Spring 2020
  */
-public class Catan extends ThreadGraphicsController implements MouseListener, MouseMotionListener, ActionListener{
+public class Catan extends ThreadGraphicsController implements MouseListener, MouseMotionListener, ActionListener, KeyListener{
     //Players in the game
     public static final int PLAYER_1 = 1;
     public static final int PLAYER_2 = 2;
@@ -122,6 +122,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
     ImageIcon icon = new ImageIcon("catanicon.png");
 
+    private boolean doneBuilding;
+
     /**
      * Constructor, which simply calls the superclass constructor
      * with an appropriate window label and dimensions.
@@ -129,7 +131,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     public Catan() {
 
         super("Catan", FRAME_WIDTH, FRAME_HEIGHT);
-
+        doneBuilding = false;
     }
 
     /**
@@ -239,6 +241,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
         panel.addMouseListener(this);
         panel.addMouseMotionListener(this);
+
+        panel.addKeyListener(this);
     }
 
     /**
@@ -257,7 +261,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
         gameboard.updateCurPlayer(curPlayer);
         String checkGamePiece = "";
-         checkGamePiece = gameboard.handleClick(e.getPoint(), turn);
+        checkGamePiece = gameboard.handleClick(e.getPoint(), turn);
         for(Player p: players){
             p.updateCities();
             p.updateRoads();
@@ -303,6 +307,16 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         panel.repaint();
     }
 
+    /**
+     * Key Event handler to signal when the player is done building
+     * @param e key event
+     */
+    @Override
+    public void keyPressed(KeyEvent e){
+        if(e.getKeyCode() == KeyEvent.VK_SPACE){
+            doneBuilding = true;
+        }
+    }
     // fill in unused methods needed to satify the interfaces, which
     // are needed since we can't use the MouseAdapter, as this class
     // now needs to extend the abstract class
@@ -316,6 +330,9 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
     public void mouseClicked(MouseEvent e) {}
 
+    public void keyReleased(KeyEvent e){}
+
+    public void keyTyped(KeyEvent e){}
     //----------------------------------------------------------
 
     //The following methods are called in the action listener
@@ -961,6 +978,11 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                 options[1]);
         if(answer == 0){
             buildStart = true;
+            JOptionPane.showMessageDialog(null,"Press space to end building");
+            //Wait for user to build
+            while(!doneBuilding){
+
+            }
         }else{
             developmentTurn();
         }
