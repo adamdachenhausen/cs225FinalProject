@@ -8,7 +8,7 @@ import javax.swing.*;
 import javax.swing.event.*;
 import java.util.Random;
 /**
- * Write a description of class Robber here.
+ * Represents the Robber in the Game
  *
  * @author Kate Nelligan, Lindsay Clark, Adam Dachenhausen
  * @version Spring 2020

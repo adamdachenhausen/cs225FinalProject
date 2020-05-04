@@ -9,7 +9,7 @@ import javax.swing.event.*;
 import java.util.Random;
 
 /**
- * Write a description of class Dice here.
+ * Represents two six sided dice
  *
  * @author Lindsay Clark, Kate Nelligan, Adam Dachenhausen
  * @version Spring 2020

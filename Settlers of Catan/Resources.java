@@ -9,7 +9,7 @@ import java.awt.Point;
 import javax.swing.JComponent;
 import java.awt.Graphics;
 /**
- * Write a description of class Resources here.
+ * Creates a stack of game resources and shuffles them
  *
  * @author Lindsay Clark, Kate Nelligan, Adam Dachenhausen
  * @version Spring 2020

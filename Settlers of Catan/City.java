@@ -8,10 +8,10 @@ import java.awt.image.ImageObserver;
 import java.awt.Image;
 import java.awt.Toolkit;
 /**
- * Write a description of class City here.
+ * Represents a single city in the game
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Kate Nelligan, Lindsay Clark, Adam Dachenhausen
+ * @version Spring 2020
  */
 public class City extends AnimatedGraphicsObject implements ImageObserver
 {
