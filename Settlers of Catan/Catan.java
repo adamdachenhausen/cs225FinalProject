@@ -86,6 +86,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     protected static boolean gameEnded = false;
 
     protected static boolean gameboardSet = false;
+    protected static boolean turnsStarted = false;
 
     protected boolean reset = false;
 
@@ -287,7 +288,9 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         }
         if(players.get(3).getCities() >= 2 && players.get(3).getRoads() >= 2){
             gameboardSet = true;
+            distributeResources();
         }
+
     }
 
     /**
@@ -369,8 +372,12 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
         gamePhase = "Place 2 roads and 2 Settlements";
         statusPane.setPhase(gamePhase);
+
+        //distribute intial resources
+        //distributeResources();
+
         //Set turn to first player and place first two settlements
-        rollDialog();
+        //rollDialog();
     }
 
     /**
@@ -792,13 +799,40 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      */
     public void distributeResources(){
         gamePhase = "Distributing resources...";
+        statusPane.setPhase(gamePhase);
+        String rType;
         //call method from hextiles or gameboard to determine how many of each
         //get resource cards based on the hex tiles that are 
         //adjacent to your settlement
-        for(int i = 0; i < players.size(); i++){
-            //players.get(i).
-        }
+        if(gameboardSet){
+            for(int i = 0; i < players.size(); i++){
+                ArrayList<City> c = players.get(i).getMyCities();
+                //search list of player-owned cities
+                for(int j = 0; j < c.size(); j++){
+                    //if city token value == roll value
+                    if(c.get(j).getTokenValue() == roll){
+                        int tokVal = c.get(j).getTokenValue();
 
+                        //get hex resource type to distribute;
+                        rType = gameboard.getHexResourceValue(tokVal);
+                        drawResourceCard(rType);
+                    }
+                }
+            }
+        }else{
+            for(int i = 0; i < players.size(); i++){
+                ArrayList<City> c = players.get(i).getMyCities();
+                //search list of player-owned cities
+                for(int j = 0; j < c.size(); j++){
+                    //if city token value == roll value
+                    if(c.get(j).getTokenValue() == roll){
+                        //get hex resource type to distribute;
+                        rType = gameboard.getHexResourceValue(roll);
+                        drawResourceCard(rType);
+                    }
+                }
+            }
+        }
     }
 
     /**
@@ -1236,9 +1270,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * if player has a city, gets two resource cards, else gets one card
      */
     public void drawResourceCard(String rType){
-        ResourceCard rc = null;
-        boolean found = false;
-        int i = 0;
+        ResourceCard rc = resourceDeck.removeCard(rType);
 
         //add card removed from player hand to resource card deck
         if(rc != null){

@@ -231,6 +231,19 @@ public class StatusPane extends AnimatedGraphicsObject implements ImageObserver{
         int x17 = (upperLeft.x + 3);
         int y17 = (y16 + 20);
         g.drawString(longestRoad, x17, y17);
+        
+                //Instructions
+        g.setFont(new Font("TimesRoman", Font.BOLD, 15));
+        String instr = "Instructions: ";
+        int x18 = (upperLeft.x + 3);
+        int y18 = (y17 + 35);
+        g.drawString(instr, x18, y18);
+        
+                g.setFont(new Font("TimesRoman", Font.BOLD, 12));
+        String instDet = gamePhase;
+        int x19 = (upperLeft.x + 3);
+        int y19 = (y18 + 20);
+        g.drawString(instDet, x19, y19);
 
         container.repaint();
         //Player Instructions text

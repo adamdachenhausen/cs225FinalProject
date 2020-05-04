@@ -296,7 +296,7 @@ public class GameBoard extends AnimatedGraphicsObject
 
             for(int j=0; j<board[0].length;j++){
                 if(board[i][j]!= null){
-                    if(board[i][j].getHexType().equals(hexType)){
+                    if(board[i][j].getResourceType().equals(hexType)){
                         hexPt = board[i][j].getHexPoint();
                     }
                 }
@@ -306,14 +306,32 @@ public class GameBoard extends AnimatedGraphicsObject
         return hexPt;
     }
 
+    public String getHexResourceValue(int tokenValue){
+        String hexResourceType = "";
+        for(int i=0; i<board.length;i++){
+
+            for(int j=0; j<board[0].length;j++){
+                if(board[i][j]!= null){
+                    if(board[i][j].getToken()!= null){
+                        if(board[i][j].getToken().getTokenValue() == tokenValue){
+                            hexResourceType = board[i][j].getResourceType();
+                        }
+                    }
+                }
+            }
+
+        }
+        return hexResourceType;
+    }
+
     /**
      *  @return the gameboard represented as a double array
      */
     public HexTiles[][] getTiles(){
         return board;
     }
-    
-        /**
+
+    /**
      *  @return the gameboard represented as a double array
      */
     public Player getCurPlayer(){
@@ -334,7 +352,7 @@ public class GameBoard extends AnimatedGraphicsObject
             for(int j=0; j<board[0].length;j++){
                 if(board[i][j]!= null){
                     HexTiles h = board[i][j];
-                    if(!board[i][j].getHexType().equals("Desert")){
+                    if(!board[i][j].getResourceType().equals("Desert")){
                         tokenPoint = findCenter(board[i][j].getHexPoint(), false);
                         board[i][j].getToken().setPosition(tokenPoint);
                         board[i][j].getToken().setPlaced(true);

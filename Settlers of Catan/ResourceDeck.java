@@ -14,7 +14,7 @@ import java.util.Random;
  * @version Spring 2020
  */
 public class ResourceDeck extends AnimatedGraphicsObject{
-    ArrayList<ResourceCard> resourceDeck;
+    ArrayList<ResourceCard> deck;
     public static final int LUMBER = 19;
     public static final int WOOL = 19;
     public static final int GRAIN = 19;
@@ -29,15 +29,15 @@ public class ResourceDeck extends AnimatedGraphicsObject{
      */
     public ResourceDeck(JComponent container){
         super(container);
-        resourceDeck = new ArrayList<ResourceCard>();
+        deck = new ArrayList<ResourceCard>();
     }
 
     public ArrayList getList(){
-        return resourceDeck;    
+        return deck;    
     }
 
     public void addCard(ResourceCard rc){
-        resourceDeck.add(rc);
+        deck.add(rc);
 
     }
 
@@ -46,11 +46,11 @@ public class ResourceDeck extends AnimatedGraphicsObject{
         boolean found = false;
         int i = 0;
 
-        while(i > resourceDeck.size() && !found){
-            if(rcType.equals(resourceDeck.get(i).getType())){
+        while(i > deck.size() && !found){
+            if(rcType.equals(deck.get(i).getType())){
                 found = true;
-                removed =resourceDeck.get(i);
-                resourceDeck.remove(i);
+                removed =deck.get(i);
+                deck.remove(i);
             }
             i++;
         }
@@ -62,10 +62,10 @@ public class ResourceDeck extends AnimatedGraphicsObject{
         boolean found = false;
         int i = 0;
 
-        while(i > resourceDeck.size() && !found){
-            if(rcType.equals(resourceDeck.get(i).getType())){
+        while(i > deck.size() && !found){
+            if(rcType.equals(deck.get(i).getType())){
                 found = true;
-                removed =resourceDeck.get(i);
+                removed =deck.get(i);
             }
             i++;
         }
@@ -76,8 +76,8 @@ public class ResourceDeck extends AnimatedGraphicsObject{
         boolean found = false;
         int i = 0;
 
-        while(i > resourceDeck.size() && !found){
-            if(searchType.equals(resourceDeck.get(i).getType())){
+        while(i > deck.size() && !found){
+            if(searchType.equals(deck.get(i).getType())){
                 found = true;
             }
             i++;
@@ -92,25 +92,25 @@ public class ResourceDeck extends AnimatedGraphicsObject{
 
         //Add everything to r
         for(int i=0;i<LUMBER;i++){
-            resourceDeck.add(new ResourceCard(container, Resource.WOOD, cardStartPoint));
+            deck.add(new ResourceCard(container, Resource.WOOD, cardStartPoint));
         }
 
         for(int i=0;i<WOOL;i++){
-            resourceDeck.add(new ResourceCard(container, Resource.WOOL, cardStartPoint));
+            deck.add(new ResourceCard(container, Resource.WOOL, cardStartPoint));
         }
 
         for(int i=0;i<GRAIN;i++){
-            resourceDeck.add(new ResourceCard(container, Resource.WHEAT, cardStartPoint));
+            deck.add(new ResourceCard(container, Resource.WHEAT, cardStartPoint));
         }
 
         for(int i=0;i<BRICK;i++){
-            resourceDeck.add(new ResourceCard(container, Resource.BRICKS, cardStartPoint));
+            deck.add(new ResourceCard(container, Resource.BRICKS, cardStartPoint));
         }
 
         for(int i=0;i<ORE;i++){
-            resourceDeck.add(new ResourceCard(container, Resource.ORE, cardStartPoint));
+            deck.add(new ResourceCard(container, Resource.ORE, cardStartPoint));
         }
-        Collections.shuffle(resourceDeck);
+        //Collections.shuffle(deck);
 
     }
 

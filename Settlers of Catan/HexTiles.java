@@ -46,15 +46,12 @@ public class HexTiles extends AnimatedGraphicsObject{
     protected Polygon p;
 
     protected Tokens t;
-    
 
     protected Point[] pts;
-
     protected String locationType;
-
     protected String subType;
-
     private boolean hasRobber;
+    protected String resourceType;
     /**
      * Constructor for objects of class Tiles
      */
@@ -70,7 +67,8 @@ public class HexTiles extends AnimatedGraphicsObject{
         this.subType=subType;
         //Outsource completing the polygon to make it a hexagon
         completeHex();
-
+        //type = createHexType();
+        createHexType();
         //Creates a string value of the type of hex it is
         //ex. brick resource is a "hill"
         //type = createHexType();
@@ -191,38 +189,45 @@ public class HexTiles extends AnimatedGraphicsObject{
         switch(r){
             case BRICKS:
             hextype = "Hill";
-            type = hextype;
+            resourceType = hextype;
             break;
 
             case WOOD:
             hextype = "Forest";
-            type = hextype;
+            resourceType = hextype;
             break;
 
             case ORE:
             hextype = "Mountain";
-            type = hextype;
+            resourceType = hextype;
             break;
 
             case WHEAT:
             hextype = "Field";
-            type = hextype;
+            resourceType = hextype;
             break;
 
             case WOOL:
             hextype = "Pasture";
-            type = hextype;
+            resourceType = hextype;
             break;
 
             case SAND:
             hextype = "Desert";
-            type = hextype;
+            resourceType = hextype;
             break;
         }
         //return hextype;
 
     }
 
+        /** Returns the resource represented by this
+     *  @return the resource of this 
+     */
+    public String getResourceType(){
+        return resourceType;
+    }
+    
     /** Returns the resource represented by this
      *  @return the resource of this 
      */
