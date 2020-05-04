@@ -275,36 +275,9 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         else if (turn == 2){curPlayer = player2;}
         else if(turn == 3) {curPlayer = player3;}
         else{curPlayer = player4;}
-        
-        
+
         gameboard.updateCurPlayer(curPlayer);
         String checkGamePiece = gameboard.handleClick(e.getPoint(), turn);
-
-        
-        clicked=true;
-        
-
-        //use boolean flags to determine if mouse listener is used to place
-        //gamepieces. 
-        if(buildSettlement){
-            cityPoint = e.getPoint();
-
-        }else if(buildCity){
-            cityPoint = e.getPoint();
-
-        }else if(buildRoad){
-            if(roadPoint1 == null){
-                roadPoint1 = e.getPoint();
-            }else{
-                roadPoint2 = e.getPoint();
-            }
-
-        }else if(moveRobber){
-            robberPoint = e.getPoint();
-
-        }else{
-            //do nothing
-        }
 
     }
 
@@ -376,7 +349,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         }else{
             answer = introDialog(); 
         }
-
+        turn = 1;
         //draw status pane
         statusPane = new StatusPane(panel, gamePhase, turn, roll, players);
         statusPane.start();
@@ -534,7 +507,6 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         gameboard.start();
         gameboard.startBoard();
 
-
     }
 
     /**
@@ -582,7 +554,6 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
             i++;
         }
 
-
         gameboard.updatePlayers(player1,player2,player3,player4);
     }
 
@@ -592,11 +563,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      */
     public void playGame(){
 
-
         while(gameStart && !gameWon){
             //call player turn with correct player
-
-            
 
             //whichever token/hex (the tokens number the hexes) is rolled
             //any settlement on the border of that hex gets resources.
@@ -643,12 +611,10 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
             //Determine players with "activated hexes"
             tradeResourcesDialog();
         }
-        
+
         checkPoints();
         //offer trades
     }
-
-
 
     /**
      * Each player puts down a road and a settlement
@@ -680,7 +646,6 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         panel.repaint();
 
     }
-
 
     /**
      * Robber actions tree begins with several choices available for the player who
@@ -754,37 +719,37 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     }
 
     // /**
-     // * Each player puts down a road and a settlement
-     // *
-     // * @param 
-     // * @return 
-     // */
+    // * Each player puts down a road and a settlement
+    // *
+    // * @param 
+    // * @return 
+    // */
     // public void distributeGamepieces(){
-        // //generate settlements
-        // for(int s = 0; s < SETTLEMENTS; s++){
-            // player1Pieces.add(new GamePiece(panel, "Settlement", players.get(0).getColor()));
-            // player2Pieces.add(new GamePiece(panel, "Settlement", players.get(1).getColor()));
-            // player3Pieces.add(new GamePiece(panel, "Settlement", players.get(2).getColor()));
-            // player4Pieces.add(new GamePiece(panel, "Settlement", players.get(3).getColor()));
+    // //generate settlements
+    // for(int s = 0; s < SETTLEMENTS; s++){
+    // player1Pieces.add(new GamePiece(panel, "Settlement", players.get(0).getColor()));
+    // player2Pieces.add(new GamePiece(panel, "Settlement", players.get(1).getColor()));
+    // player3Pieces.add(new GamePiece(panel, "Settlement", players.get(2).getColor()));
+    // player4Pieces.add(new GamePiece(panel, "Settlement", players.get(3).getColor()));
 
-        // }
-        // //generate cities
-        // for(int c = 0; c < CITIES; c++){
-            // player1Pieces.add(new GamePiece(panel, "City", players.get(0).getColor()));
-            // player2Pieces.add(new GamePiece(panel, "City", players.get(1).getColor()));
-            // player3Pieces.add(new GamePiece(panel, "City", players.get(2).getColor()));
-            // player4Pieces.add(new GamePiece(panel, "City", players.get(3).getColor()));
+    // }
+    // //generate cities
+    // for(int c = 0; c < CITIES; c++){
+    // player1Pieces.add(new GamePiece(panel, "City", players.get(0).getColor()));
+    // player2Pieces.add(new GamePiece(panel, "City", players.get(1).getColor()));
+    // player3Pieces.add(new GamePiece(panel, "City", players.get(2).getColor()));
+    // player4Pieces.add(new GamePiece(panel, "City", players.get(3).getColor()));
 
-        // }
-        // //generate roads
-        // for(int r = 0; r < ROADS; r++){
-            // player1Pieces.add(new GamePiece(panel, "Road", players.get(0).getColor()));
-            // player2Pieces.add(new GamePiece(panel, "Road", players.get(1).getColor()));
-            // player3Pieces.add(new GamePiece(panel, "Road", players.get(2).getColor()));
-            // player4Pieces.add(new GamePiece(panel, "Road", players.get(3).getColor()));
+    // }
+    // //generate roads
+    // for(int r = 0; r < ROADS; r++){
+    // player1Pieces.add(new GamePiece(panel, "Road", players.get(0).getColor()));
+    // player2Pieces.add(new GamePiece(panel, "Road", players.get(1).getColor()));
+    // player3Pieces.add(new GamePiece(panel, "Road", players.get(2).getColor()));
+    // player4Pieces.add(new GamePiece(panel, "Road", players.get(3).getColor()));
 
-        // }
-        // System.out.println("piecesmade");
+    // }
+    // System.out.println("piecesmade");
     // }
 
     /**

@@ -316,31 +316,30 @@ public class Player
             }
         }
     }
-    
+
     public void paint(Graphics g){
         Color cur = g.getColor();
-        
+
         g.setColor(this.c);
-        
+
         for(Road r : myRoads){
             r.paint(g);
         }
         for(City city : myCities){
             city.paint(g);
         }
-        
-        
+
         g.setColor(cur);
     }
 
     public void addLocation(City c){
         myCities.add(c);
     }
-    
+
     public void addRoad(Road r){
         myRoads.add(r);
     }
-    
+
     public ArrayList<ResourceCard> getResourceCards(){
         return resourceCards;
     }
@@ -359,6 +358,12 @@ public class Player
         return cities;
     }
 
+    public ArrayList<City> getMyCities(){
+
+        return myCities;
+    }
+    
+
     public int getSettlements(){
 
         return settlements;
@@ -367,6 +372,11 @@ public class Player
     public int getRoads(){
 
         return roads;
+    }
+
+    public ArrayList<Road> getMyRoads(){
+
+        return myRoads;
     }
 
     public int getVictoryPoints(){
@@ -417,8 +427,8 @@ public class Player
 
         roads = newroads;
     }
-    
-        public void addCities(){
+
+    public void addCities(){
 
         cities++;
     }
