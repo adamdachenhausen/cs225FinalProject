@@ -655,9 +655,8 @@ public class Player
     }
 
     /**
-     * Returns the resource card hand 
-     *
-     * @returns  resourceHand the arraylist of resource card types
+     * Sets the victory points cards to a new value
+     * @param vpc the new victory points cards value
      */
     public void setVictoryPointCards(int vpc){
 
@@ -665,27 +664,25 @@ public class Player
     }
 
     /**
-     * Returns the resource card hand 
-     *
-     * @returns  resourceHand the arraylist of resource card types
+     * Sets the knight cards to a new value
+     * @param newknights the new knights card value
      */
     public void setKnights(int newknights){
         knights = newknights;
     }
 
     /**
-     * Returns the resource card hand 
+     * Sets a new road lengths value
      *
-     * @returns  resourceHand the arraylist of resource card types
+     * @returns  the new road lengths value
      */
     public void setRoadlength(int rl){
         roadLength = rl;
     }
 
     /**
-     * Returns the resource card hand 
-     *
-     * @returns  resourceHand the arraylist of resource card types
+     * Sets the largest army cards to a new value
+     * @param la the new largest army value
      */
     public void setLargestArmy(boolean la){
         armyPoints = 2;
@@ -693,9 +690,8 @@ public class Player
     }
 
     /**
-     * Returns the resource card hand 
-     *
-     * @returns  resourceHand the arraylist of resource card types
+     * Sets the longest road cards to a new value
+     * @param lr the new longestroad cards value
      */
     public void setLongestRoad(boolean lr){
         roadPoints = 2;
@@ -703,36 +699,30 @@ public class Player
     }
 
     /**
-     * Returns the resource card hand 
-     *
-     * @returns  resourceHand the arraylist of resource card types
+     * Sets the road lengths to a new value
+     * @param newRoadLength the new road length value
      */
     public void setRoadLength(int newRoadLength){
         roadLength = newRoadLength;
     }
 
     /**
-     * Returns the resource card hand 
-     *
-     * @returns  resourceHand the arraylist of resource card types
+     * Updates the city values by taking the size of the array list
+     * 
      */
     public void updateCities(){
         cities = myCities.size();;
     }
 
     /**
-     * Returns the resource card hand 
-     *
-     * @returns  resourceHand the arraylist of resource card types
+     * Updates the road values by taking the size of the array list
      */
     public void updateRoads(){
         roads = myRoads.size();;
     }
 
     /**
-     * Returns the resource card hand 
-     *
-     * @returns  resourceHand the arraylist of resource card types
+     * Updates the point values of the player.
      */
     public void updatePoints(){
 
