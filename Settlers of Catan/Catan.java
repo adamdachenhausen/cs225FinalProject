@@ -830,6 +830,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         //trading can only happen with the active player on a turn
         gamePhase = "Trading...";
         statusPane.setPhase(gamePhase);
+        
         //trading can only happen with the active player on a turn
         String[] options = new String[]{"Yes","No"};
         int answer = JOptionPane.showOptionDialog(null,
@@ -905,75 +906,6 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         panel.repaint();
     }
 
-    /**
-     * Players build to develop your empire
-     *
-     * @param player1 Player initiating trade
-     * @param player2 Player trading with
-     * @return 
-     */
-    public void build(Player p, int choice){
-        //called every turn after dice are rolled
-
-        //build: roads, settlements, cities, development cards
-        switch(choice){
-            case 0:
-            buildRoad();
-            break;
-
-            case 1:
-            buildSettlement();
-            break;
-
-            case 2:
-            buildCity();
-            break;
-        }
-        //need to provide info on what is required to build each
-
-        //player selects what to build
-
-        //building is placed on gameboard
-
-        //if building settlement, can only build in place
-        //connecting to existing roads
-
-        //if building city need to pay resources and replace
-        //existing settlement with a city piece
-    }
-
-    /**
-     * Move the robber to a hex.
-     * Take action based on placement.
-     *
-     * @param a hex tile to move the robber to.
-     * @return 
-     */
-    public void buildRoad(){
-
-    }
-
-    /**
-     * Move the robber to a hex.
-     * Take action based on placement.
-     *
-     * @param a hex tile to move the robber to.
-     * @return 
-     */
-    public void buildSettlement(){
-
-    }
-
-    /**
-     * Move the robber to a hex.
-     * Take action based on placement.
-     *
-     * @param a hex tile to move the robber to.
-     * @return 
-     */
-    public void buildCity(){
-
-    }
 
     /**
      * Asks player if they would like to use a development card.
