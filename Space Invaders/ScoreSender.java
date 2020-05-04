@@ -5,20 +5,39 @@ import javax.swing.JOptionPane;
 import java.awt.Container;
 import javax.swing.JFrame;
 /**
- * Write a description of class ScoreSender here.
+ *  Prompts player to save score, then opens a connection up with a ServerSocket
+ *  at a specific IP and Port. Then verifies the connection, and sends the score.
+ *  The server will then figure out the leaderboard, and send the top 10 scores back.
+ * 
  *  SRC:https://www.codejava.net/java-se/networking/java-socket-client-examples-tcp-ip
- * @author (your name)
- * @version (a version number or a date)
+ *
+ * @author Adam Dachenhausen, Kate Nelligan, Lindsay Clark
+ * @version Spring 2020
  */
 public class ScoreSender
 {
+    /** Constructor for ScoreSender
+     *  
+     *  Makes a popup and then sends that information to sendScore
+     * 
+     *  @param score, the player's score in the game
+     */
     public ScoreSender(int score){
         //Make Popup
         JFrame saveScore = new JFrame("Save Score");
         String name=JOptionPane.showInputDialog(saveScore,"Your Score: "+score+"\nEnter Initials");
         sendScore(name,score);
     }
-    public static ArrayList sendScore(String name, int score){
+
+    /** Opens a connection up with a ServerSocket
+     *  at a specific IP and Port. Then verifies the connection, and sends the score.
+     *  The server will then figure out the leaderboard, and send the top 10 scores back.
+     *  Then call printArrayList to print scores out
+     * 
+     *  @param name the username of the player
+     *  @param score the score of the player
+     */
+    public static void sendScore(String name, int score){
         //Create a new highscore from params
         highScore currentScore = new highScore(name,score);
 
@@ -98,6 +117,20 @@ public class ScoreSender
         catch (IOException e){
             System.err.println("I/O error: " + e.getMessage());
         }
-        return scores;
+        printArrayList(scores);
+    }
+
+    /** Given an ArrayList, loops through it and prints in the following format:
+     * (i)<data>(\n)
+     * 
+     * @param a the ArrayList to print out
+     * 
+     */
+    public static void printArrayList(ArrayList a){
+        for(int i=0; i<a.size(); i++){
+
+            System.out.println(i + ". " + a +"\n");
+
+        }
     }
 }
