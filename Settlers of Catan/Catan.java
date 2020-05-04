@@ -269,7 +269,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
             checkGamePiece ="";
             gameboardSet = true;
             turn = PLAYER_1;
-            System.out.println("turn before");
+
             distributeResources();
             playerTurn();
         }
