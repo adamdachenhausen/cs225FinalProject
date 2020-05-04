@@ -396,7 +396,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         // }
 
         //Play game
-        //playGame();
+        playGame();
     }
 
     /**
