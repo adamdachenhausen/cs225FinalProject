@@ -263,18 +263,21 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     }
 
     /**
-    
 
     @param e mouse event info
      */
     @Override
     public void mousePressed(MouseEvent e) {
-<<<<<<< HEAD
-        System.out.println("mousepressed");
-        clicked = true;
-=======
-        System.out.println(e.getPoint());
->>>>>>> bfd7226b7d068284befa0526084de9f7180865e5
+        Player curPlayer;
+
+        if(turn == 1){curPlayer = player1;}
+        else if (turn == 2){curPlayer = player2;}
+        else if(turn == 3) {curPlayer = player3;}
+        else{curPlayer = player4;}
+
+        gameboard.updateCurPlayer(curPlayer);
+        gameboard.handleClick(e.getPoint());
+
         //use boolean flags to determine if mouse listener is used to place
         //gamepieces. 
         if(buildSettlement){
@@ -296,7 +299,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         }else{
             //do nothing
         }
-        
+
     }
 
     /**
@@ -512,10 +515,10 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         if(e.getSource().equals(continueButton)){
             //rollDialog();
             //tradeResourcesDialog();
-                    placeGamePiece("Settlement");
-        buildSettlement = true;
-        //placeGamePiece("Road");
-        //buildRoad = true;
+            placeGamePiece("Settlement");
+            buildSettlement = true;
+            //placeGamePiece("Road");
+            //buildRoad = true;
         }
         //panel.requestFocus(true);
     }
@@ -590,6 +593,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         }
         System.out.println("p1: "+ players.get(0).getColorToString() +"p2: "+ players.get(1).getColorToString() 
             +"p3: "+ players.get(2).getColorToString() +"p4: "+ players.get(3).getColorToString());
+
+        gameboard.updatePlayers(player1,player2,player3,player4);
     }
 
     /**
@@ -900,7 +905,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         if(pieceType.equals("Settlement")){
             //run until the user clicks on a spot on the gameboard
             // while(!clicked){
-                // panel.repaint();
+            // panel.repaint();
             // }
             for(int i = 0; i < player1Pieces.size(); i++){
                 if(player1Pieces.get(i).getType().equals(pieceType)){
