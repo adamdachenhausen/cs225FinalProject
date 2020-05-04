@@ -175,7 +175,7 @@ public class Player
     /**
      * Gets a development card if it is in the players possession.
      *
-     * @param  rcType the type of
+     * @param  foundcard the found development card or null if not found
      */
     public DevelopmentCard getDevelopmentCard(String rcType){
         DevelopmentCard foundCard = null;
