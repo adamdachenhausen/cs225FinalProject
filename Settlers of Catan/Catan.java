@@ -256,7 +256,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         else{curPlayer = player4;}
 
         gameboard.updateCurPlayer(curPlayer);
-        String checkGamePiece = gameboard.handleClick(e.getPoint(), turn);
+        String checkGamePiece = "";
+         checkGamePiece = gameboard.handleClick(e.getPoint(), turn);
         for(Player p: players){
             p.updateCities();
             p.updateRoads();
@@ -265,14 +266,15 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         //if the 4th player placed both cities and roads
         //gameboard setup is over.
         if(!gameboardSet && players.get(3).getCities() >= 2 && players.get(3).getRoads() >= 2){
-            System.out.println("turn before");
+            checkGamePiece ="";
             gameboardSet = true;
             turn = PLAYER_1;
             System.out.println("turn before");
             distributeResources();
             playerTurn();
         }
-        if(buildStart){
+        if(buildStart && checkGamePiece != ""){
+            checkGamePiece ="";
             developmentTurn();
         }
     }

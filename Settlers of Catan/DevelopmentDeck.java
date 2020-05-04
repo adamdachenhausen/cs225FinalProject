@@ -50,7 +50,7 @@ public class DevelopmentDeck extends AnimatedGraphicsObject{
         boolean found = false;
         int i = 0;
 
-        if(i > developmentDeck.size()){
+        if(i < developmentDeck.size()){
             removed = developmentDeck.remove(0);
         }
         return removed;
@@ -61,7 +61,7 @@ public class DevelopmentDeck extends AnimatedGraphicsObject{
         boolean found = false;
         int i = 0;
 
-        while(i > developmentDeck.size() && !found){
+        while(i < developmentDeck.size() && !found){
             if(rcType.equals(developmentDeck.get(i).getType())){
                 found = true;
                 removed =developmentDeck.get(i);
@@ -75,7 +75,7 @@ public class DevelopmentDeck extends AnimatedGraphicsObject{
         boolean found = false;
         int i = 0;
 
-        while(i > developmentDeck.size() && !found){
+        while(i < developmentDeck.size() && !found){
             if(searchType.equals(developmentDeck.get(i).getType())){
                 found = true;
             }
