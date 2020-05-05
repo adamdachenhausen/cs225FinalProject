@@ -897,6 +897,9 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
             }
             i++;
         }
+        if(!traded){
+            JOptionPane.showMessageDialog(null, "No one wants to trade!");
+        }
         if(answer == 0){
             buildStart = true;
         }else{
