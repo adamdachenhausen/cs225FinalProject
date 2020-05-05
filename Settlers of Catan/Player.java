@@ -259,6 +259,33 @@ public class Player
         return removed;
     }
 
+        /**
+     * Uses a development card from the user's hand.
+     *
+     * @param  dc a Development card to remove
+     */
+    public String useDevelopmentCard(){
+        String removed = null;
+        boolean found = false;
+        if(devCards.size() > 0){
+            removed = devCards.get(0).getCardType();
+        }
+        removeDevelopmentCard(removed);
+        //get type to check card types held by player
+
+        return removed;
+    }
+    
+            /**
+     * Returns the size of the development hand
+     *
+     * @param  dc a Development card to remove
+     */
+    public int devCardSize(){
+
+        return devCards.size();
+    }
+    
     /**
      * Returns the development deck hand. Used to populate joption
      * panes that guide the player through the game (for trading)

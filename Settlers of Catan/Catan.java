@@ -54,7 +54,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
     // button that resets the game
     protected JButton resetButton;
-    
+
     // button that continues to the next turn
     protected JButton continueButton;
 
@@ -91,6 +91,9 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     protected boolean buildEnd = false;
     protected boolean doneBuilding;
 
+    //holds a traded card
+    protected ResourceCard tradedCard;
+
     // main panel with buttons for the game
     protected JPanel mainPanel;
 
@@ -99,7 +102,6 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
     //The catan icon for the first dialog
     ImageIcon icon = new ImageIcon("catanicon.png");
-
 
     /**
      * Constructor, which simply calls the superclass constructor
@@ -171,7 +173,6 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
         continueButton = new JButton("Continue");
         continueButton.setToolTipText("Continues to the next phase of the game");
-
 
         //Add buttons
         buttonPanel.add(startButton);
@@ -755,7 +756,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * Exchanges cards between two players
      *
      */
-    public String swapCards(){
+ public String swapCards(){
         //trading can only happen with the active player on a turn
         gamePhase = "Trading...";
         statusPane.setPhase(gamePhase);
@@ -1002,158 +1003,14 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * If no, returns to the turn (which ends this player's turn).
      */
     public void selectDevelopmentDialog(){
-
-        String[] options;
-
-        if(turn == 1){
-            if(players.get(0).getDevelopmentHand().size()>0){
-                options = new String[players.get(0).getDevelopmentHand().size()];
-                for(int i = 0; i < players.get(0).getDevelopmentHand().size(); i++){
-                    options[i] = players.get(0).getDevelopmentHand().get(i);
-                }
-
-                int answer = JOptionPane.showOptionDialog(null,
-                        "Choose which card to use",
-                        "Use Development card interface",
-                        JOptionPane.YES_NO_CANCEL_OPTION,
-                        JOptionPane.QUESTION_MESSAGE,
-                        null,
-                        options,
-                        options[1]);
-
-                //Choice is the answer in the array of the card to use
-                String choice = options[answer];
-
-                useDevelopmentCard(choice);
-            }
-        }else if(turn == 2){
-            if(players.get(1).getDevelopmentHand().size()>0){
-                options = new String[players.get(1).getDevelopmentHand().size()];
-                for(int i = 0; i < players.get(1).getDevelopmentHand().size(); i++){
-                    options[i] = players.get(1).getDevelopmentHand().get(i);
-                }
-
-                int answer = JOptionPane.showOptionDialog(null,
-                        "Choose which card to use",
-                        "Use Development card interface",
-                        JOptionPane.YES_NO_CANCEL_OPTION,
-                        JOptionPane.QUESTION_MESSAGE,
-                        null,
-                        options,
-                        options[1]);
-
-                //Choice is the answer in the array of the card to use
-                String choice = options[answer];
-
-                useDevelopmentCard(choice);
-            }
-        }else if(turn == 3){
-            if(players.get(2).getDevelopmentHand().size()>0){
-                options = new String[players.get(2).getDevelopmentHand().size()];
-                for(int i = 0; i < players.get(2).getDevelopmentHand().size(); i++){
-                    options[i] = players.get(2).getDevelopmentHand().get(i);
-                }
-
-                int answer = JOptionPane.showOptionDialog(null,
-                        "Choose which card to use",
-                        "Use Development card interface",
-                        JOptionPane.YES_NO_CANCEL_OPTION,
-                        JOptionPane.QUESTION_MESSAGE,
-                        null,
-                        options,
-                        options[1]);
-
-                //Choice is the answer in the array of the card to use
-                String choice = options[answer];
-
-                useDevelopmentCard(choice);
-            }
-        }else if(turn == 4){
-            if(players.get(3).getDevelopmentHand().size()>0){
-                options = new String[players.get(3).getDevelopmentHand().size()];
-                for(int i = 0; i < players.get(3).getDevelopmentHand().size(); i++){
-                    options[i] = players.get(3).getDevelopmentHand().get(i);
-                }
-
-                int answer = JOptionPane.showOptionDialog(null,
-                        "Choose which card to use",
-                        "Use Development card interface",
-                        JOptionPane.YES_NO_CANCEL_OPTION,
-                        JOptionPane.QUESTION_MESSAGE,
-                        null,
-                        options,
-                        options[1]);
-
-                //Choice is the answer in the array of the card to use
-                String choice = options[answer];
-
-                useDevelopmentCard(choice);
-            } 
-
+        String devName = "";
+        if(players.get(turn-1).devCardSize() > 0){
+            devName = players.get(turn-1).useDevelopmentCard();
+                    JOptionPane.showMessageDialog(null, "You used the "+ devName+ " card!");
         }else{
-            //Player has no development cards, show message.
-            Object[] noCards = {"Ok"};
-            int answer = JOptionPane.showOptionDialog(frame, "You have no development cards.","Catan",
-                    JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,
-                    icon,noCards,noCards[0]);
+            JOptionPane.showMessageDialog(null, "You don't have a development card.");
         }
-        panel.repaint();
-    }
 
-    /**
-     * Removes card for circulation and apply card benefit.
-     *
-     * @param 
-     * @return 
-     */
-    public void useDevelopmentCard(String dType){
-        DevelopmentCard dc = null;
-        boolean found = false;
-        int i = 0;
-        //remove card from player's hand
-        if(turn == 1){
-            while(i < players.get(0).getDevelopmentCards().size() && !found){
-                if(players.get(0).getDevelopmentCards().get(i).getType().equals(dType)){
-                    dc = players.get(0).removeDevelopmentCard(dType);
-                    found = true;
-                } 
-                i++;
-            }
-        }else if(turn == 2){
-            i=0;
-            found = false;
-            while(i < players.get(1).getDevelopmentCards().size() && !found){
-                if(players.get(1).getDevelopmentCards().get(i).getType().equals(dType)){
-                    dc = players.get(0).removeDevelopmentCard(dType);
-                    found = true;
-                } 
-                i++;
-            }
-        }else if(turn == 3){
-            i=0;
-            found = false;
-            while(i < players.get(2).getDevelopmentCards().size() && !found){
-                if(players.get(2).getDevelopmentCards().get(i).getType().equals(dType)){
-                    dc = players.get(0).removeDevelopmentCard(dType);
-                    found = true;
-                } 
-                i++;
-            }
-        }else{
-            i=0;
-            found = false;
-            while(i < players.get(3).getDevelopmentCards().size() && !found){
-                if(players.get(3).getDevelopmentCards().get(i).getType().equals(dType)){
-                    dc = players.get(0).removeDevelopmentCard(dType);
-                    found = true;
-                } 
-                i++;
-            }
-        }
-        //card is not added back to development deck
-        // if(dc != null){
-        // developmentDeck.addCard(dc);
-        // }
     }
 
     /**
@@ -1372,13 +1229,12 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     //Starts the main run method
     //----------------------------------------------------------
 
-
-/**
- * The main method that calls invoke later and loads all pictures used.
- *
- * @param args A parameter
- */
-public static void main(String args[]) {
+    /**
+     * The main method that calls invoke later and loads all pictures used.
+     *
+     * @param args A parameter
+     */
+    public static void main(String args[]) {
         Dice.loadPic();
         ResourceCard.loadPic();
         DevelopmentCard.loadPic();
