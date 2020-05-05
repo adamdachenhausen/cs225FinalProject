@@ -26,8 +26,9 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     public static final int PLAYER_3 = 3;
     public static final int PLAYER_4 = 4;
 
+    //Total points to win and total amounts you can have for cities
+    //roads and settlements
     public static final int WINNING_POINTS = 10;
-
     final static protected int CITIES = 4; 
     final static protected int SETTLEMENTS = 5;
     final static protected int ROADS = 15;
@@ -36,16 +37,16 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     public static final Color ORANGE = new Color(230, 108, 44);
     protected Color[] playerColors = {Color.RED, Color.BLUE, Color.BLACK, ORANGE};
 
-    //adds variables for gameplay
+    //This tracks the dice roll
     protected int roll = 0;
 
-    //phase of gameplay
+    //Tracks the phase of the game
     protected String gamePhase;
 
     //player whose turn it is
     protected int turn = 0;
 
-    //Players
+    //Player objects
     protected Player player1, player2, player3, player4;
 
     // button that starts the game
@@ -60,48 +61,20 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     // button that displays building costs for the game;
     protected JButton buildingCostsButton;
 
-    // button that draws resource card
-    protected JButton drawResourceButton;
-
-    // button that draws development card
-    protected JButton drawDevelopmentButton;
-
-    // button that makes game continue to next phase
-    protected JButton continueButton;
-
-    // button that draws development card
-    protected JButton useDevCardButton;
-
-    // button that draws development card
-    protected JButton buildButton;
-
-    // button that displays opens trade panel;
-    protected JButton tradeButton;
-
-    // // button that rolls dice;
-    // protected JButton rollDiceButton;
-
+    //booleans to track the state of the game
     protected static boolean gameStart = false;
-
     protected static boolean gameWon = false;
-
     protected static boolean gameEnded = false;
-
     protected static boolean gameboardSet = false;
     protected static boolean turnsStarted = false;
-
     protected boolean reset = false;
-
     protected static boolean longestRoad = false;
-
     protected static boolean largestArmy = false;
 
+    //Track which player has special cards
     protected static int longestRoadAmt = 0;
-
     protected static int largestArmyAmt = 0;
-
     protected static int longestRoadHolder = 0;
-
     protected static int largestArmyHolder = 0;
 
     //These flags determine what action is selected
@@ -113,6 +86,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     protected boolean moveRobber = false;
     protected boolean buildStart = false;
     protected boolean buildEnd = false;
+    protected boolean doneBuilding;
 
     // main panel with buttons for the game
     protected JPanel mainPanel;
@@ -120,9 +94,9 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     // bottom panel with buttons for the game
     protected JPanel bottomPanel;
 
+    //The catan icon for the first dialog
     ImageIcon icon = new ImageIcon("catanicon.png");
 
-    private boolean doneBuilding;
 
     /**
      * Constructor, which simply calls the superclass constructor
