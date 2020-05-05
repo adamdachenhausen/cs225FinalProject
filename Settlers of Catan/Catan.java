@@ -54,6 +54,9 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
     // button that resets the game
     protected JButton resetButton;
+    
+    // button that continues to the next turn
+    protected JButton continueButton;
 
     // button that displays instructions for the game;
     protected JButton instructionsButton;
@@ -169,20 +172,6 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         continueButton = new JButton("Continue");
         continueButton.setToolTipText("Continues to the next phase of the game");
 
-        drawResourceButton = new JButton("Draw Resource");
-        drawResourceButton.setToolTipText("Draws a resource card");
-
-        drawDevelopmentButton = new JButton("Draw Development");
-        drawDevelopmentButton.setToolTipText("Draws a development card");
-
-        useDevCardButton = new JButton("Use Development");
-        useDevCardButton.setToolTipText("Uses a development card");
-
-        buildButton = new JButton("Build");
-        buildButton.setToolTipText("Build using resources");
-
-        tradeButton = new JButton("Trade Resource");
-        tradeButton.setToolTipText("Trade with another player");
 
         //Add buttons
         buttonPanel.add(startButton);
@@ -549,9 +538,6 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * The next method called either way is the use of development
      * cards.
      *
-     * @param player1 Player initiating trade
-     * @param player2 Player trading with
-     * @return 
      */
     public void playerTurn(){
 
@@ -579,9 +565,6 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     /**
      * The turn for the person playing the game
      *
-     * @param player1 Player initiating trade
-     * @param player2 Player trading with
-     * @return 
      */
     public void developmentTurn(){
         buildStart = false;
@@ -593,10 +576,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     }
 
     /**
-     * Each player puts down a road and a settlement
+     * Rolls the dice and calls up a dialog
      *
-     * @param 
-     * @return 
      */
     public void rollDialog(){
         gamePhase = "Rolling dice...";
@@ -626,12 +607,11 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
     /**
      * Robber actions tree begins with several choices available for the player who
-     * rolled 7.
+     * rolled 7.  This was an extra that is excluded from method calls.
+     * We did not get to implement it.
      * 
      * Take action based on placement.
      *
-     * @param a hex tile to move the robber to.
-     * @return 
      */
     public void activateRobber(){
         gamePhase = "Activating robber...";
@@ -652,8 +632,6 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
      * Move the robber to a hex.
      * Take action based on placement.
      *
-     * @param a hex tile to move the robber to.
-     * @return 
      */
     public void moveRobberDialog(){
         gamePhase = "Moving robber...";
@@ -677,11 +655,9 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     }
 
     /**
-     * Move the robber to a hex.
+     * This would happen if the user selectd to move the robber to a hex.
      * Take action based on placement.
      *
-     * @param a hex tile to move the robber to.
-     * @return 
      */
     public void moveRobber(){
         //move the robber to a different hex
@@ -702,10 +678,9 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     }
 
     /**
-     * Distributes resource cards to each player based on the roll of the player in control's dice.
+     * Distributes resource cards to each player based on the roll 
+     * of the player in control's dice.
      *
-     * @param tokenVal the value of the roll of the dice that corresponds to token pieces on the board.
-     * 
      */
     public void distributeResources(){
         gamePhase = "Distributing resources...";
@@ -751,11 +726,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     }
 
     /**
-     * Players trade resource cards
+     * Dialog for players to trade resource cards
      *
-     * @param player1 Player initiating trade
-     * @param player2 Player trading with
-     * @return 
      */
     public void tradeResourcesDialog(){
         gamePhase = "Trading...";
@@ -782,9 +754,6 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     /**
      * Exchanges cards between two players
      *
-     * @param player1 Player initiating trade
-     * @param player2 Player trading with
-     * @return player's choice
      */
     public String swapCards(){
         //trading can only happen with the active player on a turn
@@ -965,11 +934,9 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     }
 
     /**
-     * Players build to develop your empire
+     * Players get a dialog box asking if they want to buy a development
+     * card.
      *
-     * @param player1 Player initiating trade
-     * @param player2 Player trading with
-     * @return 
      */
     public void buyDevelopmentDialog(){
         gamePhase = "Buying development card...";
@@ -1031,7 +998,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     }
 
     /**
-     * Asks player if they would like to use a development card.
+     * Asks player to select a development card to use.
      * If no, returns to the turn (which ends this player's turn).
      */
     public void selectDevelopmentDialog(){
@@ -1313,9 +1280,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
     /**
      * Check victory points scored by each player.
-     *
-     * @return winner if no one won yet, returns 0, else returns 
-     * player number. 10 points wins the game.
+     *.
      */
     public int checkPoints(){
         int winner = 0;
@@ -1333,10 +1298,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     }
 
     /**
-     * Draw a card from the resource card bank.
+     * Checks for the longest road.
      *
-     * @param 
-     * @return 
      */
     public void checkRoads(){
 
@@ -1371,10 +1334,9 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
     }
 
     /**
-     * Draw a card from the resource card bank.
+     * Checks how many knights exist to determine if someone gets
+     * the largest army card
      *
-     * @param 
-     * @return 
      */
     public void checkKnights(){
         //first player to get 3 knight development cards gets
@@ -1406,37 +1368,23 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
 
     }
 
-    //Found here: http://www.java2s.com/Code/Java/Event/ActionMouseFocus.htm
-    class ActionFocusMover implements ActionListener {
-        public void actionPerformed(ActionEvent actionEvent) {
-            Object source = actionEvent.getSource();
-            if (source instanceof Component) {
-                Component component = (Component) source;
-                component.transferFocus();
-            }
-        }
-    }
-
-    class MouseEnterFocusMover extends MouseAdapter {
-        public void mouseEntered(MouseEvent mouseEvent) {
-            Component component = mouseEvent.getComponent();
-            if (!component.hasFocus()) {
-                component.requestFocus();
-            }
-        }
-    }
-
     //----------------------------------------------------------
     //Starts the main run method
     //----------------------------------------------------------
-    public static void main(String args[]) {
+
+
+/**
+ * The main method that calls invoke later and loads all pictures used.
+ *
+ * @param args A parameter
+ */
+public static void main(String args[]) {
         Dice.loadPic();
         ResourceCard.loadPic();
         DevelopmentCard.loadPic();
         Robber.loadPic();
         Table.loadPic();
         City.loadPic();
-        //Road.loadPic();
 
         //launch main thread that will manage the GUI
         javax.swing.SwingUtilities.invokeLater(new Catan());
