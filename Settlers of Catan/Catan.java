@@ -703,7 +703,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                     rType = gameboard.getHexResourceValue(tokVal);
                     drawResourceCard(rType);
                     statusPane.setPlayers(players);
-
+                    panel.repaint();
                 }
 
             }
