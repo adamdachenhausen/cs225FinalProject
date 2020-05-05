@@ -687,6 +687,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
         gamePhase = "Distributing resources...";
         statusPane.setPhase(gamePhase);
         String rType;
+        
         //call method from hextiles or gameboard to determine how many of each
         //get resource cards based on the hex tiles that are 
         //adjacent to your settlement
@@ -926,7 +927,7 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                 options[1]);
         if(answer == 0){
             buildStart = true;
-            JOptionPane.showMessageDialog(null,"Press space to end building");
+            JOptionPane.showMessageDialog(null,"Press space to BEGIN building");
             //Wait for user to build
         }else{
             developmentTurn();
@@ -971,6 +972,8 @@ public class Catan extends ThreadGraphicsController implements MouseListener, Mo
                 useResourceCard("Wool");
                 drawDevelopmentCard();
                 JOptionPane.showMessageDialog(null, "You spent an ore, grain & wood card!");
+            }else{
+                JOptionPane.showMessageDialog(null, "Not enough resources to buy a card!");
             }
         }
         statusPane.setPlayers(players);
